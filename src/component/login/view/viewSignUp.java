@@ -4,7 +4,10 @@
  */
 package component.login.view;
 
+import component.login.model.modelLogin;
+import component.login.repo.repoSignUp;
 import java.awt.*;
+import javax.swing.*;
 
 /**
  *
@@ -15,9 +18,17 @@ public class viewSignUp extends javax.swing.JFrame {
     /**
      * Creates new form viewSignUp
      */
+
+    private repoSignUp repo = new repoSignUp();
+
     public viewSignUp() {
         initComponents();
         setBackground();
+    }
+    
+    private void clear() {
+        txtUsername.setText("");
+        txtPassword.setText("");
     }
 
     private void setBackground() {
@@ -249,6 +260,37 @@ public class viewSignUp extends javax.swing.JFrame {
 
     private void kGradientPanel3MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_kGradientPanel3MouseClicked
         // TODO add your handling code here:
+        String username = txtUsername.getText().trim();
+        String password = new String(txtPassword.getPassword());
+
+        if (username.isEmpty() && password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Username and password cannot be empty.", "Erorr sign up",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (username.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "You must enter your username.", "Username cannot be empty",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "You must enter your password.", "Password cannot be empty",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (!repo.isDuplicate(username)) {
+            modelLogin login = new modelLogin(username, password);
+            this.repo.register(login);
+            this.clear();
+            JOptionPane.showMessageDialog(this, "User account created successfully");
+        } else {
+            JOptionPane.showMessageDialog(this, "Username already exists: " + username, "Duplicate Primary Key",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
     }// GEN-LAST:event_kGradientPanel3MouseClicked
 
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel14MouseClicked
