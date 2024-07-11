@@ -1,4 +1,5 @@
 package component.login.repo;
+
 import component.login.model.modelLogin;
 import dao.DBContext;
 import java.sql.*;
@@ -16,30 +17,31 @@ public class repoSignUp {
             e.printStackTrace();
         }
     }
-    
+
     public void register(modelLogin login) {
         sql = "Insert Into DangNhap(TenDangNhap, MatKhau, VaiTro) Values (?, ?, 0)";
-        
+
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, login.getUsername());
             ps.setString(2, login.getPassword());
             ps.execute();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
     public boolean isDuplicate(String username) {
         sql = "SELECT TenDangNhap FROM dbo.DangNhap WHERE TenDangNhap = ?";
-        
+
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, username);
-            
+            ps.execute();
+
             rs = ps.getResultSet();
-            while(rs.next()) {
+            while (rs.next()) {
                 return true;
             }
         } catch (Exception e) {
