@@ -6,14 +6,14 @@ import component.login.repo.FileUtils;
 import component.login.repo.repoLogin;
 import java.awt.*;
 
-public class viewLogin extends javax.swing.JFrame {
+public class viewSignIn extends javax.swing.JFrame {
 
     /**
-     * Creates new form viewLogin
+     * Creates new form viewSignIn
      */
     private repoLogin repo = new repoLogin();
 
-    public viewLogin() {
+    public viewSignIn() {
         initComponents();
         setBackground();
         loadLoginDetails();
@@ -44,7 +44,7 @@ public class viewLogin extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -82,7 +82,6 @@ public class viewLogin extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 450));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        kGradientPanel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
         kGradientPanel2.setkEndColor(new java.awt.Color(0, 204, 204));
         kGradientPanel2.setkGradientFocus(550);
         kGradientPanel2.setkStartColor(new java.awt.Color(153, 0, 153));
@@ -181,18 +180,19 @@ public class viewLogin extends javax.swing.JFrame {
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
         kGradientPanel1Layout.setHorizontalGroup(
-                kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                .addGap(122, 122, 122)
-                                .addComponent(jLabel7)
-                                .addContainerGap(123, Short.MAX_VALUE)));
+            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                .addGap(122, 122, 122)
+                .addComponent(jLabel7)
+                .addContainerGap(123, Short.MAX_VALUE))
+        );
         kGradientPanel1Layout.setVerticalGroup(
-                kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                kGradientPanel1Layout.createSequentialGroup()
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel7)
-                                        .addContainerGap()));
+            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addContainerGap())
+        );
 
         kGradientPanel2.add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, 40));
 
@@ -229,8 +229,7 @@ public class viewLogin extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel12.setIcon(
-                new javax.swing.ImageIcon(getClass().getResource("/icon/freepik-export-20240711094852nOFd.png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/freepik-export-20240711094852nOFd.png"))); // NOI18N
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 450));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 450));
@@ -359,20 +358,23 @@ public class viewLogin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(viewLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(viewLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(viewLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(viewLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
         // </editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new viewLogin().setVisible(true);
+                new viewSignIn().setVisible(true);
             }
         });
     }
