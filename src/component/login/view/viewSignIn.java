@@ -44,7 +44,8 @@ public class viewSignIn extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -82,9 +83,9 @@ public class viewSignIn extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 450));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        kGradientPanel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
         kGradientPanel2.setkEndColor(new java.awt.Color(0, 204, 204));
         kGradientPanel2.setkGradientFocus(550);
-        kGradientPanel2.setkStartColor(new java.awt.Color(153, 0, 153));
         kGradientPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -97,6 +98,7 @@ public class viewSignIn extends javax.swing.JFrame {
         });
         kGradientPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 6, 30, 30));
 
+        jLabel10.setCursor(new Cursor(Cursor.HAND_CURSOR));
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -174,27 +176,26 @@ public class viewSignIn extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 21)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Login");
+        jLabel7.setText("Sign in");
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
         kGradientPanel1Layout.setHorizontalGroup(
-            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(jLabel7)
-                .addContainerGap(123, Short.MAX_VALUE))
-        );
+                kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                .addGap(122, 122, 122)
+                                .addComponent(jLabel7)
+                                .addContainerGap(121, Short.MAX_VALUE)));
         kGradientPanel1Layout.setVerticalGroup(
-            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addContainerGap())
-        );
+                kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                kGradientPanel1Layout.createSequentialGroup()
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel7)
+                                        .addContainerGap()));
 
-        kGradientPanel2.add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, 40));
+        kGradientPanel2.add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 310, 40));
 
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("_______________________________________________________");
@@ -229,7 +230,8 @@ public class viewSignIn extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/freepik-export-20240711094852nOFd.png"))); // NOI18N
+        jLabel12.setIcon(
+                new javax.swing.ImageIcon(getClass().getResource("/icon/freepik-export-20240711094852nOFd.png"))); // NOI18N
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 450));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 450));
@@ -256,7 +258,8 @@ public class viewSignIn extends javax.swing.JFrame {
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel10MouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "chua xu ly");
+        new viewSignUp().setVisible(true);
+        this.dispose();
     }// GEN-LAST:event_jLabel10MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel3MouseClicked
@@ -269,17 +272,20 @@ public class viewSignIn extends javax.swing.JFrame {
         String password = new String(txtPassword.getPassword());
 
         if (username.isEmpty() && password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Username and password cannot be empty.", "Erorr login", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Username and password cannot be empty.", "Erorr login",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (username.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "You must enter your username.", "Username cannot be empty", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "You must enter your username.", "Username cannot be empty",
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         if (password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "You must enter your password.", "Password cannot be empty", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "You must enter your password.", "Password cannot be empty",
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -287,14 +293,16 @@ public class viewSignIn extends javax.swing.JFrame {
 
         if (login != null) {
             if (login.getRole() == 1) {
-                // Admin
+                new viewSignUp().setVisible(true);
+                this.dispose();
                 JOptionPane.showMessageDialog(this, "Admin");
             } else {
                 // Staff
                 JOptionPane.showMessageDialog(this, "Staff");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Incorrect username or password.", "Login failed", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Incorrect username or password.", "Login failed",
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
     }// GEN-LAST:event_kGradientPanel1MouseClicked
@@ -358,13 +366,17 @@ public class viewSignIn extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(viewSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(viewSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(viewSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(viewSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         }
         // </editor-fold>
         // </editor-fold>
