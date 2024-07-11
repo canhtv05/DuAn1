@@ -2,8 +2,9 @@ package component.login.view;
 
 import javax.swing.*;
 import component.login.model.modelLogin;
+import component.login.repo.FileUtils;
 import component.login.repo.repoLogin;
-import javax.swing.JOptionPane;
+import java.awt.Cursor;
 
 public class viewLogin extends javax.swing.JFrame {
 
@@ -15,11 +16,25 @@ public class viewLogin extends javax.swing.JFrame {
     public viewLogin() {
         initComponents();
         setBackground();
+        loadLoginDetails();
     }
 
     private void setBackground() {
         txtUsername.setBackground(new java.awt.Color(0, 0, 0, 1));
         txtPassword.setBackground(new java.awt.Color(0, 0, 0, 1));
+    }
+
+    private void loadLoginDetails() {
+        String[] loginDetails = FileUtils.readLoginDetails();
+        if (loginDetails != null && loginDetails.length == 2) {
+            txtUsername.setText(loginDetails[0]);
+            txtPassword.setText(loginDetails[1]);
+            rdoRemember.setSelected(true);
+            rdoRemember.setIcon(new ImageIcon(getClass().getResource("/icon/icons8_ok_24px.png")));
+        } else {
+            rdoRemember.setSelected(false);
+            rdoRemember.setIcon(new ImageIcon(getClass().getResource("/icon/icons8_cancel_24px.png")));
+        }
     }
 
     /**
@@ -29,11 +44,7 @@ public class viewLogin extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -60,12 +71,18 @@ public class viewLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 450));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        kGradientPanel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
         kGradientPanel2.setkEndColor(new java.awt.Color(0, 204, 204));
         kGradientPanel2.setkGradientFocus(550);
         kGradientPanel2.setkStartColor(new java.awt.Color(153, 0, 153));
@@ -73,6 +90,7 @@ public class viewLogin extends javax.swing.JFrame {
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_multiply_24px_3.png"))); // NOI18N
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -155,26 +173,26 @@ public class viewLogin extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 21)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Login");
+        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
         kGradientPanel1Layout.setHorizontalGroup(
-            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(jLabel7)
-                .addContainerGap(126, Short.MAX_VALUE))
-        );
+                kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                .addGap(122, 122, 122)
+                                .addComponent(jLabel7)
+                                .addContainerGap(123, Short.MAX_VALUE)));
         kGradientPanel1Layout.setVerticalGroup(
-            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addContainerGap())
-        );
+                kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                kGradientPanel1Layout.createSequentialGroup()
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel7)
+                                        .addContainerGap()));
 
         kGradientPanel2.add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, 40));
 
@@ -210,7 +228,9 @@ public class viewLogin extends javax.swing.JFrame {
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/freepik-export-20240711094852nOFd.png"))); // NOI18N
+        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel12.setIcon(
+                new javax.swing.ImageIcon(getClass().getResource("/icon/freepik-export-20240711094852nOFd.png"))); // NOI18N
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 450));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 450));
@@ -219,14 +239,26 @@ public class viewLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rdoRememberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdoRememberMouseClicked
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        if (rdoRemember.isSelected()) {
+            String username = txtUsername.getText();
+            String password = new String(txtPassword.getPassword());
+            FileUtils.saveLoginDetails(username, password);
+        } else {
+            FileUtils.clearLoginDetails();
+        }
+        System.exit(0);
+    }// GEN-LAST:event_formWindowClosing
 
-    }//GEN-LAST:event_rdoRememberMouseClicked
+    private void rdoRememberMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_rdoRememberMouseClicked
 
-    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+    }// GEN-LAST:event_rdoRememberMouseClicked
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel10MouseClicked
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(this, "chua xu ly");
-    }//GEN-LAST:event_jLabel10MouseClicked
+    }// GEN-LAST:event_jLabel10MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
@@ -238,10 +270,12 @@ public class viewLogin extends javax.swing.JFrame {
         String password = new String(txtPassword.getPassword());
 
         if (username.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "loi");
             return;
         }
 
         if (password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "loi");
             return;
         }
 
@@ -280,15 +314,16 @@ public class viewLogin extends javax.swing.JFrame {
     }// GEN-LAST:event_enableMouseClicked
 
     private void rdoRememberActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-        // TODO add your handling code here:
-
         Icon selectedIcon = new ImageIcon(getClass().getResource("/icon/icons8_ok_24px.png"));
         Icon unselectedIcon = new ImageIcon(getClass().getResource("/icon/icons8_cancel_24px.png"));
 
         if (rdoRemember.isSelected()) {
+            String username = txtUsername.getText();
+            String password = new String(txtPassword.getPassword());
+            FileUtils.saveLoginDetails(username, password);
             rdoRemember.setIcon(selectedIcon);
         } else {
+            FileUtils.clearLoginDetails();
             rdoRemember.setIcon(unselectedIcon);
         }
     }
