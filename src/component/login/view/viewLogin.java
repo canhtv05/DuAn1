@@ -4,7 +4,7 @@ import javax.swing.*;
 import component.login.model.modelLogin;
 import component.login.repo.FileUtils;
 import component.login.repo.repoLogin;
-import java.awt.Cursor;
+import java.awt.*;
 
 public class viewLogin extends javax.swing.JFrame {
 
@@ -269,13 +269,18 @@ public class viewLogin extends javax.swing.JFrame {
         String username = txtUsername.getText().trim();
         String password = new String(txtPassword.getPassword());
 
+        if (username.isEmpty() && password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Username and password cannot be empty.", "Erorr login", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         if (username.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "loi");
+            JOptionPane.showMessageDialog(this, "You must enter your username.", "Username cannot be empty", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         if (password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "loi");
+            JOptionPane.showMessageDialog(this, "You must enter your password.", "Password cannot be empty", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -290,7 +295,7 @@ public class viewLogin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Staff");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "tkmk ko chinh xacs");
+            JOptionPane.showMessageDialog(this, "Incorrect username or password.", "Login failed", JOptionPane.WARNING_MESSAGE);
             return;
         }
     }// GEN-LAST:event_kGradientPanel1MouseClicked
