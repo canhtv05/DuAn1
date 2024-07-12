@@ -3,8 +3,8 @@ package component.login.view;
 import javax.swing.*;
 import component.login.model.modelLogin;
 import component.login.repo.FileUtils;
+import component.login.repo.repoCheckEmpty;
 import component.login.repo.repoLogin;
-import java.awt.*;
 
 public class viewSignIn extends javax.swing.JFrame {
 
@@ -12,6 +12,7 @@ public class viewSignIn extends javax.swing.JFrame {
      * Creates new form viewSignIn
      */
     private repoLogin repo = new repoLogin();
+    private repoCheckEmpty repoCheckEmpty = new repoCheckEmpty();
 
     public viewSignIn() {
         initComponents();
@@ -46,7 +47,7 @@ public class viewSignIn extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -77,7 +78,6 @@ public class viewSignIn extends javax.swing.JFrame {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
-
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -155,7 +155,7 @@ public class viewSignIn extends javax.swing.JFrame {
 
         rdoRemember.setForeground(new java.awt.Color(255, 255, 255));
         rdoRemember.setText("Remember password");
-        rdoRemember.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_cancel_24px.png"))); // NOI18N
+        rdoRemember.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_ok_24px.png"))); // NOI18N
         rdoRemember.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 rdoRememberMouseClicked(evt);
@@ -181,24 +181,23 @@ public class viewSignIn extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Sign in");
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        kGradientPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
         kGradientPanel1Layout.setHorizontalGroup(
-                kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                .addGap(122, 122, 122)
-                                .addComponent(jLabel7)
-                                .addContainerGap(121, Short.MAX_VALUE)));
+            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                .addGap(122, 122, 122)
+                .addComponent(jLabel7)
+                .addContainerGap(121, Short.MAX_VALUE))
+        );
         kGradientPanel1Layout.setVerticalGroup(
-                kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                kGradientPanel1Layout.createSequentialGroup()
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel7)
-                                        .addContainerGap()));
+            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addContainerGap())
+        );
 
         kGradientPanel2.add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 310, 40));
 
@@ -235,8 +234,7 @@ public class viewSignIn extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel12.setIcon(
-                new javax.swing.ImageIcon(getClass().getResource("/icon/freepik-export-20240711094852nOFd.png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/freepik-export-20240711094852nOFd.png"))); // NOI18N
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 450));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 450));
@@ -291,21 +289,15 @@ public class viewSignIn extends javax.swing.JFrame {
         String username = txtUsername.getText().trim();
         String password = new String(txtPassword.getPassword());
 
-        if (username.isEmpty() && password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Username and password cannot be empty.", "Erorr login",
-                    JOptionPane.ERROR_MESSAGE);
+        if (repoCheckEmpty.checkUsernameAndPasswordEmpty(username, password)) {
             return;
         }
 
-        if (username.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "You must enter your username.", "Username cannot be empty",
-                    JOptionPane.WARNING_MESSAGE);
+        if (repoCheckEmpty.checkPasswordEmpty(password)) {
             return;
         }
 
-        if (password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "You must enter your password.", "Password cannot be empty",
-                    JOptionPane.WARNING_MESSAGE);
+        if (repoCheckEmpty.checkUsernameEmpty(username)) {
             return;
         }
 
@@ -321,9 +313,9 @@ public class viewSignIn extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Staff");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Incorrect username or password.", "Login failed",
-                    JOptionPane.WARNING_MESSAGE);
-            return;
+//            JOptionPane.showMessageDialog(this, "Incorrect username or password.", "Login failed",
+//                    JOptionPane.WARNING_MESSAGE);
+            repoCheckEmpty.loginFailed();
         }
     }// GEN-LAST:event_kGradientPanel1MouseClicked
 

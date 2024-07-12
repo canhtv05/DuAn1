@@ -5,8 +5,8 @@
 package component.login.view;
 
 import component.login.model.modelLogin;
+import component.login.repo.repoCheckEmpty;
 import component.login.repo.repoSignUp;
-import java.awt.*;
 import javax.swing.*;
 
 /**
@@ -20,6 +20,7 @@ public class viewSignUp extends javax.swing.JFrame {
      */
 
     private repoSignUp repo = new repoSignUp();
+    private repoCheckEmpty repoCheckEmpty = new repoCheckEmpty();
 
     public viewSignUp() {
         initComponents();
@@ -285,21 +286,15 @@ public class viewSignUp extends javax.swing.JFrame {
         String username = txtUsername.getText().trim();
         String password = new String(txtPassword.getPassword());
 
-        if (username.isEmpty() && password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Username and password cannot be empty.", "Erorr sign up",
-                    JOptionPane.ERROR_MESSAGE);
+        if (repoCheckEmpty.checkUsernameAndPasswordEmpty(username, password)) {
             return;
         }
 
-        if (username.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "You must enter your username.", "Username cannot be empty",
-                    JOptionPane.WARNING_MESSAGE);
+        if (repoCheckEmpty.checkPasswordEmpty(password)) {
             return;
         }
 
-        if (password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "You must enter your password.", "Password cannot be empty",
-                    JOptionPane.WARNING_MESSAGE);
+        if (repoCheckEmpty.checkUsernameEmpty(username)) {
             return;
         }
 
@@ -307,10 +302,9 @@ public class viewSignUp extends javax.swing.JFrame {
             modelLogin login = new modelLogin(username, password);
             this.repo.register(login);
             this.clear();
-            JOptionPane.showMessageDialog(this, "User account created successfully");
+            repoCheckEmpty.successCreatedAccount();
         } else {
-            JOptionPane.showMessageDialog(this, "Username already exists: " + username, "Duplicate Primary Key",
-                    JOptionPane.ERROR_MESSAGE);
+            repoCheckEmpty.errorDuplicate(username);
         }
 
     }// GEN-LAST:event_kGradientPanel3MouseClicked

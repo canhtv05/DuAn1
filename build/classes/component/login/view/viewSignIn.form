@@ -218,7 +218,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Remember password"/>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icon/icons8_cancel_24px.png"/>
+                  <Image iconType="3" name="/icon/icons8_ok_24px.png"/>
                 </Property>
               </Properties>
               <Events>
