@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/DuAn1/HostelManagement/src/component/login/repo/repoLogin.java</file>
             <file>file:/D:/DuAn1/HostelManagement/src/component/login/view/viewSignUp.java</file>
+            <file>file:/D:/DuAn1/HostelManagement/src/component/login/model/modelLogin.java</file>
+            <file>file:/D:/DuAn1/HostelManagement/src/dao/DBContext.java</file>
             <file>file:/D:/DuAn1/HostelManagement/src/component/login/view/viewSignIn.java</file>
+            <file>file:/D:/DuAn1/HostelManagement/src/component/login/repo/repoSignUp.java</file>
         </group>
     </open-files>
 </project-private>

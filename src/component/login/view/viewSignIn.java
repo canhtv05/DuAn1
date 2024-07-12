@@ -45,6 +45,7 @@ public class viewSignIn extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -76,6 +77,10 @@ public class viewSignIn extends javax.swing.JFrame {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
+
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -83,7 +88,6 @@ public class viewSignIn extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 450));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        kGradientPanel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
         kGradientPanel2.setkEndColor(new java.awt.Color(0, 204, 204));
         kGradientPanel2.setkGradientFocus(550);
         kGradientPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -98,7 +102,6 @@ public class viewSignIn extends javax.swing.JFrame {
         });
         kGradientPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 6, 30, 30));
 
-        jLabel10.setCursor(new Cursor(Cursor.HAND_CURSOR));
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -120,7 +123,7 @@ public class viewSignIn extends javax.swing.JFrame {
         kGradientPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("_______________________________________________________");
+        jLabel5.setText("_______________________________________________");
         kGradientPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 298, 20));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_user_32px.png"))); // NOI18N
@@ -178,6 +181,8 @@ public class viewSignIn extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Sign in");
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        kGradientPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
@@ -198,7 +203,7 @@ public class viewSignIn extends javax.swing.JFrame {
         kGradientPanel2.add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 310, 40));
 
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("_______________________________________________________");
+        jLabel11.setText("_______________________________________________");
         kGradientPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 173, 298, 30));
 
         txtPassword.setForeground(new java.awt.Color(255, 255, 255));
@@ -239,6 +244,21 @@ public class viewSignIn extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(950, 450));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        for (double i = 0.0; i < 1.0; i += 0.1) {
+            String variable = i + "";
+            float opacity = Float.parseFloat(variable);
+            this.setOpacity(opacity);
+
+            try {
+                Thread.sleep(10);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }// GEN-LAST:event_formWindowOpened
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
