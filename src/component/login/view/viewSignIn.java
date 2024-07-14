@@ -5,6 +5,7 @@ import component.login.model.modelLogin;
 import component.login.repo.FileUtils;
 import component.login.repo.repoCheckEmpty;
 import component.login.repo.repoLogin;
+import component.move.MoveJFramekGradient;
 
 public class viewSignIn extends javax.swing.JFrame {
 
@@ -13,11 +14,19 @@ public class viewSignIn extends javax.swing.JFrame {
      */
     private repoLogin repo = new repoLogin();
     private repoCheckEmpty repoCheckEmpty = new repoCheckEmpty();
+    private MoveJFramekGradient move;
 
     public viewSignIn() {
         initComponents();
         setBackground();
         loadLoginDetails();
+        makeFrameDraggable();
+    }
+
+    private void makeFrameDraggable() {
+        move = new MoveJFramekGradient(this);
+        kGradientPanel2.addMouseListener(move);
+        kGradientPanel2.addMouseMotionListener(move);
     }
 
     private void setBackground() {

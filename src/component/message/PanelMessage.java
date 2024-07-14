@@ -55,6 +55,7 @@ public class PanelMessage extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_facebook_messenger_90px.png"))); // NOI18N
