@@ -11,14 +11,14 @@ public class viewSignUp extends javax.swing.JFrame {
     private repoSignUp repo = new repoSignUp();
     private repoCheckEmpty repoCheckEmpty = new repoCheckEmpty();
     private MoveJFramekGradient move;
-    
+
     public viewSignUp() {
         initComponents();
         setBackground();
         makeFrameDraggable();
     }
-    
-    // move Jframe    
+
+    // move Jframe
     private void makeFrameDraggable() {
         move = new MoveJFramekGradient(this);
         kGradientPanel1.addMouseListener(move);
