@@ -38,6 +38,15 @@ public class viewApp extends javax.swing.JFrame {
             @Override
             public void menuSelected(int menuIndex, int subMenuIndex) {
                 System.out.println("Menu Index: " + menuIndex + "SubMenu Index: " + subMenuIndex);
+                if (menuIndex == 0) {
+                    
+//                    showMenu
+//                    if (subMenuIndex == 0) {
+//                        main.showForm(new Form_Home());
+//                    } else if (subMenuIndex == 1) {
+//                        main.showForm(new Form1());
+//                    }
+                }
             }
         });
         menu.addEventShowPopup(new EventShowPopupMenu() {
@@ -105,11 +114,14 @@ public class viewApp extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1400, 700));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
+
+        jLayeredPane1.setPreferredSize(new java.awt.Dimension(1400, 700));
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setOpaque(true);
@@ -118,11 +130,11 @@ public class viewApp extends javax.swing.JFrame {
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1100, Short.MAX_VALUE)
+            .addGap(0, 1400, Short.MAX_VALUE)
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGap(0, 700, Short.MAX_VALUE)
         );
 
         jLayeredPane1.setLayer(bg, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -142,14 +154,14 @@ public class viewApp extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(1100, 560));
+        setSize(new java.awt.Dimension(1400, 700));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
