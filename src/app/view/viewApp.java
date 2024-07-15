@@ -1,23 +1,33 @@
 package app.view;
 
-import component.menu.repo.Header;
-import component.menu.repo.MainForm;
-import component.menu.repo.Menu;
+import component.menu.repo.form.Header;
+import component.menu.repo.form.MainForm;
+import component.menu.repo.form.Menu;
+import component.menu.repo.form.MenuItem;
 import component.menu.repo.itf.EventMenuSelected;
+import component.menu.repo.itf.EventShowPopupMenu;
+import component.menu.repo.popup.PopupMenu;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import net.miginfocom.swing.MigLayout;
+import org.jdesktop.animation.timing.Animator;
+import org.jdesktop.animation.timing.TimingTarget;
+import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 public class viewApp extends javax.swing.JFrame {
-    
+
     private MigLayout layout;
     private Menu menu;
     private Header header;
     private MainForm main;
-    
+    private Animator animator;
+
     public viewApp() {
         initComponents();
         init();
     }
-    
+
     private void init() {
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
@@ -28,12 +38,61 @@ public class viewApp extends javax.swing.JFrame {
             @Override
             public void menuSelected(int menuIndex, int subMenuIndex) {
                 System.out.println("Menu Index: " + menuIndex + "SubMenu Index: " + subMenuIndex);
-            }            
+            }
+        });
+        menu.addEventShowPopup(new EventShowPopupMenu() {
+            @Override
+            public void showPopup(Component com) {
+                MenuItem item = (MenuItem) com;
+                PopupMenu popup = new PopupMenu(viewApp.this, item.getIndex(), item.getEventSelected(), item.getMenu().getSubMenu());
+                int x = viewApp.this.getX() + 52;
+                int y = viewApp.this.getY() + com.getY() + 86;
+                popup.setLocation(x, y);
+                popup.setVisible(true);
+            }
         });
         menu.initMenuItem();
         bg.add(menu, "w 230!, spany 2");
         bg.add(header, "h 50!, wrap");
         bg.add(main, "w 100%, h 100%");
+
+        TimingTarget target = new TimingTargetAdapter() {
+            @Override
+            public void timingEvent(float fraction) {
+                double width;
+                if (menu.isShowMenu()) {
+                    width = 60 + (170 * (1f - fraction));
+                } else {
+                    width = 60 + (170 * fraction);
+                }
+                layout.setComponentConstraints(menu, "w " + width + "!, spany2");
+                menu.revalidate();
+            }
+
+            @Override
+            public void end() {
+                menu.setShowMenu(!menu.isShowMenu());
+                menu.setEnableMenu(true);
+            }
+
+        };
+
+        animator = new Animator(500, target);
+        animator.setResolution(0);
+        animator.setDeceleration(0.5f);
+        animator.setAcceleration(0.5f);
+        header.addMenuEvent(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                if (!animator.isRunning()) {
+                    animator.start();
+                }
+                menu.setEnableMenu(false);
+                if (menu.isShowMenu()) {
+                    menu.hideallMenu();
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -46,6 +105,11 @@ public class viewApp extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setOpaque(true);
@@ -88,6 +152,21 @@ public class viewApp extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1100, 560));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        for (double i = 0.0; i < 1.0; i += 0.1) {
+            String variable = i + "";
+            float opacity = Float.parseFloat(variable);
+            this.setOpacity(opacity);
+
+            try {
+                Thread.sleep(10);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

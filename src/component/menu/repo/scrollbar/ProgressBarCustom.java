@@ -1,6 +1,5 @@
 package component.menu.repo.scrollbar;
 
-import component.menu.repo.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;

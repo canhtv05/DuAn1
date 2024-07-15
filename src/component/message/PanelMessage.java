@@ -67,6 +67,7 @@ public class PanelMessage extends javax.swing.JPanel {
         add(txtContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 380, 20));
 
         jPanel2.setBackground(new java.awt.Color(78, 134, 238));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -83,6 +84,7 @@ public class PanelMessage extends javax.swing.JPanel {
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 80, 30));
 
         jPanel3.setBackground(new java.awt.Color(78, 134, 238));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel3.setPreferredSize(new java.awt.Dimension(80, 30));
         jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {

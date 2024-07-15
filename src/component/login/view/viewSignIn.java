@@ -1,5 +1,6 @@
 package component.login.view;
 
+import app.view.viewApp;
 import javax.swing.*;
 import component.login.model.modelLogin;
 import component.login.repo.FileUtils;
@@ -316,7 +317,7 @@ public class viewSignIn extends javax.swing.JFrame {
             if (login.getRole() == 1) {
                 new viewSignUp().setVisible(true);
                 this.dispose();
-                JOptionPane.showMessageDialog(this, "Admin");
+                new viewApp().setVisible(true);
             } else {
                 // Staff
                 JOptionPane.showMessageDialog(this, "Staff");
