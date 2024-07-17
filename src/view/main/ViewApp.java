@@ -15,6 +15,13 @@ import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
+import view.panel.DoiMK;
+import view.panel.QlyHeThong;
+import view.panel.QlyHoaDon;
+import view.panel.QlyKhachThue;
+import view.panel.QlyNhanVien;
+import view.panel.QlyPhongTro;
+import view.panel.QlyTaiSan;
 
 public class ViewApp extends javax.swing.JFrame {
 
@@ -40,13 +47,34 @@ public class ViewApp extends javax.swing.JFrame {
             @Override
             public void menuSelected(int menuIndex, int subMenuIndex) {
                 System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
-                if (menuIndex == 0) {
-                    if (subMenuIndex == 0) {
-                        main.showForm(new FormHome());
-                    } else if (subMenuIndex == 1) {
-                        // main.showForm(new Form1());
-
-                    }
+                switch (menuIndex) {
+                    case 0:
+                        main.showForm(new QlyHeThong());
+                        break;
+                    case 1:
+                        main.showForm(new QlyPhongTro());
+                        break;
+                    case 2:
+                        main.showForm(new QlyKhachThue());
+                        break;
+                    case 3:
+                        main.showForm(new QlyHoaDon());
+                        break;
+                    case 4:
+                        main.showForm(new QlyNhanVien());
+                        break;
+                    case 5:
+                        main.showForm(new QlyTaiSan());
+                        break;
+                    case 6:
+                        main.showForm(new DoiMK());
+                        break;
+                    case 7:
+                        new viewSignIn().setVisible(true);
+                        dispose();
+                        break;
+                    default:
+                        break;
                 }
             }
         });
@@ -103,7 +131,7 @@ public class ViewApp extends javax.swing.JFrame {
             }
         });
         // Start with this form
-        // main.showForm(new FormHome());
+        main.showForm(new FormHome());
     }
 
     @SuppressWarnings("unchecked")

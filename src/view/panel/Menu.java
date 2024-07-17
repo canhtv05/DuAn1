@@ -2,6 +2,7 @@ package view.panel;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -53,22 +54,28 @@ public class Menu extends javax.swing.JPanel {
     }
 
     public void initMenuItem() {
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_user_group_24px_1.png")), "Hệ thống",
-                "juhi", "djfi", "kir", "kdoi"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_user_group_24px_1.png")),
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_speed_20px.png")),
+                "Hệ thống"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_hotel_star_20px.png")),
                 "QL Phòng trọ"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_user_group_24px_1.png")),
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_customer_20px.png")),
                 "QL Khách thuê"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_user_group_24px_1.png")),
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_bill_20px.png")),
                 "Ql Hóa đơn"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_user_group_20px.png")),
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_worker_20px.png")),
                 "QL Nhân viên"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_user_group_24px_1.png")),
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_money_20px.png")),
                 "QL Tài sản"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_password_20px.png")),
+                "Đổi mật khẩu"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_shutdown_20px.png")),
+                "Đăng xuất"));
     }
 
     private void addMenu(ModelMenu menu) {
-        panel.add(new MenuItem(menu, getEventMenu(), event, panel.getComponentCount()), "h 60!");
+        MenuItem menuItem = new MenuItem(menu, getEventMenu(), event, panel.getComponentCount());
+        menuItem.setMenuItemFont(new Font("Arial", Font.BOLD, 12));
+        panel.add(menuItem, "h 60!");
     }
 
     private EventMenu getEventMenu() {

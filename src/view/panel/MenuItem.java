@@ -2,6 +2,8 @@ package view.panel;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -85,6 +87,7 @@ public class MenuItem extends javax.swing.JPanel {
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -130,6 +133,15 @@ public class MenuItem extends javax.swing.JPanel {
         float ay1 = (1f - alpha) * size;
         g2.drawLine(x, (int) (y + ay), x + 4, (int) (y + ay1));
         g2.drawLine(x + 4, (int) (y + ay1), x + 8, (int) (y + ay));
+    }
+
+    public void setMenuItemFont(Font font) {
+        for (Component component : getComponents()) {
+            if (component instanceof MenuButton) {
+                MenuButton menuButton = (MenuButton) component;
+                menuButton.setFont(font);
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
