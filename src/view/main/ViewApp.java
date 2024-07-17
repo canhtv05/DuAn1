@@ -33,8 +33,17 @@ public class ViewApp extends javax.swing.JFrame {
 
     public ViewApp() {
         initComponents();
-//         ViewApp.this.setExtendedState(ViewApp.this.MAXIMIZED_BOTH);
+        ViewApp.this.setExtendedState(ViewApp.this.MAXIMIZED_BOTH);
         init();
+        changeHeader();
+    }
+
+    private void changeHeader() {
+        //        logic: lấy từ bên login được username -> jframe chính lúc này là app xong sau đó thì sửa username ở header vì là hàm static
+        String usernameString = viewSignIn.getUsernameString;
+        Header.setUsername(usernameString);
+        int role = viewSignIn.role;
+        header.changeImg(role);
     }
 
     private void init() {
@@ -48,33 +57,26 @@ public class ViewApp extends javax.swing.JFrame {
             public void menuSelected(int menuIndex, int subMenuIndex) {
                 System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
                 switch (menuIndex) {
-                    case 0:
+                    case 0 ->
                         main.showForm(new QlyHeThong());
-                        break;
-                    case 1:
+                    case 1 ->
                         main.showForm(new QlyPhongTro());
-                        break;
-                    case 2:
+                    case 2 ->
                         main.showForm(new QlyKhachThue());
-                        break;
-                    case 3:
+                    case 3 ->
                         main.showForm(new QlyHoaDon());
-                        break;
-                    case 4:
+                    case 4 ->
                         main.showForm(new QlyNhanVien());
-                        break;
-                    case 5:
+                    case 5 ->
                         main.showForm(new QlyTaiSan());
-                        break;
-                    case 6:
+                    case 6 ->
                         main.showForm(new DoiMK());
-                        break;
-                    case 7:
+                    case 7 -> {
                         new viewSignIn().setVisible(true);
                         dispose();
-                        break;
-                    default:
-                        break;
+                    }
+                    default -> {
+                    }
                 }
             }
         });

@@ -1,10 +1,12 @@
 package view.component.message;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import view.panel.PanelMessage;
 import service.PanelMessageListenerImpl;
 
-public class MessageFrame extends JFrame implements PanelMessageListenerImpl{
+public class MessageFrame extends JFrame implements PanelMessageListenerImpl {
 
     private boolean ok;
     private boolean cancel;
@@ -16,15 +18,20 @@ public class MessageFrame extends JFrame implements PanelMessageListenerImpl{
         this.ok = ok;
     }
 
-    public void showMessageFrame(String typeMessage, String content) {
-        setSize(550, 130);
-        setUndecorated(true);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+    public void showMessage(String type, String message) {
+        MessageFrame messageFrame = new MessageFrame();
+        messageFrame.setSize(550, 130);
+        messageFrame.setUndecorated(true);
+        messageFrame.setLocationRelativeTo(null);
+        messageFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         PanelMessage panelMessage = new PanelMessage();
-        panelMessage.changeMessage(typeMessage, content);
-        add(panelMessage);
+        panelMessage.changeMessage(type, message);
+        messageFrame.add(panelMessage);
+        messageFrame.setVisible(true);
+
+        if (messageFrame.isOk() || messageFrame.isCancel()) {
+            messageFrame.dispose();
+        }
     }
 
     @Override
@@ -36,11 +43,11 @@ public class MessageFrame extends JFrame implements PanelMessageListenerImpl{
     public void onCancelClicked() {
         cancel = true;
     }
-    
+
     public boolean isOk() {
         return ok;
-    } 
-    
+    }
+
     public boolean isCancel() {
         return cancel;
     }

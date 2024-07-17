@@ -29,7 +29,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="lbl" min="-2" max="-2" attributes="0"/>
-                  <Component id="username" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtUsername" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="imageAvatar1" min="-2" pref="52" max="-2" attributes="0"/>
@@ -44,7 +44,7 @@
                   <Group type="102" attributes="0">
                       <Component id="lbl" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="username" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtUsername" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="cmdMenu" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
                   <Component id="jSeparator1" max="32767" attributes="0"/>
@@ -82,7 +82,7 @@
         <Property name="text" type="java.lang.String" value="User name"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="username">
+    <Component class="javax.swing.JLabel" name="txtUsername">
       <Properties>
         <Property name="text" type="java.lang.String" value="Admin"/>
       </Properties>

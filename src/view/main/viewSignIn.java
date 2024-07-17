@@ -6,6 +6,7 @@ import util.FileUtils;
 import repository.login.RepoCheckEmpty;
 import repository.login.RepoLogin;
 import util.MoveJFramekGradient;
+import view.component.message.MessageFrame;
 
 public class viewSignIn extends javax.swing.JFrame {
 
@@ -15,12 +16,15 @@ public class viewSignIn extends javax.swing.JFrame {
     private RepoLogin repo = new RepoLogin();
     private RepoCheckEmpty repoCheckEmpty = new RepoCheckEmpty();
     private MoveJFramekGradient move;
+    public static String getUsernameString;
+    public static int role;
 
     public viewSignIn() {
         initComponents();
         setBackground();
         loadLoginDetails();
         makeFrameDraggable();
+        rdoRemember.setSelected(false);
     }
 
     private void makeFrameDraggable() {
@@ -56,7 +60,8 @@ public class viewSignIn extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -87,6 +92,7 @@ public class viewSignIn extends javax.swing.JFrame {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
+
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -104,6 +110,8 @@ public class viewSignIn extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_multiply_24px_3.png"))); // NOI18N
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        kGradientPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -146,6 +154,7 @@ public class viewSignIn extends javax.swing.JFrame {
 
         disable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_hide_32px.png"))); // NOI18N
         disable.setText("           ");
+        disable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         disable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 disableMouseClicked(evt);
@@ -164,6 +173,7 @@ public class viewSignIn extends javax.swing.JFrame {
 
         rdoRemember.setForeground(new java.awt.Color(255, 255, 255));
         rdoRemember.setText("Remember password");
+        rdoRemember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         rdoRemember.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_ok_24px.png"))); // NOI18N
         rdoRemember.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -194,19 +204,18 @@ public class viewSignIn extends javax.swing.JFrame {
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
         kGradientPanel1Layout.setHorizontalGroup(
-            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(jLabel7)
-                .addContainerGap(121, Short.MAX_VALUE))
-        );
+                kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                .addGap(122, 122, 122)
+                                .addComponent(jLabel7)
+                                .addContainerGap(121, Short.MAX_VALUE)));
         kGradientPanel1Layout.setVerticalGroup(
-            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addContainerGap())
-        );
+                kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                kGradientPanel1Layout.createSequentialGroup()
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel7)
+                                        .addContainerGap()));
 
         kGradientPanel2.add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 310, 40));
 
@@ -229,6 +238,7 @@ public class viewSignIn extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Sign up");
+        jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel10MouseClicked(evt);
@@ -243,7 +253,8 @@ public class viewSignIn extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/freepik-export-20240711094852nOFd.png"))); // NOI18N
+        jLabel12.setIcon(
+                new javax.swing.ImageIcon(getClass().getResource("/icon/freepik-export-20240711094852nOFd.png"))); // NOI18N
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 450));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 450));
@@ -313,17 +324,21 @@ public class viewSignIn extends javax.swing.JFrame {
         ModelLogin login = repo.checkLogin(new ModelLogin(username, password));
 
         if (login != null) {
-            if (login.getRole() == 1) {
-                new viewSignUp().setVisible(true);
-                this.dispose();
+            this.dispose();
+            if (login.getRole() == 0) {
+                getUsernameString = login.getUsername();
+                role = login.getRole();
                 new ViewApp().setVisible(true);
+                MessageFrame popup = new MessageFrame();
+                popup.showMessage("message", "Bạn đang đăng nhập dưới quyền Admin.");
             } else {
-                // Staff
-                JOptionPane.showMessageDialog(this, "Staff");
+                getUsernameString = login.getUsername();
+                role = login.getRole();
+                new ViewApp().setVisible(true);
+                MessageFrame popup = new MessageFrame();
+                popup.showMessage("message", "Bạn đang đăng nhập dưới quyền Nhân viên.");
             }
         } else {
-//            JOptionPane.showMessageDialog(this, "Incorrect username or password.", "Login failed",
-//                    JOptionPane.WARNING_MESSAGE);
             repoCheckEmpty.loginFailed();
         }
     }// GEN-LAST:event_kGradientPanel1MouseClicked
