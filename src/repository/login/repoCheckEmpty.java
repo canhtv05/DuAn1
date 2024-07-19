@@ -4,7 +4,7 @@ import view.component.message.MessageFrame;
 
 public class RepoCheckEmpty {
 
-    private MessageFrame message;
+    private MessageFrame message = new MessageFrame();
     
     public boolean checkUsernameEmpty(String username) {
         if (username.isEmpty()) {

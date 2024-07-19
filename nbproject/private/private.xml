@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
         <file>
             <url>src/view/panel/PanelMessage.java</url>
+            <bookmark id="2">
+                <name/>
+                <line>43</line>
+                <key/>
+            </bookmark>
             <bookmark id="1">
                 <name/>
-                <line>107</line>
+                <line>106</line>
                 <key/>
             </bookmark>
         </file>

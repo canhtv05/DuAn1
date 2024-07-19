@@ -1,7 +1,5 @@
 package view.component.message;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import view.panel.PanelMessage;
 import service.PanelMessageListenerImpl;

@@ -16,6 +16,7 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import view.panel.DoiMK;
+import view.panel.Footer;
 import view.panel.QlyHeThong;
 import view.panel.QlyHoaDon;
 import view.panel.QlyKhachThue;
@@ -30,28 +31,30 @@ public class ViewApp extends javax.swing.JFrame {
     private Header header;
     private MainForm main;
     private Animator animator;
+    private Footer footer;
 
     public ViewApp() {
         initComponents();
-        ViewApp.this.setExtendedState(ViewApp.this.MAXIMIZED_BOTH);
+//        ViewApp.this.setExtendedState(ViewApp.this.MAXIMIZED_BOTH);
         init();
         changeHeader();
     }
 
     private void changeHeader() {
-        //        logic: lấy từ bên login được username -> jframe chính lúc này là app xong sau đó thì sửa username ở header vì là hàm static
+        //logic: lấy từ bên login được username -> jframe chính lúc này là app xong sau đó thì sửa username ở header vì là hàm static
         String usernameString = viewSignIn.getUsernameString;
-        Header.setUsername(usernameString);
+        header.setUsername(usernameString);
         int role = viewSignIn.role;
         header.changeImg(role);
     }
 
     private void init() {
-        layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
+        layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0[fill]0[fill, bottom]0");
         bg.setLayout(layout);
         menu = new Menu();
         header = new Header();
         main = new MainForm();
+        footer = new Footer();
         menu.addEvent(new EventMenuSelected() {
             @Override
             public void menuSelected(int menuIndex, int subMenuIndex) {
@@ -93,9 +96,10 @@ public class ViewApp extends javax.swing.JFrame {
             }
         });
         menu.initMenuItem();
-        bg.add(menu, "w 230!, spany 2"); // Span Y 2cell
+        bg.add(menu, "w 230!, spany 3");
         bg.add(header, "h 50!, wrap");
-        bg.add(main, "w 100%, h 100%");
+        bg.add(main, "w 100%, h 100%, wrap");
+        bg.add(footer, "h 50!, wrap");
         TimingTarget target = new TimingTargetAdapter() {
             @Override
             public void timingEvent(float fraction) {
@@ -105,7 +109,7 @@ public class ViewApp extends javax.swing.JFrame {
                 } else {
                     width = 60 + (170 * fraction);
                 }
-                layout.setComponentConstraints(menu, "w " + width + "!, spany2");
+                layout.setComponentConstraints(menu, "w " + width + "!, spany3");
                 menu.revalidate();
             }
 
@@ -138,7 +142,7 @@ public class ViewApp extends javax.swing.JFrame {
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
@@ -161,33 +165,37 @@ public class ViewApp extends javax.swing.JFrame {
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
-                bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 1400, Short.MAX_VALUE));
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1400, Short.MAX_VALUE)
+        );
         bgLayout.setVerticalGroup(
-                bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 700, Short.MAX_VALUE));
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 700, Short.MAX_VALUE)
+        );
 
         jLayeredPane1.setLayer(bg, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
-                jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(bg));
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bg)
+        );
         jLayeredPane1Layout.setVerticalGroup(
-                jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(bg));
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bg)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setSize(new java.awt.Dimension(1400, 700));
         setLocationRelativeTo(null);

@@ -308,7 +308,6 @@ public class viewSignIn extends javax.swing.JFrame {
     private void kGradientPanel1MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_kGradientPanel1MouseClicked
         String username = txtUsername.getText().trim();
         String password = new String(txtPassword.getPassword());
-
         if (repoCheckEmpty.checkUsernameAndPasswordEmpty(username, password)) {
             return;
         }
