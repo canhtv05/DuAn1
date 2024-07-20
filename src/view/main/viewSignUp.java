@@ -1,14 +1,14 @@
 package view.main;
 
 import model.login.ModelLogin;
-import repository.login.RepoCheckEmpty;
+import repository.login.CheckEmpty;
 import repository.login.RepoSignUp;
 import util.MoveJFramekGradient;
 
 public class viewSignUp extends javax.swing.JFrame {
 
     private RepoSignUp repo = new RepoSignUp();
-    private RepoCheckEmpty repoCheckEmpty = new RepoCheckEmpty();
+    private CheckEmpty repoCheckEmpty = new CheckEmpty();
     private MoveJFramekGradient move;
 
     public viewSignUp() {

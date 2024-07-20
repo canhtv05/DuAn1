@@ -104,11 +104,17 @@ public class RepoTienDien {
         return list;
     }
 
-    public int totalRecords() {
+    public int totalRecords(String timKiem) {
         int sum = 0;
-        sql = "SELECT COUNT(*) FROM dbo.TienDien";
+        sql = "SELECT COUNT(*) FROM dbo.TienDien ";
+        if (!timKiem.isEmpty()) {
+            sql += "WHERE MaPT LIKE ?";
+        }
         try {
             ps = conn.prepareStatement(sql);
+            if(!timKiem.isEmpty()) {
+                ps.setString(1, "%" + timKiem + "%");
+            }
             rs = ps.executeQuery();
             if (rs.next()) {
                 sum = rs.getInt(1);
@@ -119,4 +125,14 @@ public class RepoTienDien {
         return sum;
     }
 
+    public void delete(int maTD) {
+        sql = "{DelTienDien(?)}";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, maTD);
+            ps.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
