@@ -1,6 +1,7 @@
 package model.tiendien;
 
 public class ModelTienDien {
+
     private int maTD;
     private String maHD;
     private String maPT;
@@ -107,5 +108,4 @@ public class ModelTienDien {
     public void setThanhTien(double thanhTien) {
         this.thanhTien = thanhTien;
     }
-    
 }

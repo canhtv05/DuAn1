@@ -22,7 +22,19 @@ public class RepoTienDien {
 
     public ArrayList<ModelTienDien> search(String maPhongTro) {
         ArrayList<ModelTienDien> list = new ArrayList<>();
-        sql = "SELECT MaTD, MaHoaDon, MaPT, NgayBatDau, NgayKetThuc, ChiSoDau, ChiSoCuoi ,SoDien, GiaTien, ThanhTien FROM dbo.TienDien ";
+        sql = "SELECT "
+                + "    MaTD, "
+                + "    MaHoaDon, "
+                + "    MaPT, "
+                + "    CONVERT(VARCHAR, NgayBatDau, 105) AS NgayBatDauFormatted, "
+                + "    CONVERT(VARCHAR, NgayKetThuc, 105) AS NgayKetThucFormatted, "
+                + "    ChiSoDau, "
+                + "    ChiSoCuoi, "
+                + "    SoDien, "
+                + "    GiaTien, "
+                + "    ThanhTien "
+                + "FROM "
+                + "    dbo.TienDien ";
 
         if (!maPhongTro.isEmpty()) {
             sql += "WHERE MaPT LIKE ?";
@@ -59,7 +71,19 @@ public class RepoTienDien {
 
     public ArrayList<ModelTienDien> searchAndPage(String maPhongTro, int page, int limit) {
         ArrayList<ModelTienDien> list = new ArrayList<>();
-        sql = "SELECT MaTD, MaHoaDon, MaPT, NgayBatDau, NgayKetThuc, ChiSoDau, ChiSoCuoi ,SoDien, GiaTien, ThanhTien FROM dbo.TienDien ";
+        sql = "SELECT "
+                + "    MaTD, "
+                + "    MaHoaDon, "
+                + "    MaPT, "
+                + "    CONVERT(VARCHAR, NgayBatDau, 105) AS NgayBatDauFormatted, "
+                + "    CONVERT(VARCHAR, NgayKetThuc, 105) AS NgayKetThucFormatted, "
+                + "    ChiSoDau, "
+                + "    ChiSoCuoi, "
+                + "    SoDien, "
+                + "    GiaTien, "
+                + "    ThanhTien "
+                + "FROM "
+                + "    dbo.TienDien ";
 
         if (!maPhongTro.isEmpty()) {
             sql += "WHERE MaPT LIKE ? ";
@@ -85,16 +109,16 @@ public class RepoTienDien {
             rs = ps.executeQuery();
             while (rs.next()) {
                 ModelTienDien model = new ModelTienDien(
-                        rs.getInt("MaTD"),
-                        rs.getString("MaHoaDon"),
-                        rs.getString("MaPT"),
-                        rs.getString("NgayBatDau"),
-                        rs.getString("NgayKetThuc"),
-                        rs.getInt("ChiSoDau"),
-                        rs.getInt("ChiSoCuoi"),
-                        rs.getInt("SoDien"),
-                        rs.getFloat("GiaTien"),
-                        rs.getFloat("ThanhTien"));
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getFloat(9),
+                        rs.getFloat(10));
                 list.add(model);
             }
         } catch (SQLException e) {
@@ -112,7 +136,7 @@ public class RepoTienDien {
         }
         try {
             ps = conn.prepareStatement(sql);
-            if(!timKiem.isEmpty()) {
+            if (!timKiem.isEmpty()) {
                 ps.setString(1, "%" + timKiem + "%");
             }
             rs = ps.executeQuery();
@@ -125,14 +149,41 @@ public class RepoTienDien {
         return sum;
     }
 
-    public void delete(int maTD) {
-        sql = "{DelTienDien(?)}";
+    public boolean delete(int maTD) {
+        sql = "EXEC dbo.DelTienDien @MaTD = ?";
         try {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, maTD);
-            ps.execute();
+            int affectedRows = ps.executeUpdate();
+            return affectedRows > 0;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean add(ModelTienDien modelTienDien) {
+        sql = "EXEC dbo.insertTienDien @MaHoaDon = ?,"
+                + "                    @MaPT = ?,"
+                + "                    @NgayBatDau = ?,"
+                + "                    @NgayKetThuc = ?,"
+                + "                    @ChiSoDau = ?,"
+                + "                    @ChiSoCuoi = ?,"
+                + "                    @GiaTien = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setObject(1, modelTienDien.getMaHD());
+            ps.setObject(2, modelTienDien.getMaPT());
+            ps.setObject(3, modelTienDien.getNgayBD());
+            ps.setObject(4, modelTienDien.getNgayKT());
+            ps.setObject(5, modelTienDien.getChiSoDau());
+            ps.setObject(6, modelTienDien.getChiSoCuoi());
+            ps.setObject(7, modelTienDien.getGiaTien());
+        int affectedRows = ps.executeUpdate();
+            return affectedRows > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

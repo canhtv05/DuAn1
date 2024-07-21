@@ -29,12 +29,13 @@ public final class DateChooser extends javax.swing.JPanel {
     }
 
     private JTextField textRefernce;
-    private final String MONTH_ENGLISH[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    private final String MONTH_ENGLISH[] = { "January", "February", "March", "April", "May", "June", "July", "August",
+            "September", "October", "November", "December" };
     private String dateFormat = "dd-MM-yyyy";
     private int MONTH = 1;
     private int YEAR = 2021;
     private int DAY = 1;
-    private int STATUS = 1;   //  1 is day    2 is month  3 is year
+    private int STATUS = 1; // 1 is day 2 is month 3 is year
     private int startYear;
     private SelectedDate selectedDate = new SelectedDate();
     private List<EventDateChooser> events;
@@ -143,6 +144,13 @@ public final class DateChooser extends javax.swing.JPanel {
         };
     }
 
+    public String getTextFromField() {
+        if (textRefernce != null) {
+            return textRefernce.getText();
+        }
+        return null; // Trả về null nếu textRefernce là null
+    }
+
     private void toDay(boolean runEvent) {
         Dates dates = new Dates();
         dates.setForeground(getForeground());
@@ -210,7 +218,13 @@ public final class DateChooser extends javax.swing.JPanel {
     }
 
     public void showPopup() {
-        popup.show(textRefernce, 0, textRefernce.getHeight());
+        // Lấy chiều cao của popup và JTextField
+        int popupHeight = popup.getPreferredSize().height;
+        // Hiển thị popup phía trên JTextField
+        popup.show(textRefernce, 0, -popupHeight);
+
+        // show popup bên dưới
+        // popup.show(textRefernce, 0, textRefernce.getHeight());
     }
 
     public void hidePopup() {
@@ -218,10 +232,11 @@ public final class DateChooser extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        popup = new javax.swing.JPopupMenu(){
+        popup = new javax.swing.JPopupMenu() {
             @Override
             protected void paintComponent(Graphics grphcs) {
                 grphcs.setColor(new Color(114, 113, 113));
@@ -307,53 +322,60 @@ public final class DateChooser extends javax.swing.JPanel {
         javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
         header.setLayout(headerLayout);
         headerLayout.setHorizontalGroup(
-            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cmdPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(MY, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmdForward, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+                headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(cmdPrevious, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(MY, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmdForward, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap()));
         headerLayout.setVerticalGroup(
-            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmdPrevious, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(MY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdForward, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cmdPrevious, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(MY, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cmdForward, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         slide.setLayout(new javax.swing.BoxLayout(slide, javax.swing.BoxLayout.LINE_AXIS));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(slide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, 0)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(slide, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, 0)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
-                .addComponent(slide, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(3, 3, 3)
+                                .addComponent(slide, javax.swing.GroupLayout.PREFERRED_SIZE, 165,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmdPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdPreviousActionPerformed
-        if (STATUS == 1) {   //  Date
+    private void cmdPreviousActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cmdPreviousActionPerformed
+        if (STATUS == 1) { // Date
             if (MONTH == 1) {
                 MONTH = 12;
                 YEAR--;
@@ -361,7 +383,7 @@ public final class DateChooser extends javax.swing.JPanel {
                 MONTH--;
             }
             setDateBack();
-        } else if (STATUS == 3) {    //  Year
+        } else if (STATUS == 3) { // Year
             setYearBack();
         } else {
             if (YEAR >= 1000) {
@@ -372,10 +394,10 @@ public final class DateChooser extends javax.swing.JPanel {
                 cmdYear.setText(YEAR + "");
             }
         }
-    }//GEN-LAST:event_cmdPreviousActionPerformed
+    }// GEN-LAST:event_cmdPreviousActionPerformed
 
-    private void cmdForwardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdForwardActionPerformed
-        if (STATUS == 1) {   //  Date
+    private void cmdForwardActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cmdForwardActionPerformed
+        if (STATUS == 1) { // Date
             if (MONTH == 12) {
                 MONTH = 1;
                 YEAR++;
@@ -383,7 +405,7 @@ public final class DateChooser extends javax.swing.JPanel {
                 MONTH++;
             }
             setDateNext();
-        } else if (STATUS == 3) {    //  Year
+        } else if (STATUS == 3) { // Year
             setYearNext();
         } else {
             YEAR++;
@@ -392,9 +414,9 @@ public final class DateChooser extends javax.swing.JPanel {
             slide.slideToLeft(months);
             cmdYear.setText(YEAR + "");
         }
-    }//GEN-LAST:event_cmdForwardActionPerformed
+    }// GEN-LAST:event_cmdForwardActionPerformed
 
-    private void cmdMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMonthActionPerformed
+    private void cmdMonthActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cmdMonthActionPerformed
         if (STATUS != 2) {
             STATUS = 2;
             Months months = new Months();
@@ -408,9 +430,9 @@ public final class DateChooser extends javax.swing.JPanel {
             slide.slideToDown(dates);
             STATUS = 1;
         }
-    }//GEN-LAST:event_cmdMonthActionPerformed
+    }// GEN-LAST:event_cmdMonthActionPerformed
 
-    private void cmdYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdYearActionPerformed
+    private void cmdYearActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cmdYearActionPerformed
         if (STATUS != 3) {
             STATUS = 3;
             Years years = new Years();
@@ -425,9 +447,9 @@ public final class DateChooser extends javax.swing.JPanel {
             slide.slideToDown(dates);
             STATUS = 1;
         }
-    }//GEN-LAST:event_cmdYearActionPerformed
+    }// GEN-LAST:event_cmdYearActionPerformed
 
-    private void cmdPreviousKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmdPreviousKeyPressed
+    private void cmdPreviousKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_cmdPreviousKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_UP) {
             Component com = slide.getComponent(0);
             if (com instanceof Dates) {
@@ -453,7 +475,7 @@ public final class DateChooser extends javax.swing.JPanel {
                 d.next();
             }
         }
-    }//GEN-LAST:event_cmdPreviousKeyPressed
+    }// GEN-LAST:event_cmdPreviousKeyPressed
 
     public String getDateFormat() {
         return dateFormat;
