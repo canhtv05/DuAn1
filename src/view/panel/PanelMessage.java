@@ -13,7 +13,7 @@ public class PanelMessage extends javax.swing.JPanel {
     public PanelMessage() {
         initComponents();
     }
-    
+
     public void setPanelMessageListener(PanelMessageListenerImpl listener) {
         this.listener = listener;
     }
@@ -40,6 +40,13 @@ public class PanelMessage extends javax.swing.JPanel {
             jPanel2.setBackground(new Color(248, 198, 101));
             jPanel3.setBackground(new Color(248, 198, 101));
             lblTitle.setText("Warning:");
+        } else if (typeMessage.equalsIgnoreCase("success")) {
+            icon = new ImageIcon(getClass().getResource("/icon/icons8_ok_90px_3.png"));
+            lblIcon.setIcon(icon);
+            txtContent.setText(content.trim());
+            jPanel2.setBackground(new Color(76,175,80));
+            jPanel3.setBackground(new Color(76,175,80));
+            lblTitle.setText("Successful:");
         }
     }
 

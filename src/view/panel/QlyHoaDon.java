@@ -1,20 +1,62 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package view.panel;
 
-/**
- *
- * @author CanhPC
- */
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 public class QlyHoaDon extends javax.swing.JPanel {
 
-    /**
-     * Creates new form QlyHoaDon
-     */
     public QlyHoaDon() {
         initComponents();
+        tbl.fixTable(scroll);
+//        setOpaque(false);
+        testData(tbl);
+    }
+    
+    private void testData(JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.addRow(new Object[]{1, "Chai", "Beverages", 18, true});
+        model.addRow(new Object[]{2, "Chang", "Beverages", 19, false});
+        model.addRow(new Object[]{3, "Aniseed Syrup", "Beverages", 18, 39});
+        model.addRow(new Object[]{4, "Chef Anton's Cajun Seasoning", "Beverages", 19, 39});
+        model.addRow(new Object[]{5, "Chef Anton's Gumbo Mix", "Beverages", 18, 39});
+        model.addRow(new Object[]{6, "Grandma's Boysenberry Spread", "Beverages", 19, 39});
+        model.addRow(new Object[]{7, "Uncle Bob's Organic Dried Pears", "Beverages", 18, 39});
+        model.addRow(new Object[]{8, "Northwoods Cranberry Sauce", "Beverages", 19, 39});
+        model.addRow(new Object[]{9, "Mishi Kobe Niku", "Beverages", 18, 39});
+        model.addRow(new Object[]{10, "Ikura", "Beverages", 19, 39});
+        model.addRow(new Object[]{11, "Queso Cabrales", "Beverages", 18, 39});
+        model.addRow(new Object[]{12, "Queso Manchego La Pastora", "Beverages", 19, 39});
+        model.addRow(new Object[]{13, "Konbu", "Beverages", 18, 39});
+        model.addRow(new Object[]{14, "Tofu", "Seafood", 19, 39});
+        model.addRow(new Object[]{15, "Genen Shouyu", "Seafood", 18, 39});
+        model.addRow(new Object[]{16, "Pavlova", "Seafood", 19, 39});
+        model.addRow(new Object[]{17, "Alice Mutton", "Seafood", 18, 39});
+        model.addRow(new Object[]{18, "Carnarvon Tigers", "Seafood", 19, 39});
+        model.addRow(new Object[]{19, "Teatime Chocolate Biscuits", "Seafood", 19, 39});
+        model.addRow(new Object[]{20, "Sir Rodney's Marmalade", "Seafood", 19, 39});
+        model.addRow(new Object[]{21, "Sir Rodney's Scones", "Seafood", 19, 39});
+        model.addRow(new Object[]{22, "Gustaf's Knäckebröd", "Seafood", 19, 39});
+        model.addRow(new Object[]{23, "Tunnbröd", "Seafood", 19, 39});
+        model.addRow(new Object[]{24, "Guaraná Fantástica", "Seafood", 19, 39});
+        model.addRow(new Object[]{25, "NuNuCa Nuß-Nougat-Creme", "Seafood", 19, 39});
+        model.addRow(new Object[]{26, "Gumbär Gummibärchen", "Seafood", 19, 39});
+        model.addRow(new Object[]{27, "Schoggi Schokolade", "Seafood", 19, 39});
+        model.addRow(new Object[]{28, "Rössle Sauerkraut", "Seafood", 19, 39});
+        model.addRow(new Object[]{29, "Thüringer Rostbratwurst", "Seafood", 19, 39});
+        model.addRow(new Object[]{30, "Nord-Ost Matjeshering", "Seafood", 19, 39});
+        model.addRow(new Object[]{31, "Gorgonzola Telino", "Seafood", 19, 39});
+        model.addRow(new Object[]{32, "Mascarpone Fabioli", "Seafood", 19, 39});
+        model.addRow(new Object[]{33, "Geitost", "Seafood", 19, 39});
+        model.addRow(new Object[]{34, "Sasquatch Ale", "Seafood", 19, 39});
+        model.addRow(new Object[]{35, "Steeleye Stout", "Seafood", 19, 39});
+        model.addRow(new Object[]{36, "Inlagd Sill", "Seafood", 19, 39});
+        model.addRow(new Object[]{37, "Gravad lax", "Seafood", 19, 39});
+        model.addRow(new Object[]{38, "Côte de Blaye", "Seafood", 19, 39});
+        model.addRow(new Object[]{39, "Chartreuse verte", "Seafood", 19, 39});
+        model.addRow(new Object[]{40, "Boston Crab Meat", "Seafood", 19, 39});
+        model.addRow(new Object[]{41, "Jack's New England Clam Chowder", "Seafood", 19, 39});
+        model.addRow(new Object[]{42, "Singaporean Hokkien Fried Mee", "Seafood", 19, 39});
+        model.addRow(new Object[]{43, "Ipoh Coffee", "Seafood", 19, 39});
     }
 
     /**
@@ -26,30 +68,43 @@ public class QlyHoaDon extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        scroll = new javax.swing.JScrollPane();
+        tbl = new view.component.table.Table();
 
-        jLabel1.setText("Hóa đơn");
+        tbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        scroll.setViewportView(tbl);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(178, 178, 178)
-                .addComponent(jLabel1)
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(368, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(jLabel1)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane scroll;
+    private view.component.table.Table tbl;
     // End of variables declaration//GEN-END:variables
 }

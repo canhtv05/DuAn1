@@ -1,14 +1,14 @@
 package view.main;
 
 import model.login.ModelLogin;
-import repository.login.RepoCheckEmpty;
+import repository.login.CheckEmpty;
 import repository.login.RepoSignUp;
 import util.MoveJFramekGradient;
 
 public class viewSignUp extends javax.swing.JFrame {
 
     private RepoSignUp repo = new RepoSignUp();
-    private RepoCheckEmpty repoCheckEmpty = new RepoCheckEmpty();
+    private CheckEmpty repoCheckEmpty = new CheckEmpty();
     private MoveJFramekGradient move;
 
     public viewSignUp() {
@@ -17,7 +17,7 @@ public class viewSignUp extends javax.swing.JFrame {
         makeFrameDraggable();
     }
 
-    // move Jframe
+//     move Jframe
     private void makeFrameDraggable() {
         move = new MoveJFramekGradient(this);
         kGradientPanel1.addMouseListener(move);
@@ -87,7 +87,7 @@ public class viewSignUp extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_multiply_24px_3.png"))); // NOI18N
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        kGradientPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        kGradientPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
