@@ -1,36 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
-        <file>
-            <url>src/view/panel/PanelMessage.java</url>
-            <bookmark id="2">
-                <name/>
-                <line>43</line>
-                <key/>
-            </bookmark>
-            <bookmark id="1">
-                <name/>
-                <line>106</line>
-                <key/>
-            </bookmark>
-        </file>
-    </editor-bookmarks>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/view/main/ViewApp.java</file>
             <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/view/panel/FormHome.java</file>
             <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/view/panel/QlyPhongTro.java</file>
+            <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/view/panel/Menu.java</file>
             <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/model/PhongTro/ModelPhongTro.java</file>
+            <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/view/main/viewSignIn.java</file>
+            <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/repository/login/RepoSignUp.java</file>
             <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/repository/PhongTro/repoPhongTro.java</file>
-=======
-            <file>file:/D:/DuAn1/DuAn1/src/view/component/button/MyButton.java</file>
-            <file>file:/D:/DuAn1/DuAn1/src/repository/tiendien/RepoTienDien.java</file>
-            <file>file:/D:/DuAn1/DuAn1/src/view/panel/QlyTienDien.java</file>
-            <file>file:/D:/DuAn1/DuAn1/src/view/main/ViewApp.java</file>
-            <file>file:/D:/DuAn1/DuAn1/src/view/panel/PanelMessage.java</file>
-            <file>file:/D:/DuAn1/DuAn1/src/view/component/search/TextFieldAnimation.java</file>
->>>>>>> ef984bcd0992f78afd66265530256d8158a0231f
         </group>
     </open-files>
 </project-private>
