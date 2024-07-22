@@ -3,7 +3,7 @@ package view.main;
 import javax.swing.*;
 import model.login.ModelLogin;
 import util.FileUtils;
-import repository.login.RepoCheckEmpty;
+import repository.login.CheckEmpty;
 import repository.login.RepoLogin;
 import util.MoveJFramekGradient;
 import view.component.message.MessageFrame;
@@ -14,7 +14,7 @@ public class viewSignIn extends javax.swing.JFrame {
      * Creates new form viewSignIn
      */
     private RepoLogin repo = new RepoLogin();
-    private RepoCheckEmpty repoCheckEmpty = new RepoCheckEmpty();
+    private CheckEmpty repoCheckEmpty = new CheckEmpty();
     private MoveJFramekGradient move;
     public static String getUsernameString;
     public static int role;
@@ -308,7 +308,6 @@ public class viewSignIn extends javax.swing.JFrame {
     private void kGradientPanel1MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_kGradientPanel1MouseClicked
         String username = txtUsername.getText().trim();
         String password = new String(txtPassword.getPassword());
-
         if (repoCheckEmpty.checkUsernameAndPasswordEmpty(username, password)) {
             return;
         }
