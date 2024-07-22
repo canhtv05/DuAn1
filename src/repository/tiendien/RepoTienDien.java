@@ -31,7 +31,7 @@ public class RepoTienDien {
                 + "    ChiSoDau, "
                 + "    ChiSoCuoi, "
                 + "    SoDien, "
-                + "    GiaTien, "
+                + "    REPLACE(CONVERT(VARCHAR, GiaTien, 1), ',', '') AS GiaTien, "
                 + "    ThanhTien "
                 + "FROM "
                 + "    dbo.TienDien ";
@@ -150,7 +150,8 @@ public class RepoTienDien {
     }
 
     public boolean delete(int maTD) {
-        sql = "EXEC dbo.DelTienDien @MaTD = ?";
+        sql = "DELETE FROM dbo.TienDien "
+                + "WHERE MaTD = ?;";
         try {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, maTD);
@@ -163,13 +164,8 @@ public class RepoTienDien {
     }
 
     public boolean add(ModelTienDien modelTienDien) {
-        sql = "EXEC dbo.insertTienDien @MaHoaDon = ?,"
-                + "                    @MaPT = ?,"
-                + "                    @NgayBatDau = ?,"
-                + "                    @NgayKetThuc = ?,"
-                + "                    @ChiSoDau = ?,"
-                + "                    @ChiSoCuoi = ?,"
-                + "                    @GiaTien = ?";
+        sql = "INSERT INTO dbo.TienDien (MaHoaDon, MaPT, NgayBatDau, NgayKetThuc, ChiSoDau, ChiSoCuoi, GiaTien) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?);";
         try {
             ps = conn.prepareStatement(sql);
             ps.setObject(1, modelTienDien.getMaHD());
@@ -179,11 +175,29 @@ public class RepoTienDien {
             ps.setObject(5, modelTienDien.getChiSoDau());
             ps.setObject(6, modelTienDien.getChiSoCuoi());
             ps.setObject(7, modelTienDien.getGiaTien());
-        int affectedRows = ps.executeUpdate();
+            int affectedRows = ps.executeUpdate();
             return affectedRows > 0;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
+
+    public boolean checkQuanHe(String maHD, String maPT) {
+        sql = "SELECT hd.MaHoaDon, pt.MaPT "
+                + "FROM dbo.PhongTro pt "
+                + "JOIN dbo.HoaDon hd "
+                + "ON hd.MaPT = pt.MaPT "
+                + "WHERE hd.MaHoaDon = ? OR pt.MaPT = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, maHD);
+            ps.setString(2, maPT);
+            rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
 }

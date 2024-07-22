@@ -29,6 +29,16 @@ public class ModelTienDien {
         this.thanhTien = thanhTien;
     }
 
+    public ModelTienDien(String maHD, String maPT, String ngayBD, String ngayKT, int chiSoDau, int chiSoCuoi, double giaTien) {
+        this.maHD = maHD;
+        this.maPT = maPT;
+        this.ngayBD = ngayBD;
+        this.ngayKT = ngayKT;
+        this.chiSoDau = chiSoDau;
+        this.chiSoCuoi = chiSoCuoi;
+        this.giaTien = giaTien;
+    }
+    
     public int getMaTD() {
         return maTD;
     }
