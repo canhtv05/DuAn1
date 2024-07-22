@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.PhongTro.ModelPhongTro;
 import repository.PhongTro.repoPhongTro;
+import view.component.message.MessageFrame;
 
 /**
  *
@@ -17,6 +18,7 @@ import repository.PhongTro.repoPhongTro;
 public class QlyPhongTro extends javax.swing.JPanel {
 
     private repoPhongTro repoPT = new repoPhongTro();
+    private MessageFrame msg;
 
     /**
      * Creates new form QlPhongTro
@@ -56,9 +58,11 @@ public class QlyPhongTro extends javax.swing.JPanel {
     }
 
     private boolean checkIdInsert() {
-        String maPT = this.txtMaPT.getText();
+        String maPT = this.txtMaPT.getText().trim();
         for (ModelPhongTro pt : this.repoPT.listPT) {
+            msg = new MessageFrame();
             if (pt.getMaPT().equalsIgnoreCase(maPT)) {
+                msg.showMessage("error", "Mã phòng đã tồn tại.Vui lòng chọn mã khác!");
                 return false;
             }
         }
@@ -66,10 +70,11 @@ public class QlyPhongTro extends javax.swing.JPanel {
     }
 
     private boolean checkIdUpdate() {
-        String maPT = this.txtMaPT.getText();
+        String maPT = this.txtMaPT.getText().trim();
         for (ModelPhongTro pt : this.repoPT.listPT) {
+            msg = new MessageFrame();
             if (!pt.getMaPT().equalsIgnoreCase(maPT)) {
-                JOptionPane.showMessageDialog(this, "Mã phòng không tồn tại!" + "\nLưu ý: Không thể sửa mã phòng!!");
+                msg.showMessage("error", "Mã phòng không tồn tại!" + "\nLưu ý: Không thể sửa mã phòng!!");
                 return false;
             }
         }
@@ -77,44 +82,45 @@ public class QlyPhongTro extends javax.swing.JPanel {
     }
 
     private boolean check() {
+        msg = new MessageFrame();
         if (this.txtMaPT.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Không để trống mục mã!");
+            msg.showMessage("error", "Không để trống mục mã!");
             return false;
         }
 
         if (this.txtLoaiPhong.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Không để trống mục Loại phòng!");
+            msg.showMessage("error", "Không để trống mục Loại phòng!");
             return false;
         }
 
         if (this.txtDienTich.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Không để trống mục Diện tích!");
+            msg.showMessage("error", "Không để trống mục Diện tích!");
             return false;
         } else {
             try {
                 float dienTich = Float.parseFloat(this.txtDienTich.getText());
                 if (dienTich <= 10 || dienTich >= 100) {
-                    JOptionPane.showMessageDialog(this, "Diện tích phòng chỉ trong khoảng từ 10 - 100");
+                    msg.showMessage("error", "Diện tích phòng chỉ trong khoảng từ 10 - 100");
                     return false;
                 }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Vui lòng chỉ nhập số");
+                msg.showMessage("error", "Vui lòng chỉ nhập số");
                 return false;
             }
         }
 
         if (this.txtGiaPhong.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Không để trống mục Giá phòng!");
+            msg.showMessage("error", "Không để trống mục Giá phòng!");
             return false;
         } else {
             try {
                 float giaPhong = Float.parseFloat(this.txtGiaPhong.getText());
                 if (giaPhong <= 0) {
-                    JOptionPane.showMessageDialog(this, "Giá phòng phải lớn hơn 0");
+                    msg.showMessage("error", "Giá phòng phải lớn hơn 0");
                     return false;
                 }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Vui lòng chỉ nhập số!");
+                msg.showMessage("error", "Vui lòng chỉ nhập số!");
                 return false;
             }
         }
@@ -128,11 +134,11 @@ public class QlyPhongTro extends javax.swing.JPanel {
     }
 
     private ModelPhongTro start() {
-        String maPT = this.txtMaPT.getText();
-        String loaiPhong = this.txtLoaiPhong.getText();
-        float dienTich = Float.parseFloat(this.txtDienTich.getText());
-        float giaPhong = Float.parseFloat(this.txtGiaPhong.getText());
-        String tienNghi = this.txtTienNghi.getText();
+        String maPT = this.txtMaPT.getText().trim();
+        String loaiPhong = this.txtLoaiPhong.getText().trim();
+        float dienTich = Float.parseFloat(this.txtDienTich.getText().trim());
+        float giaPhong = Float.parseFloat(this.txtGiaPhong.getText().trim());
+        String tienNghi = this.txtTienNghi.getText().trim();
 
         int trangThai = this.rdoConTrong.isSelected() ? 0 : this.rdoDaThue.isSelected() ? 1 : 2;
 
@@ -337,9 +343,10 @@ public class QlyPhongTro extends javax.swing.JPanel {
     private void tblPhongTroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhongTroMouseClicked
         // TODO add your handling code here:
         int row = this.tblPhongTro.getSelectedRow();
+        msg = new MessageFrame();
 
         if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Bạn chưa chọn dữ liệu trên bảng!");
+            msg.showMessage("error", "Bạn chưa chọn dữ liệu trên bảng!");
             return;
         }
 
@@ -369,7 +376,7 @@ public class QlyPhongTro extends javax.swing.JPanel {
 
     private void btnResetFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFormActionPerformed
         // TODO add your handling code here:
-            this.clearForm();
+        this.clearForm();
 
     }//GEN-LAST:event_btnResetFormActionPerformed
 
@@ -377,10 +384,11 @@ public class QlyPhongTro extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
             if (this.checkIdInsert()) {
+                msg = new MessageFrame();
                 if (this.check()) {
                     ModelPhongTro pt = start();
                     this.repoPT.insert(pt);
-                    JOptionPane.showMessageDialog(this, "Thêm thành công!");
+                    msg.showMessage("success", "Thêm thành công!");
                     this.loadTable();
                     this.clearForm();
                 }
@@ -394,10 +402,11 @@ public class QlyPhongTro extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
             if (this.check()) {
+                msg = new MessageFrame();
                 if (this.checkIdUpdate()) {
                     ModelPhongTro pt = start();
                     this.repoPT.update(pt);
-                    JOptionPane.showMessageDialog(this, "Sửa thành công");
+                    msg.showMessage("success", "Sửa thành công");
                     this.loadTable();
                     this.clearForm();
                 }
