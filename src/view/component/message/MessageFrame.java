@@ -1,7 +1,5 @@
 package view.component.message;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import view.panel.PanelMessage;
 import service.PanelMessageListenerImpl;
@@ -10,12 +8,10 @@ public class MessageFrame extends JFrame implements PanelMessageListenerImpl {
 
     private boolean ok;
     private boolean cancel;
+    private boolean interactionCompleted;
 
     public MessageFrame() {
-    }
-
-    public MessageFrame(boolean ok) {
-        this.ok = ok;
+        interactionCompleted = false;
     }
 
     public void showMessage(String type, String message) {
@@ -37,11 +33,13 @@ public class MessageFrame extends JFrame implements PanelMessageListenerImpl {
     @Override
     public void onOkClicked() {
         ok = true;
+        interactionCompleted = true;
     }
 
     @Override
     public void onCancelClicked() {
         cancel = true;
+        interactionCompleted = true;
     }
 
     public boolean isOk() {

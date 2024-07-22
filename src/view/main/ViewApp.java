@@ -16,12 +16,16 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import view.panel.DoiMK;
+import view.panel.Footer;
 import view.panel.QlyHeThong;
 import view.panel.QlyHoaDon;
 import view.panel.QlyKhachThue;
 import view.panel.QlyNhanVien;
 import view.panel.QlyPhongTro;
 import view.panel.QlyTaiSan;
+import view.panel.QlyTienDichVu;
+import view.panel.QlyTienDien;
+import view.panel.QlyTienNuoc;
 
 public class ViewApp extends javax.swing.JFrame {
 
@@ -30,6 +34,7 @@ public class ViewApp extends javax.swing.JFrame {
     private Header header;
     private MainForm main;
     private Animator animator;
+    private Footer footer;
 
     public ViewApp() {
         initComponents();
@@ -39,44 +44,52 @@ public class ViewApp extends javax.swing.JFrame {
     }
 
     private void changeHeader() {
-        //        logic: lấy từ bên login được username -> jframe chính lúc này là app xong sau đó thì sửa username ở header vì là hàm static
+        // logic: lấy từ bên login được username -> jframe chính lúc này là app xong sau
+        // đó thì sửa username ở header vì là hàm static
         String usernameString = viewSignIn.getUsernameString;
-        Header.setUsername(usernameString);
+        header.setUsername(usernameString);
         int role = viewSignIn.role;
         header.changeImg(role);
     }
 
     private void init() {
-        layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
+        layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0[fill]0[]0");
         bg.setLayout(layout);
         menu = new Menu();
         header = new Header();
         main = new MainForm();
+        footer = new Footer();
         menu.addEvent(new EventMenuSelected() {
             @Override
             public void menuSelected(int menuIndex, int subMenuIndex) {
                 System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
-                switch (menuIndex) {
-                    case 0 ->
-                        main.showForm(new QlyHeThong());
-                    case 1 ->
-                        main.showForm(new QlyPhongTro());
-                    case 2 ->
-                        main.showForm(new QlyKhachThue());
-                    case 3 ->
+                if (menuIndex == 0) {
+                    main.showForm(new QlyHeThong());
+                } else if (menuIndex == 1) {
+                    main.showForm(new QlyPhongTro());
+                } else if (menuIndex == 2) {
+                    main.showForm(new QlyKhachThue());
+                } else if (menuIndex == 3) {
+                    if (subMenuIndex == 0) {
                         main.showForm(new QlyHoaDon());
-                    case 4 ->
-                        main.showForm(new QlyNhanVien());
-                    case 5 ->
-                        main.showForm(new QlyTaiSan());
-                    case 6 ->
-                        main.showForm(new DoiMK());
-                    case 7 -> {
-                        new viewSignIn().setVisible(true);
-                        dispose();
+                    } else if (subMenuIndex == 1) {
+                        main.showForm(new QlyTienDien());
+                    } else if (subMenuIndex == 2) {
+                        main.showForm(new QlyTienNuoc());
+                    } else if (subMenuIndex == 3) {
+                        main.showForm(new QlyTienDichVu());
                     }
-                    default -> {
-                    }
+                } else if (menuIndex == 4) {
+                    main.showForm(new QlyNhanVien());
+                } else if (menuIndex == 5) {
+                    main.showForm(new QlyTaiSan());
+                } else if (menuIndex == 6) {
+                    main.showForm(new DoiMK());
+                } else if (menuIndex == 7) {
+                    new viewSignIn().setVisible(true);
+                    dispose();
+                } else {
+                    // Default case if needed
                 }
                 
                 
@@ -97,9 +110,10 @@ public class ViewApp extends javax.swing.JFrame {
             }
         });
         menu.initMenuItem();
-        bg.add(menu, "w 230!, spany 2"); // Span Y 2cell
+        bg.add(menu, "w 230!, spany 2");
         bg.add(header, "h 50!, wrap");
-        bg.add(main, "w 100%, h 100%");
+        bg.add(main, "w 100%, h 100%, wrap");
+//        bg.add(footer, "h 50!, wrap");
         TimingTarget target = new TimingTargetAdapter() {
             @Override
             public void timingEvent(float fraction) {
@@ -141,6 +155,7 @@ public class ViewApp extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
