@@ -38,7 +38,7 @@ public class ViewApp extends javax.swing.JFrame {
 
     public ViewApp() {
         initComponents();
-        // ViewApp.this.setExtendedState(ViewApp.this.MAXIMIZED_BOTH);
+        ViewApp.this.setExtendedState(ViewApp.this.MAXIMIZED_BOTH);
         init();
         changeHeader();
     }
@@ -91,7 +91,11 @@ public class ViewApp extends javax.swing.JFrame {
                 } else {
                     // Default case if needed
                 }
+                
+                
             }
+            
+            
         });
         menu.addEventShowPopup(new EventShowPopupMenu() {
             @Override
