@@ -78,7 +78,11 @@ public class ViewApp extends javax.swing.JFrame {
                     default -> {
                     }
                 }
+                
+                
             }
+            
+            
         });
         menu.addEventShowPopup(new EventShowPopupMenu() {
             @Override

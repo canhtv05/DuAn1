@@ -11,6 +11,11 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/H:/DuAn/DuAn1/src/view/panel/QlyNhanVien.java</file>
+            <file>file:/H:/DuAn/DuAn1/src/view/main/ViewApp.java</file>
+            <file>file:/H:/DuAn/DuAn1/src/repository/NhanVien/repoNhanVien.java</file>
+            <file>file:/H:/DuAn/DuAn1/src/repository/NhanVien/repoChamCong.java</file>
+        </group>
     </open-files>
 </project-private>
