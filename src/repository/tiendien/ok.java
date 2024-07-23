@@ -13,11 +13,13 @@ import view.component.message.MessageFrame;
  */
 public class ok {
     public static void main(String[] args) {
+        MessageFrame test = new MessageFrame();
         MessageFrame customFrame = new MessageFrame(){
             @Override
             public void onOkClicked() {
                 super.onOkClicked();
                 System.out.println("ok");
+                test.showMessage("error", "e");
             }
 
             @Override

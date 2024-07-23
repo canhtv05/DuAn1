@@ -4,6 +4,8 @@
  */
 package model.KhachThue;
 
+import java.util.Date;
+
 /**
  *
  * @author X1
@@ -11,7 +13,7 @@ package model.KhachThue;
 public class ModelKhachThue {
     private String MaKT;
     private String HoTen;
-    private int tuoi;
+    private Date ngaySinh;
     private boolean gioiTinh;
     private String DienThoai;
     private String email;
@@ -30,11 +32,11 @@ public class ModelKhachThue {
     public ModelKhachThue() {
     }
 
-    public ModelKhachThue(String MaKT, String MaPT, String HoTen, int tuoi, boolean gioiTinh, String DienThoai, String email, String DiaChi, String CCCD) {
+    public ModelKhachThue(String MaKT, String MaPT, String HoTen, Date ngaySinh, boolean gioiTinh, String DienThoai, String email, String DiaChi, String CCCD) {
         this.MaKT = MaKT;
         this.MaPT = MaPT;
         this.HoTen = HoTen;
-        this.tuoi = tuoi;
+        this.ngaySinh = ngaySinh;
         this.gioiTinh = gioiTinh;
         this.DienThoai = DienThoai;
         this.email = email;
@@ -59,13 +61,15 @@ public class ModelKhachThue {
         this.HoTen = HoTen;
     }
 
-    public int getTuoi() {
-        return tuoi;
+    public Date getNgaySinh() {
+        return ngaySinh;
     }
 
-    public void setTuoi(int tuoi) {
-        this.tuoi = tuoi;
+    public void setNgaySinh(Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
     }
+
+    
 
     public boolean isGioiTinh() {
         return gioiTinh;
@@ -116,7 +120,7 @@ public class ModelKhachThue {
     }
     
     public Object[] toDataRow(){
-        return new Object[]{this.getMaKT(), this.getMaPT(), this.getHoTen(), this.getTuoi(), this.GioiTinh(), this.DienThoai, this.getEmail(), this.getDiaChi(), this.getCCCD()};
+        return new Object[]{this.getMaKT(), this.getMaPT(), this.getHoTen(), this.getNgaySinh(), this.GioiTinh(), this.DienThoai, this.getEmail(), this.getDiaChi(), this.getCCCD()};
     }
     
 }

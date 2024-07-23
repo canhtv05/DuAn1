@@ -90,5 +90,11 @@ public class repoPhongTro {
         }
     }
     
+    public ArrayList<ModelPhongTro> Search() {
+        
+        
+        return listPT;
+    }
+    
     
 }
