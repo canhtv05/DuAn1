@@ -19,48 +19,72 @@ public class PanelMessage extends javax.swing.JPanel {
     }
 
     public void changeMessage(String typeMessage, String content) {
-        if (typeMessage.equalsIgnoreCase("error")) {
+        if (typeMessage.trim().equalsIgnoreCase("error")) {
             icon = new ImageIcon(getClass().getResource("/icon/icons8_cancel_90px.png"));
             lblIcon.setIcon(icon);
             txtContent.setText(content.trim());
-            jPanel2.setBackground(new Color(244, 71, 88));
-            jPanel3.setBackground(new Color(244, 71, 88));
+            btnOK.setBackground(new Color(244, 71, 88));
+            btnOK.setColorOver(new Color(244, 71, 88));
+            btnOK.setColorClick(new Color(224, 51, 68));
+            btnOK.setColor(new Color(244, 71, 88));
+            btnCancel.setBackground(new Color(244, 71, 88));
+            btnCancel.setColorOver(new Color(244, 71, 88));
+            btnCancel.setColorClick(new Color(224, 51, 68));
+            btnCancel.setColor(new Color(244, 71, 88));
             lblTitle.setText("Error:");
-        } else if (typeMessage.equalsIgnoreCase("message")) {
+        } else if (typeMessage.trim().equalsIgnoreCase("message")) {
             icon = new ImageIcon(getClass().getResource("/icon/icons8_facebook_messenger_90px.png"));
             lblIcon.setIcon(icon);
             txtContent.setText(content.trim());
-            jPanel2.setBackground(new Color(78, 134, 238));
-            jPanel3.setBackground(new Color(78, 134, 238));
+            btnOK.setBackground(new Color(78, 134, 238));
+            btnOK.setColorOver(new Color(78, 134, 238));
+            btnOK.setColorClick(new Color(58, 114, 218));
+            btnOK.setColor(new Color(78, 134, 238));
+            btnCancel.setBackground(new Color(78, 134, 238));
+            btnCancel.setColorOver(new Color(78, 134, 238));
+            btnCancel.setColorClick(new Color(58, 114, 218));
+            btnCancel.setColor(new Color(78, 134, 238));
             lblTitle.setText("Message:");
-        } else if (typeMessage.equalsIgnoreCase("warning")) {
+        } else if (typeMessage.trim().equalsIgnoreCase("warning")) {
             icon = new ImageIcon(getClass().getResource("/icon/icons8_warning_90px.png"));
             lblIcon.setIcon(icon);
             txtContent.setText(content.trim());
-            jPanel2.setBackground(new Color(248, 198, 101));
-            jPanel3.setBackground(new Color(248, 198, 101));
+            btnOK.setBackground(new Color(248, 198, 101));
+            btnOK.setColorOver(new Color(248, 198, 101));
+            btnOK.setColorClick(new Color(228, 178, 81));
+            btnOK.setColor(new Color(248, 198, 101));
+            btnCancel.setBackground(new Color(248, 198, 101));
+            btnCancel.setColorOver(new Color(248, 198, 101));
+            btnCancel.setColorClick(new Color(228, 178, 81));
+            btnCancel.setColor(new Color(248, 198, 101));
             lblTitle.setText("Warning:");
-        } else if (typeMessage.equalsIgnoreCase("success")) {
+        } else if (typeMessage.trim().equalsIgnoreCase("success")) {
             icon = new ImageIcon(getClass().getResource("/icon/icons8_ok_90px_3.png"));
             lblIcon.setIcon(icon);
             txtContent.setText(content.trim());
-            jPanel2.setBackground(new Color(76,175,80));
-            jPanel3.setBackground(new Color(76,175,80));
-            lblTitle.setText("Successful:");
+            btnOK.setBackground(new Color(76, 175, 80));
+            btnOK.setColorOver(new Color(76, 175, 80));
+            btnOK.setColorClick(new Color(56, 155, 60));
+            btnOK.setColor(new Color(76, 175, 80));
+            btnCancel.setBackground(new Color(76, 175, 80));
+            btnCancel.setColorOver(new Color(76, 175, 80));
+            btnCancel.setColorClick(new Color(56, 155, 60));
+            btnCancel.setColor(new Color(76, 175, 80));
+            lblTitle.setText("Successfully:");
         }
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         lblIcon = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
         txtContent = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        btnCancel = new view.component.button.MyButton();
+        btnOK = new view.component.button.MyButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -74,71 +98,50 @@ public class PanelMessage extends javax.swing.JPanel {
         add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 100, -1));
         add(txtContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 380, 20));
 
-        jPanel2.setBackground(new java.awt.Color(78, 134, 238));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel2MouseClicked(evt);
+        btnCancel.setBackground(new java.awt.Color(78, 134, 238));
+        btnCancel.setBorder(null);
+        btnCancel.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancel.setText("Cancel");
+        btnCancel.setBorderColor(new java.awt.Color(0, 0, 0));
+        btnCancel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
             }
         });
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 80, 30));
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Cancel");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 6, -1, -1));
-
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 80, 30));
-
-        jPanel3.setBackground(new java.awt.Color(78, 134, 238));
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel3.setPreferredSize(new java.awt.Dimension(80, 30));
-        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel3MouseClicked(evt);
+        btnOK.setBackground(new java.awt.Color(78, 134, 238));
+        btnOK.setBorder(null);
+        btnOK.setForeground(new java.awt.Color(255, 255, 255));
+        btnOK.setText("OK");
+        btnOK.setBorderColor(new java.awt.Color(0, 0, 0));
+        btnOK.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnOK.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOKActionPerformed(evt);
             }
         });
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("OK");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 6, -1, -1));
-
-        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, -1, -1));
+        add(btnOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 80, 30));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
-        // TODO add your handling code here:
+    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnOKActionPerformed
         if (listener != null) {
             listener.onOkClicked();
         }
-        // Sử dụng JFrame) SwingUtilities.getWindowAncestor để tìm cửa sổ Jframe hiện tại
-        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        if (topFrame != null) {
-            topFrame.dispose();
-        }
-    }//GEN-LAST:event_jPanel3MouseClicked
+    }// GEN-LAST:event_btnOKActionPerformed
 
-    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
-        // TODO add your handling code here:
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCancelActionPerformed
         if (listener != null) {
             listener.onCancelClicked();
         }
-        // Sử dụng JFrame) SwingUtilities.getWindowAncestor để tìm cửa sổ Jframe hiện tại
-        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        if (topFrame != null) {
-            topFrame.dispose();
-        }
-    }//GEN-LAST:event_jPanel2MouseClicked
-
+    }// GEN-LAST:event_btnCancelActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private view.component.button.MyButton btnCancel;
+    private view.component.button.MyButton btnOK;
     private javax.swing.JLabel lblIcon;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel txtContent;
