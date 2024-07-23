@@ -50,7 +50,6 @@ public class QlyKhachThue extends javax.swing.JPanel {
         buttonGroup1 = new javax.swing.ButtonGroup();
         txtTimKhachThue = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        btnTimKiem = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDiaChi = new javax.swing.JTextArea();
@@ -68,20 +67,14 @@ public class QlyKhachThue extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblKhachThue = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
-        btnThem = new javax.swing.JButton();
-        btnSua = new javax.swing.JButton();
-        btnReset = new javax.swing.JButton();
+        btnThem = new view.component.button.Button();
+        btnSua = new view.component.button.Button();
+        btnLamMoi = new view.component.button.Button();
+        btnTimKiem = new view.component.button.Button();
 
         txtTimKhachThue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimKhachThueActionPerformed(evt);
-            }
-        });
-
-        btnTimKiem.setText("Tìm kiếm");
-        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTimKiemActionPerformed(evt);
             }
         });
 
@@ -232,6 +225,7 @@ public class QlyKhachThue extends javax.swing.JPanel {
         jLabel11.setForeground(new java.awt.Color(0, 51, 255));
         jLabel11.setText("Quản lý khách thuê");
 
+        btnThem.setBackground(new java.awt.Color(153, 255, 0));
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,6 +233,7 @@ public class QlyKhachThue extends javax.swing.JPanel {
             }
         });
 
+        btnSua.setBackground(new java.awt.Color(255, 255, 204));
         btnSua.setText("Cập nhật");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -246,10 +241,17 @@ public class QlyKhachThue extends javax.swing.JPanel {
             }
         });
 
-        btnReset.setText("Làm mới");
-        btnReset.addActionListener(new java.awt.event.ActionListener() {
+        btnLamMoi.setText("Làm mới");
+        btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResetActionPerformed(evt);
+                btnLamMoiActionPerformed(evt);
+            }
+        });
+
+        btnTimKiem.setText("Tìm kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
             }
         });
 
@@ -258,30 +260,33 @@ public class QlyKhachThue extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                    .addComponent(btnLamMoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(9, 9, 9))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel11))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(241, 241, 241)
                                 .addComponent(txtTimKhachThue, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnTimKiem)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 96, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(104, 104, 104)
+                                        .addComponent(jLabel1))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(31, 31, 31)
+                                        .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,22 +296,24 @@ public class QlyKhachThue extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTimKhachThue, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(btnTimKiem))
+                    .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(btnThem)
+                        .addGap(52, 52, 52)
+                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSua)
+                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnReset)))
+                        .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
+
+        txtTimKhachThue.getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtTimKhachThueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKhachThueActionPerformed
@@ -332,17 +339,9 @@ public class QlyKhachThue extends javax.swing.JPanel {
         txtCCCD.setText(tblKhachThue.getValueAt(index, 8).toString());
     }//GEN-LAST:event_tblKhachThueMouseClicked
 
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+    private void txtCCCDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCCCDActionPerformed
         // TODO add your handling code here:
-        if (readForm()!=null) {
-            if (rpKT.sua(readForm())>0) {
-                JOptionPane.showConfirmDialog(this, "cập nhật thành công");
-                fillTable(rpKT.getAll());
-            } else {
-                JOptionPane.showConfirmDialog(this, "cập nhật thất bại");
-            }
-        }
-    }//GEN-LAST:event_btnSuaActionPerformed
+    }//GEN-LAST:event_txtCCCDActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
@@ -361,7 +360,22 @@ public class QlyKhachThue extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
-    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        mesg = new MessageFrame();
+        if (readForm()!=null) {
+            if (rpKT.sua(readForm())>0) {
+                mesg.showMessage("success", "cập nhật thành công");
+//                JOptionPane.showConfirmDialog(this, "cập nhật thành công");
+                fillTable(rpKT.getAll());
+            } else {
+                mesg.showMessage("error", "cập nhật thất bại");
+//                JOptionPane.showConfirmDialog(this, "cập nhật thất bại");
+            }
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
         // TODO add your handling code here:
         txtTimKhachThue.setText("");
         txtMaKT.setText("");
@@ -373,18 +387,15 @@ public class QlyKhachThue extends javax.swing.JPanel {
         txtDiaChi.setText("");
         txtCCCD.setText("");
         fillTable(rpKT.getAll());
-    }//GEN-LAST:event_btnResetActionPerformed
+    }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
         fillTable(rpKT.timKiem(txtTimKhachThue.getText()));
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
-    private void txtCCCDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCCCDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCCCDActionPerformed
-
     public model.KhachThue.ModelKhachThue readForm(){
+        mesg=new MessageFrame();
         String maKT, hoTen, dienThoai, email, diaChi, cccd, maPT;
         Date ngaySinh;
         boolean gioiTinh;
@@ -401,61 +412,72 @@ public class QlyKhachThue extends javax.swing.JPanel {
         diaChi=txtDiaChi.getText().trim();
         cccd=txtCCCD.getText().trim();
         if (maKT.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "chưa nhập mã KT");
+            mesg.showMessage("error", "chưa nhập mã Khách thuê");
+//            JOptionPane.showMessageDialog(this, "chưa nhập mã KT");
             txtMaKT.requestFocus();
             return null;
         }
         if (maPT.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "chưa nhập mã PT");
+            mesg.showMessage("error", "chưa nhập mã Phòng trọ");
+//            JOptionPane.showMessageDialog(this, "chưa nhập mã PT");
             txtMaPT.requestFocus();
             return null;
         }
         if (hoTen.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "chưa nhập Họ tên");
+            mesg.showMessage("error", "chưa nhập Họ tên");
+//            JOptionPane.showMessageDialog(this, "chưa nhập Họ tên");
             txtHoTen.requestFocus();
             return null;
         }
         if (ngaySinh.equals("")) {
-            JOptionPane.showMessageDialog(this, "chưa nhập ngày sinh");
+            mesg.showMessage("error", "chưa nhập Ngày sinh");
+//            JOptionPane.showMessageDialog(this, "chưa nhập ngày sinh");
             return null;
         }
         if (rdoNam.isSelected()==false && rdoNu.isSelected()==false) {
-            JOptionPane.showMessageDialog(this, "chưa lựa chọn giới tính");
+            mesg.showMessage("error", "chưa lựa chọn giới tính");
+//            JOptionPane.showMessageDialog(this, "chưa lựa chọn giới tính");
             return null;
         }
         if (dienThoai.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "chưa nhập số điện thoại");
+            mesg.showMessage("error", "chưa nhập số điện thoại");
+//            JOptionPane.showMessageDialog(this, "chưa nhập số điện thoại");
             txtDienThoai.requestFocus();
             return null;
         }
         if (email.isEmpty()) {
-            
-            JOptionPane.showMessageDialog(this, "chưa nhập email");
+            mesg.showMessage("error", "chưa nhập Email");
+//            JOptionPane.showMessageDialog(this, "chưa nhập email");
             txtEmail.requestFocus();
             return null;
         }
         if (email.endsWith("@gmail.com")==false) {
-            JOptionPane.showMessageDialog(this, "email chưa đúng định dạng");
+            mesg.showMessage("error", "Email chưa đúng định dạng");
+//            JOptionPane.showMessageDialog(this, "email chưa đúng định dạng");
             txtEmail.requestFocus();
             return null;
         }
         if (cccd.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "chưa nhập CCCD");
+            mesg.showMessage("error", "chưa nhập CCCD");
+
+//            JOptionPane.showMessageDialog(this, "chưa nhập CCCD");
             txtCCCD.requestFocus();
             return null;
         }
         if (diaChi.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "chưa nhập địa chỉ");
+            mesg.showMessage("error", "chưa nhập địa chỉ");
+
+//            JOptionPane.showMessageDialog(this, "chưa nhập địa chỉ");
             txtDiaChi.requestFocus();
             return null;
         }
         return new model.KhachThue.ModelKhachThue(maKT, maPT, hoTen, ngaySinh, gioiTinh, dienThoai, email, diaChi, cccd);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnReset;
-    private javax.swing.JButton btnSua;
-    private javax.swing.JButton btnThem;
-    private javax.swing.JButton btnTimKiem;
+    private view.component.button.Button btnLamMoi;
+    private view.component.button.Button btnSua;
+    private view.component.button.Button btnThem;
+    private view.component.button.Button btnTimKiem;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
