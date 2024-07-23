@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.KhachThue.ModelKhachThue;
 import repository.KhachThue.repositoriesKhachThue;
+import view.component.message.MessageFrame;
 
 /**
  *
@@ -17,6 +18,7 @@ import repository.KhachThue.repositoriesKhachThue;
 public class QlyKhachThue extends javax.swing.JPanel {
     private repository.KhachThue.repositoriesKhachThue rpKT = new repositoriesKhachThue();
     private DefaultTableModel mol = new DefaultTableModel();
+    private MessageFrame mesg;
     private int index = -1;
     /**
      * Creates new form QliKhachThue
@@ -74,7 +76,6 @@ public class QlyKhachThue extends javax.swing.JPanel {
         txtDiaChi = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblKhachThue = new javax.swing.JTable();
-        btnCancel = new javax.swing.JButton();
 
         txtTimKhachThue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,9 +186,7 @@ public class QlyKhachThue extends javax.swing.JPanel {
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                     .addComponent(txtDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                    .addGap(0, 0, 0)
-                                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -274,13 +273,6 @@ public class QlyKhachThue extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblKhachThue);
 
-        btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -293,12 +285,8 @@ public class QlyKhachThue extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(btnTimKiem)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(btnCancel)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addGap(0, 178, Short.MAX_VALUE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
@@ -310,8 +298,7 @@ public class QlyKhachThue extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTimKhachThue, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(btnTimKiem)
-                    .addComponent(btnCancel))
+                    .addComponent(btnTimKiem))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -358,10 +345,15 @@ public class QlyKhachThue extends javax.swing.JPanel {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
         if (readForm()!=null) {
+            mesg = new MessageFrame();
             if (rpKT.them(readForm())>0) {
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                
+//                JOptionPane.showMessageDialog(this, "Thêm thành công")
+                mesg.showMessage("success", "Thêm thành công");
                 fillTable(rpKT.getAll());
             } else {
+                mesg.showMessage("error", "Thêm thất bại");
+                
                 JOptionPane.showMessageDialog(this, "thêm thất bại");
             }
         }
@@ -377,17 +369,13 @@ public class QlyKhachThue extends javax.swing.JPanel {
         txtEmail.setText("");
         txtDiaChi.setText("");
         txtCCCD.setText("");
+        fillTable(rpKT.getAll());
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
         fillTable(rpKT.timKiem(txtTimKhachThue.getText()));
     }//GEN-LAST:event_btnTimKiemActionPerformed
-
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        // TODO add your handling code here:
-        fillTable(rpKT.getAll());
-    }//GEN-LAST:event_btnCancelActionPerformed
 
     public model.KhachThue.ModelKhachThue readForm(){
         String maKT, hoTen, dienThoai, email, diaChi, cccd, maPT;
@@ -426,7 +414,6 @@ public class QlyKhachThue extends javax.swing.JPanel {
         return new model.KhachThue.ModelKhachThue(maKT, maPT, hoTen, tuoi, gioiTinh, dienThoai, email, diaChi, cccd);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;

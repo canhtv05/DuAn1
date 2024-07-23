@@ -105,11 +105,12 @@ public class repositoriesKhachThue {
     
     public ArrayList<model.KhachThue.ModelKhachThue> timKiem(String mapt){
         ArrayList<model.KhachThue.ModelKhachThue> arrKT = new ArrayList<>();
-        sql="select * from KhachThue where MaPT=?";
+        sql="select * from KhachThue where MaPT LIKE ? or MaKT LIKE ?";
         try {
             con=DBContext.getConnection();
             ps=con.prepareStatement(sql);
-            ps.setObject(1, mapt);
+            ps.setObject(1, "%"+mapt+"%");
+            ps.setObject(2, "%"+mapt+"%");
             
             
             rs=ps.executeQuery();
