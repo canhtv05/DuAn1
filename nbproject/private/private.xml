@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+<<<<<<< HEAD
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="3">
         <file>
             <url>src/repository/tiendien/RepoTienDien.java</url>
@@ -9,22 +10,21 @@
                 <key/>
             </bookmark>
         </file>
+=======
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+>>>>>>> 59106b9d7454492d12181c27345b37a34497bc8b
         <file>
             <url>src/view/panel/PanelMessage.java</url>
-            <bookmark id="2">
-                <name/>
-                <line>61</line>
-                <key/>
-            </bookmark>
             <bookmark id="1">
                 <name/>
-                <line>124</line>
+                <line>107</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/QlyHoaDon.java</file>
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/ExportPdf.java</file>
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/main/ViewApp.java</file>
@@ -37,6 +37,21 @@
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/HoaDon.java</file>
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/MainForm.java</file>
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/NhapDuLieu.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/D:/Git/DuAn1/src/view/panel/QlyKhachThue.java</file>
+            <file>file:/D:/Git/DuAn1/src/view/panel/PopupMenu.java</file>
+            <file>file:/D:/Git/DuAn1/src/repository/KhachThue/repositoriesKhachThue.java</file>
+            <file>file:/D:/Git/DuAn1/src/view/main/ViewApp.java</file>
+            <file>file:/D:/Git/DuAn1/src/model/KhachThue/ModelKhachThue.java</file>
+=======
+            <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/view/main/ViewApp.java</file>
+            <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/view/panel/FormHome.java</file>
+            <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/view/panel/QlyPhongTro.java</file>
+            <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/model/PhongTro/ModelPhongTro.java</file>
+            <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/repository/PhongTro/repoPhongTro.java</file>
+>>>>>>> 6d03895da05080eaa45c963f94ab6f3e4512d90f
+>>>>>>> 59106b9d7454492d12181c27345b37a34497bc8b
         </group>
     </open-files>
 </project-private>
