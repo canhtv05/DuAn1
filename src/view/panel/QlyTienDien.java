@@ -343,6 +343,11 @@ public class QlyTienDien extends javax.swing.JPanel {
         btnThem.setColorOver(new java.awt.Color(204, 255, 255));
         btnThem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnThem.setRadius(20);
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 90, 40));
 
         btnSua.setBackground(new java.awt.Color(204, 255, 255));
@@ -353,6 +358,11 @@ public class QlyTienDien extends javax.swing.JPanel {
         btnSua.setColorOver(new java.awt.Color(204, 255, 255));
         btnSua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSua.setRadius(20);
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 150, 90, 40));
 
         search.setHintText("Tìm mã phòng trọ");
@@ -398,6 +408,14 @@ public class QlyTienDien extends javax.swing.JPanel {
         repo = new RepoTienDien();
         
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSuaActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:

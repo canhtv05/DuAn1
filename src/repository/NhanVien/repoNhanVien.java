@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import dao.DBContext;
 import java.util.ArrayList;
 import java.util.Date;
+import model.NhanVien.Model_DiemDanh;
 /**
  *
  * @author BOSS
@@ -19,9 +20,9 @@ public class repoNhanVien {
     private  PreparedStatement ps = null;
     private ResultSet rs = null;
     private String sql = null;
-    public ArrayList<Model_NhanVien> getAll(){
+    public ArrayList<Model_NhanVien> getAllNhanVien(){
         ArrayList<Model_NhanVien> list_NhanVien = new ArrayList<>();
-        sql ="select  MaNV, HoTen,NgaySinh,GioiTinh,DienThoai,CCCD,NgayBatDau,NgayKetThuc,ThoiHan,Anh from NhanVien";
+        sql ="select  MaNhanVien, HoTen,NgaySinh,GioiTinh,DienThoai,CCCD,NgayBatDau,NgayKetThuc,ThoiHan,Anh from NhanVien";
         try {
             con = DBContext.getConnection();
             ps = con.prepareStatement(sql);
@@ -49,7 +50,7 @@ public class repoNhanVien {
     }
     public int add(Model_NhanVien QLNV){
         sql ="INSERT INTO [dbo].[NhanVien]\n" +
-"           ([MaNV]\n" +
+"           ([MaNhanVien]\n" +
 "           ,[HoTen]\n" +
 "           ,[NgaySinh]\n" +
 "           ,[GioiTinh]\n" +
@@ -81,11 +82,11 @@ public class repoNhanVien {
         return 0;
     }
     public int delete(String maNV) {
-    String sql = "DELETE FROM NhanVien WHERE maNV = ?";
+    String sql = "DELETE FROM NhanVien WHERE MaNhanVien  = ?";
     try {
         con = DBContext.getConnection();
         ps = con.prepareStatement(sql);
-        ps.setObject(1, maNV); // Giả sử mã nhân viên được lưu trong thuộc tính maNV của đối tượng Model_NhanVien
+        ps.setObject(1, maNV); // Giả sử mã nhân viên được lưu trong thuộc tính maNV của đối tượng Model_NhanViens
         return ps.executeUpdate();
     } catch (Exception e) {
         e.printStackTrace();
@@ -104,7 +105,7 @@ public class repoNhanVien {
     }
 }
     public int update(String maNV, Model_NhanVien m) {
-    String sql = "UPDATE NhanVien SET MaNV=?, HoTen=?, NgaySinh=?, GioiTinh=?, DienThoai=?, CCCD=?, NgayBatDau=?, NgayKetThuc=?, ThoiHan=?, Anh=? WHERE MaNV=?";
+    String sql = "UPDATE NhanVien SET MaNhanVien=?, HoTen=?, NgaySinh=?, GioiTinh=?, DienThoai=?, CCCD=?, NgayBatDau=?, NgayKetThuc=?, ThoiHan=?, Anh=? WHERE MaNhanVien=?";
     try {
         con = DBContext.getConnection();
         ps = con.prepareStatement(sql);
@@ -143,7 +144,7 @@ public class repoNhanVien {
     public ArrayList<Model_NhanVien> tim(String tenCanTim){
         ArrayList<Model_NhanVien> list_NhanVien = new ArrayList<>();
         sql = """
-              SELECT [MaNV]
+              SELECT [MaNhanVien]
                     ,[HoTen]
                     ,[NgaySinh]
                     ,[GioiTinh]
@@ -154,11 +155,12 @@ public class repoNhanVien {
                     ,[ThoiHan]
                     ,[Anh]
                 FROM [dbo].[NhanVien]
-                where MaNV =?""";
+                where MaNhanVien LIKE ? Or HoTen LIKE ? """;
         try {
             con = DBContext.getConnection();
             ps = con.prepareStatement(sql);
             ps.setObject(1,'%'+tenCanTim+'%');
+            ps.setObject(2,'%'+tenCanTim+'%');
             rs = ps.executeQuery();
             while(rs.next()){
                 Model_NhanVien nv = Model_NhanVien.builder()
@@ -181,4 +183,63 @@ public class repoNhanVien {
             return null;
         }
     }
+//    public Model_NhanVien checkTrung(String ma, String dt, String cccd) {
+//    try {
+//        // Tạo kết nối đến cơ sở dữ liệu
+//         con = DBContext.getConnection();
+//        PreparedStatement stmt = con.prepareStatement("SELECT * FROM NhanVien WHERE MaNV = ? OR DienThoai = ? OR CCCD = ?");
+//        stmt.setString(1, ma);
+//        stmt.setString(2, dt);
+//        stmt.setString(3, cccd);
+//        ResultSet rs = stmt.executeQuery();
+//
+//        if (rs.next()) {
+//            // Tạo đối tượng Model_NhanVien và gán giá trị từ ResultSet
+//            Model_NhanVien nv = new Model_NhanVien();
+//            nv.setMaNV(rs.getString("MaNV"));
+//            // ... các thuộc tính khác
+//            return nv;
+//        } else {
+//            return null;
+//        }
+//    } catch (Exception e) {
+//        e.printStackTrace();
+//        return null;
+//    }
+//}
+    public Model_NhanVien checkTrung(String ma, String dt, String cccd) {
+    try {
+        // Tạo kết nối đến cơ sở dữ liệu
+        con = DBContext.getConnection();
+        ps = con.prepareStatement(sql);
+        // Tạo câu lệnh SQL để kiểm tra trùng lặp
+        sql = "SELECT * FROM NhanVien WHERE MaNhanVien = ? OR DienThoai = ? OR CCCD = ?";
+        ps = con.prepareStatement(sql);
+        ps.setString(1, ma);
+        ps.setString(2, dt);
+        ps.setString(3, cccd);
+        rs = ps.executeQuery();
+
+         while(rs.next()) {
+            // Tạo đối tượng Model_NhanVien và gán giá trị từ ResultSet
+            Model_NhanVien nv = Model_NhanVien.builder()
+                    .maNV(rs.getString("MaNhanVien"))
+                    .hoTen(rs.getString("HoTen"))
+                    .ngaySinh(rs.getDate("NgaySinh"))
+                    .gioiTinh(rs.getInt("GioiTinh"))
+                    .dienThoai(rs.getString("DienThoai"))
+                    .CCCD(rs.getString("CCCD"))
+                    .ngayBD(rs.getDate("NgayBatDau"))
+                    .ngayKT(rs.getDate("NgayKetThuc"))
+                    .thoiHan(rs.getInt("ThoiHan"))
+                    .anhNV(rs.getString("Anh"))
+                    .build();
+            return nv;
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return null;
+        }
+
 }

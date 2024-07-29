@@ -3,25 +3,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model.NhanVien;
-import QuanLyNhanVien.*;
-import java.util.Date;
+
+/**
+ *
+ * @author BOSS
+ */
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString
 @Builder
-/**
- *
- * @author BOSS
- */
-public class Model_ChamCong {
+public class Model_Luong {
+    private int maLuong;
     private String maNV;
-    private Date NgayCong;
-    private int diemDanh;
+    private int thang;
+    private int nam;
+    private int soNgayDiLam;
+    private double luongThang;
+    private String hoTen;
 }

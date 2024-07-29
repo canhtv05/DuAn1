@@ -20,6 +20,7 @@ import view.panel.Footer;
 import view.panel.QlyHeThong;
 import view.panel.QlyHoaDon;
 import view.panel.QlyKhachThue;
+import view.panel.QlyLuong;
 import view.panel.QlyNhanVien;
 import view.panel.QlyPhongTro;
 import view.panel.QlyTaiSan;
@@ -80,7 +81,11 @@ public class ViewApp extends javax.swing.JFrame {
                         main.showForm(new QlyTienDichVu());
                     }
                 } else if (menuIndex == 4) {
-                    main.showForm(new QlyNhanVien());
+                    if (subMenuIndex == 0) {
+                        main.showForm(new QlyNhanVien());
+                    } else if (subMenuIndex == 1) {
+                        main.showForm(new QlyLuong());
+                    }
                 } else if (menuIndex == 5) {
                     main.showForm(new QlyTaiSan());
                 } else if (menuIndex == 6) {
