@@ -17,6 +17,7 @@ import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import view.panel.DoiMK;
 import view.panel.Footer;
+import view.panel.HoaDon;
 import view.panel.QlyHeThong;
 import view.panel.QlyHoaDon;
 import view.panel.QlyKhachThue;
@@ -38,7 +39,7 @@ public class ViewApp extends javax.swing.JFrame {
 
     public ViewApp() {
         initComponents();
-        ViewApp.this.setExtendedState(ViewApp.this.MAXIMIZED_BOTH);
+//        ViewApp.this.setExtendedState(ViewApp.this.MAXIMIZED_BOTH);
         init();
         changeHeader();
     }
@@ -62,7 +63,7 @@ public class ViewApp extends javax.swing.JFrame {
         menu.addEvent(new EventMenuSelected() {
             @Override
             public void menuSelected(int menuIndex, int subMenuIndex) {
-                System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
+//                System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
                 if (menuIndex == 0) {
                     main.showForm(new QlyHeThong());
                 } else if (menuIndex == 1) {
@@ -70,6 +71,7 @@ public class ViewApp extends javax.swing.JFrame {
                 } else if (menuIndex == 2) {
                     main.showForm(new QlyKhachThue());
                 } else if (menuIndex == 3) {
+//                    main.showForm(new HoaDon());
                     if (subMenuIndex == 0) {
                         main.showForm(new QlyHoaDon());
                     } else if (subMenuIndex == 1) {
@@ -91,11 +93,9 @@ public class ViewApp extends javax.swing.JFrame {
                 } else {
                     // Default case if needed
                 }
-                
-                
+                               
             }
-            
-            
+                       
         });
         menu.addEventShowPopup(new EventShowPopupMenu() {
             @Override

@@ -20,12 +20,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-<<<<<<< HEAD
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="360" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="397" max="32767" attributes="0"/>
-=======
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -47,18 +41,12 @@
                   <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
->>>>>>> 41834e7ce36df0cc4b0edb7b4141759d6f539093
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-<<<<<<< HEAD
-              <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="269" max="32767" attributes="0"/>
-=======
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtTimKhachThue" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
@@ -71,7 +59,6 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
->>>>>>> 41834e7ce36df0cc4b0edb7b4141759d6f539093
           </Group>
       </Group>
     </DimensionLayout>
