@@ -9,19 +9,30 @@ package model.PhongTro;
  * @author chung
  */
 public class ModelPhongTro {
-    private String maPT;
+
+    private int TangSo;
+    private String maPhong;
     private String loaiPhong;
     private float dienTich;
     private float giaPhong;
     private String tienNghi;
     private int trangThai;
+    private String anh;
 
-    public String getMaPT() {
-        return maPT;
+    public int getTangSo() {
+        return TangSo;
     }
 
-    public void setMaPT(String maPT) {
-        this.maPT = maPT;
+    public void setTangSo(int TangSo) {
+        this.TangSo = TangSo;
+    }
+
+    public String getMaPhong() {
+        return maPhong;
+    }
+
+    public void setMaPhong(String maPhong) {
+        this.maPhong = maPhong;
     }
 
     public String getLoaiPhong() {
@@ -64,17 +75,27 @@ public class ModelPhongTro {
         this.trangThai = trangThai;
     }
 
+    public String getAnh() {
+        return anh;
+    }
+
+    public void setAnh(String anh) {
+        this.anh = anh;
+    }
+
     public ModelPhongTro() {
 
     }
 
-    public ModelPhongTro(String maPT, String loaiPhong, float dienTich, float giaPhong, String tienNghi, int trangThai) {
-        this.maPT = maPT;
+    public ModelPhongTro(int TangSo, String maPhong, String loaiPhong, float dienTich, float giaPhong, String tienNghi, int trangThai, String anh) {
+        this.TangSo = TangSo;
+        this.maPhong = maPhong;
         this.loaiPhong = loaiPhong;
         this.dienTich = dienTich;
         this.giaPhong = giaPhong;
         this.tienNghi = tienNghi;
         this.trangThai = trangThai;
+        this.anh = anh;
     }
-    
+
 }

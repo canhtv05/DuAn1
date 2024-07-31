@@ -17,7 +17,7 @@ import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import view.panel.DoiMK;
 import view.panel.Footer;
-import view.panel.QlyHeThong;
+import view.panel.HoaDon;
 import view.panel.QlyHoaDon;
 import view.panel.QlyHopDong;
 import view.panel.QlyKhachThue;
@@ -63,18 +63,19 @@ public class ViewApp extends javax.swing.JFrame {
         menu.addEvent(new EventMenuSelected() {
             @Override
             public void menuSelected(int menuIndex, int subMenuIndex) {
-                System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
+//                System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
                 if (menuIndex == 0) {
-                    main.showForm(new QlyHeThong());
+//                    main.showForm(new QlyHeThong());
                 } else if (menuIndex == 1) {
                     main.showForm(new QlyPhongTro());
-                } else if (menuIndex == 2) {
+                }else if (menuIndex == 2) {
                     if (subMenuIndex == 0) {
                         main.showForm(new QlyKhachThue());
                     } else if (subMenuIndex == 1) {
                         main.showForm(new QlyHopDong());
                     }
                 } else if (menuIndex == 3) {
+//                    main.showForm(new HoaDon());
                     if (subMenuIndex == 0) {
                         main.showForm(new QlyHoaDon());
                     } else if (subMenuIndex == 1) {
@@ -85,7 +86,13 @@ public class ViewApp extends javax.swing.JFrame {
                         main.showForm(new QlyTienDichVu());
                     }
                 } else if (menuIndex == 4) {
-                    main.showForm(new QlyNhanVien());
+                    if (subMenuIndex == 0) {
+                        main.showForm(new QlyNhanVien());
+                    } else if (subMenuIndex == 1) {
+//                        main.showForm(new QlyLuong());
+                    } else if (subMenuIndex == 2) {
+//                        main.showForm(new LichLamViec());
+                    }
                 } else if (menuIndex == 5) {
                     main.showForm(new QlyTaiSan());
                 } else if (menuIndex == 6) {
@@ -96,9 +103,9 @@ public class ViewApp extends javax.swing.JFrame {
                 } else {
                     // Default case if needed
                 }
-
+                               
             }
-
+                       
         });
         menu.addEventShowPopup(new EventShowPopupMenu() {
             @Override
