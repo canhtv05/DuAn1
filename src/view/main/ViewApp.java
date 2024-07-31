@@ -17,7 +17,7 @@ import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import view.panel.DoiMK;
 import view.panel.Footer;
-import view.panel.QlyHeThong;
+import view.panel.QlyTang;
 import view.panel.QlyHoaDon;
 import view.panel.QlyKhachThue;
 import view.panel.QlyNhanVien;
@@ -26,6 +26,7 @@ import view.panel.QlyTaiSan;
 import view.panel.QlyTienDichVu;
 import view.panel.QlyTienDien;
 import view.panel.QlyTienNuoc;
+import view.panel.QLTaiSanPhong;
 
 public class ViewApp extends javax.swing.JFrame {
 
@@ -64,7 +65,7 @@ public class ViewApp extends javax.swing.JFrame {
             public void menuSelected(int menuIndex, int subMenuIndex) {
                 System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
                 if (menuIndex == 0) {
-                    main.showForm(new QlyHeThong());
+                    main.showForm(new QlyTang());
                 } else if (menuIndex == 1) {
                     main.showForm(new QlyPhongTro());
                 } else if (menuIndex == 2) {
@@ -82,7 +83,11 @@ public class ViewApp extends javax.swing.JFrame {
                 } else if (menuIndex == 4) {
                     main.showForm(new QlyNhanVien());
                 } else if (menuIndex == 5) {
-                    main.showForm(new QlyTaiSan());
+                    if (subMenuIndex == 0) {
+                        main.showForm(new QlyTaiSan());
+                    } else if(subMenuIndex == 1) {
+                        main.showForm(new QLTaiSanPhong());
+                    }
                 } else if (menuIndex == 6) {
                     main.showForm(new DoiMK());
                 } else if (menuIndex == 7) {
@@ -91,11 +96,9 @@ public class ViewApp extends javax.swing.JFrame {
                 } else {
                     // Default case if needed
                 }
-                
-                
+
             }
-            
-            
+
         });
         menu.addEventShowPopup(new EventShowPopupMenu() {
             @Override
@@ -157,7 +160,7 @@ public class ViewApp extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
@@ -180,33 +183,37 @@ public class ViewApp extends javax.swing.JFrame {
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
-                bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 1400, Short.MAX_VALUE));
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1400, Short.MAX_VALUE)
+        );
         bgLayout.setVerticalGroup(
-                bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 700, Short.MAX_VALUE));
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 700, Short.MAX_VALUE)
+        );
 
         jLayeredPane1.setLayer(bg, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
-                jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(bg));
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bg)
+        );
         jLayeredPane1Layout.setVerticalGroup(
-                jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(bg));
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bg)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setSize(new java.awt.Dimension(1400, 700));
         setLocationRelativeTo(null);
