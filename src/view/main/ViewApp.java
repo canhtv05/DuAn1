@@ -19,6 +19,7 @@ import view.panel.DoiMK;
 import view.panel.Footer;
 import view.panel.QlyHeThong;
 import view.panel.QlyHoaDon;
+import view.panel.QlyHopDong;
 import view.panel.QlyKhachThue;
 import view.panel.QlyNhanVien;
 import view.panel.QlyPhongTro;
@@ -68,7 +69,11 @@ public class ViewApp extends javax.swing.JFrame {
                 } else if (menuIndex == 1) {
                     main.showForm(new QlyPhongTro());
                 } else if (menuIndex == 2) {
-                    main.showForm(new QlyKhachThue());
+                    if (subMenuIndex == 0) {
+                        main.showForm(new QlyKhachThue());
+                    } else if (subMenuIndex == 1) {
+                        main.showForm(new QlyHopDong());
+                    }
                 } else if (menuIndex == 3) {
                     if (subMenuIndex == 0) {
                         main.showForm(new QlyHoaDon());
@@ -91,11 +96,9 @@ public class ViewApp extends javax.swing.JFrame {
                 } else {
                     // Default case if needed
                 }
-                
-                
+
             }
-            
-            
+
         });
         menu.addEventShowPopup(new EventShowPopupMenu() {
             @Override

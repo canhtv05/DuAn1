@@ -17,27 +17,44 @@ import view.component.message.MessageFrame;
  * @author CanhPC
  */
 public class QlyKhachThue extends javax.swing.JPanel {
+
     private repository.KhachThue.repositoriesKhachThue rpKT = new repositoriesKhachThue();
     private DefaultTableModel mol = new DefaultTableModel();
     private MessageFrame mesg;
+
     private int index = -1;
+
     /**
      * Creates new form QliKhachThue
      */
-    public void fillTable(ArrayList<model.KhachThue.ModelKhachThue> list){
+    public void fillTable(ArrayList<model.KhachThue.ModelKhachThue> list) {
         mol = (DefaultTableModel) tblKhachThue.getModel();
         mol.setNumRows(0);
+
         for (ModelKhachThue x : list) {
             mol.addRow(x.toDataRow());
+
+        }
+
+    }
+
+    public void fillCBB(ArrayList<model.KhachThue.ModelKhachThue> list) {
+        cbbMaPhong.removeAllItems();
+        cbbLocPhong.removeAllItems();
+        cbbLocPhong.addItem("Tất cả");
+
+        for (ModelKhachThue x : list) {
+            cbbMaPhong.addItem(x.getMaPT());
+            cbbLocPhong.addItem(x.getMaPT());
         }
     }
-    
+
     public QlyKhachThue() {
         initComponents();
         this.fillTable(rpKT.getAll());
+        this.fillCBB(rpKT.getCBB());
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,16 +71,18 @@ public class QlyKhachThue extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDiaChi = new javax.swing.JTextArea();
         txtHoTen = new view.component.textfield.TextField();
-        jPanel2 = new javax.swing.JPanel();
-        txtNgaySinh = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         rdoNam = new javax.swing.JRadioButton();
         rdoNu = new javax.swing.JRadioButton();
-        txtMaPT = new view.component.textfield.TextField();
         txtDienThoai = new view.component.textfield.TextField();
         txtEmail = new view.component.textfield.TextField();
         txtCCCD = new view.component.textfield.TextField();
         txtMaKT = new view.component.textfield.TextField();
+        cbbMaPhong = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtNgaySinh = new com.toedter.calendar.JDateChooser();
+        jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblKhachThue = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
@@ -71,6 +90,9 @@ public class QlyKhachThue extends javax.swing.JPanel {
         btnSua = new view.component.button.Button();
         btnLamMoi = new view.component.button.Button();
         btnTimKiem = new view.component.button.Button();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        cbbLocPhong = new javax.swing.JComboBox<>();
 
         txtTimKhachThue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,41 +100,19 @@ public class QlyKhachThue extends javax.swing.JPanel {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setForeground(new java.awt.Color(51, 153, 255));
 
         txtDiaChi.setColumns(20);
         txtDiaChi.setRows(5);
-        txtDiaChi.setBorder(javax.swing.BorderFactory.createTitledBorder("Địa chỉ"));
+        txtDiaChi.setBorder(null);
         jScrollPane2.setViewportView(txtDiaChi);
 
         txtHoTen.setLabelText("Họ tên");
 
-        jPanel2.setBackground(new java.awt.Color(153, 204, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Ngày sinh"));
-
-        txtNgaySinh.setToolTipText("");
-        txtNgaySinh.setDateFormatString("dd-MM-yyyy");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtNgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
-        );
-
-        jPanel3.setBackground(new java.awt.Color(153, 204, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Giới tính"));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Giới tính", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(153, 153, 153))); // NOI18N
 
         buttonGroup1.add(rdoNam);
         rdoNam.setText(" Nam");
@@ -125,11 +125,11 @@ public class QlyKhachThue extends javax.swing.JPanel {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(39, 39, 39)
                 .addComponent(rdoNam)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rdoNu)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,8 +137,6 @@ public class QlyKhachThue extends javax.swing.JPanel {
                 .addComponent(rdoNam)
                 .addComponent(rdoNu))
         );
-
-        txtMaPT.setLabelText("Mã phòng trọ");
 
         txtDienThoai.setLabelText("Điện thoại");
 
@@ -151,30 +149,47 @@ public class QlyKhachThue extends javax.swing.JPanel {
             }
         });
 
+        txtMaKT.setEditable(false);
         txtMaKT.setLabelText("Mã khách thuê");
+
+        jLabel2.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel2.setText(" Mã phòng");
+
+        jLabel3.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel3.setText(" Ngày sinh");
+
+        txtNgaySinh.setBackground(new java.awt.Color(255, 255, 255));
+        txtNgaySinh.setToolTipText("");
+        txtNgaySinh.setDateFormatString("dd-MM-yyyy");
+
+        jLabel4.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel4.setText(" Địa chỉ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtMaPT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(cbbMaPhong, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNgaySinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtMaKT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(42, 42, 42)
+                    .addComponent(txtMaKT, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                    .addComponent(txtHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                            .addComponent(txtDienThoai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtCCCD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtCCCD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -188,19 +203,26 @@ public class QlyKhachThue extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtMaPT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbbMaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(25, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtCCCD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33))))
         );
 
         tblKhachThue.setModel(new javax.swing.table.DefaultTableModel(
@@ -223,7 +245,7 @@ public class QlyKhachThue extends javax.swing.JPanel {
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 51, 255));
-        jLabel11.setText("Quản lý khách thuê");
+        jLabel11.setText("Quản lý khách thuê/Khách thuê");
 
         btnThem.setBackground(new java.awt.Color(153, 255, 0));
         btnThem.setText("Thêm");
@@ -255,23 +277,39 @@ public class QlyKhachThue extends javax.swing.JPanel {
             }
         });
 
+        jLabel5.setText("Bộ lọc: ");
+
+        jLabel6.setText("Phòng:");
+
+        cbbLocPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbLocPhongActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                    .addComponent(btnLamMoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(9, 9, 9))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 829, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                                        .addComponent(btnLamMoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(51, 51, 51)
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbbLocPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel5)))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel11))
@@ -297,9 +335,9 @@ public class QlyKhachThue extends javax.swing.JPanel {
                     .addComponent(txtTimKhachThue, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addGap(32, 32, 32)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(52, 52, 52)
@@ -307,10 +345,16 @@ public class QlyKhachThue extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(cbbLocPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(50, 50, 50))
         );
 
         txtTimKhachThue.getAccessibleContext().setAccessibleDescription("");
@@ -322,17 +366,18 @@ public class QlyKhachThue extends javax.swing.JPanel {
 
     private void tblKhachThueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachThueMouseClicked
         // TODO add your handling code here:
-        index=tblKhachThue.getSelectedRow();
+        index = tblKhachThue.getSelectedRow();
         txtMaKT.setText(tblKhachThue.getValueAt(index, 0).toString());
-        txtMaPT.setText(tblKhachThue.getValueAt(index, 1).toString());
+//        txtMaPT.setText(tblKhachThue.getValueAt(index, 1).toString());
+        cbbMaPhong.setSelectedItem(tblKhachThue.getValueAt(index, 1).toString());
         txtHoTen.setText(tblKhachThue.getValueAt(index, 2).toString());
-        txtNgaySinh.setDate( (Date)tblKhachThue.getValueAt(index, 3));
+        txtNgaySinh.setDate((Date) tblKhachThue.getValueAt(index, 3));
         if (tblKhachThue.getValueAt(index, 4).toString().equalsIgnoreCase("Nam")) {
             rdoNam.setSelected(true);
         } else {
             rdoNu.setSelected(true);
         }
-        
+
         txtDienThoai.setText(tblKhachThue.getValueAt(index, 5).toString());
         txtEmail.setText(tblKhachThue.getValueAt(index, 6).toString());
         txtDiaChi.setText(tblKhachThue.getValueAt(index, 7).toString());
@@ -345,29 +390,37 @@ public class QlyKhachThue extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        if (readForm()!=null) {
+        
+        if (readForm() != null) {
             mesg = new MessageFrame();
-            if (rpKT.them(readForm())>0) {
-                
-//                JOptionPane.showMessageDialog(this, "Thêm thành công")
-                mesg.showMessage("success", "Thêm thành công");
-                fillTable(rpKT.getAll());
+            if (readForm().getMaKT().equalsIgnoreCase(rpKT.check(readForm().getMaKT()))) {
+                mesg.showMessage("error", "đã tồn tại mã khách: " + txtMaKT.getText());
             } else {
-                mesg.showMessage("error", "Thêm thất bại");
-                
-                
+                if (rpKT.them(readForm()) > 0) {
+//                cbbMaPhong.addItem(readForm().getMaPT());
+//                JOptionPane.showMessageDialog(this, "Thêm thành công")
+                    mesg.showMessage("success", "Thêm thành công");
+                    fillTable(rpKT.getAll());
+                    cbbLocPhong.setSelectedItem("Tất cả");
+                } else {
+                    mesg.showMessage("error", "Thêm thất bại");
+
+                }
             }
+        
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
         mesg = new MessageFrame();
-        if (readForm()!=null) {
-            if (rpKT.sua(readForm())>0) {
+        if (readForm() != null) {
+            if (rpKT.sua(readForm()) > 0) {
                 mesg.showMessage("success", "cập nhật thành công");
 //                JOptionPane.showConfirmDialog(this, "cập nhật thành công");
                 fillTable(rpKT.getAll());
+                cbbLocPhong.setSelectedItem("Tất cả");
+
             } else {
                 mesg.showMessage("error", "cập nhật thất bại");
 //                JOptionPane.showConfirmDialog(this, "cập nhật thất bại");
@@ -379,14 +432,18 @@ public class QlyKhachThue extends javax.swing.JPanel {
         // TODO add your handling code here:
         txtTimKhachThue.setText("");
         txtMaKT.setText("");
-        txtMaPT.setText("");
+//        txtMaPT.setText("");
         txtHoTen.setText("");
         txtNgaySinh.setDate(null);
         txtDienThoai.setText("");
         txtEmail.setText("");
         txtDiaChi.setText("");
         txtCCCD.setText("");
+//        fillCBB(rpKT.getCBB());
         fillTable(rpKT.getAll());
+        cbbLocPhong.setSelectedItem("Tất cả");
+
+
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
@@ -394,35 +451,46 @@ public class QlyKhachThue extends javax.swing.JPanel {
         fillTable(rpKT.timKiem(txtTimKhachThue.getText()));
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
-    public model.KhachThue.ModelKhachThue readForm(){
-        mesg=new MessageFrame();
+    private void cbbLocPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbLocPhongActionPerformed
+        // TODO add your handling code here:
+        if (cbbLocPhong.getSelectedItem().toString() != "Tất cả") {
+            fillTable(rpKT.timKiem(cbbLocPhong.getSelectedItem().toString()));
+        } else {
+            fillTable(rpKT.getAll());
+        }
+
+    }//GEN-LAST:event_cbbLocPhongActionPerformed
+
+    public model.KhachThue.ModelKhachThue readForm() {
+        mesg = new MessageFrame();
         String maKT, hoTen, dienThoai, email, diaChi, cccd, maPT;
         Date ngaySinh;
         boolean gioiTinh;
-        maKT=txtMaKT.getText().trim();
-        maPT=txtMaPT.getText().trim();
-        hoTen=txtHoTen.getText().trim();
-        ngaySinh= txtNgaySinh.getDate(); 
-        gioiTinh=true;
+        maKT = txtMaKT.getText().trim();
+//        maPT=txtMaPT.getText().trim();
+        maPT = cbbMaPhong.getSelectedItem().toString();
+        hoTen = txtHoTen.getText().trim();
+        ngaySinh = txtNgaySinh.getDate();
+        gioiTinh = false;
         if (rdoNu.isSelected()) {
-            gioiTinh=false;
+            gioiTinh = true;
         }
-        dienThoai=txtDienThoai.getText().trim();
-        email=txtEmail.getText().trim();
-        diaChi=txtDiaChi.getText().trim();
-        cccd=txtCCCD.getText().trim();
-        if (maKT.isEmpty()) {
-            mesg.showMessage("error", "chưa nhập mã Khách thuê");
-//            JOptionPane.showMessageDialog(this, "chưa nhập mã KT");
-            txtMaKT.requestFocus();
-            return null;
-        }
-        if (maPT.isEmpty()) {
-            mesg.showMessage("error", "chưa nhập mã Phòng trọ");
-//            JOptionPane.showMessageDialog(this, "chưa nhập mã PT");
-            txtMaPT.requestFocus();
-            return null;
-        }
+        dienThoai = txtDienThoai.getText().trim();
+        email = txtEmail.getText().trim();
+        diaChi = txtDiaChi.getText().trim();
+        cccd = txtCCCD.getText().trim();
+//        if (maKT.isEmpty()) {
+//            mesg.showMessage("error", "chưa nhập mã Khách thuê");
+////            JOptionPane.showMessageDialog(this, "chưa nhập mã KT");
+//            txtMaKT.requestFocus();
+//            return null;
+//        }
+//        if (maPT.isEmpty()) {
+//            mesg.showMessage("error", "chưa nhập mã Phòng trọ");
+////            JOptionPane.showMessageDialog(this, "chưa nhập mã PT");
+//            txtMaPT.requestFocus();
+//            return null;
+//        }
         if (hoTen.isEmpty()) {
             mesg.showMessage("error", "chưa nhập Họ tên");
 //            JOptionPane.showMessageDialog(this, "chưa nhập Họ tên");
@@ -434,7 +502,7 @@ public class QlyKhachThue extends javax.swing.JPanel {
 //            JOptionPane.showMessageDialog(this, "chưa nhập ngày sinh");
             return null;
         }
-        if (rdoNam.isSelected()==false && rdoNu.isSelected()==false) {
+        if (rdoNam.isSelected() == false && rdoNu.isSelected() == false) {
             mesg.showMessage("error", "chưa lựa chọn giới tính");
 //            JOptionPane.showMessageDialog(this, "chưa lựa chọn giới tính");
             return null;
@@ -451,7 +519,7 @@ public class QlyKhachThue extends javax.swing.JPanel {
             txtEmail.requestFocus();
             return null;
         }
-        if (email.endsWith("@gmail.com")==false) {
+        if (email.endsWith("@gmail.com") == false) {
             mesg.showMessage("error", "Email chưa đúng định dạng");
 //            JOptionPane.showMessageDialog(this, "email chưa đúng định dạng");
             txtEmail.requestFocus();
@@ -479,10 +547,16 @@ public class QlyKhachThue extends javax.swing.JPanel {
     private view.component.button.Button btnThem;
     private view.component.button.Button btnTimKiem;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cbbLocPhong;
+    private javax.swing.JComboBox<String> cbbMaPhong;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -495,7 +569,6 @@ public class QlyKhachThue extends javax.swing.JPanel {
     private view.component.textfield.TextField txtEmail;
     private view.component.textfield.TextField txtHoTen;
     private view.component.textfield.TextField txtMaKT;
-    private view.component.textfield.TextField txtMaPT;
     private com.toedter.calendar.JDateChooser txtNgaySinh;
     private javax.swing.JTextField txtTimKhachThue;
     // End of variables declaration//GEN-END:variables
