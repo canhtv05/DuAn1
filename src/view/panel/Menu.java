@@ -59,9 +59,9 @@ public class Menu extends javax.swing.JPanel {
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_hotel_star_20px.png")),
                 "Phòng trọ"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_customer_20px.png")),
-                "Khách thuê"));
+                "QL Khách thuê", "Khách thuê", "Hợp đồng"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_bill_20px.png")),
-                "Hóa đơn", "Hóa đơn","Tiền điện", "Tiền nước", "Tiền dịch vụ"));
+                "Hóa đơn", "Hóa đơn", "Tiền điện", "Tiền nước", "Tiền dịch vụ"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_worker_20px.png")),
                 "Nhân viên"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_money_20px.png")),

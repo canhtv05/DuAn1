@@ -24,14 +24,21 @@ public class ModelKhachThue {
     
     public String GioiTinh(){
         if (gioiTinh) {
-            return "Nam";
-        } else {
             return "Nữ";
+        } else {
+            return "Nam";
         }
     }
     public ModelKhachThue() {
     }
+    
+    //arr combo box
 
+    public ModelKhachThue(String MaPT) {
+        this.MaPT = MaPT;
+    }
+    
+    
     public ModelKhachThue(String MaKT, String MaPT, String HoTen, Date ngaySinh, boolean gioiTinh, String DienThoai, String email, String DiaChi, String CCCD) {
         this.MaKT = MaKT;
         this.MaPT = MaPT;
@@ -123,4 +130,7 @@ public class ModelKhachThue {
         return new Object[]{this.getMaKT(), this.getMaPT(), this.getHoTen(), this.getNgaySinh(), this.GioiTinh(), this.DienThoai, this.getEmail(), this.getDiaChi(), this.getCCCD()};
     }
     
+    public Object[] bangPhu(){
+        return new Object[]{this.getMaKT(), this.getHoTen(), this.GioiTinh(), this.getDienThoai(), this.getCCCD()};
+    }
 }
