@@ -55,6 +55,28 @@ public class repoPhongTro {
 
         return listPT;
     }
+    
+    public ArrayList<ModelPhongTro> getCbbTang() {
+        ArrayList<ModelPhongTro> listPT = new ArrayList<>();
+        String sql = "Select TangSo From Tang order by TangSo";
+        
+        try {
+            PreparedStatement ps = this.conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {                
+                int tangSo = rs.getInt(1);
+                
+                ModelPhongTro pt = new ModelPhongTro(tangSo);
+                listPT.add(pt);   
+            }  
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
+        return listPT;
+    }
 
     public void insert(ModelPhongTro pt) {
         try {
@@ -155,13 +177,13 @@ public class repoPhongTro {
         return listPT;
     }
 
-    public ArrayList<ModelPhongTro> filterTrangThai(int trangThai) {
+    public ArrayList<ModelPhongTro> filterTrangThai(int tt) {
         ArrayList<ModelPhongTro> listPT = new ArrayList<>();
         String sql = "Select TangSo, MaPhong, LoaiPhong, DienTich, GiaPhong, TienNghi, TrangThai, Anh Where TrangThai = ?";
-
+        
         try {
             PreparedStatement ps = this.conn.prepareStatement(sql);
-            ps.setInt(1, trangThai);
+            ps.setInt(1, tt);
             ps.execute();
 
             ResultSet rs = ps.getResultSet();
@@ -184,5 +206,7 @@ public class repoPhongTro {
         }
         return listPT;
     }
+    
+    
 
 }

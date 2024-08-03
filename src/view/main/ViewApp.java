@@ -17,12 +17,8 @@ import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import view.panel.DoiMK;
 import view.panel.Footer;
-<<<<<<< HEAD
 import view.panel.QlyTang;
-=======
 import view.panel.HoaDon;
-import view.panel.QlyHeThong;
->>>>>>> cf9f84785ce5459669b173bb762dbcf8e074433d
 import view.panel.QlyHoaDon;
 import view.panel.QlyKhachThue;
 import view.panel.QlyNhanVien;
@@ -44,7 +40,7 @@ public class ViewApp extends javax.swing.JFrame {
 
     public ViewApp() {
         initComponents();
-//        ViewApp.this.setExtendedState(ViewApp.this.MAXIMIZED_BOTH);
+        ViewApp.this.setExtendedState(ViewApp.this.MAXIMIZED_BOTH);
         init();
         changeHeader();
     }
@@ -102,15 +98,10 @@ public class ViewApp extends javax.swing.JFrame {
                 } else {
                     // Default case if needed
                 }
-<<<<<<< HEAD
 
-            }
-
-=======
                                
             }
                        
->>>>>>> cf9f84785ce5459669b173bb762dbcf8e074433d
         });
         menu.addEventShowPopup(new EventShowPopupMenu() {
             @Override
@@ -175,8 +166,17 @@ public class ViewApp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         bg = new javax.swing.JLayeredPane();
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -288,5 +288,8 @@ public class ViewApp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane bg;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }

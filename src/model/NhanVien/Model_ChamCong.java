@@ -3,10 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model.NhanVien;
-<<<<<<< HEAD
 import repository.NhanVien.repoChamCong;
-=======
->>>>>>> cf9f84785ce5459669b173bb762dbcf8e074433d
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

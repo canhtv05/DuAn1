@@ -1,17 +1,16 @@
 package view.panel;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 
 public class FormHome extends javax.swing.JPanel {
 
-        private String path = "D/...";
-    
+    private String path = "D/...";
+
     public FormHome() {
         initComponents();
         setOpaque(false);
-        
+
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -145,7 +144,7 @@ public class FormHome extends javax.swing.JPanel {
                                 .addComponent(jLabel13)
                                 .addComponent(jLabel16))
                             .addComponent(lbImg1, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 305, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 289, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,24 +225,24 @@ public class FormHome extends javax.swing.JPanel {
 
     private void lbImg1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbImg1MouseClicked
         // TODO add your handling code here:
-        JFileChooser choo = new JFileChooser();
-        int ketQua = choo.showOpenDialog(jPanel1);
-        if (ketQua == JFileChooser.APPROVE_OPTION) {
-            this.path = choo.getSelectedFile().getPath();
-            ImageIcon icon = new ImageIcon(path);
-            lbImg1.setIcon(icon);
-        }
+//        JFileChooser choo = new JFileChooser();
+//        int ketQua = choo.showOpenDialog(jPanel1);
+//        if (ketQua == JFileChooser.APPROVE_OPTION) {
+//            this.path = choo.getSelectedFile().getPath();
+//            ImageIcon icon = new ImageIcon(path);
+//            lbImg1.setIcon(icon);
+//        }
     }//GEN-LAST:event_lbImg1MouseClicked
 
     private void lbImg2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbImg2MouseClicked
         // TODO add your handling code here:
-        JFileChooser choo = new JFileChooser();
-        int ketQua = choo.showOpenDialog(jPanel1);
-        if (ketQua == JFileChooser.APPROVE_OPTION) {
-            this.path = choo.getSelectedFile().getPath();
-            ImageIcon icon = new ImageIcon(path);
-            lbImg2.setIcon(icon);
-        }
+//        JFileChooser choo = new JFileChooser();
+//        int ketQua = choo.showOpenDialog(jPanel1);
+//        if (ketQua == JFileChooser.APPROVE_OPTION) {
+//            this.path = choo.getSelectedFile().getPath();
+//            ImageIcon icon = new ImageIcon(path);
+//            lbImg2.setIcon(icon);
+//        }
     }//GEN-LAST:event_lbImg2MouseClicked
 
 
