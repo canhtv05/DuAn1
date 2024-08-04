@@ -31,6 +31,5 @@ public class Model_NhanVien {
     private Date ngayKT;
     private Integer thoiHan;
     private String anhNV;
-
-    
+    private int TrangThai;
 }

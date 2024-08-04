@@ -1,8 +1,9 @@
 package model.tiendien;
 
 public class ModelTienDien {
+
     private int maTD;
-    private String maHD;
+    private int maHD;
     private String maPT;
     private String ngayBD;
     private String ngayKT;
@@ -15,7 +16,7 @@ public class ModelTienDien {
     public ModelTienDien() {
     }
 
-    public ModelTienDien(int maTD, String maHD, String maPT, String ngayBD, String ngayKT, int chiSoDau, int chiSoCuoi, int soDien, double giaTien, double thanhTien) {
+    public ModelTienDien(int maTD, int maHD, String maPT, String ngayBD, String ngayKT, int chiSoDau, int chiSoCuoi, int soDien, double giaTien, double thanhTien) {
         this.maTD = maTD;
         this.maHD = maHD;
         this.maPT = maPT;
@@ -28,6 +29,27 @@ public class ModelTienDien {
         this.thanhTien = thanhTien;
     }
 
+    public ModelTienDien(int maHD, String maPT, String ngayBD, String ngayKT, int chiSoDau, int chiSoCuoi, double giaTien) {
+        this.maHD = maHD;
+        this.maPT = maPT;
+        this.ngayBD = ngayBD;
+        this.ngayKT = ngayKT;
+        this.chiSoDau = chiSoDau;
+        this.chiSoCuoi = chiSoCuoi;
+        this.giaTien = giaTien;
+    }
+
+    public ModelTienDien(int maTD, int maHD, String maPT, String ngayBD, String ngayKT, int chiSoDau, int chiSoCuoi, double giaTien) {
+        this.maTD = maTD;
+        this.maHD = maHD;
+        this.maPT = maPT;
+        this.ngayBD = ngayBD;
+        this.ngayKT = ngayKT;
+        this.chiSoDau = chiSoDau;
+        this.chiSoCuoi = chiSoCuoi;
+        this.giaTien = giaTien;
+    }
+    
     public int getMaTD() {
         return maTD;
     }
@@ -36,11 +58,11 @@ public class ModelTienDien {
         this.maTD = maTD;
     }
 
-    public String getMaHD() {
+    public int getMaHD() {
         return maHD;
     }
 
-    public void setMaHD(String maHD) {
+    public void setMaHD(int maHD) {
         this.maHD = maHD;
     }
 
@@ -107,5 +129,4 @@ public class ModelTienDien {
     public void setThanhTien(double thanhTien) {
         this.thanhTien = thanhTien;
     }
-    
 }

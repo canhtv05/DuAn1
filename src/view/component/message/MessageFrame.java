@@ -8,38 +8,42 @@ public class MessageFrame extends JFrame implements PanelMessageListenerImpl {
 
     private boolean ok;
     private boolean cancel;
-    private boolean interactionCompleted;
+    private Runnable onOkClicked;
 
     public MessageFrame() {
-        interactionCompleted = false;
+        setSize(550, 130);
+        setUndecorated(true);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        PanelMessage panelMessage = new PanelMessage();
+        panelMessage.setPanelMessageListener(this);
+        add(panelMessage);
+    }
+
+    public void setOnOkClicked(Runnable onOkClicked) {
+        this.onOkClicked = onOkClicked;
     }
 
     public void showMessage(String type, String message) {
-        MessageFrame messageFrame = new MessageFrame();
-        messageFrame.setSize(550, 130);
-        messageFrame.setUndecorated(true);
-        messageFrame.setLocationRelativeTo(null);
-        messageFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        PanelMessage panelMessage = new PanelMessage();
+        PanelMessage panelMessage = (PanelMessage) getContentPane().getComponent(0);
         panelMessage.changeMessage(type, message);
-        messageFrame.add(panelMessage);
-        messageFrame.setVisible(true);
-
-        if (messageFrame.isOk() || messageFrame.isCancel()) {
-            messageFrame.dispose();
-        }
+        setVisible(true);
     }
 
     @Override
     public void onOkClicked() {
         ok = true;
-        interactionCompleted = true;
+        if (onOkClicked != null) {
+            onOkClicked.run();
+        }
+        this.dispose(); // Đóng cửa sổ khi nhấn OK
     }
 
     @Override
     public void onCancelClicked() {
         cancel = true;
-        interactionCompleted = true;
+        this.dispose(); // Đóng cửa sổ khi nhấn Cancel
     }
 
     public boolean isOk() {

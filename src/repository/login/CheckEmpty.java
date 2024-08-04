@@ -7,7 +7,7 @@ public class CheckEmpty {
     private final MessageFrame message = new MessageFrame();
     
     public boolean checkUsernameEmpty(String username) {
-        if (username.isEmpty()) {
+        if (username.trim().isEmpty()) {
             message.showMessage("error", "You must enter your username.");
             return true;
         }
@@ -15,7 +15,7 @@ public class CheckEmpty {
     }
 
     public boolean checkPasswordEmpty(String password) {
-        if (password.isEmpty()) {
+        if (password.trim().isEmpty()) {
             message.showMessage("error", "You must enter your password.");
             return true;
         }
@@ -23,7 +23,7 @@ public class CheckEmpty {
     }
 
     public boolean checkUsernameAndPasswordEmpty(String username, String password) {
-        if (username.isEmpty() && password.isEmpty()) {
+        if (username.trim().isEmpty() && password.trim().isEmpty()) {
             message.showMessage("error", "Username and password cannot be empty.");
             return true;
         }

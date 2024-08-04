@@ -1,6 +1,7 @@
 package view.component.button;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -61,25 +62,26 @@ public class MyButton extends JButton {
 
     public MyButton() {
         // Init Color
-
         setColor(Color.WHITE);
         colorOver = new Color(179, 250, 160);
         colorClick = new Color(152, 184, 144);
         borderColor = new Color(30, 136, 56);
         setContentAreaFilled(false);
+
         // Add event mouse
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent me) {
                 setBackground(colorOver);
+                setCursor(new Cursor(Cursor.HAND_CURSOR)); // Set hand cursor
                 over = true;
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
                 setBackground(color);
+                setCursor(new Cursor(Cursor.DEFAULT_CURSOR)); // Reset to default cursor
                 over = false;
-
             }
 
             @Override
@@ -113,8 +115,8 @@ public class MyButton extends JButton {
         g2.setColor(borderColor);
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), radius, radius);
         g2.setColor(getBackground());
-        // Border set 2 Pix
-        g2.fillRoundRect(2, 2, getWidth() - 4, getHeight() - 4, radius, radius);
+        // Border set 1 Pix
+        g2.fillRoundRect(1, 1, getWidth() - 2, getHeight() - 2, radius, radius);
         super.paintComponent(grphcs);
     }
 }
