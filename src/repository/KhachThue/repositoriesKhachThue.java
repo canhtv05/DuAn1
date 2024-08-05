@@ -26,14 +26,33 @@ public class repositoriesKhachThue {
         
     }
     
+    public ArrayList<model.KhachThue.ModelKhachThue> getCBB(){
+        ArrayList<model.KhachThue.ModelKhachThue> arrCBB = new ArrayList<>();
+        sql = "select MaPhong from PhongTro order by MaPhong";
+        try {
+            con= DBContext.getConnection();
+            ps= con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                String mapt;
+                mapt=rs.getString(1).trim();
+                model.KhachThue.ModelKhachThue kt = new ModelKhachThue(mapt);
+                arrCBB.add(kt);
+            }
+            return arrCBB;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     
-    
-    public ArrayList<model.KhachThue.ModelKhachThue> getAll(){
+    public ArrayList<model.KhachThue.ModelKhachThue> getAll(int tt){
         ArrayList<model.KhachThue.ModelKhachThue> arrKT = new ArrayList<>();
-        sql="select * from KhachThue";
+        sql="select IdKhach, MaPhong, HoTen, NgaySinh, GioiTinh, DienThoai, Email, DiaChi, CCCD from KhachThue where TrangThai=?  order by MaPhong";
         try {
             con = DBContext.getConnection();
             ps = con.prepareStatement(sql);
+            ps.setObject(1, tt);
             rs = ps.executeQuery();
             while (rs.next()) {                
                 String maKT, hoTen, dienThoai, email, diaChi, cccd, maPT;
@@ -60,19 +79,19 @@ public class repositoriesKhachThue {
     }
     
     public int them(model.KhachThue.ModelKhachThue x) {
-        sql="insert into KhachThue(MaKT, MaPT, HoTen, NgaySinh, GioiTinh, DienThoai, Email, DiaChi , CCCD) values(?,?,?,?,?,?,?,?,?)";
+        sql="insert into KhachThue(MaPhong, HoTen, NgaySinh, GioiTinh, DienThoai, Email, DiaChi , CCCD, TrangThai) values(?,?,?,?,?,?,?,?,0)";
         try {
             con=DBContext.getConnection();
             ps=con.prepareStatement(sql);
-            ps.setObject(2, x.getMaPT());
-            ps.setObject(3, x.getHoTen());
-            ps.setObject(4, x.getNgaySinh());
-            ps.setObject(5, x.isGioiTinh());
-            ps.setObject(6, x.getDienThoai());
-            ps.setObject(7, x.getEmail());
-            ps.setObject(8, x.getDiaChi());
-            ps.setObject(9, x.getCCCD());
-            ps.setObject(1, x.getMaKT());
+            ps.setObject(1, x.getMaPT());
+            ps.setObject(2, x.getHoTen());
+            ps.setObject(3, x.getNgaySinh());
+            ps.setObject(4, x.isGioiTinh());
+            ps.setObject(5, x.getDienThoai());
+            ps.setObject(6, x.getEmail());
+            ps.setObject(7, x.getDiaChi());
+            ps.setObject(8, x.getCCCD());
+            
             return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,7 +100,7 @@ public class repositoriesKhachThue {
     }
     
     public int sua(model.KhachThue.ModelKhachThue x){
-        sql=" update KhachThue set MaPT=?, HoTen=?, NgaySinh=?, GioiTinh=?, DienThoai=?, Email=?, DiaChi=?, CCCD=? where MaKT=?";
+        sql=" update KhachThue set MaPhong=?, HoTen=?, NgaySinh=?, GioiTinh=?, DienThoai=?, Email=?, DiaChi=?, CCCD=? where IdKhach=?";
         try {
             con=DBContext.getConnection();
             ps=con.prepareStatement(sql);
@@ -103,16 +122,31 @@ public class repositoriesKhachThue {
         }
     }
     
-    public ArrayList<model.KhachThue.ModelKhachThue> timKiem(String mapt){
+    public int xoa(int x){
+        sql="update KhachThue set TrangThai=1 where IdKhach=?";
+        try {
+            con=DBContext.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.setObject(1, x);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    
+    public ArrayList<model.KhachThue.ModelKhachThue> timKiem(String mapt, int TrangThai){
         ArrayList<model.KhachThue.ModelKhachThue> arrKT = new ArrayList<>();
-        sql="select * from KhachThue where MaPT LIKE ? or MaKT LIKE ? or HoTen LIKE ?";
+        sql="select IdKhach, MaPhong, HoTen, NgaySinh, GioiTinh, DienThoai, Email, DiaChi, CCCD from KhachThue   where (MaPhong LIKE ? or IdKhach LIKE ? or HoTen LIKE ? or DienThoai LIKE ? or Email LIKE ?) and TrangThai = ?";
         try {
             con=DBContext.getConnection();
             ps=con.prepareStatement(sql);
             ps.setObject(1, "%"+mapt+"%");
             ps.setObject(2, "%"+mapt+"%");
             ps.setObject(3, "%"+mapt+"%");
-            
+            ps.setObject(4, "%"+mapt+"%");
+            ps.setObject(5, "%"+mapt+"%");
+            ps.setObject(6, TrangThai);
             
             rs=ps.executeQuery();
             while (rs.next()) {                
@@ -133,6 +167,83 @@ public class repositoriesKhachThue {
                 arrKT.add(kt);
             }
             return arrKT;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public String check(String ma){
+        sql="select IdKhach from KhachThue where IdKhach=?";
+        try {
+            String makt = null;
+            con=DBContext.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.setObject(1, ma);
+            
+            rs= ps.executeQuery();
+            while (rs.next()) {                
+                makt=rs.getString(1);
+            }
+            return makt;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public String CheckSDT(String MaKT){
+        sql="select DienThoai from KhachThue where DienThoai=?";
+        try {
+            String dt=null;
+            con=DBContext.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.setObject(1, MaKT);
+            rs=ps.executeQuery();
+            while (rs.next()) {                
+                
+                dt=rs.getString(1);
+                
+            }
+            return dt;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public String CheckEmail(String email){
+        sql="select Email from KhachThue where Email=?";
+        try {
+            String dt=null;
+            con=DBContext.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.setObject(1, email);
+            rs=ps.executeQuery();
+            while (rs.next()) {                
+                
+                dt=rs.getString(1);
+                
+            }
+            return dt;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public String CheckCCCD(String CC){
+        sql="select CCCD from KhachThue where CCCD=?";
+        try {
+            String dt=null;
+            con=DBContext.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.setObject(1, CC);
+            rs=ps.executeQuery();
+            while (rs.next()) {                
+                
+                dt=rs.getString(1);
+                
+            }
+            return dt;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

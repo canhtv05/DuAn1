@@ -17,8 +17,9 @@ import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import view.panel.DoiMK;
 import view.panel.Footer;
-import view.panel.QlyHeThong;
+import view.panel.QlyTang;
 import view.panel.QlyHoaDon;
+import view.panel.QlyHopDong;
 import view.panel.QlyKhachThue;
 import view.panel.QlyNhanVien;
 import view.panel.QlyPhongTro;
@@ -38,7 +39,7 @@ public class ViewApp extends javax.swing.JFrame {
 
     public ViewApp() {
         initComponents();
-//        ViewApp.this.setExtendedState(ViewApp.this.MAXIMIZED_BOTH);
+        ViewApp.this.setExtendedState(ViewApp.this.MAXIMIZED_BOTH);
         init();
         changeHeader();
     }
@@ -63,11 +64,15 @@ public class ViewApp extends javax.swing.JFrame {
             @Override
             public void menuSelected(int menuIndex, int subMenuIndex) {
                 if (menuIndex == 0) {
-                    main.showForm(new QlyHeThong());
+                    main.showForm(new QlyTang());
                 } else if (menuIndex == 1) {
                     main.showForm(new QlyPhongTro());
                 } else if (menuIndex == 2) {
-                    main.showForm(new QlyKhachThue());
+                    if (subMenuIndex == 0) {
+                        main.showForm(new QlyKhachThue());
+                    } else if (subMenuIndex == 1) {
+                        main.showForm(new QlyHopDong());
+                    }
                 } else if (menuIndex == 3) {
                     if (subMenuIndex == 0) {
                         main.showForm(new QlyHoaDon());
@@ -79,7 +84,13 @@ public class ViewApp extends javax.swing.JFrame {
                         main.showForm(new QlyTienDichVu());
                     }
                 } else if (menuIndex == 4) {
-                    main.showForm(new QlyNhanVien());
+                        main.showForm(new QlyNhanVien());
+                    if (subMenuIndex == 0) {
+                    } else if (subMenuIndex == 1) {
+//                         main.showForm(new QlyLuong());
+                    } else if (subMenuIndex == 2) {
+                        // main.showForm(new LichLamViec());
+                    }
                 } else if (menuIndex == 5) {
                     main.showForm(new QlyTaiSan());
                 } else if (menuIndex == 6) {
@@ -90,9 +101,9 @@ public class ViewApp extends javax.swing.JFrame {
                 } else {
                     // Default case if needed
                 }
-                               
+
             }
-                       
+
         });
         menu.addEventShowPopup(new EventShowPopupMenu() {
             @Override
@@ -110,7 +121,7 @@ public class ViewApp extends javax.swing.JFrame {
         bg.add(menu, "w 230!, spany 2");
         bg.add(header, "h 50!, wrap");
         bg.add(main, "w 100%, h 100%, wrap");
-//        bg.add(footer, "h 50!, wrap");
+        // bg.add(footer, "h 50!, wrap");
         TimingTarget target = new TimingTargetAdapter() {
             @Override
             public void timingEvent(float fraction) {
@@ -154,11 +165,21 @@ public class ViewApp extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         bg = new javax.swing.JLayeredPane();
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -177,37 +198,33 @@ public class ViewApp extends javax.swing.JFrame {
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1400, Short.MAX_VALUE)
-        );
+                bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 1400, Short.MAX_VALUE));
         bgLayout.setVerticalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
+                bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 700, Short.MAX_VALUE));
 
         jLayeredPane1.setLayer(bg, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg)
-        );
+                jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(bg));
         jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg)
-        );
+                jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(bg));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
         setSize(new java.awt.Dimension(1400, 700));
         setLocationRelativeTo(null);
@@ -270,5 +287,8 @@ public class ViewApp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane bg;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }
