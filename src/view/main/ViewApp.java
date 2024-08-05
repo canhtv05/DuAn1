@@ -17,10 +17,7 @@ import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import view.panel.DoiMK;
 import view.panel.Footer;
-<<<<<<< HEAD
 import view.panel.QlyTang;
-=======
->>>>>>> 81d41c70021f6fd0cc5efcefb022e8fc23d7e876
 import view.panel.HoaDon;
 import view.panel.QlyHoaDon;
 import view.panel.QlyHopDong;
@@ -69,7 +66,7 @@ public class ViewApp extends javax.swing.JFrame {
             public void menuSelected(int menuIndex, int subMenuIndex) {
 //                System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
                 if (menuIndex == 0) {
-//                    main.showForm(new QlyHeThong());
+                    main.showForm(new QlyTang());
                 } else if (menuIndex == 1) {
                     main.showForm(new QlyPhongTro());
                 }else if (menuIndex == 2) {
@@ -107,10 +104,6 @@ public class ViewApp extends javax.swing.JFrame {
                 } else {
                     // Default case if needed
                 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 81d41c70021f6fd0cc5efcefb022e8fc23d7e876
                                
             }
                        
