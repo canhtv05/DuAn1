@@ -7,10 +7,7 @@ package model.NhanVien;
  *
  * @author BOSS
  */
-<<<<<<< HEAD
 import repository.NhanVien.repoNhanVien;
-=======
->>>>>>> c8a2c028b9dfbd5c309bf6978a0c1a5cc38c228f
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
