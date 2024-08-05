@@ -20,128 +20,242 @@ public class RepoTienDichVu {
         }
     }
 
-    public ArrayList<ModelTienDichVu> searchAndPage(String timKiem, int page, int limit) {
+    public ArrayList<ModelTienDichVu> searchAndPage(String timKiem, int page, int limit, int month, int year, int trangThai) {
         ArrayList<ModelTienDichVu> list = new ArrayList<>();
-        sql = "SELECT IdDichVu, TenDichVu, GiaTien "
-                + "FROM dbo.TienDichVu ";
+        sql = "SELECT "
+                + "IdDichVu, "
+                + "IdHoaDon, "
+                + "MaPhong, "
+                + "TenDichVu, "
+                + "CONVERT(VARCHAR, NgayBatDau, 105) AS NgayBatDauFormatted, "
+                + "CONVERT(VARCHAR, NgayKetThuc, 105) AS NgayKetThucFormatted, "
+                + "DauNguoi, "
+                + "GiaTien, "
+                + "ThanhTien, "
+                + "TrangThai "
+                + "FROM "
+                + "dbo.TienDichVu ";
 
-        if (!timKiem.isEmpty()) {
-            sql += "WHERE TenDichVu LIKE ? ";
+        boolean hasTimKiem = timKiem != null && !timKiem.isEmpty();
+        boolean hasMonth = month != 0;
+        boolean hasYear = year != 0;
+        boolean hasTrangThai = trangThai != -1;
+
+        if (hasTimKiem || hasMonth || hasYear || hasTrangThai) {
+            sql += " WHERE ";
+
+            if (hasTimKiem) {
+                sql += "(MaPhong LIKE ? OR IdHoaDon LIKE ? OR IdDichVu LIKE ?) ";
+            }
+
+            if (hasTrangThai) {
+                if (hasTimKiem) {
+                    sql += "AND ";
+                }
+                sql += "TrangThai = ? ";
+            }
+            if (hasMonth || hasYear) {
+                if (hasTimKiem || hasTrangThai) {
+                    sql += "AND ";
+                }
+                if (hasMonth && hasYear) {
+                    sql += "((DATEPART(month, NgayBatDau) = ? AND DATEPART(year, NgayBatDau) = ?) "
+                            + "OR (DATEPART(month, NgayKetThuc) = ? AND DATEPART(year, NgayKetThuc) = ?)) ";
+                } else if (hasMonth) {
+                    sql += "(DATEPART(month, NgayBatDau) = ? OR DATEPART(month, NgayKetThuc) = ?) ";
+                } else if (hasYear) {
+                    sql += "(DATEPART(year, NgayBatDau) = ? OR DATEPART(year, NgayKetThuc) = ?) ";
+                }
+            }
         }
 
-        sql += "ORDER BY IdDichVu "
-                + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        sql += "ORDER BY IdDichVu OFFSET ? ROWS FETCH NEXT ? ROWS ONLY ";
 
         int offset = (page - 1) * limit;
-        if (page < 1) {
+
+        if (page < 0) {
             page = 1;
         }
 
         try {
             ps = conn.prepareStatement(sql);
-            int param = 1;
-            if (!timKiem.isEmpty()) {
-                ps.setString(param++, "%" + timKiem + "%");
+            int paramIndex = 1;
+            if (hasTimKiem) {
+                ps.setString(paramIndex++, "%" + timKiem + "%");
+                ps.setString(paramIndex++, "%" + timKiem + "%");
+                ps.setString(paramIndex++, "%" + timKiem + "%");
             }
+            if (hasTrangThai) {
+                ps.setInt(paramIndex++, trangThai);
+            }
+            if (hasMonth && hasYear) {
+                ps.setInt(paramIndex++, month);
+                ps.setInt(paramIndex++, year);
+                ps.setInt(paramIndex++, month);
+                ps.setInt(paramIndex++, year);
+            } else if (hasMonth) {
+                ps.setInt(paramIndex++, month);
+                ps.setInt(paramIndex++, month);
+            } else if (hasYear) {
+                ps.setInt(paramIndex++, year);
+                ps.setInt(paramIndex++, year);
+            }
+            ps.setInt(paramIndex++, offset);
+            ps.setInt(paramIndex++, limit);
+            rs = ps.executeQuery();
 
-            ps.setInt(param++, offset);
-            ps.setInt(param++, limit);
-
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    ModelTienDichVu modelTienDichVu = new ModelTienDichVu(
-                            rs.getInt("IdDichVu"),
-                            rs.getString("TenDichVu"),
-                            rs.getDouble("GiaTien")
-                    );
-                    list.add(modelTienDichVu);
-                }
+            while (rs.next()) {
+                ModelTienDichVu model = new ModelTienDichVu(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getInt(7),
+                        rs.getDouble(8),
+                        rs.getDouble(9),
+                        rs.getInt(10)
+                );
+                list.add(model);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return list;
     }
 
-    public int totalRecords(String timKiem) {
+    public int totalRecords(String timKiem, int month, int year, int trangThai) {
         int sum = 0;
         sql = "SELECT COUNT(*) FROM dbo.TienDichVu ";
 
-        if (!timKiem.isEmpty()) {
-            sql += "WHERE IdDichVu LIKE ? OR TenDichVu LIKE ?";
+        boolean hasTimKiem = !timKiem.isEmpty();
+        boolean hasMonth = month != 0;
+        boolean hasYear = year != 0;
+        boolean hasTrangThai = trangThai != -1;
+
+        if (hasTimKiem || hasMonth || hasYear || hasTrangThai) {
+            sql += "WHERE ";
+            if (hasTimKiem) {
+                sql += "(MaPhong LIKE ? OR IdDichVu LIKE ? OR IdHoaDon LIKE ?) ";
+            }
+            if (hasTrangThai) {
+                if (hasTimKiem) {
+                    sql += "AND ";
+                }
+                sql += "TrangThai = ? ";
+            }
+            if (hasMonth || hasYear) {
+                if (hasTimKiem || hasTrangThai) {
+                    sql += "AND ";
+                }
+                if (hasMonth && hasYear) {
+                    sql += "((DATEPART(month, NgayBatDau) = ? AND DATEPART(year, NgayBatDau) = ?) "
+                            + "OR (DATEPART(month, NgayKetThuc) = ? AND DATEPART(year, NgayKetThuc) = ?)) ";
+                } else if (hasMonth) {
+                    sql += "(DATEPART(month, NgayBatDau) = ? OR DATEPART(month, NgayKetThuc) = ?) ";
+                } else if (hasYear) {
+                    sql += "(DATEPART(year, NgayBatDau) = ? OR DATEPART(year, NgayKetThuc) = ?) ";
+                }
+            }
         }
 
         try {
             ps = conn.prepareStatement(sql);
-            if (!timKiem.isEmpty()) {
-                ps.setString(1, "%" + timKiem + "%");
-                ps.setString(2, "%" + timKiem + "%");
+            int paramIndex = 1;
+
+            if (hasTimKiem) {
+                ps.setString(paramIndex++, "%" + timKiem + "%");
+                ps.setString(paramIndex++, "%" + timKiem + "%");
+                ps.setString(paramIndex++, "%" + timKiem + "%");
             }
+            if (hasTrangThai) {
+                ps.setInt(paramIndex++, trangThai);
+            }
+            if (hasMonth && hasYear) {
+                ps.setInt(paramIndex++, month);
+                ps.setInt(paramIndex++, year);
+                ps.setInt(paramIndex++, month);
+                ps.setInt(paramIndex++, year);
+            } else if (hasMonth) {
+                ps.setInt(paramIndex++, month);
+                ps.setInt(paramIndex++, month);
+            } else if (hasYear) {
+                ps.setInt(paramIndex++, year);
+                ps.setInt(paramIndex++, year);
+            }
+
             rs = ps.executeQuery();
             if (rs.next()) {
                 sum = rs.getInt(1);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
         return sum;
     }
 
-    public boolean delete(int maDV) {
-        sql = "DELETE FROM dbo.TienDichVu "
-                + "WHERE IdDichVu = ?;";
-        try {
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, maDV);
-            int affectedRows = ps.executeUpdate();
-            return affectedRows > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public boolean add(ModelTienDichVu modelTienDichVu) {
-        sql = "INSERT INTO dbo.TienDichVu(TenDichVu, GiaTien)"
-                + "VALUES (?, ?)";
-        try {
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, modelTienDichVu.getTenDV());
-            ps.setDouble(2, modelTienDichVu.getGiaTien());
-            return ps.executeUpdate() > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
     public boolean update(ModelTienDichVu modelTienDichVu) {
-        sql = "UPDATE dbo.TienDichVu "
-                + "SET TenDichVu = ?, GiaTien = ? "
-                + "WHERE IdDichVu = ? ";
+        PreparedStatement ps1 = null;
+        PreparedStatement ps2 = null;
+        PreparedStatement ps3 = null;
+        boolean success = false;
+
+        String sql1 = "UPDATE dbo.TienDichVu "
+                + "SET NgayBatDau = ?, NgayKetThuc = ?, DauNguoi = ?, GiaTien = ?, TrangThai = ? "
+                + "WHERE IdDichVu = ?;";
+
+        String sql2 = "UPDATE dbo.TienNuoc "
+                + "SET NgayBatDau = ?, NgayKetThuc = ? "
+                + "WHERE IdTienNuoc = ?;";
+
+        String sql3 = "UPDATE dbo.TienDien "
+                + "SET NgayBatDau = ?, NgayKetThuc = ? "
+                + "WHERE IdTienDien = ?;";
         try {
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, modelTienDichVu.getTenDV());
-            ps.setDouble(2, modelTienDichVu.getGiaTien());
-            ps.setInt(3, modelTienDichVu.getIdDV());
-            return ps.executeUpdate() > 0;
+            ps1 = conn.prepareStatement(sql1);
+            ps1.setObject(1, modelTienDichVu.getNgayBD());
+            ps1.setObject(2, modelTienDichVu.getNgayKT());
+            ps1.setObject(3, modelTienDichVu.getDauNguoi());
+            ps1.setObject(4, modelTienDichVu.getGiaTien());
+            ps1.setObject(5, modelTienDichVu.getTrangThai());
+            ps1.setObject(6, modelTienDichVu.getMaDV());
+            int affectedRows1 = ps1.executeUpdate();
+
+            ps2 = conn.prepareStatement(sql2);
+            ps2.setObject(1, modelTienDichVu.getNgayBD());
+            ps2.setObject(2, modelTienDichVu.getNgayKT());
+            ps2.setObject(3, modelTienDichVu.getMaDV());
+            int affectedRows2 = ps2.executeUpdate();
+
+            ps3 = conn.prepareStatement(sql3);
+            ps3.setObject(1, modelTienDichVu.getNgayBD());
+            ps3.setObject(2, modelTienDichVu.getNgayKT());
+            ps3.setObject(3, modelTienDichVu.getMaDV());
+            int affectedRows3 = ps3.executeUpdate();
+
+            if (affectedRows1 > 0 && affectedRows2 > 0 && affectedRows3 > 0) {
+                success = true;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return false;
+        return success;
     }
 
-    public boolean checkExistMaDV(int maDV) {
-        sql = "SELECT COUNT(*) FROM dbo.TienDichVu WHERE IdDichVu = ?";
+    public boolean updatePirceAndDate(double giaTien, String ngayDB, String ngayKT) {
+        sql = "UPDATE dbo.TienDichVu "
+                + "SET GiaTien = ? "
+                + "WHERE NgayBatDau >= ? AND NgayKetThuc <= ?";
         try {
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, maDV);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1) > 0;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            ps.setObject(1, giaTien);
+            ps.setObject(2, ngayDB);
+            ps.setObject(3, ngayKT);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.out.println(e);
         }
         return false;
     }

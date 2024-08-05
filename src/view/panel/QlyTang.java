@@ -18,10 +18,10 @@ public class QlyTang extends javax.swing.JPanel {
 
     public QlyTang() {
         initComponents();
-        this.loadTable(this.repoT.findAll());
+        this.fillTable(this.repoT.findAll());
     }
 
-    private void loadTable(ArrayList<ModelTang> listT) {
+    private void fillTable(ArrayList<ModelTang> listT) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblTang.getModel();
 
         dtm.setRowCount(0);
@@ -77,7 +77,7 @@ public class QlyTang extends javax.swing.JPanel {
     private boolean check() {
         msg = new MessageFrame();
         if (this.txtTangSo.getText().isEmpty()) {
-            msg.showMessage("error", "Không bỏ trống mục tên tầng");
+            msg.showMessage("error", "Không bỏ trống mục tầng");
             return false;
         } else {
             int tangSo = Integer.parseInt(this.txtTangSo.getText());
@@ -97,7 +97,7 @@ public class QlyTang extends javax.swing.JPanel {
         } else {
             int soPhong = Integer.parseInt(this.txtSoPhong.getText());
             try {
-                if (soPhong <= 0 || soPhong >= 10) {
+                if (soPhong <= 0 || soPhong > 10) {
                     msg.showMessage("error", "Số phòng không hợp lệ");
                     return false;
                 }
@@ -132,7 +132,6 @@ public class QlyTang extends javax.swing.JPanel {
         txtGhiChu = new view.component.textfield.TextField();
         btnInsert = new view.component.button.Button();
         btnUpdate = new view.component.button.Button();
-        btnDelete = new view.component.button.Button();
         btnReSetForm = new view.component.button.Button();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTang = new view.component.table.Table();
@@ -148,6 +147,7 @@ public class QlyTang extends javax.swing.JPanel {
         txtGhiChu.setLabelText("Ghi chú");
 
         btnInsert.setBackground(new java.awt.Color(153, 204, 255));
+        btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_plus_24px.png"))); // NOI18N
         btnInsert.setText("Thêm");
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,17 +156,16 @@ public class QlyTang extends javax.swing.JPanel {
         });
 
         btnUpdate.setBackground(new java.awt.Color(153, 204, 255));
-        btnUpdate.setText("Sửa");
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_downloading_updates_24px.png"))); // NOI18N
+        btnUpdate.setText("Cập nhập");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateActionPerformed(evt);
             }
         });
 
-        btnDelete.setBackground(new java.awt.Color(255, 102, 102));
-        btnDelete.setText("Xóa");
-
         btnReSetForm.setBackground(new java.awt.Color(153, 204, 255));
+        btnReSetForm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_update_24px.png"))); // NOI18N
         btnReSetForm.setText("Làm mới");
         btnReSetForm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,42 +193,41 @@ public class QlyTang extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 797, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTangSo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 706, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSoPhong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 706, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtGhiChu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 706, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtSoPhong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTangSo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtGhiChu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54)
+                        .addComponent(btnReSetForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
-                .addComponent(btnReSetForm, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
-                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(txtTangSo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
+                        .addGap(18, 18, 18)
                         .addComponent(txtSoPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(txtGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(31, 31, 31)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReSetForm, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(344, Short.MAX_VALUE))
+                    .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReSetForm, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(512, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -240,11 +238,11 @@ public class QlyTang extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(1200, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,7 +271,7 @@ public class QlyTang extends javax.swing.JPanel {
                     ModelTang mdt = start();
                     this.repoT.insert(mdt);
                     msg.showMessage("success", "Thêm thành công");
-                    this.loadTable(this.repoT.findAll());
+                    this.fillTable(this.repoT.findAll());
                     this.clearForm();
                 }
             }
@@ -291,7 +289,7 @@ public class QlyTang extends javax.swing.JPanel {
                     ModelTang mdt = start();
                     this.repoT.update(mdt);
                     msg.showMessage("success", "Sửa thành công");
-                    this.loadTable(this.repoT.findAll());
+                    this.fillTable(this.repoT.findAll());
                     this.clearForm();
                 }
             }
@@ -302,12 +300,14 @@ public class QlyTang extends javax.swing.JPanel {
 
     private void btnReSetFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReSetFormActionPerformed
         // TODO add your handling code here:
+        msg = new MessageFrame();
         this.clearForm();
+        msg.showMessage("success", "Làm mới thành công");
+
     }//GEN-LAST:event_btnReSetFormActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.component.button.Button btnDelete;
     private view.component.button.Button btnInsert;
     private view.component.button.Button btnReSetForm;
     private view.component.button.Button btnUpdate;

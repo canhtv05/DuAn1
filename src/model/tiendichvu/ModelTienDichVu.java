@@ -1,47 +1,42 @@
 package model.tiendichvu;
 
+import lombok.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+
 public class ModelTienDichVu {
-    private int idDV;
+
+    private int maDV;
+    private int maHD;
+    private String maPT;
     private String tenDV;
+    private String ngayBD;
+    private String ngayKT;
+    private int dauNguoi;
     private double giaTien;
+    private double thanhTien;
+    private int trangThai;
 
-    public ModelTienDichVu() {
-    }
-
-    public ModelTienDichVu(int idDV, String tenDV, double giaTien) {
-        this.idDV = idDV;
-        this.tenDV = tenDV;
+    public ModelTienDichVu(int maDV, String ngayBD, String ngayKT, int dauNguoi, double giaTien, int trangThai) {
+        this.maDV = maDV;
+        this.ngayBD = ngayBD;
+        this.ngayKT = ngayKT;
+        this.dauNguoi = dauNguoi;
         this.giaTien = giaTien;
+        this.trangThai = trangThai;
     }
 
-    public ModelTienDichVu(String tenDV, double giaTien) {
+    public ModelTienDichVu(String maPT,String ngayBD, String ngayKT, String tenDV, int dauNguoi, double giaTien, double thanhTien) {
+        this.maPT = maPT;
         this.tenDV = tenDV;
+        this.ngayBD = ngayBD;
+        this.ngayKT = ngayKT;
+        this.dauNguoi = dauNguoi;
         this.giaTien = giaTien;
-    }
-    
-
-    public int getIdDV() {
-        return idDV;
+        this.thanhTien = thanhTien;
     }
 
-    public void setIdDV(int idDV) {
-        this.idDV = idDV;
-    }
-
-    public String getTenDV() {
-        return tenDV;
-    }
-
-    public void setTenDV(String tenDV) {
-        this.tenDV = tenDV;
-    }
-
-    public double getGiaTien() {
-        return giaTien;
-    }
-
-    public void setGiaTien(double giaTien) {
-        this.giaTien = giaTien;
-    }
-    
 }
