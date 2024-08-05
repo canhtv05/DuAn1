@@ -16,26 +16,54 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="1176" max="32767" attributes="0"/>
+=======
+<<<<<<< HEAD
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="260" max="-2" attributes="0"/>
+              <Component id="jLabel2" min="-2" pref="304" max="-2" attributes="0"/>
+              <EmptySpace pref="627" max="32767" attributes="0"/>
+=======
+          <Component id="jPanel1" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+>>>>>>> 4b4590d4284d89b78f7ba82ba520ea477c4e6efc
+>>>>>>> c8a2c028b9dfbd5c309bf6978a0c1a5cc38c228f
           </Group>
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="563" max="-2" attributes="0"/>
+              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="132" max="32767" attributes="0"/>
+=======
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+<<<<<<< HEAD
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+=======
+>>>>>>> 4b4590d4284d89b78f7ba82ba520ea477c4e6efc
+>>>>>>> c8a2c028b9dfbd5c309bf6978a0c1a5cc38c228f
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
+<<<<<<< HEAD
+    <Component class="javax.swing.JLabel" name="jLabel2">
+=======
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -345,6 +373,7 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Home"/>
       </Properties>
+>>>>>>> 4b4590d4284d89b78f7ba82ba520ea477c4e6efc
     </Component>
   </SubComponents>
 </Form>

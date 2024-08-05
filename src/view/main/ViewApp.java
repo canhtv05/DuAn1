@@ -17,7 +17,12 @@ import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import view.panel.DoiMK;
 import view.panel.Footer;
+<<<<<<< HEAD
 import view.panel.QlyTang;
+=======
+
+
+>>>>>>> c8a2c028b9dfbd5c309bf6978a0c1a5cc38c228f
 import view.panel.HoaDon;
 import view.panel.QlyHoaDon;
 import view.panel.QlyHopDong;
