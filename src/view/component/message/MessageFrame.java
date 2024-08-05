@@ -1,5 +1,7 @@
 package view.component.message;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import javax.swing.JFrame;
 import view.panel.PanelMessage;
 import service.PanelMessageListenerImpl;
@@ -11,7 +13,7 @@ public class MessageFrame extends JFrame implements PanelMessageListenerImpl {
     private Runnable onOkClicked;
 
     public MessageFrame() {
-        setSize(550, 130);
+        setSize(630, 130);
         setUndecorated(true);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -19,6 +21,20 @@ public class MessageFrame extends JFrame implements PanelMessageListenerImpl {
         PanelMessage panelMessage = new PanelMessage();
         panelMessage.setPanelMessageListener(this);
         add(panelMessage);
+        WindowFocus();
+    }
+    
+    private void WindowFocus() {
+        addWindowFocusListener(new WindowFocusListener() {
+            @Override
+            public void windowGainedFocus(WindowEvent e) {
+            }
+
+            @Override
+            public void windowLostFocus(WindowEvent e) {
+                dispose();
+            }
+        });
     }
 
     public void setOnOkClicked(Runnable onOkClicked) {

@@ -24,6 +24,8 @@
         </Property>
       </Properties>
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="groupbtn">
+    </Component>
   </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -49,7 +51,7 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPanel2" pref="1168" max="32767" attributes="0"/>
+                          <Component id="jPanel2" pref="1328" max="32767" attributes="0"/>
                           <Component id="jPanel1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -93,13 +95,11 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="scroll" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="scroll" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="437" max="-2" attributes="0"/>
+                          <EmptySpace pref="527" max="32767" attributes="0"/>
                           <Component id="prev" min="-2" pref="70" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="index" min="-2" pref="31" max="-2" attributes="0"/>
@@ -109,7 +109,7 @@
                           <Component id="end" min="-2" pref="31" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="next" min="-2" pref="70" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="384" max="32767" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtTongHD" min="-2" pref="57" max="-2" attributes="0"/>
@@ -124,17 +124,17 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="scroll" min="-2" pref="232" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="next" alignment="1" max="32767" attributes="0"/>
-                      <Component id="prev" alignment="1" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="index" alignment="1" max="32767" attributes="0"/>
                       <Component id="end" alignment="1" max="32767" attributes="0"/>
                       <Component id="jLabel2" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jLabel1" max="32767" attributes="0"/>
+                      <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtTongHD" alignment="0" max="32767" attributes="0"/>
+                      <Component id="prev" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="next" alignment="1" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -150,21 +150,27 @@
             <Component class="view.component.table.Table" name="tbl">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="10" rowCount="0">
-                    <Column editable="true" title="M&#xe3; ti&#x1ec1;n &#x111;i&#x1ec7;n" type="java.lang.Object"/>
-                    <Column editable="true" title="M&#xe3; h&#xf3;a &#x111;&#x1a1;n" type="java.lang.Object"/>
-                    <Column editable="true" title="M&#xe3; ph&#xf2;ng tr&#x1ecd;" type="java.lang.Object"/>
-                    <Column editable="true" title="Ng&#xe0;y b&#x1eaf;t &#x111;&#x1ea7;u" type="java.lang.Object"/>
-                    <Column editable="true" title="Ng&#xe0;y k&#x1ebf;t th&#xfa;c" type="java.lang.Object"/>
-                    <Column editable="true" title="Ch&#x1ec9; s&#x1ed1; &#x111;&#x1ea7;u" type="java.lang.Object"/>
-                    <Column editable="true" title="Ch&#x1ec9; s&#x1ed1; cu&#x1ed1;i" type="java.lang.Object"/>
-                    <Column editable="true" title="S&#x1ed1; &#x111;i&#x1ec7;n" type="java.lang.Object"/>
-                    <Column editable="true" title="Gi&#xe1; ti&#x1ec1;n" type="java.lang.Object"/>
-                    <Column editable="true" title="Th&#xe0;nh ti&#x1ec1;n" type="java.lang.Object"/>
+                  <Table columnCount="11" rowCount="0">
+                    <Column editable="false" title="M&#xe3; ti&#x1ec1;n &#x111;i&#x1ec7;n" type="java.lang.Object"/>
+                    <Column editable="false" title="M&#xe3; h&#xf3;a &#x111;&#x1a1;n" type="java.lang.Object"/>
+                    <Column editable="false" title="M&#xe3; ph&#xf2;ng tr&#x1ecd;" type="java.lang.Object"/>
+                    <Column editable="false" title="Ng&#xe0;y b&#x1eaf;t &#x111;&#x1ea7;u" type="java.lang.Object"/>
+                    <Column editable="false" title="Ng&#xe0;y k&#x1ebf;t th&#xfa;c" type="java.lang.Object"/>
+                    <Column editable="false" title="Ch&#x1ec9; s&#x1ed1; &#x111;&#x1ea7;u" type="java.lang.Object"/>
+                    <Column editable="false" title="Ch&#x1ec9; s&#x1ed1; cu&#x1ed1;i" type="java.lang.Object"/>
+                    <Column editable="false" title="S&#x1ed1; &#x111;i&#x1ec7;n" type="java.lang.Object"/>
+                    <Column editable="false" title="Gi&#xe1; ti&#x1ec1;n" type="java.lang.Object"/>
+                    <Column editable="false" title="Th&#xe0;nh ti&#x1ec1;n" type="java.lang.Object"/>
+                    <Column editable="false" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
@@ -233,7 +239,7 @@
               <Image iconType="3" name="/icon/icons8_back_arrow_24px.png"/>
             </Property>
             <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="cc" type="rgb"/>
+              <Color blue="cc" green="cc" red="99" type="rgb"/>
             </Property>
             <Property name="color" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="cc" type="rgb"/>
@@ -257,7 +263,7 @@
               <Image iconType="3" name="/icon/icons8_forward_button_24px.png"/>
             </Property>
             <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="cc" type="rgb"/>
+              <Color blue="cc" green="cc" red="99" type="rgb"/>
             </Property>
             <Property name="color" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="cc" type="rgb"/>
@@ -332,6 +338,7 @@
       <SubComponents>
         <Component class="view.component.textfield.TextField" name="txtMaTD">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="labelText" type="java.lang.String" value="M&#xe3; ti&#x1ec1;n &#x111;i&#x1ec7;n"/>
           </Properties>
           <Events>
@@ -339,12 +346,13 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="10" width="272" height="-1"/>
+              <AbsoluteConstraints x="10" y="10" width="200" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="view.component.textfield.TextField" name="txtMaHD">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="labelText" type="java.lang.String" value="M&#xe3; h&#xf3;a &#x111;&#x1a1;n"/>
           </Properties>
           <Events>
@@ -352,12 +360,13 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="60" width="272" height="-1"/>
+              <AbsoluteConstraints x="10" y="60" width="200" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="view.component.textfield.TextField" name="txtMaPT">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="labelText" type="java.lang.String" value="M&#xe3; ph&#xf2;ng tr&#x1ecd;"/>
           </Properties>
           <Events>
@@ -365,7 +374,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="110" width="272" height="-1"/>
+              <AbsoluteConstraints x="10" y="110" width="200" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -381,7 +390,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="160" width="272" height="-1"/>
+              <AbsoluteConstraints x="10" y="160" width="200" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -395,7 +404,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="210" width="272" height="-1"/>
+              <AbsoluteConstraints x="10" y="210" width="200" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -409,7 +418,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="340" y="10" width="272" height="-1"/>
+              <AbsoluteConstraints x="280" y="10" width="200" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -422,7 +431,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="340" y="60" width="272" height="-1"/>
+              <AbsoluteConstraints x="280" y="60" width="200" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -436,7 +445,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="340" y="110" width="272" height="-1"/>
+              <AbsoluteConstraints x="280" y="110" width="200" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -449,7 +458,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="340" y="160" width="272" height="-1"/>
+              <AbsoluteConstraints x="280" y="160" width="200" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -463,7 +472,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="340" y="210" width="272" height="-1"/>
+              <AbsoluteConstraints x="280" y="210" width="200" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -476,7 +485,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="650" y="40" width="220" height="-1"/>
+              <AbsoluteConstraints x="570" y="10" width="230" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -490,7 +499,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t"/>
             <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="cc" type="rgb"/>
+              <Color blue="cc" green="cc" red="99" type="rgb"/>
             </Property>
             <Property name="color" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="cc" type="rgb"/>
@@ -512,43 +521,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="770" y="120" width="110" height="40"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="view.component.button.MyButton" name="btnThem">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="cc" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icon/icons8_plus_24px.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="   Th&#xea;m"/>
-            <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="cc" type="rgb"/>
-            </Property>
-            <Property name="color" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="cc" type="rgb"/>
-            </Property>
-            <Property name="colorClick" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="99" type="rgb"/>
-            </Property>
-            <Property name="colorOver" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="cc" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="1"/>
-            </Property>
-            <Property name="horizontalAlignment" type="int" value="2"/>
-            <Property name="radius" type="int" value="20"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemActionPerformed"/>
-          </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="640" y="120" width="110" height="40"/>
+              <AbsoluteConstraints x="570" y="100" width="110" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -562,7 +535,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value=" L&#xe0;m m&#x1edb;i"/>
             <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="cc" type="rgb"/>
+              <Color blue="cc" green="cc" red="99" type="rgb"/>
             </Property>
             <Property name="color" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="cc" type="rgb"/>
@@ -585,43 +558,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="770" y="180" width="110" height="40"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="view.component.button.MyButton" name="btnXoa">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="cc" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icon/icons8_delete_24px_1.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="   X&#xf3;a "/>
-            <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="cc" type="rgb"/>
-            </Property>
-            <Property name="color" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="cc" type="rgb"/>
-            </Property>
-            <Property name="colorClick" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="99" type="rgb"/>
-            </Property>
-            <Property name="colorOver" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="cc" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="1"/>
-            </Property>
-            <Property name="horizontalAlignment" type="int" value="2"/>
-            <Property name="radius" type="int" value="20"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaActionPerformed"/>
-          </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="640" y="180" width="110" height="40"/>
+              <AbsoluteConstraints x="690" y="100" width="110" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -677,7 +614,103 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="930" y="30" width="160" height="-1"/>
+              <AbsoluteConstraints x="930" y="10" width="160" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="view.component.radiobutton.RadioButtonCustom" name="rdoDaChinhSua">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="cc" red="0" type="rgb"/>
+            </Property>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="groupbtn"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="96" green="96" red="96" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="&#x110;&#xe3; ch&#x1ec9;nh s&#x1eed;a"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="570" y="190" width="100" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="view.component.radiobutton.RadioButtonCustom" name="rdoChuaChinhSua">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="0" red="ff" type="rgb"/>
+            </Property>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="groupbtn"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="96" green="96" red="96" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Ch&#x1b0;a ch&#x1ec9;nh s&#x1eed;a"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="680" y="190" width="-1" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTrangThai">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="96" green="96" red="96" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Tr&#x1ea1;ng th&#xe1;i"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="570" y="160" width="70" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="view.component.button.MyButton" name="btnTrangThai">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="cc" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icon/icons8_filter_30px.png"/>
+            </Property>
+            <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="99" type="rgb"/>
+            </Property>
+            <Property name="color" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="cc" type="rgb"/>
+            </Property>
+            <Property name="colorClick" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="99" type="rgb"/>
+            </Property>
+            <Property name="colorOver" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="cc" type="rgb"/>
+            </Property>
+            <Property name="radius" type="int" value="10"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTrangThaiActionPerformed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="840" y="160" width="50" height="50"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblLocTrangThai">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="96" green="96" red="96" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="L&#x1ecd;c tr&#x1ea1;ng th&#xe1;i"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="820" y="130" width="90" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>

@@ -77,7 +77,7 @@ public class PanelMessage extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         lblIcon = new javax.swing.JLabel();
@@ -96,7 +96,7 @@ public class PanelMessage extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTitle.setText("Message:");
         add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 100, -1));
-        add(txtContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 380, 20));
+        add(txtContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 490, 20));
 
         btnCancel.setBackground(new java.awt.Color(78, 134, 238));
         btnCancel.setBorder(null);
@@ -104,13 +104,12 @@ public class PanelMessage extends javax.swing.JPanel {
         btnCancel.setText("Cancel");
         btnCancel.setBorderColor(new java.awt.Color(0, 0, 0));
         btnCancel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnCancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
             }
         });
-        add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 80, 30));
+        add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 80, 30));
 
         btnOK.setBackground(new java.awt.Color(78, 134, 238));
         btnOK.setBorder(null);
@@ -118,13 +117,12 @@ public class PanelMessage extends javax.swing.JPanel {
         btnOK.setText("OK");
         btnOK.setBorderColor(new java.awt.Color(0, 0, 0));
         btnOK.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnOK.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOKActionPerformed(evt);
             }
         });
-        add(btnOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 80, 30));
+        add(btnOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 80, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnOKActionPerformed

@@ -1,5 +1,12 @@
 package model.tiendien;
 
+import lombok.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+
 public class ModelTienDien {
 
     private int maTD;
@@ -12,14 +19,19 @@ public class ModelTienDien {
     private int soDien;
     private double giaTien;
     private double thanhTien;
+    private int trangThai;
 
-    public ModelTienDien() {
+    public ModelTienDien(int maTD, String ngayBD, String ngayKT, int chiSoDau, int chiSoCuoi, double giaTien, int trangThai) {
+        this.maTD = maTD;
+        this.ngayBD = ngayBD;
+        this.ngayKT = ngayKT;
+        this.chiSoDau = chiSoDau;
+        this.chiSoCuoi = chiSoCuoi;
+        this.giaTien = giaTien;
+        this.trangThai = trangThai;
     }
 
-    public ModelTienDien(int maTD, int maHD, String maPT, String ngayBD, String ngayKT, int chiSoDau, int chiSoCuoi, int soDien, double giaTien, double thanhTien) {
-        this.maTD = maTD;
-        this.maHD = maHD;
-        this.maPT = maPT;
+    public ModelTienDien(String ngayBD, String ngayKT, int chiSoDau, int chiSoCuoi, int soDien, double giaTien, double thanhTien) {
         this.ngayBD = ngayBD;
         this.ngayKT = ngayKT;
         this.chiSoDau = chiSoDau;
@@ -27,106 +39,7 @@ public class ModelTienDien {
         this.soDien = soDien;
         this.giaTien = giaTien;
         this.thanhTien = thanhTien;
-    }
-
-    public ModelTienDien(int maHD, String maPT, String ngayBD, String ngayKT, int chiSoDau, int chiSoCuoi, double giaTien) {
-        this.maHD = maHD;
-        this.maPT = maPT;
-        this.ngayBD = ngayBD;
-        this.ngayKT = ngayKT;
-        this.chiSoDau = chiSoDau;
-        this.chiSoCuoi = chiSoCuoi;
-        this.giaTien = giaTien;
-    }
-
-    public ModelTienDien(int maTD, int maHD, String maPT, String ngayBD, String ngayKT, int chiSoDau, int chiSoCuoi, double giaTien) {
-        this.maTD = maTD;
-        this.maHD = maHD;
-        this.maPT = maPT;
-        this.ngayBD = ngayBD;
-        this.ngayKT = ngayKT;
-        this.chiSoDau = chiSoDau;
-        this.chiSoCuoi = chiSoCuoi;
-        this.giaTien = giaTien;
     }
     
-    public int getMaTD() {
-        return maTD;
-    }
-
-    public void setMaTD(int maTD) {
-        this.maTD = maTD;
-    }
-
-    public int getMaHD() {
-        return maHD;
-    }
-
-    public void setMaHD(int maHD) {
-        this.maHD = maHD;
-    }
-
-    public String getMaPT() {
-        return maPT;
-    }
-
-    public void setMaPT(String maPT) {
-        this.maPT = maPT;
-    }
-
-    public String getNgayBD() {
-        return ngayBD;
-    }
-
-    public void setNgayBD(String ngayBD) {
-        this.ngayBD = ngayBD;
-    }
-
-    public String getNgayKT() {
-        return ngayKT;
-    }
-
-    public void setNgayKT(String ngayKT) {
-        this.ngayKT = ngayKT;
-    }
-
-    public int getChiSoDau() {
-        return chiSoDau;
-    }
-
-    public void setChiSoDau(int chiSoDau) {
-        this.chiSoDau = chiSoDau;
-    }
-
-    public int getChiSoCuoi() {
-        return chiSoCuoi;
-    }
-
-    public void setChiSoCuoi(int chiSoCuoi) {
-        this.chiSoCuoi = chiSoCuoi;
-    }
-
-    public int getSoDien() {
-        return soDien;
-    }
-
-    public void setSoDien(int soDien) {
-        this.soDien = soDien;
-    }
-
-    public double getGiaTien() {
-        return giaTien;
-    }
-
-    public void setGiaTien(double giaTien) {
-        this.giaTien = giaTien;
-    }
-
-    public double getThanhTien() {
-        return thanhTien;
-    }
-
-    public void setThanhTien(double thanhTien) {
-        this.thanhTien = thanhTien;
-    }
+    
 }

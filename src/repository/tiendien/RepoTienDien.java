@@ -20,7 +20,8 @@ public class RepoTienDien {
         }
     }
 
-    public ArrayList<ModelTienDien> searchAndPage(String timKiem, int page, int limit, int month, int year) {
+    public ArrayList<ModelTienDien> searchAndPage(String timKiem, int page, int limit, int month, int year,
+            int trangThai) {
         ArrayList<ModelTienDien> list = new ArrayList<>();
         sql = "SELECT "
                 + "    IdTienDien, "
@@ -32,25 +33,30 @@ public class RepoTienDien {
                 + "    ChiSoCuoi, "
                 + "    SoDien, "
                 + "    GiaTien, "
-                + "    ThanhTien "
+                + "    ThanhTien, "
+                + "    TrangThai "
                 + "FROM "
                 + "    dbo.TienDien ";
-
         boolean hasTimKiem = !timKiem.isEmpty();
         boolean hasMonth = month != 0;
         boolean hasYear = year != 0;
+        boolean hasTrangThai = trangThai != -1;
 
-        if (hasTimKiem || hasMonth || hasYear) {
+        if (hasTimKiem || hasMonth || hasYear || hasTrangThai) {
             sql += "WHERE ";
             if (hasTimKiem) {
                 sql += "(MaPhong LIKE ? OR IdHoaDon LIKE ? OR IdTienDien LIKE ?) ";
             }
-
-            if (hasMonth || hasYear) {
+            if (hasTrangThai) {
                 if (hasTimKiem) {
                     sql += "AND ";
                 }
-
+                sql += "TrangThai = ? ";
+            }
+            if (hasMonth || hasYear) {
+                if (hasTimKiem || hasTrangThai) {
+                    sql += "AND ";
+                }
                 if (hasMonth && hasYear) {
                     sql += "((DATEPART(month, NgayBatDau) = ? AND DATEPART(year, NgayBatDau) = ?) "
                             + "OR (DATEPART(month, NgayKetThuc) = ? AND DATEPART(year, NgayKetThuc) = ?)) ";
@@ -61,24 +67,22 @@ public class RepoTienDien {
                 }
             }
         }
-
         sql += "ORDER BY IdTienDien OFFSET ? ROWS FETCH NEXT ? ROWS ONLY ";
         int offset = (page - 1) * limit;
-
         if (page < 0) {
-            page = 0;
+            page = 1;
         }
-
         try {
             ps = conn.prepareStatement(sql);
             int paramIndex = 1;
-
             if (hasTimKiem) {
                 ps.setString(paramIndex++, "%" + timKiem + "%");
                 ps.setString(paramIndex++, "%" + timKiem + "%");
                 ps.setString(paramIndex++, "%" + timKiem + "%");
             }
-
+            if (hasTrangThai) {
+                ps.setInt(paramIndex++, trangThai);
+            }
             if (hasMonth && hasYear) {
                 ps.setInt(paramIndex++, month);
                 ps.setInt(paramIndex++, year);
@@ -91,10 +95,8 @@ public class RepoTienDien {
                 ps.setInt(paramIndex++, year);
                 ps.setInt(paramIndex++, year);
             }
-
             ps.setInt(paramIndex++, offset);
             ps.setInt(paramIndex++, limit);
-
             rs = ps.executeQuery();
             while (rs.next()) {
                 ModelTienDien model = new ModelTienDien(
@@ -107,35 +109,39 @@ public class RepoTienDien {
                         rs.getInt(7),
                         rs.getInt(8),
                         rs.getDouble(9),
-                        rs.getDouble(10));
+                        rs.getDouble(10),
+                        rs.getInt(11));
                 list.add(model);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return list;
     }
 
-    public int totalRecords(String timKiem, int month, int year) {
+    public int totalRecords(String timKiem, int month, int year, int trangThai) {
         int sum = 0;
         sql = "SELECT COUNT(*) FROM dbo.TienDien ";
-
         boolean hasTimKiem = !timKiem.isEmpty();
         boolean hasMonth = month != 0;
         boolean hasYear = year != 0;
+        boolean hasTrangThai = trangThai != -1;
 
-        if (hasTimKiem || hasMonth || hasYear) {
+        if (hasTimKiem || hasMonth || hasYear || hasTrangThai) {
             sql += "WHERE ";
             if (hasTimKiem) {
                 sql += "(MaPhong LIKE ? OR IdTienDien LIKE ? OR IdHoaDon LIKE ?) ";
             }
-
-            if (hasMonth || hasYear) {
+            if (hasTrangThai) {
                 if (hasTimKiem) {
                     sql += "AND ";
                 }
-
+                sql += "TrangThai = ? ";
+            }
+            if (hasMonth || hasYear) {
+                if (hasTimKiem || hasTrangThai) {
+                    sql += "AND ";
+                }
                 if (hasMonth && hasYear) {
                     sql += "((DATEPART(month, NgayBatDau) = ? AND DATEPART(year, NgayBatDau) = ?) "
                             + "OR (DATEPART(month, NgayKetThuc) = ? AND DATEPART(year, NgayKetThuc) = ?)) ";
@@ -146,17 +152,17 @@ public class RepoTienDien {
                 }
             }
         }
-
         try {
             ps = conn.prepareStatement(sql);
             int paramIndex = 1;
-
             if (hasTimKiem) {
                 ps.setString(paramIndex++, "%" + timKiem + "%");
                 ps.setString(paramIndex++, "%" + timKiem + "%");
                 ps.setString(paramIndex++, "%" + timKiem + "%");
             }
-
+            if (hasTrangThai) {
+                ps.setInt(paramIndex++, trangThai);
+            }
             if (hasMonth && hasYear) {
                 ps.setInt(paramIndex++, month);
                 ps.setInt(paramIndex++, year);
@@ -164,12 +170,11 @@ public class RepoTienDien {
                 ps.setInt(paramIndex++, year);
             } else if (hasMonth) {
                 ps.setInt(paramIndex++, month);
-                ps.setInt(paramIndex++, month); // Đặt tháng cho cả NgayBatDau và NgayKetThuc
+                ps.setInt(paramIndex++, month);
             } else if (hasYear) {
                 ps.setInt(paramIndex++, year);
-                ps.setInt(paramIndex++, year); // Đặt năm cho cả NgayBatDau và NgayKetThuc
+                ps.setInt(paramIndex++, year);
             }
-
             rs = ps.executeQuery();
             if (rs.next()) {
                 sum = rs.getInt(1);
@@ -180,114 +185,70 @@ public class RepoTienDien {
         return sum;
     }
 
-    public boolean add(ModelTienDien modelTienDien, String maNV) {
-        sql = "DECLARE @maHD INT; "
-                + "INSERT INTO HoaDon (MaPhong, MaNhanVien, NgayLap, HanThanhToan, TrangThai, NgayThanhToan, TongTien) "
-                + "VALUES (?, ?, GETDATE(), GETDATE(), 1, NULL, 0); "
-                + "SET @maHD = SCOPE_IDENTITY(); "
-                + "INSERT INTO dbo.TienDien (IdHoaDon, MaPhong, NgayBatDau, NgayKetThuc, ChiSoDau, ChiSoCuoi, GiaTien) "
-                + "VALUES (@maHD, ?, ?, ?, ?, ?, ?);";
+    public boolean update(ModelTienDien modelTienDien) {
+        PreparedStatement ps1 = null;
+        PreparedStatement ps2 = null;
+        PreparedStatement ps3 = null;
+        boolean success = false;
+
+        String sql1 = "UPDATE dbo.TienDien "
+                + "SET NgayBatDau = ?, NgayKetThuc = ?, ChiSoDau = ?, ChiSoCuoi = ?, GiaTien = ?, TrangThai = ? "
+                + "WHERE IdTienDien = ?;";
+
+        String sql2 = "UPDATE dbo.TienNuoc "
+                + "SET NgayBatDau = ?, NgayKetThuc = ? "
+                + "WHERE IdTienNuoc = ?;";
+
+        String sql3 = "UPDATE dbo.TienDichVu "
+                + "SET NgayBatDau = ?, NgayKetThuc = ? "
+                + "WHERE IdDichVu = ?;";
         try {
-            ps = conn.prepareStatement(sql);
-            ps.setObject(1, modelTienDien.getMaPT());
-            ps.setObject(2, maNV);
-            ps.setObject(3, modelTienDien.getMaPT());
-            ps.setObject(4, modelTienDien.getNgayBD());
-            ps.setObject(5, modelTienDien.getNgayKT());
-            ps.setObject(6, modelTienDien.getChiSoDau());
-            ps.setObject(7, modelTienDien.getChiSoCuoi());
-            ps.setObject(8, modelTienDien.getGiaTien());
-            int affectedRows = ps.executeUpdate();
-            return affectedRows > 0;
+            ps1 = conn.prepareStatement(sql1);
+            ps1.setObject(1, modelTienDien.getNgayBD());
+            ps1.setObject(2, modelTienDien.getNgayKT());
+            ps1.setObject(3, modelTienDien.getChiSoDau());
+            ps1.setObject(4, modelTienDien.getChiSoCuoi());
+            ps1.setObject(5, modelTienDien.getGiaTien());
+            ps1.setObject(6, modelTienDien.getTrangThai());
+            ps1.setObject(7, modelTienDien.getMaTD());
+            int affectedRows1 = ps1.executeUpdate();
+
+            ps2 = conn.prepareStatement(sql2);
+            ps2.setObject(1, modelTienDien.getNgayBD());
+            ps2.setObject(2, modelTienDien.getNgayKT());
+            ps2.setObject(3, modelTienDien.getMaTD());
+            int affectedRows2 = ps2.executeUpdate();
+
+            ps3 = conn.prepareStatement(sql3);
+            ps3.setObject(1, modelTienDien.getNgayBD());
+            ps3.setObject(2, modelTienDien.getNgayKT());
+            ps3.setObject(3, modelTienDien.getMaTD());
+            int affectedRows3 = ps3.executeUpdate();
+
+            if (affectedRows1 > 0 && affectedRows2 > 0 && affectedRows3 > 0) {
+                success = true;
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
+        return success;
     }
 
-    public boolean checkMaPhong(String MaPhong) {
-        String sqlPhongTro = "SELECT COUNT(*) FROM dbo.PhongTro WHERE MaPhong = ?";
-        try {
-            ps = conn.prepareStatement(sqlPhongTro);
-            ps.setString(1, MaPhong);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1) > 0;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public boolean checkMaHD(int IdHoaDon) {
-        sql = "SELECT COUNT(*) FROM dbo.HoaDon WHERE IdHoaDon = ?";
-        try {
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, IdHoaDon);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                int count = rs.getInt(1);
-                return count > 0;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public boolean checkExistMaTD(String maTD) {
-        sql = "SELECT COUNT(*) FROM dbo.TienDien WHERE IdTienDien = ?";
-        try {
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, maTD);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1) > 0;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public boolean update(ModelTienDien modelTienDien) {
+    public boolean updatePirceAndDate(double giaTien, String ngayDB, String ngayKT) {
         sql = "UPDATE dbo.TienDien "
-                + "SET IdHoaDon = ?, MaPhong = ?, NgayBatDau = ?, NgayKetThuc = ?, ChiSoDau = ?, ChiSoCuoi = ?, GiaTien = ? "
-                + "WHERE IdTienDien = ? "
-                + "UPDATE dbo.TienDien "
-                + "SET GiaTien = ? ";
+                + "SET GiaTien = ? "
+                + "WHERE NgayBatDau >= ? AND NgayKetThuc <= ?";
         try {
             ps = conn.prepareStatement(sql);
-            ps.setObject(1, modelTienDien.getMaHD());
-            ps.setObject(2, modelTienDien.getMaPT());
-            ps.setObject(3, modelTienDien.getNgayBD());
-            ps.setObject(4, modelTienDien.getNgayKT());
-            ps.setObject(5, modelTienDien.getChiSoDau());
-            ps.setObject(6, modelTienDien.getChiSoCuoi());
-            ps.setObject(7, modelTienDien.getGiaTien());
-            ps.setInt(8, modelTienDien.getMaTD());
-            ps.setObject(9, modelTienDien.getGiaTien());
+            ps.setObject(1, giaTien);
+            ps.setObject(2, ngayDB);
+            ps.setObject(3, ngayKT);
+
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
         return false;
-    }
-
-    public boolean delete(int maTD) {
-        sql = "DELETE FROM dbo.TienDien "
-                + "WHERE IdTienDien = ?;";
-        try {
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, maTD);
-            int affectedRows = ps.executeUpdate();
-            return affectedRows > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
     }
 
     public String timMaNV(String tenDangNhap) {
@@ -305,4 +266,5 @@ public class RepoTienDien {
         }
         return maNV;
     }
+
 }

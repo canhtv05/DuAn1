@@ -4,17 +4,78 @@
  */
 package view.panel;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JTextField;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableModel;
+import model.doimk.ModelDoiMK;
+import repository.doimk.RepoDoiMK;
+import repository.login.RepoLogin;
+import repository.validate.Validate;
+import view.component.message.MessageFrame;
+import view.jframe.ViewSignIn;
+
 /**
  *
  * @author CanhPC
  */
 public class DoiMK extends javax.swing.JPanel {
 
-    /**
-     * Creates new form DoiMK
-     */
+    private String user;
+    private int role;
+    private MessageFrame mess;
+
     public DoiMK() {
         initComponents();
+        init();
+        eventChangeTab();
+    }
+
+    private void init() {
+        this.setBackground(new Color(242, 242, 242));
+        user = ViewSignIn.getUsernameString;
+        role = ViewSignIn.role;
+        txtTK.setText(user);
+    }
+
+    private void eventChangeTab() {
+        tab.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int select = tab.getSelectedIndex();
+                if (select == 1 && role == 1) {
+                    mess = new MessageFrame();
+                    mess.showMessage("error", "Nhân viên không có quyền này.");
+                    tab.setSelectedIndex(0);
+                    return;
+                } else {
+                    tab1();
+                }
+            }
+        });
+    }
+
+    private void tab1() {
+        tbl.fixTable(jScrollPane1);
+        RepoDoiMK repo = new RepoDoiMK();
+        DefaultTableModel model = (DefaultTableModel) tbl.getModel();
+        model.setRowCount(0);
+        ArrayList<ModelDoiMK> list = new ArrayList<>();
+        list = repo.getAll();
+
+        for (ModelDoiMK m : list) {
+            Object[] row = {
+                m.getTk(),
+                m.getMaNV(),
+                m.getMk(),
+                m.getVaiTro()
+            };
+            model.addRow(row);
+        }
     }
 
     /**
@@ -26,30 +87,287 @@ public class DoiMK extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        tab = new view.component.tab.MaterialTabbed();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        txtTK = new view.component.textfield.TextField();
+        txtMkCu = new view.component.textfield.TextField();
+        txtMkMoi = new view.component.textfield.TextField();
+        txtXacNhan = new view.component.textfield.TextField();
         jLabel1 = new javax.swing.JLabel();
+        btn = new view.component.button.MyButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl = new view.component.table.Table();
+        txtTenTK = new view.component.textfield.TextField();
+        txtMK = new view.component.textfield.TextField();
+        btnTK = new view.component.button.MyButton();
 
-        jLabel1.setText("Đổi mk");
+        tab.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        txtTK.setLabelText("Tên tài khoản");
+
+        txtMkCu.setLabelText("Mật khẩu cũ");
+
+        txtMkMoi.setLabelText("Mật khẩu mới");
+
+        txtXacNhan.setLabelText("Nhập lại mật khẩu");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("ĐỔI MẬT KHẨU");
+
+        btn.setText("Đổi");
+        btn.setBorderColor(new java.awt.Color(153, 204, 204));
+        btn.setColor(new java.awt.Color(204, 255, 255));
+        btn.setColorClick(new java.awt.Color(153, 255, 255));
+        btn.setColorOver(new java.awt.Color(204, 255, 255));
+        btn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn.setRadius(10);
+        btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtMkMoi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtMkCu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtTK, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtXacNhan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(112, 112, 112)
+                .addComponent(btn, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(111, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addComponent(txtTK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtMkCu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtMkMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(btn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(483, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(484, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
+        );
+
+        tab.addTab("Đổi mật khẩu", jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        tbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tên đăng nhập", "Mã nhân viên", "Mật khẩu", "Vai trò"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tbl);
+
+        txtTenTK.setLabelText("Tên tài khoản");
+
+        txtMK.setLabelText("Mật khẩu");
+
+        btnTK.setText("Tạo tài khoản");
+        btnTK.setBorderColor(new java.awt.Color(153, 204, 204));
+        btnTK.setColor(new java.awt.Color(204, 255, 255));
+        btnTK.setColorClick(new java.awt.Color(153, 255, 255));
+        btnTK.setColorOver(new java.awt.Color(204, 255, 255));
+        btnTK.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnTK.setRadius(10);
+        btnTK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTKActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1288, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtMK, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTenTK, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(btnTK, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(txtTenTK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(btnTK, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(409, Short.MAX_VALUE))
+        );
+
+        tab.addTab("Thêm tài khoản", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(187, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(175, 175, 175))
+            .addComponent(tab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(jLabel1)
-                .addContainerGap(188, Short.MAX_VALUE))
+            .addComponent(tab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
+
+        RepoLogin repo = new RepoLogin();
+        Validate validate = new Validate();
+        mess = new MessageFrame();
+
+        JTextField[] field = {txtMkCu, txtMkMoi, txtXacNhan};
+        String[] label = {"Mật khẩu cũ", "Mật khẩu mới", "Xác nhận mật khẩu"};
+
+        for (int i = 0; i < field.length; i++) {
+            if (!validate.isNull(field[i], label[i])) {
+                return;
+            }
+        }
+        String mkCu = txtMkCu.getText().trim();
+        String mkMoi = txtMkMoi.getText().trim();
+        String xnMkMoi = txtXacNhan.getText().trim();
+
+        if (!mkCu.equals(repo.xacNhanMK(txtTK.getText().trim()))) {
+            mess.showMessage("error", "Mật khẩu sai.");
+            return;
+        }
+
+        String regex = "^.*(?=.*[0-9])(?=.*[A-Z]).*$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcherMkMoi = pattern.matcher(mkMoi);
+        Matcher matcherNxMK = pattern.matcher(xnMkMoi);
+
+        if (mkMoi.length() <= 2 || xnMkMoi.length() <= 2) {
+            mess.showMessage("error", "Mật khẩu phải chứa 3 ký tự trở lên.");
+            return;
+        }
+        if (!matcherMkMoi.matches() || !matcherNxMK.matches()) {
+            mess.showMessage("error", "Mật khẩu phải chứa ít nhất 1 kí tự số và chữ in hoa.");
+            return;
+        }
+
+        if (!mkMoi.equals(xnMkMoi)) {
+            txtXacNhan.requestFocus();
+            mess.showMessage("error", "Mật khẩu không khớp.");
+            return;
+        }
+
+        mess.showMessage("message", "Bạn có muốn đổi mật khẩu không?");
+        mess.setOnOkClicked(() -> {
+            MessageFrame messageFrame = new MessageFrame();
+            if (repo.changePassword(user, mkMoi)) {
+                messageFrame.showMessage("success", "Đổi mật khẩu thành công.");
+            } else {
+                messageFrame.showMessage("error", "Đổi mật khẩu thất bại.");
+            }
+        });
+    }//GEN-LAST:event_btnActionPerformed
+
+    private void btnTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTKActionPerformed
+        RepoDoiMK repo = new RepoDoiMK();
+        Validate validate = new Validate();
+        mess = new MessageFrame();
+        JTextField[] field = {txtTK, txtMK};
+        String[] label = {"Tài khoản", "Mật khẩu"};
+
+        for (int i = 0; i < field.length; i++) {
+            if (!validate.isNull(field[i], label[i])) {
+                return;
+            }
+        }
+        
+        String tk = txtTK.getText().trim();
+        String mk = txtMK.getText().trim();
+        
+        if(repo.existTK(tk)) {
+            mess.showMessage("error", "Đã tồn tại tài khoản này.");
+            return;
+        }
+        
+        
+    }//GEN-LAST:event_btnTKActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private view.component.button.MyButton btn;
+    private view.component.button.MyButton btnTK;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private view.component.tab.MaterialTabbed tab;
+    private view.component.table.Table tbl;
+    private view.component.textfield.TextField txtMK;
+    private view.component.textfield.TextField txtMkCu;
+    private view.component.textfield.TextField txtMkMoi;
+    private view.component.textfield.TextField txtTK;
+    private view.component.textfield.TextField txtTenTK;
+    private view.component.textfield.TextField txtXacNhan;
     // End of variables declaration//GEN-END:variables
 }
