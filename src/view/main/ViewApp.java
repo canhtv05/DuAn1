@@ -17,6 +17,12 @@ import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import view.panel.DoiMK;
 import view.panel.Footer;
+<<<<<<< HEAD
+import view.panel.QlyTang;
+=======
+
+
+>>>>>>> c8a2c028b9dfbd5c309bf6978a0c1a5cc38c228f
 import view.panel.HoaDon;
 import view.panel.QlyHoaDon;
 import view.panel.QlyHopDong;
@@ -65,7 +71,7 @@ public class ViewApp extends javax.swing.JFrame {
             public void menuSelected(int menuIndex, int subMenuIndex) {
 //                System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
                 if (menuIndex == 0) {
-//                    main.showForm(new QlyHeThong());
+                    main.showForm(new QlyTang());
                 } else if (menuIndex == 1) {
                     main.showForm(new QlyPhongTro());
                 }else if (menuIndex == 2) {
@@ -170,8 +176,17 @@ public class ViewApp extends javax.swing.JFrame {
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         bg = new javax.swing.JLayeredPane();
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -279,5 +294,8 @@ public class ViewApp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane bg;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }

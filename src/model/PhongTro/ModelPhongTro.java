@@ -98,4 +98,8 @@ public class ModelPhongTro {
         this.anh = anh;
     }
 
+    public ModelPhongTro(int TangSo) {
+        this.TangSo = TangSo;
+    }
+
 }

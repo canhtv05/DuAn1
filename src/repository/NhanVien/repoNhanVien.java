@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import dao.DBContext;
 import java.util.ArrayList;
-import java.util.Date;
 /**
  *
  * @author BOSS
@@ -19,48 +18,68 @@ public class repoNhanVien {
     private  PreparedStatement ps = null;
     private ResultSet rs = null;
     private String sql = null;
-    public ArrayList<Model_NhanVien> getAll(){
+    public ArrayList<Model_NhanVien> getAllNhanVien(int trangThai) {
         ArrayList<Model_NhanVien> list_NhanVien = new ArrayList<>();
-        sql ="select  MaNV, HoTen,NgaySinh,GioiTinh,DienThoai,CCCD,NgayBatDau,NgayKetThuc,ThoiHan,Anh from NhanVien";
+        sql = "SELECT MaNhanVien, HoTen, NgaySinh, GioiTinh, DienThoai, CCCD, NgayBatDau, NgayKetThuc, ThoiHan, Anh, TrangThai FROM NhanVien WHERE TrangThai = ?";
         try {
             con = DBContext.getConnection();
             ps = con.prepareStatement(sql);
+            ps.setInt(1, trangThai);
             rs = ps.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 Model_NhanVien nv = Model_NhanVien.builder()
-                        .maNV(rs.getString(1))
-                        .hoTen(rs.getString(2))
-                        .ngaySinh(rs.getDate(3))
-                        .gioiTinh(rs.getInt(4))
-                        .dienThoai(rs.getString(5))
-                        .CCCD(rs.getString(6))
-                        .ngayBD(rs.getDate(7))
-                        .ngayKT(rs.getDate(8))
-                        .thoiHan(rs.getInt(9))
-                        .anhNV(rs.getString(10))
+                        .maNV(rs.getString("MaNhanVien"))
+                        .hoTen(rs.getString("HoTen"))
+                        .ngaySinh(rs.getDate("NgaySinh"))
+                        .gioiTinh(rs.getInt("GioiTinh"))
+                        .dienThoai(rs.getString("DienThoai"))
+                        .CCCD(rs.getString("CCCD"))
+                        .ngayBD(rs.getDate("NgayBatDau"))
+                        .ngayKT(rs.getDate("NgayKetThuc"))
+                        .thoiHan(rs.getInt("ThoiHan"))
+                        .anhNV(rs.getString("Anh"))
+                        .TrangThai(rs.getInt("TrangThai"))
                         .build();
                 list_NhanVien.add(nv);
             }
-            
         } catch (Exception e) {
-             e.printStackTrace();
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return list_NhanVien;
     }
+
     public int add(Model_NhanVien QLNV){
-        sql ="INSERT INTO [dbo].[NhanVien]\n" +
-"           ([MaNV]\n" +
-"           ,[HoTen]\n" +
-"           ,[NgaySinh]\n" +
-"           ,[GioiTinh]\n" +
-"           ,[DienThoai]\n" +
-"           ,[CCCD]\n" +
-"           ,[NgayBatDau]\n" +
-"           ,[NgayKetThuc]\n" +
-"           ,[ThoiHan]\n" +
-"           ,[Anh])\n" +
-"     VALUES\n" +
-"          (?,?,?,?,?,?,?,?,?,?);";
+ 
+        sql ="""
+             INSERT INTO [dbo].[NhanVien]
+                        ([MaNhanVien]
+                        ,[HoTen]
+                        ,[NgaySinh]
+                        ,[GioiTinh]
+                        ,[DienThoai]
+                        ,[CCCD]
+                        ,[NgayBatDau]
+                        ,[NgayKetThuc]
+                        ,[ThoiHan]
+                        ,[anh]
+                        ,[TrangThai])
+                  VALUES
+                        (?,?,?,?,?,?,?,?,?,?,?)
+             """;
         try {
             con = DBContext.getConnection();
             ps = con.prepareStatement(sql);
@@ -74,18 +93,19 @@ public class repoNhanVien {
             ps.setObject(8, QLNV.getNgayKT());
             ps.setObject(9, QLNV.getThoiHan());
             ps.setObject(10, QLNV.getAnhNV());
-            return ps.executeUpdate();
+            ps.setObject(11, QLNV.getTrangThai());
+             return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return 0;
     }
-    public int delete(String maNV) {
-    String sql = "DELETE FROM NhanVien WHERE maNV = ?";
+    public int DeleteNV(String maNV) {
+    String sql = "UPDATE NhanVien SET TrangThai = 0 WHERE MaNhanVien = ?";
     try {
         con = DBContext.getConnection();
         ps = con.prepareStatement(sql);
-        ps.setObject(1, maNV); // Giả sử mã nhân viên được lưu trong thuộc tính maNV của đối tượng Model_NhanVien
+        ps.setString(1, maNV);
         return ps.executeUpdate();
     } catch (Exception e) {
         e.printStackTrace();
@@ -103,8 +123,9 @@ public class repoNhanVien {
         }
     }
 }
+
     public int update(String maNV, Model_NhanVien m) {
-    String sql = "UPDATE NhanVien SET MaNV=?, HoTen=?, NgaySinh=?, GioiTinh=?, DienThoai=?, CCCD=?, NgayBatDau=?, NgayKetThuc=?, ThoiHan=?, Anh=? WHERE MaNV=?";
+    String sql = "UPDATE NhanVien SET MaNhanVien=?, HoTen=?, NgaySinh=?, GioiTinh=?, DienThoai=?, CCCD=?, NgayBatDau=?, NgayKetThuc=?, ThoiHan=?, TrangThai =?, Anh=? WHERE MaNhanVien=?";
     try {
         con = DBContext.getConnection();
         ps = con.prepareStatement(sql);
@@ -121,8 +142,9 @@ public class repoNhanVien {
             ps.setNull(8, java.sql.Types.DATE);
         }
         ps.setInt(9, m.getThoiHan());
-        ps.setString(10, m.getAnhNV());
-        ps.setString(11, maNV);
+        ps.setInt(10, m.getTrangThai());
+        ps.setString(11, m.getAnhNV());
+        ps.setString(12, maNV);
         return ps.executeUpdate();
     } catch (Exception e) {
         e.printStackTrace();
@@ -140,10 +162,11 @@ public class repoNhanVien {
         }
     }
 }
+
     public ArrayList<Model_NhanVien> tim(String tenCanTim){
         ArrayList<Model_NhanVien> list_NhanVien = new ArrayList<>();
         sql = """
-              SELECT [MaNV]
+              SELECT [MaNhanVien]
                     ,[HoTen]
                     ,[NgaySinh]
                     ,[GioiTinh]
@@ -152,13 +175,15 @@ public class repoNhanVien {
                     ,[NgayBatDau]
                     ,[NgayKetThuc]
                     ,[ThoiHan]
+                    ,[TrangThai]
                     ,[Anh]
                 FROM [dbo].[NhanVien]
-                where MaNV =?""";
+                where MaNhanVien LIKE ? Or HoTen LIKE ? """;
         try {
             con = DBContext.getConnection();
             ps = con.prepareStatement(sql);
             ps.setObject(1,'%'+tenCanTim+'%');
+            ps.setString(2,'%'+tenCanTim+'%');
             rs = ps.executeQuery();
             while(rs.next()){
                 Model_NhanVien nv = Model_NhanVien.builder()
@@ -171,7 +196,8 @@ public class repoNhanVien {
                         .ngayBD(rs.getDate(7))
                         .ngayKT(rs.getDate(8))
                         .thoiHan(rs.getInt(9))
-                        .anhNV(rs.getString(10))
+                        .TrangThai(rs.getInt(10))
+                        .anhNV(rs.getString(11))
                         .build();
                 list_NhanVien.add(nv);
             }
@@ -180,5 +206,128 @@ public class repoNhanVien {
             e.printStackTrace();
             return null;
         }
+    }
+    public Model_NhanVien checkTrungMaNV(String maNV) {
+    String sql = "SELECT * FROM NhanVien WHERE MaNhanVien = ?";
+    try (Connection con = DBContext.getConnection();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, maNV);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return Model_NhanVien.builder()
+                        .maNV(rs.getString("MaNhanVien"))
+                        .hoTen(rs.getString("HoTen"))
+                        .ngaySinh(rs.getDate("NgaySinh"))
+                        .gioiTinh(rs.getInt("GioiTinh"))
+                        .dienThoai(rs.getString("DienThoai"))
+                        .CCCD(rs.getString("CCCD"))
+                        .ngayBD(rs.getDate("NgayBatDau"))
+                        .ngayKT(rs.getDate("NgayKetThuc"))
+                        .thoiHan(rs.getInt("ThoiHan"))
+                        .anhNV(rs.getString("Anh"))
+                        .build();
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return null;
+}
+
+public Model_NhanVien checkTrungDienThoai(String dienThoai) {
+    String sql = "SELECT * FROM NhanVien WHERE DienThoai = ?";
+    try (Connection con = DBContext.getConnection();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, dienThoai);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return Model_NhanVien.builder()
+                        .maNV(rs.getString("MaNhanVien"))
+                        .hoTen(rs.getString("HoTen"))
+                        .ngaySinh(rs.getDate("NgaySinh"))
+                        .gioiTinh(rs.getInt("GioiTinh"))
+                        .dienThoai(rs.getString("DienThoai"))
+                        .CCCD(rs.getString("CCCD"))
+                        .ngayBD(rs.getDate("NgayBatDau"))
+                        .ngayKT(rs.getDate("NgayKetThuc"))
+                        .thoiHan(rs.getInt("ThoiHan"))
+                        .anhNV(rs.getString("Anh"))
+                        .build();
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return null;
+}
+
+public Model_NhanVien checkTrungCCCD(String cccd) {
+    String sql = "SELECT * FROM NhanVien WHERE CCCD = ?";
+    try (Connection con = DBContext.getConnection();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, cccd);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return Model_NhanVien.builder()
+                        .maNV(rs.getString("MaNhanVien"))
+                        .hoTen(rs.getString("HoTen"))
+                        .ngaySinh(rs.getDate("NgaySinh"))
+                        .gioiTinh(rs.getInt("GioiTinh"))
+                        .dienThoai(rs.getString("DienThoai"))
+                        .CCCD(rs.getString("CCCD"))
+                        .ngayBD(rs.getDate("NgayBatDau"))
+                        .ngayKT(rs.getDate("NgayKetThuc"))
+                        .thoiHan(rs.getInt("ThoiHan"))
+                        .anhNV(rs.getString("Anh"))
+                        .build();
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return null;
+}
+
+    public int getTotalNhanVien() {
+     sql = "SELECT COUNT(*) FROM NhanVien";
+    try {
+        con = DBContext.getConnection();
+        ps = con.prepareStatement(sql);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return 0;
+    }
+    public int getTotalNhanVienDangLam() {
+    sql = "SELECT COUNT(*) FROM NhanVien WHERE TrangThai = 1";
+    try {
+        con = DBContext.getConnection();
+        ps = con.prepareStatement(sql);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return 0;
+    }
+    public int getTotalNhanVienDaNghi() {
+    sql = "SELECT COUNT(*) FROM NhanVien WHERE TrangThai = 0";
+    try {
+        con = DBContext.getConnection();
+        ps = con.prepareStatement(sql);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+            return  rs.getInt(1);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return 0;
     }
 }

@@ -44,4 +44,8 @@ public class ModelTang {
         this.ghiChu = ghiChu;
     }
 
+    public ModelTang(int soPhong) {
+        this.soPhong = soPhong;
+    }
+
 }

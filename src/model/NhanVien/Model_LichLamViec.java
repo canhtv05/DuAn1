@@ -3,24 +3,35 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model.NhanVien;
+<<<<<<< HEAD:src/model/NhanVien/Model_ChamCong.java
+import repository.NhanVien.repoChamCong;
+=======
+
+>>>>>>> c8a2c028b9dfbd5c309bf6978a0c1a5cc38c228f:src/model/NhanVien/Model_LichLamViec.java
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString
 @Builder
 /**
  *
  * @author BOSS
  */
-public class Model_ChamCong {
+public class Model_LichLamViec {
+    private int idLich;
+    private java.util.Date ngayLam;
     private String maNV;
-    private Date NgayCong;
-    private int diemDanh;
+    private String tenNV;
+    private String congViec;
+    private String ghiChu;
+    private int trangThai;
 }
