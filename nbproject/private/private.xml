@@ -1,33 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-<<<<<<< HEAD
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
-        <file>
-            <url>src/model/NhanVien/Model_LichLamViec.java</url>
-            <bookmark id="2">
-                <name/>
-                <line>25</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
-            <url>src/view/panel/PanelMessage.java</url>
-            <bookmark id="1">
-                <name/>
-                <line>107</line>
-                <key/>
-            </bookmark>
-        </file>
-    </editor-bookmarks>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/H:/DuAn/DuAn1/src/view/panel/QlyNhanVien.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/view/panel/LichLamViec.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/view/main/ViewApp.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/repository/NhanVien/repoNhanVien.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/model/NhanVien/Model_NhanVien.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/repository/NhanVien/repoLichLamViec.java</file>
-=======
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
@@ -37,16 +9,6 @@
             <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/view/panel/QlyPhongTro.java</file>
             <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/repository/Tang/repoTang.java</file>
             <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/repository/PhongTro/repoPhongTro.java</file>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 6d03895da05080eaa45c963f94ab6f3e4512d90f
->>>>>>> 59106b9d7454492d12181c27345b37a34497bc8b
->>>>>>> 0d742c303005d2103eb7ff7e166e2a8f818d5f43
->>>>>>> 81d41c70021f6fd0cc5efcefb022e8fc23d7e876
->>>>>>> 4b4590d4284d89b78f7ba82ba520ea477c4e6efc
->>>>>>> c8a2c028b9dfbd5c309bf6978a0c1a5cc38c228f
         </group>
     </open-files>
 </project-private>
