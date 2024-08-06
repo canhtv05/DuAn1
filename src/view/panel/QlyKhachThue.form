@@ -317,7 +317,7 @@
         <Component class="view.component.textfield.TextField" name="txtMaKT">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="labelText" type="java.lang.String" value="M&#xe3; kh&#xe1;ch thu&#xea;"/>
+            <Property name="labelText" type="java.lang.String" value="M&#xe3; kh&#xe1;ch thu&#xea; (Kh&#xf4;ng nh&#x1ead;p khi Th&#xea;m)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbbMaPhong">

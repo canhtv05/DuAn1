@@ -158,7 +158,7 @@ public class QlyKhachThue extends javax.swing.JPanel {
         });
 
         txtMaKT.setEditable(false);
-        txtMaKT.setLabelText("Mã khách thuê");
+        txtMaKT.setLabelText("Mã khách thuê (Không nhập khi Thêm)");
 
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
         jLabel2.setText(" Mã phòng");
@@ -653,13 +653,10 @@ public class QlyKhachThue extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JRadioButton rdoNam;
-    private javax.swing.JRadioButton rdoNam1;
     private javax.swing.JRadioButton rdoNu;
-    private javax.swing.JRadioButton rdoNu1;
     private view.component.table.Table tblKhachThue;
     private view.component.textfield.TextField txtCCCD;
     private javax.swing.JTextArea txtDiaChi;
