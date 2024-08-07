@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+<<<<<<< HEAD
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/Git/DuAn1/src/model/HopDong/ModelHopDong.java</file>
+            <file>file:/D:/Git/DuAn1/src/repository/login/RepoSignUp.java</file>
+            <file>file:/D:/Git/DuAn1/src/view/panel/Menu.java</file>
+            <file>file:/D:/Git/DuAn1/src/model/NhanVien/Model_NhanVien.java</file>
+            <file>file:/D:/Git/DuAn1/src/view/panel/QlyTienNuoc.java</file>
+            <file>file:/D:/Git/DuAn1/src/repository/KhachThue/repositoriesKhachThue.java</file>
+            <file>file:/D:/Git/DuAn1/src/repository/HopDong/repositoryHopDong.java</file>
+            <file>file:/D:/Git/DuAn1/src/view/panel/PopupMenu.java</file>
+            <file>file:/D:/Git/DuAn1/src/model/KhachThue/ModelKhachThue.java</file>
+            <file>file:/D:/Git/DuAn1/src/view/jframe/ViewApp.java</file>
+            <file>file:/D:/Git/DuAn1/src/view/panel/QlyKhachThue.java</file>
+            <file>file:/D:/Git/DuAn1/src/view/panel/MenuItem.java</file>
+            <file>file:/D:/Git/DuAn1/src/view/panel/QlyHopDong.java</file>
+            <file>file:/D:/Git/DuAn1/src/view/panel/Footer.java</file>
+            <file>file:/D:/Git/DuAn1/src/view/panel/QlyTienDien.java</file>
+=======
+<<<<<<< HEAD
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
+=======
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="3">
+>>>>>>> 481b9dbcaf5bed8ee932e8a61d1fc307b3623633
         <file>
             <url>src/repository/tiendien/RepoTienDien.java</url>
             <bookmark id="3">
@@ -25,12 +49,30 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/view/jframe/ViewApp.java</file>
             <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/view/panel/FormHome.java</file>
             <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/view/panel/QlyTang.java</file>
             <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/view/panel/QlyPhongTro.java</file>
             <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/repository/Tang/repoTang.java</file>
             <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/repository/PhongTro/repoPhongTro.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/H:/DuAn/DuAn1/src/view/main/ViewApp.java</file>
+=======
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/QlyHoaDon.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/jframe/ViewApp.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/jframe/QrCodeHoaDon.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/DoiMK.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/jframe/ExportPdf.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/QlyTienNuoc.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/model/doimk/ModelDoiMK.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/QlyNhanVien.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/jframe/ThemHoaDon.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/QlyPhongTro.java</file>
+>>>>>>> 481b9dbcaf5bed8ee932e8a61d1fc307b3623633
+>>>>>>> 760cf45f076c1497d1d708a276b0c54ec7292d9e
+>>>>>>> e5e310fb4a3267da3b206200913cf8d1cea65ccf
         </group>
     </open-files>
 </project-private>
