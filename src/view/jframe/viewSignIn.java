@@ -25,6 +25,8 @@ public class ViewSignIn extends javax.swing.JFrame {
         loadLoginDetails();
         makeFrameDraggable();
         rdoRemember.setSelected(false);
+        jLabel9.setVisible(false);
+        jLabel10.setVisible(false);
     }
 
     private void makeFrameDraggable() {

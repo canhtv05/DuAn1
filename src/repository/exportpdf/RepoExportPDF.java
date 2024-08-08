@@ -8,8 +8,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
 import model.hoadon.ModelExcel;
 import org.apache.poi.ss.usermodel.Cell;
+<<<<<<< HEAD
+=======
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.RichTextString;
+>>>>>>> 31edd08ccb746b2be3b989ab44a679c17180fe2e
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -68,15 +74,52 @@ public class RepoExportPDF {
         return arr;
     }
 
-    public void exportToExcel(String ngayLap) {
+    public String getTenNV(int maHD) {
+        sql = """
+              SELECT nv.HoTen FROM dbo.HoaDon hd
+              JOIN dbo.NhanVien nv ON nv.MaNhanVien = hd.MaNhanVien
+              WHERE hd.IdHoaDon = ?
+             """;
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, maHD);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public boolean exportToExcel(String ngayLap) {
         ArrayList<ModelExcel> list = new ArrayList<>();
-        sql = "SELECT hd.IdHoaDon, pt.MaPhong, pt.GiaPhong, td.ThanhTien, tn.ThanhTien, dv.ThanhTien, hd.TongTien "
-                + "FROM dbo.HoaDon hd "
-                + "JOIN dbo.PhongTro pt ON pt.MaPhong = hd.MaPhong "
-                + "JOIN dbo.TienDien td ON td.IdHoaDon = hd.IdHoaDon "
-                + "JOIN dbo.TienNuoc tn ON tn.IdHoaDon = hd.IdHoaDon "
-                + "JOIN dbo.TienDichVu dv ON dv.IdDichVu = hd.IdHoaDon "
-                + "WHERE hd.NgayLap = ?";
+
+        sql = """
+          SELECT 
+              hd.IdHoaDon, 
+              pt.MaPhong, 
+              pt.GiaPhong, 
+              nv.HoTen,
+              td.ThanhTien AS TienDien, 
+              tn.ThanhTien AS TienNuoc, 
+              dv.ThanhTien AS TienDichVu, 
+              hd.TongTien
+          FROM 
+              dbo.HoaDon hd
+          JOIN 
+              dbo.PhongTro pt ON pt.MaPhong = hd.MaPhong
+          JOIN 
+              dbo.TienDien td ON td.IdHoaDon = hd.IdHoaDon
+          JOIN 
+              dbo.TienNuoc tn ON tn.IdHoaDon = hd.IdHoaDon
+          JOIN 
+              dbo.TienDichVu dv ON dv.IdDichVu = hd.IdHoaDon
+          JOIN 
+              dbo.NhanVien nv ON nv.MaNhanVien = hd.MaNhanVien
+          WHERE 
+              hd.NgayLap = ?;""";
 
         try {
             ps = conn.prepareStatement(sql);
@@ -87,46 +130,68 @@ public class RepoExportPDF {
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getDouble(3),
-                        rs.getDouble(4),
+                        rs.getString(4),
                         rs.getDouble(5),
                         rs.getDouble(6),
-                        rs.getDouble(7)
+                        rs.getDouble(7),
+                        rs.getDouble(8)
                 ));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
-            return;
+            return false;
+        }
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Chọn vị trí lưu file");
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        int userSelection = fileChooser.showSaveDialog(null);
+
+        if (userSelection != JFileChooser.APPROVE_OPTION) {
+            return false;
+        }
+
+        File fileToSave = fileChooser.getSelectedFile();
+
+        if (!fileToSave.getAbsolutePath().endsWith(".xlsx")) {
+            fileToSave = new File(fileToSave + ".xlsx");
         }
 
         try (XSSFWorkbook workbook = new XSSFWorkbook()) {
             XSSFSheet sheet = workbook.createSheet("Danh sách hóa đơn");
             int rowNum = 0;
             Row headerRow = sheet.createRow(rowNum++);
-            String[] headers = {"Mã HĐ", "Mã phòng", "Giá phòng", "Tiền điện", "Tiền nước", "Tiền dịch vụ", "Thành tiền"};
-
+            String[] headers = {"Mã HĐ", "Mã phòng", "Giá phòng", "Người tạo", "Tiền điện", "Tiền nước", "Tiền dịch vụ", "Thành tiền"};
             for (int i = 0; i < headers.length; i++) {
                 Cell cell = headerRow.createCell(i);
                 cell.setCellValue(headers[i]);
             }
-
             for (ModelExcel model : list) {
                 Row row = sheet.createRow(rowNum++);
                 row.createCell(0).setCellValue(model.getMaHD());
                 row.createCell(1).setCellValue(model.getMaPT());
                 row.createCell(2).setCellValue(model.getGiaPT());
-                row.createCell(3).setCellValue(model.getTienDien());
-                row.createCell(4).setCellValue(model.getTienNuoc());
-                row.createCell(5).setCellValue(model.getTienDV());
-                row.createCell(6).setCellValue(model.getThanhTien());
+                row.createCell(3).setCellValue(model.getNguoiTao());
+                row.createCell(4).setCellValue(model.getTienDien());
+                row.createCell(5).setCellValue(model.getTienNuoc());
+                row.createCell(6).setCellValue(model.getTienDV());
+                row.createCell(7).setCellValue(model.getThanhTien());
             }
+<<<<<<< HEAD
+            try (FileOutputStream fileOut = new FileOutputStream(fileToSave)) {
+=======
 
             File file = new File("C:\\Users\\chung\\Desktop\\hoadon.xlsx");
             try (FileOutputStream fileOut = new FileOutputStream(file)) {
+>>>>>>> 83c47920c5491efc12602200374a260febc5dff4
                 workbook.write(fileOut);
             }
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
+
+        return true;
     }
 }

@@ -20,11 +20,10 @@ public class ModelTienDichVu {
     private double thanhTien;
     private int trangThai;
 
-    public ModelTienDichVu(int maDV, String ngayBD, String ngayKT, int dauNguoi, double giaTien, int trangThai) {
+    public ModelTienDichVu(int maDV, String ngayBD, String ngayKT, double giaTien, int trangThai) {
         this.maDV = maDV;
         this.ngayBD = ngayBD;
         this.ngayKT = ngayKT;
-        this.dauNguoi = dauNguoi;
         this.giaTien = giaTien;
         this.trangThai = trangThai;
     }

@@ -325,21 +325,40 @@ public class RepoHoaDon {
         }
         return modelTienDichVu;
     }
-    
+
     public ArrayList<String> getKhachThue(String maPT) {
         ArrayList<String> arr = new ArrayList<>();
         sql = "SELECT HoTen FROM KhachThue WHERE MaPhong = ?";
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, maPT);
-            rs= ps.executeQuery();
-            while(rs.next()) {
+            rs = ps.executeQuery();
+            while (rs.next()) {
                 arr.add(rs.getString(1));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return arr;
+    }
+
+    public String getTenNV(int maHD) {
+        sql = """
+              SELECT nv.HoTen FROM dbo.HoaDon hd
+              JOIN dbo.NhanVien nv ON nv.MaNhanVien = hd.MaNhanVien
+              WHERE hd.IdHoaDon = ?
+             """;
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, maHD);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 }

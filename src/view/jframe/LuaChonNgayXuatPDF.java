@@ -186,6 +186,7 @@ public class LuaChonNgayXuatPDF extends javax.swing.JFrame {
         } else {
             ExportPdf.main(new String[]{});
         }
+        dispose();
     }//GEN-LAST:event_myButton1ActionPerformed
 
     public static void main(String args[]) {

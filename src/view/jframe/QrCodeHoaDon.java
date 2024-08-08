@@ -151,7 +151,7 @@ public class QrCodeHoaDon extends javax.swing.JFrame implements Runnable, Thread
 //            System.out.println("ok");
             if (result != null) {
                 String qrCodeText = result.getText();
-                System.out.println(qrCodeText);
+//                System.out.println(qrCodeText);
 //                result_field.setText(qrCodeText);
                 if (listener != null) {
                     listener.onQrCodeRead(qrCodeText);

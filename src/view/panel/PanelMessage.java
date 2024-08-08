@@ -33,7 +33,7 @@ public class PanelMessage extends javax.swing.JPanel {
             btnCancel.setColor(new Color(244, 71, 88));
             lblTitle.setText("Error:");
         } else if (typeMessage.trim().equalsIgnoreCase("message")) {
-            icon = new ImageIcon(getClass().getResource("/icon/icons8_facebook_messenger_90px.png"));
+            icon = new ImageIcon(getClass().getResource("/icon/icons8_box_important_90px_1.png"));
             lblIcon.setIcon(icon);
             txtContent.setText(content.trim());
             btnOK.setBackground(new Color(78, 134, 238));
@@ -90,7 +90,7 @@ public class PanelMessage extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_facebook_messenger_90px.png"))); // NOI18N
+        lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_box_important_90px_1.png"))); // NOI18N
         add(lblIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, 90));
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

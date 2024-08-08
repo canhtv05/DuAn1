@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 #Thu Aug 08 11:00:22 ICT 2024
 password=Password456
 username=Chu_tro1
+=======
+#Thu Aug 08 16:12:27 ICT 2024
+password=
+username=
+>>>>>>> 31edd08ccb746b2be3b989ab44a679c17180fe2e

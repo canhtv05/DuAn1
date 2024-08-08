@@ -766,6 +766,7 @@ public class QlyTienDichVu extends javax.swing.JPanel {
         });
         jPanel6.add(txtNgayKT, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 200, -1));
 
+        txtDauNguoi.setEditable(false);
         txtDauNguoi.setLabelText("Đầu người");
         txtDauNguoi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -1070,7 +1071,7 @@ public class QlyTienDichVu extends javax.swing.JPanel {
             message.showMessage("message", "Bạn có muốn thay đổi giá tiền: " + giaTien + " trong khoảng: " + inputFormat.format(oldNgayDB) + " tới " + inputFormat.format(oldNgayKT) + " không?");
             return;
         } else {
-            ModelTienDichVu modelTienDichVu = new ModelTienDichVu(maTienDV, ngayBD, ngayKT, getDauNguoi, giaTien, 1);
+            ModelTienDichVu modelTienDichVu = new ModelTienDichVu(maTienDV, ngayBD, ngayKT, giaTien, 1);
             message.setOnOkClicked(new Runnable() {
                 @Override
                 public void run() {
@@ -1151,6 +1152,18 @@ public class QlyTienDichVu extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTenDVActionPerformed
 
     private void btnTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrangThaiActionPerformed
+        int month = locThang.getSelectedIndex();
+        locTheoThang = month;
+        if (locNam.getSelectedIndex() == 0) {
+            locTheoNam = 0;
+        }
+        String text = locNam.getSelectedItem() + "";
+        if (text.trim().isEmpty()) {
+            locTheoNam = 0;
+        } else {
+            int year = Integer.parseInt(text);
+            locTheoNam = year;
+        }
         if (rdoDaChinhSua.isSelected()) {
             state = 1;
         } else {

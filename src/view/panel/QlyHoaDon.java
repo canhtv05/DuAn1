@@ -24,6 +24,7 @@ import model.hoadon.ModelHoaDon;
 import repository.exportpdf.RepoExportPDF;
 import repository.hoadon.RepoHoaDon;
 import service.EventDateChooser;
+import service.EventListenAdd;
 import service.QrCodeListener;
 import service.SelectedAction;
 import view.component.calendar.SelectedDate;
@@ -34,7 +35,7 @@ import view.jframe.LuaChonNgayXuatExcel;
 import view.jframe.LuaChonNgayXuatPDF;
 import view.jframe.QrCodeHoaDon;
 
-public class QlyHoaDon extends javax.swing.JPanel implements QrCodeListener {
+public class QlyHoaDon extends javax.swing.JPanel implements QrCodeListener, EventListenAdd {
 
     private NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
     private RepoHoaDon repo;
@@ -69,7 +70,8 @@ public class QlyHoaDon extends javax.swing.JPanel implements QrCodeListener {
     private String ngayLapString = null;
     public static boolean show = false;
     private String path;
-    public static  Map<Integer, String> showIcon2 =new HashMap<>();
+    public static Map<Integer, String> showIcon2 = new HashMap<>();
+    private boolean add = false;
 
     public QlyHoaDon() {
         initComponents();
@@ -1073,10 +1075,24 @@ public class QlyHoaDon extends javax.swing.JPanel implements QrCodeListener {
     }//GEN-LAST:event_nextActionPerformed
 
     private void btnThemHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemHoaDonActionPerformed
-        new ThemHoaDon().setVisible(true);
+        ThemHoaDon themHoaDon = new ThemHoaDon();
+        themHoaDon.setVisible(true);
+        themHoaDon.setEvent(this);
     }//GEN-LAST:event_btnThemHoaDonActionPerformed
 
     private void btnTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrangThaiActionPerformed
+        int month = locThang.getSelectedIndex();
+        locTheoThang = month;
+        if (locNam.getSelectedIndex() == 0) {
+            locTheoNam = 0;
+        }
+        String text = locNam.getSelectedItem() + "";
+        if (text.trim().isEmpty()) {
+            locTheoNam = 0;
+        } else {
+            int year = Integer.parseInt(text);
+            locTheoNam = year;
+        }
         state = cbbTrangThai.getSelectedIndex();
         page = 1;
         loadTable();
@@ -1142,4 +1158,13 @@ public class QlyHoaDon extends javax.swing.JPanel implements QrCodeListener {
     private view.component.textfield.TextField txtTimKiem;
     private javax.swing.JLabel txtTongHD;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void getAdd(boolean add) {
+        this.add = add;
+        if (this.add) {
+            loadTable();
+            updatePagination();
+        }
+    }
 }
