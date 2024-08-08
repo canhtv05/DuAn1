@@ -4,6 +4,8 @@
  */
 package view.panel;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -40,15 +42,12 @@ public class LichLamViec extends javax.swing.JPanel {
         loadTableData();
         textSearch();
         updateTotalTrangThai();
+        tbl_Lich.fixTable(jScrollPane1);
     }
 
     private void loadTableData() {
         ArrayList<Model_LichLamViec> listLich = rp.getALLLich();
         fillTable(listLich);
-//        combo_Ngay.setSelectedIndex(-1);
-//        comBo_Thang.setSelectedIndex(-1);
-//        comBo_Nam.setSelectedIndex(-1);
-//        combo_TrangThai.setSelectedIndex(-1);
     }
 
     private void fillTable(ArrayList<Model_LichLamViec> list) {
@@ -59,7 +58,6 @@ public class LichLamViec extends javax.swing.JPanel {
             s.getGhiChu(), s.getTrangThai() == 0 ? "Chưa hoàn thành" : "Đã hoàn thành"
         }));
     }
-
     public Model_LichLamViec readFrom() {
         Model_LichLamViec Lich = new Model_LichLamViec();
         Lich.setMaNV(txt_Ma.getText());
@@ -220,7 +218,7 @@ public class LichLamViec extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel1.setText("Công việc ngày:");
 
-        jPanel3.setBackground(new java.awt.Color(102, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(204, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cập nhật vào cuối ngày", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
 
         buttonGroup1.add(rdo_ChuaHoanThanh);
@@ -402,10 +400,7 @@ public class LichLamViec extends javax.swing.JPanel {
 
         tbl_Lich.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "STT", "ID lịch Làm việc", "Ngày", "Mã Nhân Viên", "Tên Nhân Viên", "Công Việc", "Ghi chú", "Trạng thái"
@@ -569,17 +564,19 @@ public class LichLamViec extends javax.swing.JPanel {
 
     private void tbl_LichMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_LichMouseClicked
         // TODO add your handling code here:
-        i = tbl_Lich.getSelectedRow();
-        txt_Ma.setText(tbl_Lich.getValueAt(i, 3).toString());
-        txt_CongViec.setText(tbl_Lich.getValueAt(i, 5).toString());
-        txt_GhiChu.setText(tbl_Lich.getValueAt(i, 6).toString());
-        txt_TenNhanVien.setText(tbl_Lich.getValueAt(i, 4).toString());
-        Date ngayLamViec = (Date) tbl_Lich.getValueAt(i, 2);
-        txt_NgayLamViec.setDate(ngayLamViec);
-        if (tbl_Lich.getValueAt(i, 7).toString().equalsIgnoreCase("Chưa hoàn thành")) {
-            rdo_ChuaHoanThanh.setSelected(true);
-        } else {
-            rdo_DaHoanThanh.setSelected(true);
+        int i = tbl_Lich.getSelectedRow(); // Sửa lỗi: Đặt `i` trước khi sử dụng
+        if (i >= 0) { // Kiểm tra nếu có hàng được chọn
+            txt_Ma.setText(tbl_Lich.getValueAt(i, 3).toString());
+            txt_CongViec.setText(tbl_Lich.getValueAt(i, 5).toString());
+            txt_GhiChu.setText(tbl_Lich.getValueAt(i, 6).toString());
+            txt_TenNhanVien.setText(tbl_Lich.getValueAt(i, 4).toString());
+            Date ngayLamViec = (Date) tbl_Lich.getValueAt(i, 2);
+            txt_NgayLamViec.setDate(ngayLamViec);
+            if (tbl_Lich.getValueAt(i, 7).toString().equalsIgnoreCase("Chưa hoàn thành")) {
+                rdo_ChuaHoanThanh.setSelected(true);
+            } else {
+                rdo_DaHoanThanh.setSelected(true);
+            }
         }
     }//GEN-LAST:event_tbl_LichMouseClicked
 
@@ -592,10 +589,10 @@ public class LichLamViec extends javax.swing.JPanel {
     }//GEN-LAST:event_rdo_DaHoanThanhActionPerformed
 
     private void comBo_ThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comBo_ThangActionPerformed
-       String text = comBo_Thang.getSelectedItem() + "";
-        if(text.trim().isEmpty()) {
+        String text = comBo_Thang.getSelectedItem() + "";
+        if (text.trim().isEmpty()) {
             thang = -1;
-        }else {
+        } else {
             thang = Integer.parseInt(text);
         }
         timKiem();
@@ -660,19 +657,19 @@ public class LichLamViec extends javax.swing.JPanel {
 
     private void combo_NgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_NgayActionPerformed
         String text = combo_Ngay.getSelectedItem() + "";
-        if(text.trim().isEmpty()) {
+        if (text.trim().isEmpty()) {
             ngay = -1;
-        }else {
+        } else {
             ngay = Integer.parseInt(text);
         }
         timKiem();
     }//GEN-LAST:event_combo_NgayActionPerformed
 
     private void comBo_NamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comBo_NamActionPerformed
-       String text = comBo_Nam.getSelectedItem() + "";
-        if(text.trim().isEmpty()) {
+        String text = comBo_Nam.getSelectedItem() + "";
+        if (text.trim().isEmpty()) {
             nam = -1;
-        }else {
+        } else {
             nam = Integer.parseInt(text);
         }
         timKiem();
@@ -683,7 +680,7 @@ public class LichLamViec extends javax.swing.JPanel {
         if (index == -1) {
             trangThai = -1;
         } else {
-            if(index == 0 ) {
+            if (index == 0) {
                 trangThai = 1;
             } else {
                 trangThai = 0;
