@@ -121,7 +121,7 @@ public class RepoExportPDF {
                 row.createCell(6).setCellValue(model.getThanhTien());
             }
 
-            File file = new File("C:\\Users\\PC\\OneDrive\\Desktop\\hoadon.xlsx");
+            File file = new File("C:\\Users\\chung\\Desktop\\hoadon.xlsx");
             try (FileOutputStream fileOut = new FileOutputStream(file)) {
                 workbook.write(fileOut);
             }

@@ -19,7 +19,7 @@ import view.component.message.MessageFrame;
  * @author X1
  */
 public class QlyHopDong extends javax.swing.JPanel {
-
+    
     private repository.KhachThue.repositoriesKhachThue rpKT = new repositoriesKhachThue();
     private repository.HopDong.repositoryHopDong rpHD = new repositoryHopDong();
     private DefaultTableModel mol = new DefaultTableModel();
@@ -34,9 +34,13 @@ public class QlyHopDong extends javax.swing.JPanel {
         fillTable(rpHD.getAll(0));
         fillCbbMaPT(rpHD.getCbbMaPhong());
         fillCbbMaKT(rpHD.getCbbKT());
-
+        tblHopDong.fixTable(jScrollPane5);
+        tblKhachThue.fixTable(jScrollPane2);
+        txtDieuKhoan.setLineWrap(true);
+        txtDieuKhoan.setWrapStyleWord(true);
+        this.disPlay(0);
     }
-
+    
     public void fillTable(ArrayList<model.HopDong.ModelHopDong> list) {
         mol = (DefaultTableModel) tblHopDong.getModel();
         mol.setNumRows(0);
@@ -44,27 +48,27 @@ public class QlyHopDong extends javax.swing.JPanel {
         for (ModelHopDong x : list) {
             mol.addRow(x.toDataRow());
             cbbMaHopDong.addItem(x.getMaHD());
-
+            
         }
-
+        
     }
-
+    
     public void fillCbbMaPT(ArrayList<model.HopDong.ModelHopDong> list) {
         cbbMaPhongTro.removeAllItems();
         for (ModelHopDong x : list) {
             cbbMaPhongTro.addItem(x.getMaPT());
         }
-
+        
     }
-
+    
     public void fillCbbMaKT(ArrayList<model.HopDong.ModelHopDong> list) {
         cbbKhachThue.removeAllItems();
         for (ModelHopDong x : list) {
             cbbKhachThue.addItem(x.getMaKT());
         }
-
+        
     }
-
+    
     public void fillTablePhu(ArrayList<model.KhachThue.ModelKhachThue> list) {
         mol = (DefaultTableModel) tblKhachThue.getModel();
         mol.setNumRows(0);
@@ -88,14 +92,9 @@ public class QlyHopDong extends javax.swing.JPanel {
         table1 = new view.component.table.Table();
         jPasswordField1 = new javax.swing.JPasswordField();
         txtTimKiem = new javax.swing.JTextField();
-        button1 = new view.component.button.Button();
+        btnTimKiem = new view.component.button.Button();
         jLabel11 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        cbbMaPhongTro = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        cbbKhachThue = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
         txtSoLuongNguoi = new view.component.textfield.TextField();
         txtNgayBatDau = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
@@ -112,16 +111,18 @@ public class QlyHopDong extends javax.swing.JPanel {
         rdoHetHan = new javax.swing.JRadioButton();
         btnThem = new view.component.button.Button();
         btnCapNhat = new view.component.button.Button();
-        cbbMaHopDong = new javax.swing.JComboBox<>();
         btnLamMoi = new view.component.button.Button();
+        cbbMaHopDong = new view.component.combobox.Combobox();
+        cbbMaPhongTro = new view.component.combobox.Combobox();
+        cbbKhachThue = new view.component.combobox.Combobox();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblKhachThue = new view.component.table.Table();
-        cbbBoLoc = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblHopDong = new view.component.table.Table();
+        cbbBoLoc = new view.component.combobox.Combobox();
 
         jLabel1.setText("jLabel1");
 
@@ -142,11 +143,11 @@ public class QlyHopDong extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        button1.setBackground(new java.awt.Color(204, 255, 204));
-        button1.setText("Tìm Kiếm");
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        btnTimKiem.setBackground(new java.awt.Color(204, 255, 204));
+        btnTimKiem.setText("Tìm Kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                btnTimKiemActionPerformed(evt);
             }
         });
 
@@ -156,15 +157,6 @@ public class QlyHopDong extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel3.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel3.setText("ID Hợp đồng");
-
-        jLabel4.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel4.setText("Mã Phòng");
-
-        jLabel5.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel5.setText("Mã Khách thuê");
 
         txtSoLuongNguoi.setLabelText("Số lượng người");
 
@@ -182,6 +174,7 @@ public class QlyHopDong extends javax.swing.JPanel {
 
         txtThoiHan.setLabelText("Thời hạn");
 
+        txtGiaPhong.setEditable(false);
         txtGiaPhong.setLabelText("Giá phòng");
 
         txtTienCoc.setLabelText("Số tiền cọc");
@@ -226,6 +219,22 @@ public class QlyHopDong extends javax.swing.JPanel {
             }
         });
 
+        cbbMaHopDong.setLabeText("ID Hợp đồng");
+
+        cbbMaPhongTro.setLabeText("Mã phòng");
+        cbbMaPhongTro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbbMaPhongTroMouseClicked(evt);
+            }
+        });
+        cbbMaPhongTro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbMaPhongTroActionPerformed(evt);
+            }
+        });
+
+        cbbKhachThue.setLabeText("Mã khách");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -233,19 +242,16 @@ public class QlyHopDong extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel5)
-                        .addComponent(cbbKhachThue, 0, 114, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
-                        .addComponent(cbbMaPhongTro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addComponent(txtSoLuongNguoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel7))
                     .addComponent(jLabel6)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txtNgayKetThuc, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                         .addComponent(txtNgayBatDau, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(cbbMaHopDong, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(cbbKhachThue, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbbMaPhongTro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbbMaHopDong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtSoLuongNguoi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -279,28 +285,19 @@ public class QlyHopDong extends javax.swing.JPanel {
                         .addComponent(btnCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbbMaHopDong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbbMaHopDong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtThoiHan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbbMaPhongTro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtGiaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtGiaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbbMaPhongTro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbbKhachThue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtTienCoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTienCoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbbKhachThue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -335,10 +332,7 @@ public class QlyHopDong extends javax.swing.JPanel {
 
         tblKhachThue.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Mã Khách", "Họ Tên", "Giới Tính", "Điện thoại", "CCCD"
@@ -368,13 +362,6 @@ public class QlyHopDong extends javax.swing.JPanel {
                 .addGap(14, 14, 14))
         );
 
-        cbbBoLoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "còn hạn", "đã hết hợp đồng" }));
-        cbbBoLoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbbBoLocActionPerformed(evt);
-            }
-        });
-
         jLabel10.setText("Bộ lọc");
 
         tblHopDong.setModel(new javax.swing.table.DefaultTableModel(
@@ -395,6 +382,14 @@ public class QlyHopDong extends javax.swing.JPanel {
         });
         jScrollPane5.setViewportView(tblHopDong);
 
+        cbbBoLoc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "còn hạn", "hết hạn" }));
+        cbbBoLoc.setLabeText("");
+        cbbBoLoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbBoLocActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -403,11 +398,11 @@ public class QlyHopDong extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbbBoLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(113, 113, 113)
+                .addComponent(cbbBoLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(136, 136, 136)
                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -432,6 +427,7 @@ public class QlyHopDong extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+<<<<<<< HEAD
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(button1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -440,6 +436,21 @@ public class QlyHopDong extends javax.swing.JPanel {
                         .addComponent(jLabel10)
                         .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26)
+=======
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnTimKiem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel10)
+                                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(26, 26, 26))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(cbbBoLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+>>>>>>> 83c47920c5491efc12602200374a260febc5dff4
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(199, 199, 199))
         );
@@ -449,11 +460,11 @@ public class QlyHopDong extends javax.swing.JPanel {
         // TODO add your handling code here:
         mesg = new MessageFrame();
         int tt = 1;
-
+        
         if (readForm() != null) {
             if (readForm().getMaPT().equals(rpHD.check(cbbMaPhongTro.getSelectedItem().toString()))) {
                 mesg.showMessage("error", "Phòng " + cbbMaPhongTro.getSelectedItem().toString() + " Đang còn hạn hợp đồng");
-
+                
             } else {
                 if (rpHD.them(readForm()) > 0) {
                     mesg.showMessage("success", "Thêm thành công");
@@ -462,7 +473,7 @@ public class QlyHopDong extends javax.swing.JPanel {
                     mesg.showMessage("error", "Thêm thất bại");
                 }
             }
-
+            
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -470,6 +481,7 @@ public class QlyHopDong extends javax.swing.JPanel {
         // TODO add your handling code here:
         fillCbbMaPT(rpHD.getCbbMaPhong());
         fillCbbMaKT(rpHD.getCbbKT());
+        cbbMaPhongTro.setSelectedItem(0);
         txtSoLuongNguoi.setText("");
         txtNgayBatDau.setDate(null);
         txtNgayKetThuc.setDate(null);
@@ -495,8 +507,23 @@ public class QlyHopDong extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        int tt = 1;
+        if (cbbBoLoc.getSelectedItem().equals("còn hạn")) {
+            tt = 0;
+        }
+        this.fillTable(rpHD.TimKiem(txtTimKiem.getText(), tt));
+    }//GEN-LAST:event_btnTimKiemActionPerformed
+
+    private void tblHopDongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHopDongMouseClicked
+        // TODO add your handling code here:
+        index = tblHopDong.getSelectedRow();
+        this.disPlay(index);
+    }//GEN-LAST:event_tblHopDongMouseClicked
+
     private void cbbBoLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbBoLocActionPerformed
-       if (cbbBoLoc.getSelectedItem().equals("còn hạn")) {
+        // TODO add your handling code here:
+        if (cbbBoLoc.getSelectedItem().equals("còn hạn")) {
             this.fillTable(rpHD.getAll(0));
             
         } else {
@@ -504,18 +531,23 @@ public class QlyHopDong extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cbbBoLocActionPerformed
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-       int tt=1;
-        if (cbbBoLoc.getSelectedItem().equals("còn hạn")) {
-            tt=0;
-        }
-        this.fillTable(rpHD.TimKiem(txtTimKiem.getText(),tt));
-    }//GEN-LAST:event_button1ActionPerformed
-
-    private void tblHopDongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHopDongMouseClicked
+    private void cbbMaPhongTroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbMaPhongTroActionPerformed
         // TODO add your handling code here:
-        index = tblHopDong.getSelectedRow();
-        cbbMaHopDong.setSelectedItem(tblHopDong.getValueAt(index, 0));
+        if (cbbMaPhongTro.getSelectedItem() != null) {
+            float gia= rpHD.getGiaPhong(cbbMaPhongTro.getSelectedItem().toString());
+            txtGiaPhong.setText(gia +"");
+        }
+        
+    }//GEN-LAST:event_cbbMaPhongTroActionPerformed
+
+    private void cbbMaPhongTroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbMaPhongTroMouseClicked
+        // TODO add your handling code here:
+//        float gia= rpHD.getGiaPhong(cbbMaPhongTro.getSelectedItem().toString());
+//        txtGiaPhong.setText(gia +"");
+    }//GEN-LAST:event_cbbMaPhongTroMouseClicked
+    
+    public void disPlay(int index){
+         cbbMaHopDong.setSelectedItem(tblHopDong.getValueAt(index, 0));
         cbbMaPhongTro.setSelectedItem(tblHopDong.getValueAt(index, 1));
         cbbKhachThue.setSelectedItem(tblHopDong.getValueAt(index, 2));
         txtSoLuongNguoi.setText(tblHopDong.getValueAt(index, 3).toString());
@@ -530,7 +562,7 @@ public class QlyHopDong extends javax.swing.JPanel {
         } else {
             rdoHetHan.setSelected(true);
         }
-
+        
         int tt;
         if (cbbBoLoc.getSelectedItem().toString().equalsIgnoreCase("còn hạn")) {
             tt = 0;
@@ -538,8 +570,8 @@ public class QlyHopDong extends javax.swing.JPanel {
             tt = 1;
         }
         fillTablePhu(rpKT.timKiem(cbbMaPhongTro.getSelectedItem().toString(), tt));
-    }//GEN-LAST:event_tblHopDongMouseClicked
-
+    }
+    
     public model.HopDong.ModelHopDong readForm() {
         mesg = new MessageFrame();
         String maHD, maPT, maKT, dieuKhoan;
@@ -548,21 +580,21 @@ public class QlyHopDong extends javax.swing.JPanel {
         Date ngayBD, ngayKT;
         float giaPhong, tienCoc;
         boolean trangThai;
-
+        
         maHD = cbbMaHopDong.getSelectedItem().toString();
         maPT = cbbMaPhongTro.getSelectedItem().toString();
         maKT = cbbKhachThue.getSelectedItem().toString();
-
+        
         ngayBD = txtNgayBatDau.getDate();
         ngayKT = txtNgayKetThuc.getDate();
-
+        
         dieuKhoan = txtDieuKhoan.getText();
         if (rdoConHan.isSelected()) {
             trangThai = false;
         } else {
             trangThai = true;
         }
-
+        
         if (txtSoLuongNguoi.getText().equalsIgnoreCase("")) {
             mesg.showMessage("error", "chưa nhập số lượng người");
             txtSoLuongNguoi.requestFocus();
@@ -606,28 +638,25 @@ public class QlyHopDong extends javax.swing.JPanel {
         thoiHan = Integer.parseInt(txtThoiHan.getText());
         giaPhong = Float.parseFloat(txtGiaPhong.getText());
         tienCoc = Float.parseFloat(txtTienCoc.getText());
-
+        
         return new model.HopDong.ModelHopDong(maHD, maPT, maKT, soNguoi, ngayBD, ngayKT, thoiHan, giaPhong, tienCoc, dieuKhoan, trangThai);
-
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.component.button.Button btnCapNhat;
     private view.component.button.Button btnLamMoi;
     private view.component.button.Button btnThem;
-    private view.component.button.Button button1;
+    private view.component.button.Button btnTimKiem;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cbbBoLoc;
-    private javax.swing.JComboBox<String> cbbKhachThue;
-    private javax.swing.JComboBox<String> cbbMaHopDong;
-    private javax.swing.JComboBox<String> cbbMaPhongTro;
+    private view.component.combobox.Combobox cbbBoLoc;
+    private view.component.combobox.Combobox cbbKhachThue;
+    private view.component.combobox.Combobox cbbMaHopDong;
+    private view.component.combobox.Combobox cbbMaPhongTro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

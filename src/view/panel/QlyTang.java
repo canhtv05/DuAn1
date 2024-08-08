@@ -15,6 +15,7 @@ public class QlyTang extends javax.swing.JPanel {
     private ModelTang mdt = new ModelTang();
     private repoTang repoT = new repoTang();
     private MessageFrame msg;
+    private MessageFrame confirm;
 
     public QlyTang() {
         initComponents();
@@ -83,7 +84,7 @@ public class QlyTang extends javax.swing.JPanel {
             int tangSo = Integer.parseInt(this.txtTangSo.getText());
             try {
                 if (tangSo <= 0 || tangSo > 10) {
-                    msg.showMessage("error", "Số phòng không hợp lệ");
+                    msg.showMessage("error", "Tang chỉ từ 1-10!");
                     return false;
                 }
             } catch (Exception e) {
@@ -92,13 +93,13 @@ public class QlyTang extends javax.swing.JPanel {
         }
 
         if (this.txtSoPhong.getText().isEmpty()) {
-            msg.showMessage("error", "Không bỏ trống mục số phòng");
+            msg.showMessage("error", "Không bỏ trống mục số phòng!");
             return false;
         } else {
             int soPhong = Integer.parseInt(this.txtSoPhong.getText());
             try {
                 if (soPhong <= 0 || soPhong > 10) {
-                    msg.showMessage("error", "Số phòng không hợp lệ");
+                    msg.showMessage("error", "Số phòng chỉ từ 1-10!");
                     return false;
                 }
             } catch (Exception e) {
@@ -264,16 +265,22 @@ public class QlyTang extends javax.swing.JPanel {
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         // TODO add your handling code here:
+        confirm = new MessageFrame();
+        msg = new MessageFrame();
         try {
-            msg = new MessageFrame();
             if (check()) {
+
                 if (checkIdInsert()) {
-                    ModelTang mdt = start();
-                    this.repoT.insert(mdt);
-                    msg.showMessage("success", "Thêm thành công");
-                    this.fillTable(this.repoT.findAll());
-                    this.clearForm();
+                    confirm.showMessage("message", "Bạn có chắc chắn muốn thêm tầng này không?");
+                    confirm.setOnOkClicked(() -> {
+                        ModelTang mdt = start();
+                        this.repoT.insert(mdt);
+                        msg.showMessage("success", "Thêm thành công");
+                        this.fillTable(this.repoT.findAll());
+                        this.clearForm();
+                    });
                 }
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -282,17 +289,22 @@ public class QlyTang extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+        confirm = new MessageFrame();
+        msg = new MessageFrame();
         try {
-            msg = new MessageFrame();
             if (check()) {
                 if (checkIdUpdate()) {
-                    ModelTang mdt = start();
-                    this.repoT.update(mdt);
-                    msg.showMessage("success", "Sửa thành công");
-                    this.fillTable(this.repoT.findAll());
-                    this.clearForm();
+                    confirm.showMessage("message", "Bạn có chắc chắn muốn cập nhập thông tin cho tầng này không?");
+                    confirm.setOnOkClicked(() -> {
+                        ModelTang mdt = start();
+                        this.repoT.update(mdt);
+                        msg.showMessage("success", "Sửa thành công");
+                        this.fillTable(this.repoT.findAll());
+                        this.clearForm();
+                    });
                 }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -300,10 +312,13 @@ public class QlyTang extends javax.swing.JPanel {
 
     private void btnReSetFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReSetFormActionPerformed
         // TODO add your handling code here:
+        confirm = new MessageFrame();
         msg = new MessageFrame();
-        this.clearForm();
-        msg.showMessage("success", "Làm mới thành công");
-
+        confirm.showMessage("message", "Bạn có chắc chắn muốn làm mới form không?");
+        confirm.setOnOkClicked(() -> {
+            this.clearForm();
+            msg.showMessage("success", "Làm mới thành công");
+        });
     }//GEN-LAST:event_btnReSetFormActionPerformed
 
 

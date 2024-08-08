@@ -29,8 +29,8 @@ public class repoPhongTro {
     public ArrayList<ModelPhongTro> getAll() {
         ArrayList<ModelPhongTro> listPT = new ArrayList<>();
         sql = """
-                    Select TangSo, MaPhong, LoaiPhong, DienTich, GiaPhong, TienNghi, TrangThai, Anh From PhongTro order by TangSo;
-                  """;
+                Select TangSo, MaPhong, LoaiPhong, DienTich, GiaPhong, TienNghi, TrangThai, Anh From PhongTro order by TangSo;
+              """;
         try {
             ps = this.conn.prepareStatement(sql);
             rs = ps.executeQuery();
