@@ -92,7 +92,7 @@ public class QlyHopDong extends javax.swing.JPanel {
         table1 = new view.component.table.Table();
         jPasswordField1 = new javax.swing.JPasswordField();
         txtTimKiem = new javax.swing.JTextField();
-        button1 = new view.component.button.Button();
+        btnTimKiem = new view.component.button.Button();
         jLabel11 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txtSoLuongNguoi = new view.component.textfield.TextField();
@@ -143,11 +143,11 @@ public class QlyHopDong extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        button1.setBackground(new java.awt.Color(204, 255, 204));
-        button1.setText("Tìm Kiếm");
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        btnTimKiem.setBackground(new java.awt.Color(204, 255, 204));
+        btnTimKiem.setText("Tìm Kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                btnTimKiemActionPerformed(evt);
             }
         });
 
@@ -174,6 +174,7 @@ public class QlyHopDong extends javax.swing.JPanel {
 
         txtThoiHan.setLabelText("Thời hạn");
 
+        txtGiaPhong.setEditable(false);
         txtGiaPhong.setLabelText("Giá phòng");
 
         txtTienCoc.setLabelText("Số tiền cọc");
@@ -221,6 +222,16 @@ public class QlyHopDong extends javax.swing.JPanel {
         cbbMaHopDong.setLabeText("ID Hợp đồng");
 
         cbbMaPhongTro.setLabeText("Mã phòng");
+        cbbMaPhongTro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbbMaPhongTroMouseClicked(evt);
+            }
+        });
+        cbbMaPhongTro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbMaPhongTroActionPerformed(evt);
+            }
+        });
 
         cbbKhachThue.setLabeText("Mã khách");
 
@@ -391,7 +402,7 @@ public class QlyHopDong extends javax.swing.JPanel {
                 .addGap(136, 136, 136)
                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -420,7 +431,7 @@ public class QlyHopDong extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(button1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnTimKiem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel10)
                                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -459,6 +470,7 @@ public class QlyHopDong extends javax.swing.JPanel {
         // TODO add your handling code here:
         fillCbbMaPT(rpHD.getCbbMaPhong());
         fillCbbMaKT(rpHD.getCbbKT());
+        cbbMaPhongTro.setSelectedItem(0);
         txtSoLuongNguoi.setText("");
         txtNgayBatDau.setDate(null);
         txtNgayKetThuc.setDate(null);
@@ -484,13 +496,13 @@ public class QlyHopDong extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         int tt = 1;
         if (cbbBoLoc.getSelectedItem().equals("còn hạn")) {
             tt = 0;
         }
         this.fillTable(rpHD.TimKiem(txtTimKiem.getText(), tt));
-    }//GEN-LAST:event_button1ActionPerformed
+    }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void tblHopDongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHopDongMouseClicked
         // TODO add your handling code here:
@@ -507,6 +519,21 @@ public class QlyHopDong extends javax.swing.JPanel {
             this.fillTable(rpHD.getAll(1));
         }
     }//GEN-LAST:event_cbbBoLocActionPerformed
+
+    private void cbbMaPhongTroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbMaPhongTroActionPerformed
+        // TODO add your handling code here:
+        if (cbbMaPhongTro.getSelectedItem() != null) {
+            float gia= rpHD.getGiaPhong(cbbMaPhongTro.getSelectedItem().toString());
+            txtGiaPhong.setText(gia +"");
+        }
+        
+    }//GEN-LAST:event_cbbMaPhongTroActionPerformed
+
+    private void cbbMaPhongTroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbMaPhongTroMouseClicked
+        // TODO add your handling code here:
+//        float gia= rpHD.getGiaPhong(cbbMaPhongTro.getSelectedItem().toString());
+//        txtGiaPhong.setText(gia +"");
+    }//GEN-LAST:event_cbbMaPhongTroMouseClicked
     
     public void disPlay(int index){
          cbbMaHopDong.setSelectedItem(tblHopDong.getValueAt(index, 0));
@@ -609,7 +636,7 @@ public class QlyHopDong extends javax.swing.JPanel {
     private view.component.button.Button btnCapNhat;
     private view.component.button.Button btnLamMoi;
     private view.component.button.Button btnThem;
-    private view.component.button.Button button1;
+    private view.component.button.Button btnTimKiem;
     private javax.swing.ButtonGroup buttonGroup1;
     private view.component.combobox.Combobox cbbBoLoc;
     private view.component.combobox.Combobox cbbKhachThue;

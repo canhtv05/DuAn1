@@ -64,7 +64,7 @@
               <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
               <Component id="txtTimKiem" min="-2" pref="388" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-              <Component id="button1" min="-2" pref="110" max="-2" attributes="0"/>
+              <Component id="btnTimKiem" min="-2" pref="110" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
@@ -102,7 +102,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="button1" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnTimKiem" alignment="1" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtTimKiem" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
@@ -125,7 +125,7 @@
   <SubComponents>
     <Component class="javax.swing.JTextField" name="txtTimKiem">
     </Component>
-    <Component class="view.component.button.Button" name="button1">
+    <Component class="view.component.button.Button" name="btnTimKiem">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="cc" green="ff" red="cc" type="rgb"/>
@@ -133,7 +133,7 @@
         <Property name="text" type="java.lang.String" value="T&#xec;m Ki&#x1ebf;m"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTimKiemActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
@@ -314,6 +314,7 @@
         </Component>
         <Component class="view.component.textfield.TextField" name="txtGiaPhong">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="labelText" type="java.lang.String" value="Gi&#xe1; ph&#xf2;ng"/>
           </Properties>
         </Component>
@@ -411,6 +412,10 @@
           <Properties>
             <Property name="labeText" type="java.lang.String" value="M&#xe3; ph&#xf2;ng"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cbbMaPhongTroMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbbMaPhongTroActionPerformed"/>
+          </Events>
         </Component>
         <Component class="view.component.combobox.Combobox" name="cbbKhachThue">
           <Properties>
