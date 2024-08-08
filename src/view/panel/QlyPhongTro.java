@@ -18,6 +18,7 @@ public class QlyPhongTro extends javax.swing.JPanel {
     private ModelPhongTro mdPT = new ModelPhongTro();
     private repoPhongTro repoPT = new repoPhongTro();
     private MessageFrame msg;
+    private MessageFrame confirm;
     private String path = "D/...";
 
     /**
@@ -28,6 +29,7 @@ public class QlyPhongTro extends javax.swing.JPanel {
         this.init();
         this.fillTable(this.repoPT.getAll());
         this.fillCbbTang(this.repoPT.getCbbTang());
+        this.clearForm();
     }
 
     public void init() {
@@ -266,7 +268,7 @@ public class QlyPhongTro extends javax.swing.JPanel {
 
         btnSearch.setBackground(new java.awt.Color(153, 204, 255));
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
-        btnSearch.setText("Search");
+        btnSearch.setText("Tìm kiếm");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -521,19 +523,23 @@ public class QlyPhongTro extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+        msg = new MessageFrame();
+        confirm = new MessageFrame();
         try {
-            msg = new MessageFrame();
             if (checkNull()) {
                 if (this.readForm() != null) {
                     if (!(readForm().getMaPhong()).equalsIgnoreCase(this.repoPT.checkMaPhong(readForm().getMaPhong()))) {
                         msg.showMessage("error", "Mã số phòng không tồn tại. Vui lòng không sửa mã phòng!");
                     } else {
-                        if (this.repoPT.update(this.readForm()) > 0) {
-                            msg.showMessage("success", "Cập nhập thành công.");
-                            this.fillTable(this.repoPT.getAll());
-                        } else {
-                            msg.showMessage("error", "Cập nhập thất bại.");
-                        }
+                        confirm.showMessage("message", "Bạn có chắc chắn muốn cập nhập thông tin cho phòng này không?");
+                        confirm.setOnOkClicked(() -> {
+                            if (this.repoPT.update(this.readForm()) > 0) {
+                                msg.showMessage("success", "Cập nhập thành công.");
+                                this.fillTable(this.repoPT.getAll());
+                            } else {
+                                msg.showMessage("error", "Cập nhập thất bại.");
+                            }
+                        });
                     }
                 }
             }
@@ -544,16 +550,24 @@ public class QlyPhongTro extends javax.swing.JPanel {
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
+        confirm = new MessageFrame();
         msg = new MessageFrame();
-        this.clearForm();
-        msg.showMessage("success", "Làm mới thành công.");
+        confirm.showMessage("message", "Bạn có chắc chắn muốn làm mới form không?");
+        confirm.setOnOkClicked(() -> {
+            this.clearForm();
+            msg.showMessage("success", "Làm mới thành công.");
+        });
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
+        confirm = new MessageFrame();
         msg = new MessageFrame();
-        this.fillTable(this.repoPT.getAll());
-        msg.showMessage("success", "Refresh thành công.");
+        confirm.showMessage("message", "Bạn có chắc chắn muốn làm mới dữ liệu trên bảng không?");
+        confirm.setOnOkClicked(() -> {
+            this.fillTable(this.repoPT.getAll());
+            msg.showMessage("success", "Refresh thành công.");
+        });
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void tblPhongTroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhongTroMouseClicked
@@ -653,25 +667,29 @@ public class QlyPhongTro extends javax.swing.JPanel {
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         // TODO add your handling code here:
-        int soPhong = this.repoPT.getSoPhong(this.readForm().getTangSo());
-        int demPhong = this.repoPT.getDemPhong(this.readForm().getTangSo());
+        confirm = new MessageFrame();
+        msg = new MessageFrame();
         try {
-            msg = new MessageFrame();
             if (this.checkNull()) {
                 if (this.readForm() != null) {
-                    
+                    int soPhong = this.repoPT.getSoPhong(this.readForm().getTangSo());
+                    int demPhong = this.repoPT.getDemPhong(this.readForm().getTangSo());
+
                     if (demPhong >= soPhong) {
                         msg.showMessage("error", "Tầng này đã đầy phòng. Vui lòng chọn tầng khác!");
                     } else {
                         if (readForm().getMaPhong().equalsIgnoreCase(this.repoPT.checkMaPhong(readForm().getMaPhong()))) {
                             msg.showMessage("error", "Mã số phòng đã tồn tại. Vui lòng chọn mã số phòng khác!");
                         } else {
-                            if (this.repoPT.insert(readForm()) > 0) {
-                                msg.showMessage("success", "Thêm thành công.");
-                                this.fillTable(this.repoPT.getAll());
-                            } else {
-                                msg.showMessage("error", "Thêm thất bại.");
-                            }
+                            confirm.showMessage("message", "Bạn có chắc chắn muốn thêm phòng này không?");
+                            confirm.setOnOkClicked(() -> {
+                                if (this.repoPT.insert(readForm()) > 0) {
+                                    msg.showMessage("success", "Thêm thành công.");
+                                    this.fillTable(this.repoPT.getAll());
+                                } else {
+                                    msg.showMessage("error", "Thêm thất bại.");
+                                }
+                            });
                         }
                     }
                 }
@@ -739,19 +757,24 @@ public class QlyPhongTro extends javax.swing.JPanel {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
+        confirm = new MessageFrame();
+        msg = new MessageFrame();
         try {
-            msg = new MessageFrame();
             if (checkNull()) {
                 if (this.readForm() != null) {
                     if (!(readForm().getMaPhong()).equalsIgnoreCase(this.repoPT.checkMaPhong(readForm().getMaPhong()))) {
                         msg.showMessage("error", "Mã số phòng không tồn tại. Vui lòng không sửa mã phòng!");
                     } else {
-                        if (this.repoPT.delete(this.readForm()) > 0) {
-                            msg.showMessage("success", "Xóa thành công.");
-                            this.fillTable(this.repoPT.getAll());
-                        } else {
-                            msg.showMessage("error", "Xóa thất bại.");
-                        }
+                        confirm.showMessage("message", "Bạn có chắc chắn muốn xóa phòng này không?");
+                        confirm.setOnOkClicked(() -> {
+                            if (this.repoPT.delete(this.readForm()) > 0) {
+                                msg.showMessage("success", "Xóa thành công.");
+                                this.fillTable(this.repoPT.getAll());
+                                this.clearForm();
+                            } else {
+                                msg.showMessage("error", "Xóa thất bại.");
+                            }
+                        });
                     }
                 }
             }
@@ -769,6 +792,7 @@ public class QlyPhongTro extends javax.swing.JPanel {
             return false;
         } else if (!maPhong.matches("^[A-Z].*")) {
             msg.showMessage("error", "Mã số phòng phải bắt đầu bằng 1 chữ in hoa. VD: P102");
+            this.txtMaPT.requestFocus();
             return false;
         }
 
@@ -791,7 +815,7 @@ public class QlyPhongTro extends javax.swing.JPanel {
                     return false;
                 }
             } catch (Exception e) {
-                msg.showMessage("error", "Vui lòng chỉ nhập số");
+                msg.showMessage("error", "Mục diện tích chỉ nhập số");
                 this.txtDienTich.requestFocus();
                 return false;
             }
@@ -804,13 +828,13 @@ public class QlyPhongTro extends javax.swing.JPanel {
         } else {
             try {
                 float giaPhong = Float.parseFloat(this.txtGiaPhong.getText().trim());
-                if (giaPhong < 2500000 || giaPhong > 5000000 ) {
+                if (giaPhong < 2500000 || giaPhong > 5000000) {
                     msg.showMessage("error", "Giá phòng chỉ trong khoảng từ 2.5 - 5tr");
                     this.txtGiaPhong.requestFocus();
                     return false;
                 }
             } catch (Exception e) {
-                msg.showMessage("error", "Vui lòng chỉ nhập số!");
+                msg.showMessage("error", "Mục giá phòng chỉ nhập số!");
                 this.txtGiaPhong.requestFocus();
                 return false;
             }
