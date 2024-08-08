@@ -1011,6 +1011,18 @@ public class QlyTienDien extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrangThaiActionPerformed
+        int month = locThang.getSelectedIndex();
+        locTheoThang = month;
+        if (locNam.getSelectedIndex() == 0) {
+            locTheoNam = 0;
+        }
+        String text = locNam.getSelectedItem() + "";
+        if (text.trim().isEmpty()) {
+            locTheoNam = 0;
+        } else {
+            int year = Integer.parseInt(text);
+            locTheoNam = year;
+        }
         if (rdoDaChinhSua.isSelected()) {
             state = 1;
         } else {

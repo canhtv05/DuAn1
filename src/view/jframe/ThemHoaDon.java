@@ -14,6 +14,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import repository.themhoadon.RepoThemHoaDon;
 import repository.validate.Validate;
+import service.EventListenAdd;
 import view.component.message.MessageFrame;
 
 public class ThemHoaDon extends javax.swing.JFrame {
@@ -25,11 +26,16 @@ public class ThemHoaDon extends javax.swing.JFrame {
     private String ngay1ThangTruoc;
     private String ngayCuoiThangTruoc;
     private boolean isUpdating = false;
+    private EventListenAdd listenAdd;
 
     public ThemHoaDon() {
         initComponents();
         init();
         getTextOnChange();
+    }
+
+    public void setEvent(EventListenAdd eventListenAdd) {
+        this.listenAdd = eventListenAdd;
     }
 
     private void init() {
@@ -186,6 +192,7 @@ public class ThemHoaDon extends javax.swing.JFrame {
         txtTienDien.setText("");
         txtTienNuoc.setText("");
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -355,12 +362,15 @@ public class ThemHoaDon extends javax.swing.JFrame {
             MessageFrame mess = new MessageFrame();
             if (repo.addHoaDon(arr, maNV, Double.parseDouble(txtTienDien.getText()), Double.parseDouble(txtTienNuoc.getText()), Double.parseDouble(txtTienDV.getText()))) {
                 mess.showMessage("success", "Thêm mới hóa đơn thành công.");
+                if (listenAdd != null) {
+                    listenAdd.getAdd(true);
+                }
+                dispose();
                 clearAll();
             } else {
                 mess.showMessage("error", "Thêm mới hóa đơn thất bại.");
             }
         });
-
     }//GEN-LAST:event_btnThemActionPerformed
 
     public static void main(String args[]) {

@@ -398,6 +398,7 @@
         </Component>
         <Component class="view.component.textfield.TextField" name="txtDauNguoi">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="labelText" type="java.lang.String" value="&#x110;&#x1ea7;u ng&#x1b0;&#x1edd;i"/>
           </Properties>
           <Events>
