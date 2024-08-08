@@ -74,10 +74,10 @@ public class RepoExportPDF {
 
     public String getTenNV(int maHD) {
         sql = """
-              SELECT nv.HoTen FROM dbo.HoaDon hd
-              JOIN dbo.NhanVien nv ON nv.MaNhanVien = hd.MaNhanVien
-              WHERE hd.IdHoaDon = ?
-             """;
+                 SELECT nv.HoTen FROM dbo.HoaDon hd
+                 JOIN dbo.NhanVien nv ON nv.MaNhanVien = hd.MaNhanVien
+                 WHERE hd.IdHoaDon = ?
+                """;
         try {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, maHD);
@@ -95,29 +95,29 @@ public class RepoExportPDF {
         ArrayList<ModelExcel> list = new ArrayList<>();
 
         sql = """
-          SELECT 
-              hd.IdHoaDon, 
-              pt.MaPhong, 
-              pt.GiaPhong, 
-              nv.HoTen,
-              td.ThanhTien AS TienDien, 
-              tn.ThanhTien AS TienNuoc, 
-              dv.ThanhTien AS TienDichVu, 
-              hd.TongTien
-          FROM 
-              dbo.HoaDon hd
-          JOIN 
-              dbo.PhongTro pt ON pt.MaPhong = hd.MaPhong
-          JOIN 
-              dbo.TienDien td ON td.IdHoaDon = hd.IdHoaDon
-          JOIN 
-              dbo.TienNuoc tn ON tn.IdHoaDon = hd.IdHoaDon
-          JOIN 
-              dbo.TienDichVu dv ON dv.IdDichVu = hd.IdHoaDon
-          JOIN 
-              dbo.NhanVien nv ON nv.MaNhanVien = hd.MaNhanVien
-          WHERE 
-              hd.NgayLap = ?;""";
+                SELECT
+                    hd.IdHoaDon,
+                    pt.MaPhong,
+                    pt.GiaPhong,
+                    nv.HoTen,
+                    td.ThanhTien AS TienDien,
+                    tn.ThanhTien AS TienNuoc,
+                    dv.ThanhTien AS TienDichVu,
+                    hd.TongTien
+                FROM
+                    dbo.HoaDon hd
+                JOIN
+                    dbo.PhongTro pt ON pt.MaPhong = hd.MaPhong
+                JOIN
+                    dbo.TienDien td ON td.IdHoaDon = hd.IdHoaDon
+                JOIN
+                    dbo.TienNuoc tn ON tn.IdHoaDon = hd.IdHoaDon
+                JOIN
+                    dbo.TienDichVu dv ON dv.IdDichVu = hd.IdHoaDon
+                JOIN
+                    dbo.NhanVien nv ON nv.MaNhanVien = hd.MaNhanVien
+                WHERE
+                    hd.NgayLap = ?;""";
 
         try {
             ps = conn.prepareStatement(sql);
@@ -132,8 +132,7 @@ public class RepoExportPDF {
                         rs.getDouble(5),
                         rs.getDouble(6),
                         rs.getDouble(7),
-                        rs.getDouble(8)
-                ));
+                        rs.getDouble(8)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -160,7 +159,8 @@ public class RepoExportPDF {
             XSSFSheet sheet = workbook.createSheet("Danh sách hóa đơn");
             int rowNum = 0;
             Row headerRow = sheet.createRow(rowNum++);
-            String[] headers = {"Mã HĐ", "Mã phòng", "Giá phòng", "Người tạo", "Tiền điện", "Tiền nước", "Tiền dịch vụ", "Thành tiền"};
+            String[] headers = { "Mã HĐ", "Mã phòng", "Giá phòng", "Người tạo", "Tiền điện", "Tiền nước",
+                    "Tiền dịch vụ", "Thành tiền" };
             for (int i = 0; i < headers.length; i++) {
                 Cell cell = headerRow.createCell(i);
                 cell.setCellValue(headers[i]);
@@ -176,13 +176,7 @@ public class RepoExportPDF {
                 row.createCell(6).setCellValue(model.getTienDV());
                 row.createCell(7).setCellValue(model.getThanhTien());
             }
-<<<<<<< HEAD
             try (FileOutputStream fileOut = new FileOutputStream(fileToSave)) {
-=======
-
-            File file = new File("C:\\Users\\chung\\Desktop\\hoadon.xlsx");
-            try (FileOutputStream fileOut = new FileOutputStream(file)) {
->>>>>>> 83c47920c5491efc12602200374a260febc5dff4
                 workbook.write(fileOut);
             }
         } catch (Exception e) {
