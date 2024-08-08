@@ -715,7 +715,7 @@
             <Component class="view.component.table.Table" name="tbl_NhanVien">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="11" rowCount="11">
+                  <Table columnCount="11" rowCount="0">
                     <Column editable="true" title="M&#xe3; nh&#xe2;n vi&#xea;n" type="java.lang.Object"/>
                     <Column editable="true" title="H&#x1ecd; T&#xea;n" type="java.lang.Object"/>
                     <Column editable="true" title="Ng&#xe0;y sinh" type="java.lang.Object"/>
@@ -816,9 +816,10 @@
         <Component class="view.component.combobox.Combobox" name="cboLocTrangThai">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="&#x110;ang l&#xe0;m vi&#x1ec7;c"/>
-                <StringItem index="1" value="&#x110;&#xe3; ngh&#x1ec9; vi&#x1ec7;c"/>
+              <StringArray count="3">
+                <StringItem index="0" value="T&#x1ea5;t C&#x1ea3;"/>
+                <StringItem index="1" value="&#x110;ang l&#xe0;m vi&#x1ec7;c"/>
+                <StringItem index="2" value="&#x110;&#xe3; ngh&#x1ec9; vi&#x1ec7;c"/>
               </StringArray>
             </Property>
             <Property name="selectedIndex" type="int" value="-1"/>

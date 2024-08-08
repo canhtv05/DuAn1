@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package view.panel;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -13,7 +14,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 import repository.NhanVien.repoNhanVien;
-import java.util.List;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import view.component.message.MessageFrame;
@@ -23,13 +23,14 @@ import view.component.message.MessageFrame;
  * @author CanhPC
  */
 public class QlyNhanVien extends javax.swing.JPanel {
+
     private DefaultTableModel TableNhanVien = new DefaultTableModel();
     private repoNhanVien rpNV = new repoNhanVien();
     private MessageFrame mesF = new MessageFrame();
     private MessageFrame message = new MessageFrame();
-    private List<Model_NhanVien> list = new ArrayList<>();
     private String path = "D/....";
     private int i = -1;
+
     /**
      * Creates new form QlyNhanVien
      */
@@ -41,41 +42,54 @@ public class QlyNhanVien extends javax.swing.JPanel {
         textSearch();
         updateTotalNhanVien();
         loadTableData();
+        tbl_NhanVien.fixTable(jScrollPane4);
     }
+
     public void init() {
         lb_HinhAnh.setText("");
     }
+
     private void loadTableData() {
         ArrayList<Model_NhanVien> listnv = rpNV.getAllNhanVien(1);
         fillTable(listnv);
     }
+
     private void updateTotalNhanVien() {
-    int totalNhanVien = rpNV.getTotalNhanVien();
-    int totalDangLam = rpNV.getTotalNhanVienDangLam();
-    int totalDaNghi = rpNV.getTotalNhanVienDaNghi();
-    
-    jb_NhanVien.setText("Tổng số: " + totalNhanVien);
-    jb_Lam.setText("Đang làm: " + totalDangLam);
-    jb_Nghi.setText("Đã nghỉ: " + totalDaNghi);
-}
+        int totalNhanVien = rpNV.getTotalNhanVien();
+        int totalDangLam = rpNV.getTotalNhanVienDangLam();
+        int totalDaNghi = rpNV.getTotalNhanVienDaNghi();
 
-   private void fillTable(ArrayList<Model_NhanVien> list) {
-    TableNhanVien.setRowCount(0);
-    list.forEach(s -> {
+        jb_NhanVien.setText("Tổng số: " + totalNhanVien);
+        jb_Lam.setText("Đang làm: " + totalDangLam);
+        jb_Nghi.setText("Đã nghỉ: " + totalDaNghi);
+    }
 
-        TableNhanVien.addRow(new Object[]{
-            s.getMaNV(), s.getHoTen(), s.getNgaySinh(), s.getGioiTinh() == 0 ? "Nam" : "Nữ", s.getDienThoai(),
-            s.getCCCD(), s.getNgayBD(), s.getNgayKT(), s.getThoiHan(), s.getTrangThai()==0 ? "Đã nghỉ việc":"Đang làm việc", s.getAnhNV()
+    private void fillTable(ArrayList<Model_NhanVien> list) {
+        TableNhanVien.setRowCount(0);
+        list.forEach(s -> {
+
+            TableNhanVien.addRow(new Object[]{
+                s.getMaNV(), s.getHoTen(), s.getNgaySinh(), s.getGioiTinh() == 0 ? "Nam" : "Nữ", s.getDienThoai(),
+                s.getCCCD(), s.getNgayBD(), s.getNgayKT(), s.getThoiHan(), s.getTrangThai() == 0 ? "Đã nghỉ việc" : "Đang làm việc", s.getAnhNV()
+            });
         });
-    });
-}
+    }
 
     public Model_NhanVien readFrom() {
         Model_NhanVien nv = new Model_NhanVien();
+        if (txt_Ma.getText().trim().isEmpty()
+                || txt_Ten.getText().trim().isEmpty()
+                || txt_CCCD.getText().trim().isEmpty()
+                || txt_ThoiHan.getText().trim().isEmpty()
+                || txt_NgSinh.getDate() == null
+                || txt_NgayBatDau.getDate() == null) {
+            mesF.showMessage("error", "Vui lòng không để trống các trường trừ ngày kết thúc và ảnh");
+            return null; // Hoặc thực hiện các hành động khác khi có lỗi
+        }
         // Gán giá trị cho các thuộc tính của đối tượng
         nv.setMaNV(txt_Ma.getText());
         nv.setHoTen(txt_Ten.getText());
-        nv.setNgaySinh(txt_NgSinh.getDate());        
+        nv.setNgaySinh(txt_NgSinh.getDate());
         if (rdo_Nam.isSelected()) {
             nv.setGioiTinh(0); // Giới tính Nam
         } else {
@@ -85,80 +99,78 @@ public class QlyNhanVien extends javax.swing.JPanel {
         nv.setCCCD(txt_CCCD.getText());
         nv.setNgayBD(txt_NgayBatDau.getDate());
         nv.setNgayKT(txt_NgayKT.getDate());
-        nv.setThoiHan(Integer.parseInt(txt_ThoiHan.getText())); // Chuyển đổi giá trị thành kiểu int
+        try {
+            nv.setThoiHan(Integer.parseInt(txt_ThoiHan.getText())); // Chuyển đổi giá trị thành kiểu int
+        } catch (NumberFormatException e) {
+            mesF.showMessage("error", "Thời hạn phải là một số nguyên hợp lệ");
+            return null; // Hoặc thực hiện các hành động khác khi có lỗi
+        }
         nv.setAnhNV(path);
         if (rdo_Nghi.isSelected()) {
             nv.setTrangThai(0); // nghỉ làm
         } else {
             nv.setTrangThai(1);// đi làm
         }
-        if (txt_Ma.getText().trim().isEmpty() ||
-        txt_Ten.getText().trim().isEmpty() ||
-        txt_CCCD.getText().trim().isEmpty()) {
-//      JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin bắt buộc (Mã, Tên, CCCD)");
-        mesF.showMessage("error", "Vui lòng ko được để trống Mã,Tên, cccd");
-        return null; // Hoặc thực hiện các hành động khác khi có lỗi
-        }
         String cccd = txt_CCCD.getText().trim();
         // Kiểm tra CCCD chỉ chứa đúng 12 chữ số
         if (!cccd.matches("\\d{12}")) {
-        mesF.showMessage("error", "Số CCCD phải có đúng 12 chữ số và chỉ chứa chữ số");
-        return null;
+            mesF.showMessage("error", "Số CCCD phải có đúng 12 chữ số và chỉ chứa chữ số");
+            return null;
         }
         // Kiểm tra mã tỉnh/thành phố
         String maTinh = cccd.substring(0, 3);
         int maTinhNum = Integer.parseInt(maTinh);
         if (maTinhNum < 1 || maTinhNum > 96) {
-        mesF.showMessage("error", "3 số đầu của CCCD của bạn không hợp lệ");
-        return null;
-}
+            mesF.showMessage("error", "Mã CCCD không hợp lệ, kiểm tra lại 3 số đầu");
+            return null;
+        }
         // Kiểm tra mã thế kỷ và giới tính
         char maGioiTinh = cccd.charAt(3);
         if (maGioiTinh != '0' && maGioiTinh != '1' && maGioiTinh != '2' && maGioiTinh != '3') {
-        mesF.showMessage("error", "Số thứ tự thứ 4 của CCCD không hợp lệ");
-        return null;
+            mesF.showMessage("error", "Mã CCCD không hợp lệ, kiểm tra lại số thứ tự thứ 4");
+            return null;
         }
         // Kiểm tra năm sinh
         String namSinh = cccd.substring(4, 6);
         try {
-             int nam = Integer.parseInt(namSinh);
-               if (nam < 00 || nam > 99) {
-        mesF.showMessage("error", "số thứ tự 5 hoặc 6 của CCCD không hợp lệ");
-        return null;
-        }
+            int nam = Integer.parseInt(namSinh);
+            if (nam < 00 || nam > 99) {
+                mesF.showMessage("error", "Mã CCCD không hợp lệ, kiểm tra lại số thứ tự 5 và 6");
+                return null;
+            }
         } catch (NumberFormatException e) {
-        mesF.showMessage("error", "Số thứ  tự 5 hoặc 6 của CCCD không hợp lệ");
-        return null;
+            mesF.showMessage("error", "Mã CCCD không hợp lệ, kiểm tra lại số thứ tự 5 và 6");
+            return null;
         }
         // Kiểm tra số điện thoại
         String dienThoai = nv.getDienThoai();
         // Kiểm tra số điện thoại phải bắt đầu bằng số 0
         if (!dienThoai.startsWith("0")) {
-        mesF.showMessage("error", "Số điện thoại phải bắt đầu bằng số 0");
-        return null;
+            mesF.showMessage("error", "Số điện thoại phải bắt đầu bằng số 0");
+            return null;
         }
         // Kiểm tra số điện thoại chỉ chứa chữ số
         if (!dienThoai.matches("\\d+")) {
-        mesF.showMessage("error", "Số điện thoại chỉ được chứa chữ số");
-        return null;
+            mesF.showMessage("error", "Số điện thoại chỉ được chứa chữ số");
+            return null;
         }
         // Kiểm tra số điện thoại phải có đúng 10 chữ số
         if (dienThoai.length() != 10) {
-        mesF.showMessage("error", "Số điện thoại phải có đúng 10 chữ số");
-        return null;
+            mesF.showMessage("error", "Số điện thoại phải có đúng 10 chữ số");
+            return null;
         }
         // Kiểm tra mã vùng hợp lệ (bao gồm các mã vùng phổ biến ở Việt Nam)
-        String[] validPrefixes = {"09", "08", "07", "05", "03","02"};
+        String[] validPrefixes = {"09", "08", "07", "05", "03", "02"};
         boolean isValidPrefix = false;
         for (String prefix : validPrefixes) {
-        if (dienThoai.startsWith(prefix)) {
-        isValidPrefix = true;
-        break;
-        }
+            if (dienThoai.startsWith(prefix)) {
+                isValidPrefix = true;
+                break;
+            }
         }
         if (!isValidPrefix) {
-        mesF.showMessage("error", "Có thể hai số đầu SDT không hợp lệ: 00,01,04 ko nên dùng");
-        return null;
+            mesF.showMessage("error", "Có thể hai số đầu SDT không hợp lệ: 00,01,04 ko nên dùng");
+            return null;
         }
         Date ngaySinhDate = txt_NgSinh.getDate();
         LocalDate ngaySinh = ngaySinhDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -166,30 +178,30 @@ public class QlyNhanVien extends javax.swing.JPanel {
         Period period = Period.between(ngaySinh, ngayHienTai);
         int tuoi = period.getYears();
         if (tuoi < 18) {
-//        JOptionPane.showMessageDialog(null, "Người này chưa đủ 18 tuổi!");
-          mesF.showMessage("error", "Người này chưa đủ 18 tuổi");
-        return null;
+            mesF.showMessage("error", "Người này chưa đủ 18 tuổi");
+            return null;
         }
         Date ngayBatDauDate = txt_NgayBatDau.getDate();
         Date ngayKetThucDate = txt_NgayKT.getDate();
         if (ngayBatDauDate != null && ngayKetThucDate != null) {
-        LocalDate ngayBatDau = ngayBatDauDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate ngayKetThuc = ngayKetThucDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        
-        Period thoiGianLamViec = Period.between(ngayBatDau, ngayKetThuc);
-        if (thoiGianLamViec.getMonths() < 1 && thoiGianLamViec.getYears() == 0) {
-            mesF.showMessage("error", "Ngày kết thúc phải lớn hơn ngày bắt đầu ít nhất một tháng");
-            return null;
+            LocalDate ngayBatDau = ngayBatDauDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate ngayKetThuc = ngayKetThucDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            Period thoiGianLamViec = Period.between(ngayBatDau, ngayKetThuc);
+            if (thoiGianLamViec.getMonths() < 1 && thoiGianLamViec.getYears() == 0) {
+                mesF.showMessage("error", "Ngày kết thúc phải lớn hơn ngày bắt đầu ít nhất một tháng");
+                return null;
+            }
         }
-    }
         // Kiểm tra Thời hạn
         if (nv.getThoiHan() == null || nv.getThoiHan() <= 0) {
             mesF.showMessage("error", "Thời hạn hợp đồng ít nhất phải được 1 tháng");
-        return null;
+            return null;
         }
         return nv;
-        
+
     }
+
     public void clear() {
         txt_Ma.setText("");
         txt_Ten.setText("");
@@ -203,7 +215,7 @@ public class QlyNhanVien extends javax.swing.JPanel {
         txt_ThoiHan.setText("0"); // Đặt giá trị mặc định cho thoiHan
         lb_HinhAnh.setIcon(null);
         lb_HinhAnh.setText("    Them hinh anh");
-        
+
     }
 
     private void textSearch() {
@@ -212,18 +224,20 @@ public class QlyNhanVien extends javax.swing.JPanel {
             public void insertUpdate(DocumentEvent e) {
                 timKiem();
             }
-            
+
             @Override
             public void removeUpdate(DocumentEvent e) {
                 timKiem();
             }
+
             @Override
             public void changedUpdate(DocumentEvent e) {
                 timKiem();
             }
-            
+
         });
     }
+
     private void timKiem() {
         String timkiem = txt_TimKiem.getText().trim();
         fillTable(rpNV.tim(timkiem));
@@ -641,17 +655,7 @@ public class QlyNhanVien extends javax.swing.JPanel {
 
         tbl_NhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Mã nhân viên", "Họ Tên", "Ngày sinh", "Giới tính", "Điện Thoại", "CCCD", "Ngày bắt đầu", "Ngày kết thúc", "Thời Hạn", "Trạng Thái", "Ảnh"
@@ -681,7 +685,7 @@ public class QlyNhanVien extends javax.swing.JPanel {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/timNV.png"))); // NOI18N
 
-        cboLocTrangThai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Đang làm việc", "Đã nghỉ việc" }));
+        cboLocTrangThai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất Cả", "Đang làm việc", "Đã nghỉ việc" }));
         cboLocTrangThai.setSelectedIndex(-1);
         cboLocTrangThai.setLabeText("Trạng thái");
         cboLocTrangThai.addActionListener(new java.awt.event.ActionListener() {
@@ -785,81 +789,79 @@ public class QlyNhanVien extends javax.swing.JPanel {
 
     private void btn_ThemNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemNVActionPerformed
         // TODO add your handling code here:
-    Model_NhanVien nv = this.readFrom();
-    if (nv != null) {
-        // Kiểm tra trùng lặp Mã nhân viên
-        if (rpNV.checkTrungMaNV(nv.getMaNV()) != null) {
-        mesF.showMessage("error", "Không được trùng Mã nhân viên");
-        }
-        // Kiểm tra trùng lặp Điện thoại
-        else if (rpNV.checkTrungDienThoai(nv.getDienThoai()) != null) {
-        mesF.showMessage("error", "Không được trùng Điện thoại");
-        }
-        // Kiểm tra trùng lặp CCCD
-        else if (rpNV.checkTrungCCCD(nv.getCCCD()) != null) {
-        mesF.showMessage("error", "Không được trùng CCCD");
-        } else {
-            message.showMessage("message", "Bạn có muốn thêm nhân viên không:? ");
-            message.setOnOkClicked(() ->{
-            // Thêm nhân viên mới
-            if (rpNV.add(nv) > 0) {
-                mesF.showMessage("success", "Thêm thành công");
-                this.fillTable(rpNV.getAllNhanVien(1));
-                updateTotalNhanVien();
+        Model_NhanVien nv = this.readFrom();
+        if (nv != null) {
+            // Kiểm tra trùng lặp Mã nhân viên
+            if (rpNV.checkTrungMaNV(nv.getMaNV()) != null) {
+                mesF.showMessage("error", "Không được trùng Mã nhân viên");
+            } // Kiểm tra trùng lặp Điện thoại
+            else if (rpNV.checkTrungDienThoai(nv.getDienThoai()) != null) {
+                mesF.showMessage("error", "Không được trùng Điện thoại");
+            } // Kiểm tra trùng lặp CCCD
+            else if (rpNV.checkTrungCCCD(nv.getCCCD()) != null) {
+                mesF.showMessage("error", "Không được trùng CCCD");
             } else {
-                mesF.showMessage("error", "Thêm thất bại");
+                message.showMessage("message", "Bạn có chắc chắn muốn thêm nhân viên không:? ");
+                message.setOnOkClicked(() -> {
+                    // Thêm nhân viên mới
+                    if (rpNV.add(nv) > 0) {
+                        mesF.showMessage("success", "Thêm thành công");
+                        this.fillTable(rpNV.getAllNhanVien(1));
+                        updateTotalNhanVien();
+                    } else {
+                        mesF.showMessage("error", "Thêm thất bại");
+                    }
+                });
             }
-        });
-        }            
-}
+        }
     }//GEN-LAST:event_btn_ThemNVActionPerformed
 
     private void btn_XoaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaNVActionPerformed
         // TODO add your handling code here:
-       // Lấy hàng được chọn trong bảng
-    int i = tbl_NhanVien.getSelectedRow();
-    if (i == -1) {
-        mesF.showMessage("error", "Vui lòng chọn nhân viên cần xóa.");
-        return;
-    }
-    // Lấy mã nhân viên từ bảng
-    String maNV = tbl_NhanVien.getValueAt(i, 0).toString();
-    // Hiển thị hộp thoại xác nhận
-         message.showMessage("message", "Nhân viên của bạn đã nghỉ việc (Xóa) ");
-         message.setOnOkClicked(() ->{
-        // Thực hiện "xóa mềm"
-        if (rpNV.DeleteNV(maNV) > 0) {
-            mesF.showMessage("success", "Xóa thành công");
-            this.fillTable(rpNV.getAllNhanVien(1)); // Cập nhật lại bảng nhân viên
-            updateTotalNhanVien();
-        } else {
-            mesF.showMessage("error", "Xóa thất bại");
+        // Lấy hàng được chọn trong bảng
+        int i = tbl_NhanVien.getSelectedRow();
+        if (i == -1) {
+            mesF.showMessage("error", "Vui lòng chọn nhân viên cần xóa.");
+            return;
         }
-    });
-                
+        // Lấy mã nhân viên từ bảng
+        String maNV = tbl_NhanVien.getValueAt(i, 0).toString();
+        // Hiển thị hộp thoại xác nhận
+        message.showMessage("message", "Nhân viên của bạn đã nghỉ việc (Xóa) ");
+        message.setOnOkClicked(() -> {
+            // Thực hiện "xóa mềm"
+            if (rpNV.DeleteNV(maNV) > 0) {
+                mesF.showMessage("success", "Xóa thành công");
+                this.fillTable(rpNV.getAllNhanVien(1)); // Cập nhật lại bảng nhân viên
+                updateTotalNhanVien();
+            } else {
+                mesF.showMessage("error", "Xóa thất bại");
+            }
+        });
+
     }//GEN-LAST:event_btn_XoaNVActionPerformed
 
     private void btn_SuaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaNVActionPerformed
         // TODO add your handling code here:
         int i = tbl_NhanVien.getSelectedRow();
-    if (i >= 0) { // Kiểm tra xem có chọn hàng nào không
-        Model_NhanVien nv = this.readFrom();
-        if (nv != null) {
-            String maKH = tbl_NhanVien.getValueAt(i, 0).toString(); // Sử dụng cột mã nhân viên ở cột đầu tiên
-             message.showMessage("message", "Bạn có chắc chắn muốn sửa nhân viên này không? ");
-             message.setOnOkClicked(() ->{
-            if (rpNV.update(maKH, nv) > 0) {
-                mesF.showMessage("success", "Sửa thông tin nhân viên thành công");
-                this.fillTable(rpNV.getAllNhanVien(1)); // Cập nhật bảng sau khi sửa
-                updateTotalNhanVien();
-            } else {
-                mesF.showMessage("error", "Sửa thất bại");
+        if (i >= 0) { // Kiểm tra xem có chọn hàng nào không
+            Model_NhanVien nv = this.readFrom();
+            if (nv != null) {
+                String maKH = tbl_NhanVien.getValueAt(i, 0).toString(); // Sử dụng cột mã nhân viên ở cột đầu tiên
+                message.showMessage("message", "Bạn có chắc chắn muốn sửa nhân viên này không? ");
+                message.setOnOkClicked(() -> {
+                    if (rpNV.update(maKH, nv) > 0) {
+                        mesF.showMessage("success", "Sửa thông tin nhân viên thành công");
+                        this.fillTable(rpNV.getAllNhanVien(1)); // Cập nhật bảng sau khi sửa
+                        updateTotalNhanVien();
+                    } else {
+                        mesF.showMessage("error", "Sửa thất bại");
+                    }
+                });
             }
-        });
+        } else {
+            mesF.showMessage("error", "Vui lòng chọn nhân viên để sửa");
         }
-    } else {
-        mesF.showMessage("error", "Vui lòng chọn nhân viên để sửa");
-    }
     }//GEN-LAST:event_btn_SuaNVActionPerformed
 
     private void btn_ResetNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ResetNVActionPerformed
@@ -875,52 +877,54 @@ public class QlyNhanVien extends javax.swing.JPanel {
         // TODO add your handling code here:
         // Kiểm tra xem giá trị chọn trong combo box có phải là số không
         String selectedItem = cboLocTrangThai.getSelectedItem().toString();
-          if (selectedItem.equals("Đã nghỉ việc")) {
-            this.fillTable(rpNV.getAllNhanVien(0));
-          } else {
-            this.fillTable(rpNV.getAllNhanVien(1));
-          }
-            updateTotalNhanVien(); // Cập nhật tổng số nhân viên sau khi lọc
+        // Kiểm tra giá trị được chọn và gọi phương thức tương ứng
+        if (selectedItem.equals("Tất Cả")) {
+            fillTable(rpNV.getAllNhanVien()); // Lấy tất cả nhân viên
+        } else if (selectedItem.equals("Đang làm việc")) {
+            fillTable(rpNV.getAllNhanVien(1)); // Lấy nhân viên đang làm việc
+        } else if (selectedItem.equals("Đã nghỉ việc")) {
+            fillTable(rpNV.getAllNhanVien(0)); // Lấy nhân viên đã nghỉ việc
+        }
+        updateTotalNhanVien();
     }//GEN-LAST:event_cboLocTrangThaiActionPerformed
 
     private void tbl_NhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_NhanVienMouseClicked
         // TODO add your handling code here:
-    i = tbl_NhanVien.getSelectedRow();
-    txt_Ma.setText(tbl_NhanVien.getValueAt(i, 0).toString());
-    txt_Ten.setText(tbl_NhanVien.getValueAt(i, 1).toString());
-    Date ngaySinh = (Date) tbl_NhanVien.getValueAt(i, 2);
-    txt_NgSinh.setDate(ngaySinh);
-    // Kiểm tra và gán giá trị cho radio button
-    String gioiTinh = tbl_NhanVien.getValueAt(i, 3).toString();
-    if (gioiTinh.equalsIgnoreCase("Nam")) {
-        rdo_Nam.setSelected(true);
-    } else {
-        rdo_Nu.setSelected(true);
-    }
-    
-    txt_DT.setText(tbl_NhanVien.getValueAt(i, 4).toString());
-    txt_CCCD.setText(tbl_NhanVien.getValueAt(i, 5).toString());
-    
-    Date ngayBD = (Date) tbl_NhanVien.getValueAt(i, 6);
-    txt_NgayBatDau.setDate(ngayBD);
-    
-    Date ngayKT = (Date) tbl_NhanVien.getValueAt(i, 7);
-    txt_NgayKT.setDate(ngayKT);
-    
-    int thoiHan = (int) tbl_NhanVien.getValueAt(i, 8);
-    txt_ThoiHan.setText(String.valueOf(thoiHan));
-    
-    // Kiểm tra và gán giá trị cho radio button trạng thái
-    String trangThai = tbl_NhanVien.getValueAt(i, 9).toString();
-    if (trangThai.equalsIgnoreCase("Đã nghỉ việc")) {
-        rdo_Nghi.setSelected(true);
-    } else {
-        rdo_Lam.setSelected(true);
-    }
-    
-    String imagePath = tbl_NhanVien.getValueAt(i, 10).toString();
-    ImageIcon imageIcon = new ImageIcon(imagePath);
-    lb_HinhAnh.setIcon(imageIcon);
+        i = tbl_NhanVien.getSelectedRow();
+        txt_Ma.setText(tbl_NhanVien.getValueAt(i, 0).toString());
+        txt_Ten.setText(tbl_NhanVien.getValueAt(i, 1).toString());
+        Date ngaySinh = (Date) tbl_NhanVien.getValueAt(i, 2);
+        txt_NgSinh.setDate(ngaySinh);
+        // Kiểm tra và gán giá trị cho radio button
+        String gioiTinh = tbl_NhanVien.getValueAt(i, 3).toString();
+        if (gioiTinh.equalsIgnoreCase("Nam")) {
+            rdo_Nam.setSelected(true);
+        } else {
+            rdo_Nu.setSelected(true);
+        }
+
+        txt_DT.setText(tbl_NhanVien.getValueAt(i, 4).toString());
+        txt_CCCD.setText(tbl_NhanVien.getValueAt(i, 5).toString());
+
+        Date ngayBD = (Date) tbl_NhanVien.getValueAt(i, 6);
+        txt_NgayBatDau.setDate(ngayBD);
+
+        Date ngayKT = (Date) tbl_NhanVien.getValueAt(i, 7);
+        txt_NgayKT.setDate(ngayKT);
+
+        int thoiHan = (int) tbl_NhanVien.getValueAt(i, 8);
+        txt_ThoiHan.setText(String.valueOf(thoiHan));
+
+        // Kiểm tra và gán giá trị cho radio button trạng thái
+        String trangThai = tbl_NhanVien.getValueAt(i, 9).toString();
+        if (trangThai.equalsIgnoreCase("Đã nghỉ việc")) {
+            rdo_Nghi.setSelected(true);
+        } else {
+            rdo_Lam.setSelected(true);
+        }
+        String imagePath = tbl_NhanVien.getValueAt(i, 10).toString();
+        ImageIcon imageIcon = new ImageIcon(imagePath);
+        lb_HinhAnh.setIcon(imageIcon);
     }//GEN-LAST:event_tbl_NhanVienMouseClicked
 
     private void btn_LoadNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoadNVActionPerformed

@@ -6,7 +6,6 @@ package view.panel;
 
 import java.util.ArrayList;
 import java.util.Date;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.KhachThue.ModelKhachThue;
 import repository.KhachThue.repositoriesKhachThue;
@@ -120,7 +119,7 @@ public class QlyKhachThue extends javax.swing.JPanel {
         txtHoTen.setLabelText("Họ tên");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Giới tính", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(153, 153, 153))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Giới tính", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 12), new java.awt.Color(153, 153, 153))); // NOI18N
 
         buttonGroup1.add(rdoNam);
         rdoNam.setText(" Nam");
@@ -159,6 +158,12 @@ public class QlyKhachThue extends javax.swing.JPanel {
 
         txtMaKT.setEditable(false);
         txtMaKT.setLabelText("Mã khách thuê");
+
+        cbbMaPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbMaPhongActionPerformed(evt);
+            }
+        });
 
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
         jLabel2.setText(" Mã phòng");
@@ -534,6 +539,10 @@ public class QlyKhachThue extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cbbTinhTrangActionPerformed
 
+    private void cbbMaPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbMaPhongActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbbMaPhongActionPerformed
+
     public model.KhachThue.ModelKhachThue readForm() {
         mesg = new MessageFrame();
         String maKT, hoTen, dienThoai, email, diaChi, cccd, maPT;
@@ -653,13 +662,10 @@ public class QlyKhachThue extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JRadioButton rdoNam;
-    private javax.swing.JRadioButton rdoNam1;
     private javax.swing.JRadioButton rdoNu;
-    private javax.swing.JRadioButton rdoNu1;
     private view.component.table.Table tblKhachThue;
     private view.component.textfield.TextField txtCCCD;
     private javax.swing.JTextArea txtDiaChi;
