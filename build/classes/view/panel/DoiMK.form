@@ -225,7 +225,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnXoaTK" min="-2" pref="125" max="-2" attributes="0"/>
-                          <Component id="textField1" min="-2" pref="493" max="-2" attributes="0"/>
+                          <Component id="txtTimKiem" min="-2" pref="493" max="-2" attributes="0"/>
                           <Component id="btnReset" min="-2" pref="125" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -240,7 +240,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="textField1" min="-2" pref="54" max="-2" attributes="0"/>
+                              <Component id="txtTimKiem" min="-2" pref="54" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                               <Component id="btnXoaTK" min="-2" pref="39" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
@@ -507,7 +507,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="view.component.textfield.TextField" name="textField1">
+            <Component class="view.component.textfield.TextField" name="txtTimKiem">
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
               </Properties>
