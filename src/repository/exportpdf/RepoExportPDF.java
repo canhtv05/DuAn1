@@ -176,7 +176,13 @@ public class RepoExportPDF {
                 row.createCell(6).setCellValue(model.getTienDV());
                 row.createCell(7).setCellValue(model.getThanhTien());
             }
+<<<<<<< HEAD
             try (FileOutputStream fileOut = new FileOutputStream(fileToSave)) {
+=======
+
+            File file = new File("C:\\Users\\chung\\Desktop\\hoadon.xlsx");
+            try (FileOutputStream fileOut = new FileOutputStream(file)) {
+>>>>>>> 83c47920c5491efc12602200374a260febc5dff4
                 workbook.write(fileOut);
             }
         } catch (Exception e) {

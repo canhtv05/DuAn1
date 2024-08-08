@@ -26,6 +26,7 @@ public class ModelHopDong {
    
     
     
+    
     public String TrangThai(){
         if (trangThai) {
             return "hết hạn";
