@@ -9,6 +9,7 @@ import repository.Tang.repoTang;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import view.component.message.MessageFrame;
+import view.jframe.ViewSignIn;
 
 public class QlyTang extends javax.swing.JPanel {
 
@@ -16,10 +17,24 @@ public class QlyTang extends javax.swing.JPanel {
     private repoTang repoT = new repoTang();
     private MessageFrame msg;
     private MessageFrame confirm;
+    private int role = -1;
 
     public QlyTang() {
         initComponents();
         this.fillTable(this.repoT.findAll());
+        checkNV();
+    }
+    
+    private void checkNV() {
+        role = ViewSignIn.role;
+        if(role == 1) {
+            btnInsert.setEnabled(false);
+            btnReSetForm.setEnabled(false);
+            btnUpdate.setEnabled(false);
+            txtTangSo.setEditable(false);
+            txtSoPhong.setEditable(false);
+            txtGhiChu.setEditable(false);
+        }
     }
 
     private void fillTable(ArrayList<ModelTang> listT) {
