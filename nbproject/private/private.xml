@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="3">
+        <file>
+            <url>src/repository/tiendien/RepoTienDien.java</url>
+            <bookmark id="3">
+                <name/>
+                <line>21</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/view/panel/PanelMessage.java</url>
+            <bookmark id="2">
+                <name/>
+                <line>61</line>
+                <key/>
+            </bookmark>
+            <bookmark id="1">
+                <name/>
+                <line>125</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/Git/DuAn1/src/model/HopDong/ModelHopDong.java</file>
             <file>file:/D:/Git/DuAn1/src/view/panel/QlyKhachThue.java</file>
             <file>file:/D:/Git/DuAn1/src/view/panel/QLTaiSanPhong.java</file>
@@ -13,6 +36,27 @@
             <file>file:/D:/Git/DuAn1/src/model/KhachThue/ModelKhachThue.java</file>
             <file>file:/D:/Git/DuAn1/src/view/panel/QlyHopDong.java</file>
             <file>file:/D:/Git/DuAn1/src/view/jframe/ViewApp.java</file>
+=======
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/QlyHoaDon.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/PanelMessage.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/jframe/ViewApp.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/jframe/LuaChonNgayXuatExcel.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/jframe/ViewSignIn.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/service/PanelMessageListenerImpl.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/DoiMK.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/QlyKhachThue.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/component/message/MessageFrame.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/repository/exportpdf/RepoExportPDF.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/model/hoadon/ModelHoaDon.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/jframe/QrCodeHoaDon.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/QlyHopDong.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/model/hoadon/ModelExcel.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/jframe/ExportPdf.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/jframe/ThemHoaDon.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/jframe/LuaChonNgayXuatPDF.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/repository/hoadon/RepoHoaDon.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/LichLamViec.java</file>
+>>>>>>> 0b6387cfc54b0277305a22a5e21a0710eb260326
         </group>
     </open-files>
 </project-private>

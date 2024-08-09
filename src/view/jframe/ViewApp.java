@@ -1,5 +1,4 @@
 package view.jframe;
-
 import view.panel.FormHome;
 import view.panel.Header;
 import view.panel.MainForm;
@@ -41,7 +40,7 @@ public class ViewApp extends javax.swing.JFrame {
 
     public ViewApp() {
         initComponents();
-        ViewApp.this.setExtendedState(ViewApp.this.MAXIMIZED_BOTH);
+//        ViewApp.this.setExtendedState(ViewApp.this.MAXIMIZED_BOTH);
         init();
         changeHeader();
     }

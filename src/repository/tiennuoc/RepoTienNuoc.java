@@ -201,7 +201,7 @@ public class RepoTienNuoc {
         boolean success = false;
 
         String sql1 = "UPDATE dbo.TienNuoc "
-                + "SET NgayBatDau = ?, NgayKetThuc = ?, DauNguoi = ?, GiaTien = ?, TrangThai = ? "
+                + "SET NgayBatDau = ?, NgayKetThuc = ?, GiaTien = ?, TrangThai = ? "
                 + "WHERE IdTienNuoc = ?;";
 
         String sql2 = "UPDATE dbo.TienDien "
@@ -215,10 +215,9 @@ public class RepoTienNuoc {
             ps1 = conn.prepareStatement(sql1);
             ps1.setObject(1, modelTienNuoc.getNgayBD());
             ps1.setObject(2, modelTienNuoc.getNgayKT());
-            ps1.setObject(3, modelTienNuoc.getDauNguoi());
-            ps1.setObject(4, modelTienNuoc.getGiaTien());
-            ps1.setObject(5, modelTienNuoc.getTrangThai());
-            ps1.setObject(6, modelTienNuoc.getMaTN());
+            ps1.setObject(3, modelTienNuoc.getGiaTien());
+            ps1.setObject(4, modelTienNuoc.getTrangThai());
+            ps1.setObject(5, modelTienNuoc.getMaTN());
             int affectedRows1 = ps1.executeUpdate();
 
             ps2 = conn.prepareStatement(sql2);

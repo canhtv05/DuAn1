@@ -199,9 +199,14 @@ public class LuaChonNgayXuatExcel extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        repoExportPDF.exportToExcel(ngayLap);
         MessageFrame mess = new MessageFrame();
-        mess.showMessage("success", "Xuất đơn thành công.");
+        if (repoExportPDF.exportToExcel(ngayLap)) {
+            mess.showMessage("success", "Xuất đơn thành công.");
+            dispose();
+        }else {
+            mess.showMessage("error", "Xuất đơn thất bại.");
+            dispose();
+        }
     }//GEN-LAST:event_myButton1ActionPerformed
 
     public static void main(String args[]) {

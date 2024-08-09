@@ -15,10 +15,5 @@ public class ModelDoiMK {
     private String maNV;
     private String mk;
     private int vaiTro;
-
-    public ModelDoiMK(String tk, String mk) {
-        this.tk = tk;
-        this.mk = mk;
-    }
     
 }

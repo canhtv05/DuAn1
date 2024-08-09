@@ -20,14 +20,13 @@ import java.awt.geom.RoundRectangle2D;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import view.component.message.MessageFrame;
 import view.component.qrcode.DeleteAllFile;
 
 public class ExportPdf extends javax.swing.JFrame {
 
-    private RepoExportPDF repo;
+    private RepoExportPDF repo = new RepoExportPDF();
     private RepoHoaDon repoHoaDon;
     private int maHD = QlyHoaDon.maHD;
     private ArrayList<Integer> listMaHD;
@@ -37,16 +36,18 @@ public class ExportPdf extends javax.swing.JFrame {
     public ExportPdf() {
         initComponents();
         showIcon = new HashMap<>();
-//        DeleteAllFile.main(new String[]{});
         this.setVisible(true);
+        this.setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 30, 30));
+        tblTienDien.fixTable(jScrollPane1);
+        tblTienNuoc.fixTable(jScrollPane2);
+        tblTienDV.fixTable(jScrollPane3);
         if (!QlyHoaDon.show) {
             init();
             printAllHoaDon();
-
         } else {
             showHoaDon(maHD);
         }
-        this.setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 30, 30));
+        DeleteAllFile.main(new String[]{});
     }
 
     private void printAllHoaDon() {
@@ -58,7 +59,9 @@ public class ExportPdf extends javax.swing.JFrame {
         SwingUtilities.invokeLater(() -> {
             MessageFrame mess = new MessageFrame();
             mess.showMessage("success", "Xuất hóa đơn thành công.");
+            ExportPdf.this.dispose();
         });
+
     }
 
     private void chupAnhVaLuu(int maHD) {
@@ -66,7 +69,7 @@ public class ExportPdf extends javax.swing.JFrame {
         try {
             BufferedImage bi = new BufferedImage(roundedPanel1.getWidth(), roundedPanel1.getHeight(), BufferedImage.TYPE_INT_RGB);
             roundedPanel1.paint(bi.getGraphics());
-            String path = "C:\\Users\\chung\\Desktop\\hoadon_" + maHD + ".jpg";
+            String path = "C:\\Users\\PC\\OneDrive\\Desktop\\hoadon\\hoadon_" + maHD + ".jpg";
             ImageIO.write(bi, "jpg", new File(path));
         } catch (IOException e) {
             e.printStackTrace();
@@ -75,7 +78,6 @@ public class ExportPdf extends javax.swing.JFrame {
     }
 
     private void init() {
-        repo = new RepoExportPDF();
         SimpleDateFormat input = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -127,6 +129,7 @@ public class ExportPdf extends javax.swing.JFrame {
             }
         }
         txtKhachThue.setText(str.toString());
+        txtNguoiTao.setText(repo.getTenNV(maHD));
 
         DefaultTableModel model1 = (DefaultTableModel) tblTienDien.getModel();
         model1.setRowCount(0);
@@ -206,6 +209,8 @@ public class ExportPdf extends javax.swing.JFrame {
         lblMaQr = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        txtNguoiTao = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -334,9 +339,9 @@ public class ExportPdf extends javax.swing.JFrame {
         jLabel10.setText("Mã phòng:");
         roundedPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 65, -1, 26));
 
-        txtKhachThue.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtKhachThue.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtKhachThue.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        roundedPanel1.add(txtKhachThue, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 590, 26));
+        roundedPanel1.add(txtKhachThue, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 280, 26));
 
         lblMaQr.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         roundedPanel1.add(lblMaQr, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 430, 110, 110));
@@ -353,6 +358,14 @@ public class ExportPdf extends javax.swing.JFrame {
             }
         });
         roundedPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 10, 24, 24));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel13.setText("Người tạo:");
+        roundedPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, -1, 26));
+
+        txtNguoiTao.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtNguoiTao.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        roundedPanel1.add(txtNguoiTao, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, 210, 26));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -414,6 +427,7 @@ public class ExportPdf extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -433,6 +447,7 @@ public class ExportPdf extends javax.swing.JFrame {
     private javax.swing.JLabel txtGiaPhong;
     private javax.swing.JLabel txtKhachThue;
     private javax.swing.JLabel txtMaPhong;
+    private javax.swing.JLabel txtNguoiTao;
     private javax.swing.JLabel txtThanhTien;
     // End of variables declaration//GEN-END:variables
 }
