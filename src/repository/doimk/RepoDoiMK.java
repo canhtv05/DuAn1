@@ -20,13 +20,19 @@ public class RepoDoiMK {
         }
     }
 
-    public ArrayList<ModelDoiMK> getAll() {
+    public ArrayList<ModelDoiMK> getAll(String timKiem) {
         ArrayList<ModelDoiMK> list = new ArrayList<>();
         sql = "SELECT TenDangNhap, MaNhanVien, MatKhau, VaiTro FROM dbo.DangNhap";
 
+        if (timKiem != null && !timKiem.trim().isEmpty()) {
+            sql += " WHERE MaNhanVien LIKE ?";
+        }
+
         try {
             ps = conn.prepareStatement(sql);
+            if(timKiem != null && !timKiem.trim().isEmpty()) ps.setString(1, "%" + timKiem + "%");
             rs = ps.executeQuery();
+
             while (rs.next()) {
                 ModelDoiMK model = new ModelDoiMK(
                         rs.getString(1),
@@ -124,5 +130,5 @@ public class RepoDoiMK {
         }
         return false;
     }
-}
 
+}

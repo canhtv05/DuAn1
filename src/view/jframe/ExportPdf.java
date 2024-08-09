@@ -69,7 +69,7 @@ public class ExportPdf extends javax.swing.JFrame {
         try {
             BufferedImage bi = new BufferedImage(roundedPanel1.getWidth(), roundedPanel1.getHeight(), BufferedImage.TYPE_INT_RGB);
             roundedPanel1.paint(bi.getGraphics());
-            String path = "C:\\Users\\chung\\Desktop\\hoadon_" + maHD + ".jpg";
+            String path = "C:\\Users\\PC\\OneDrive\\Desktop\\hoadon\\hoadon_" + maHD + ".jpg";
             ImageIO.write(bi, "jpg", new File(path));
         } catch (IOException e) {
             e.printStackTrace();

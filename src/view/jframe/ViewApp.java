@@ -17,6 +17,7 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
 import view.panel.DoiMK;
 import view.panel.Footer;
 import view.panel.LichLamViec;
+import view.panel.QLTaiSanPhong;
 import view.panel.QlyTang;
 import view.panel.QlyHoaDon;
 import view.panel.QlyHopDong;
@@ -90,7 +91,12 @@ public class ViewApp extends javax.swing.JFrame {
                         main.showForm(new LichLamViec());
                     }
                 } else if (menuIndex == 5) {
-                    main.showForm(new QlyTaiSan());
+                    
+                    if (subMenuIndex == 0) {
+                        main.showForm(new QlyTaiSan());
+                    } else if(subMenuIndex == 1){
+                        main.showForm(new QLTaiSanPhong());
+                    }
                 } else if (menuIndex == 6) {
                     main.showForm(new DoiMK());
                 } else if (menuIndex == 7) {

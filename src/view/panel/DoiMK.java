@@ -11,6 +11,8 @@ import java.util.regex.Pattern;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import model.doimk.ModelDoiMK;
 import repository.doimk.RepoDoiMK;
@@ -28,11 +30,13 @@ public class DoiMK extends javax.swing.JPanel {
     private String user;
     private int role;
     private MessageFrame mess;
+    private String timKiem = "";
 
     public DoiMK() {
         initComponents();
         init();
         eventChangeTab();
+        tab1();
     }
 
     private void init() {
@@ -53,8 +57,28 @@ public class DoiMK extends javax.swing.JPanel {
                     tab.setSelectedIndex(0);
                     return;
                 } else {
-                    tab1();
+                    timKiem();
                 }
+            }
+        });
+    }
+
+    private void timKiem() {
+        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                timKiem = txtTimKiem.getText().trim();
+                tab1();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                timKiem = txtTimKiem.getText().trim();
+                tab1();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
             }
         });
     }
@@ -64,9 +88,7 @@ public class DoiMK extends javax.swing.JPanel {
         RepoDoiMK repo = new RepoDoiMK();
         DefaultTableModel model = (DefaultTableModel) tbl.getModel();
         model.setRowCount(0);
-        ArrayList<ModelDoiMK> list = new ArrayList<>();
-        list = repo.getAll();
-
+        ArrayList<ModelDoiMK> list = repo.getAll(timKiem);
         for (ModelDoiMK m : list) {
             Object[] row = {
                 m.getTk(),
@@ -83,6 +105,7 @@ public class DoiMK extends javax.swing.JPanel {
         txtTenTK.setText("");
         txtMK.setText("");
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -116,7 +139,7 @@ public class DoiMK extends javax.swing.JPanel {
         txtMK = new view.component.textfield.TextField();
         btnTK = new view.component.button.MyButton();
         jLabel2 = new javax.swing.JLabel();
-        textField1 = new view.component.textfield.TextField();
+        txtTimKiem = new view.component.textfield.TextField();
 
         tab.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -364,7 +387,7 @@ public class DoiMK extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        textField1.setLabelText("Tìm kiếm");
+        txtTimKiem.setLabelText("Tìm kiếm");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -380,7 +403,7 @@ public class DoiMK extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnXoaTK, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -392,7 +415,7 @@ public class DoiMK extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
                         .addComponent(btnXoaTK, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
@@ -623,13 +646,13 @@ public class DoiMK extends javax.swing.JPanel {
     private view.component.radiobutton.RadioButtonCustom rdo_NV;
     private view.component.tab.MaterialTabbed tab;
     private view.component.table.Table tbl;
-    private view.component.textfield.TextField textField1;
     private view.component.textfield.TextField txtMK;
     private view.component.textfield.TextField txtMaNV;
     private view.component.textfield.TextField txtMkCu;
     private view.component.textfield.TextField txtMkMoi;
     private view.component.textfield.TextField txtTK;
     private view.component.textfield.TextField txtTenTK;
+    private view.component.textfield.TextField txtTimKiem;
     private view.component.textfield.TextField txtXacNhan;
     // End of variables declaration//GEN-END:variables
 }

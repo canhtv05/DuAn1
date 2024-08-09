@@ -322,32 +322,7 @@
         <Component class="view.component.textfield.TextField" name="txtMaKT">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-<<<<<<< HEAD
-            <Property name="labelText" type="java.lang.String" value="M&#xe3; kh&#xe1;ch thu&#xea;"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="cbbMaPhong">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbbMaPhongActionPerformed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
-          <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="99" green="99" red="99" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value=" M&#xe3; ph&#xf2;ng"/>
-=======
             <Property name="labelText" type="java.lang.String" value="M&#xe3; kh&#xe1;ch thu&#xea; (Kh&#xf4;ng nh&#x1ead;p khi Th&#xea;m)"/>
->>>>>>> 83c47920c5491efc12602200374a260febc5dff4
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -379,6 +354,9 @@
           <Properties>
             <Property name="labeText" type="java.lang.String" value="M&#xe3; ph&#xf2;ng"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbbMaPhongActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
