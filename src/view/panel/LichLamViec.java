@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import model.NhanVien.Model_LichLamViec;
 import repository.NhanVien.repoLichLamViec;
 import view.component.message.MessageFrame;
+import view.jframe.ViewSignIn;
 
 /**
  *
@@ -30,6 +31,7 @@ public class LichLamViec extends javax.swing.JPanel {
     private int nam = -1;
     private int trangThai = -1;
     private String timKiem = "";
+    private int role = -1;
 
     /**
      * Creates new form LichLamViec
@@ -41,6 +43,17 @@ public class LichLamViec extends javax.swing.JPanel {
         textSearch();
         updateTotalTrangThai();
         tbl_Lich.fixTable(jScrollPane1);
+        checkNV();
+    }
+    
+    private void checkNV() {
+        role  = ViewSignIn.role;
+        if(role == 1) {
+            btn_ThemLich.setEnabled(false);
+            myButton3.setEnabled(false);
+            myButton2.setEnabled(false);
+            myButton1.setEnabled(false);
+        }
     }
 
     private void loadTableData() {

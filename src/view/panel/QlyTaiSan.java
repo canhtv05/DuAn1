@@ -9,6 +9,7 @@ import repository.TaiSan.repoTaiSan;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import view.component.message.MessageFrame;
+import view.jframe.ViewSignIn;
 
 /**
  *
@@ -20,10 +21,19 @@ public class QlyTaiSan extends javax.swing.JPanel {
     private repoTaiSan repoTS = new repoTaiSan();
     private MessageFrame msg;
     private MessageFrame confirm;
+    private int role = -1;
 
     public QlyTaiSan() {
         initComponents();
         this.fillTable(this.repoTS.getAll());
+        checkNV();
+    }
+    
+    private void checkNV() {
+        role = ViewSignIn.role;
+        if(role == 1) {
+            btnDelete.setEnabled(false);
+        }
     }
 
     private void fillTable(ArrayList<ModelTaiSan> listTs) {
