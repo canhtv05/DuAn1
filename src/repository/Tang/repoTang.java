@@ -53,14 +53,13 @@ public class repoTang {
 
     public void insert(ModelTang mdt) {
         String sql = """
-                     Insert into Tang(TangSo, SoPhong, GhiChu) Values (?, ?, ?);
+                     Insert into Tang(SoPhong, GhiChu) Values (?, ?);
                      """;
 
         try {
             PreparedStatement ps = this.conn.prepareStatement(sql);
-            ps.setInt(1, mdt.getTangSo());
-            ps.setInt(2, mdt.getSoPhong());
-            ps.setString(3, mdt.getGhiChu());
+            ps.setInt(1, mdt.getSoPhong());
+            ps.setString(2, mdt.getGhiChu());
             ps.execute();
 
         } catch (Exception e) {
