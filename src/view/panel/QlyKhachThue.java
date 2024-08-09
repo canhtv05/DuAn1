@@ -170,6 +170,11 @@ public class QlyKhachThue extends javax.swing.JPanel {
         jLabel4.setText(" Địa chỉ");
 
         cbbMaPhong.setLabeText("Mã phòng");
+        cbbMaPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbMaPhongActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -534,6 +539,10 @@ public class QlyKhachThue extends javax.swing.JPanel {
             fillTable(rpKT.getAll(tt));
         }
     }//GEN-LAST:event_cbbLocPhongActionPerformed
+
+    private void cbbMaPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbMaPhongActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbbMaPhongActionPerformed
 
     public model.KhachThue.ModelKhachThue readForm() {
         mesg = new MessageFrame();
