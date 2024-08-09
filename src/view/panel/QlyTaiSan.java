@@ -26,6 +26,7 @@ public class QlyTaiSan extends javax.swing.JPanel {
     public QlyTaiSan() {
         initComponents();
         this.fillTable(this.repoTS.getAll());
+        tblTaiSan.fixTable(jScrollPane1);
         checkNV();
     }
     
