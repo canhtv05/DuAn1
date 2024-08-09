@@ -1,30 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="3">
-        <file>
-            <url>src/repository/tiendien/RepoTienDien.java</url>
-            <bookmark id="3">
-                <name/>
-                <line>21</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
-            <url>src/view/panel/PanelMessage.java</url>
-            <bookmark id="2">
-                <name/>
-                <line>61</line>
-                <key/>
-            </bookmark>
-            <bookmark id="1">
-                <name/>
-                <line>125</line>
-                <key/>
-            </bookmark>
-        </file>
-    </editor-bookmarks>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/QlyHoaDon.java</file>
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/repository/doimk/RepoDoiMK.java</file>
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/PanelMessage.java</file>
@@ -47,6 +26,24 @@
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/jframe/LuaChonNgayXuatPDF.java</file>
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/repository/hoadon/RepoHoaDon.java</file>
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/LichLamViec.java</file>
+=======
+            <file>file:/H:/DuAn/DuAn1/src/view/jframe/ViewApp.java</file>
+            <file>file:/H:/DuAn/DuAn1/src/repository/KhachThue/repositoriesKhachThue.java</file>
+            <file>file:/H:/DuAn/DuAn1/src/view/panel/QlyKhachThue.java</file>
+            <file>file:/H:/DuAn/DuAn1/src/model/KhachThue/ModelKhachThue.java</file>
+            <file>file:/H:/DuAn/DuAn1/src/view/jframe/ViewSignUp.java</file>
+            <file>file:/H:/DuAn/DuAn1/src/view/panel/DoiMK.java</file>
+            <file>file:/H:/DuAn/DuAn1/src/repository/NhanVien/repoNhanVien.java</file>
+            <file>file:/H:/DuAn/DuAn1/src/repository/doimk/RepoDoiMK.java</file>
+            <file>file:/H:/DuAn/DuAn1/src/view/jframe/ViewSignIn.java</file>
+            <file>file:/H:/DuAn/DuAn1/src/view/panel/QlyNhanVien.java</file>
+            <file>file:/H:/DuAn/DuAn1/src/view/panel/LichLamViec.java</file>
+            <file>file:/H:/DuAn/DuAn1/src/repository/exportpdf/RepoExportPDF.java</file>
+            <file>file:/H:/DuAn/DuAn1/src/view/panel/QlyHopDong.java</file>
+            <file>file:/H:/DuAn/DuAn1/src/repository/login/CheckEmpty.java</file>
+            <file>file:/H:/DuAn/DuAn1/src/view/panel/QlyHoaDon.java</file>
+            <file>file:/H:/DuAn/DuAn1/src/repository/NhanVien/repoLichLamViec.java</file>
+>>>>>>> 9f5ff18a05754a662787467b71a7ed3b3710621e
         </group>
     </open-files>
 </project-private>

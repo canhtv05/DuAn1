@@ -354,6 +354,9 @@
           <Properties>
             <Property name="labeText" type="java.lang.String" value="M&#xe3; ph&#xf2;ng"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbbMaPhongActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

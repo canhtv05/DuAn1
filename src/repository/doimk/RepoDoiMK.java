@@ -22,23 +22,30 @@ public class RepoDoiMK {
 
     public ArrayList<ModelDoiMK> getAll(String timKiem) {
         ArrayList<ModelDoiMK> list = new ArrayList<>();
+        // Câu lệnh SQL để tìm kiếm theo TenDangNhap và MaNhanVien
         sql = "SELECT TenDangNhap, MaNhanVien, MatKhau, VaiTro FROM dbo.DangNhap";
 
         if (timKiem != null && !timKiem.trim().isEmpty()) {
-            sql += " WHERE MaNhanVien LIKE ?";
+            sql += " WHERE TenDangNhap LIKE ? OR MaNhanVien LIKE ?";
         }
 
         try {
             ps = conn.prepareStatement(sql);
-            if(timKiem != null && !timKiem.trim().isEmpty()) ps.setString(1, "%" + timKiem + "%");
+            if (timKiem != null && !timKiem.trim().isEmpty()) {
+                // Thiết lập tham số tìm kiếm cho TenDangNhap và MaNhanVien
+                ps.setString(1, "%" + timKiem + "%");
+                if (sql.contains("OR")) { // Nếu có điều kiện OR thì cần thêm tham số cho MaNhanVien
+                    ps.setString(2, "%" + timKiem + "%");
+                }
+            }
             rs = ps.executeQuery();
 
             while (rs.next()) {
                 ModelDoiMK model = new ModelDoiMK(
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getInt(4)
+                        rs.getString("TenDangNhap"),
+                        rs.getString("MaNhanVien"),
+                        rs.getString("MatKhau"),
+                        rs.getInt("VaiTro")
                 );
                 list.add(model);
             }
