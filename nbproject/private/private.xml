@@ -3,22 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/H:/DuAn/DuAn1/src/view/jframe/ViewApp.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/repository/KhachThue/repositoriesKhachThue.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/view/panel/QlyKhachThue.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/model/KhachThue/ModelKhachThue.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/view/jframe/ViewSignUp.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/view/panel/DoiMK.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/repository/NhanVien/repoNhanVien.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/repository/doimk/RepoDoiMK.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/view/jframe/ViewSignIn.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/view/panel/QlyNhanVien.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/view/panel/LichLamViec.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/repository/exportpdf/RepoExportPDF.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/view/panel/QlyHopDong.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/repository/login/CheckEmpty.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/view/panel/QlyHoaDon.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/repository/NhanVien/repoLichLamViec.java</file>
+            <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/view/jframe/ViewApp.java</file>
+            <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/view/panel/QlyTang.java</file>
+            <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/view/panel/QlyPhongTro.java</file>
+            <file>file:/D:/PH52424_FPL/VisualCodeStudio/DuAn1/src/view/panel/QlyTaiSan.java</file>
         </group>
     </open-files>
 </project-private>

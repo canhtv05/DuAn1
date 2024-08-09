@@ -28,6 +28,7 @@ public class QlyPhongTro extends javax.swing.JPanel {
         initComponents();
         this.init();
         this.fillTable(this.repoPT.getAll());
+        this.tblPhongTro.fixTable(jScrollPane1);
         this.fillCbbTang(this.repoPT.getCbbTang());
         this.clearForm();
     }
@@ -77,7 +78,7 @@ public class QlyPhongTro extends javax.swing.JPanel {
         this.cbkBepDien.setSelected(false);
         this.cbbFilterTrangThai.setSelectedItem("Tất cả");
         this.cbbFilterPrice.setSelectedItem("Tất cả");
-        this.lbHinhAnh.setText("                             Thêm ảnh");
+        this.lbHinhAnh.setText("                               Thêm ảnh");
         this.lbHinhAnh.setIcon(null);
     }
 
@@ -701,6 +702,14 @@ public class QlyPhongTro extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
+        msg = new MessageFrame();
+        String Search = this.txtSearch.getText().trim();
+        
+        if (Search.equals("")) {
+            msg.showMessage("error", "Vui lòng nhập dữ liệu cần tìm!");
+            return;
+        }
+        
         this.fillTable(this.repoPT.Search(this.txtSearch.getText().trim()));
     }//GEN-LAST:event_btnSearchActionPerformed
 
