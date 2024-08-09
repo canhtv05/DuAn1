@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import model.hoadon.ModelExcel;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.RichTextString;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -175,13 +173,7 @@ public class RepoExportPDF {
                 row.createCell(6).setCellValue(model.getTienDV());
                 row.createCell(7).setCellValue(model.getThanhTien());
             }
-<<<<<<< HEAD
-
-            File file = new File("C:\\Users\\chung\\Desktop\\hoadon.xlsx");
-            try (FileOutputStream fileOut = new FileOutputStream(file)) {
-=======
             try (FileOutputStream fileOut = new FileOutputStream(fileToSave)) {
->>>>>>> e6f4820a98b8c999a2dd74292ec852d6a50c4ff5
                 workbook.write(fileOut);
             }
         } catch (Exception e) {

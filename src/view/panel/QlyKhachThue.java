@@ -608,11 +608,7 @@ public class QlyKhachThue extends javax.swing.JPanel {
         }
     }// GEN-LAST:event_cbbTinhTrangActionPerformed
 
-<<<<<<< HEAD
-    private void cbbLocPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbLocPhongActionPerformed
-=======
     private void cbbLocPhongActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cbbLocPhongActionPerformed
->>>>>>> e6f4820a98b8c999a2dd74292ec852d6a50c4ff5
         // TODO add your handling code here:
         int tt;
         if (cbbTinhTrang.getSelectedItem().toString().equalsIgnoreCase("Đang thuê")) {
@@ -625,15 +621,11 @@ public class QlyKhachThue extends javax.swing.JPanel {
         } else {
             fillTable(rpKT.getAll(tt));
         }
-<<<<<<< HEAD
-    }//GEN-LAST:event_cbbLocPhongActionPerformed
-=======
     }// GEN-LAST:event_cbbLocPhongActionPerformed
 
     private void cbbMaPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbMaPhongActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbbMaPhongActionPerformed
->>>>>>> e6f4820a98b8c999a2dd74292ec852d6a50c4ff5
 
     public model.KhachThue.ModelKhachThue readForm() {
         mesg = new MessageFrame();
