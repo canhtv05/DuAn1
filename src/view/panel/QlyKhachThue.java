@@ -156,20 +156,7 @@ public class QlyKhachThue extends javax.swing.JPanel {
         });
 
         txtMaKT.setEditable(false);
-<<<<<<< HEAD
-        txtMaKT.setLabelText("Mã khách thuê");
-
-        cbbMaPhong.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbbMaPhongActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel2.setText(" Mã phòng");
-=======
         txtMaKT.setLabelText("Mã khách thuê (Không nhập khi Thêm)");
->>>>>>> 83c47920c5491efc12602200374a260febc5dff4
 
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
         jLabel3.setText(" Ngày sinh");
@@ -532,11 +519,6 @@ public class QlyKhachThue extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cbbTinhTrangActionPerformed
 
-<<<<<<< HEAD
-    private void cbbMaPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbMaPhongActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbbMaPhongActionPerformed
-=======
     private void cbbLocPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbLocPhongActionPerformed
         // TODO add your handling code here:
         int tt;
@@ -551,7 +533,6 @@ public class QlyKhachThue extends javax.swing.JPanel {
             fillTable(rpKT.getAll(tt));
         }
     }//GEN-LAST:event_cbbLocPhongActionPerformed
->>>>>>> 83c47920c5491efc12602200374a260febc5dff4
 
     public model.KhachThue.ModelKhachThue readForm() {
         mesg = new MessageFrame();

@@ -18,6 +18,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import view.component.message.MessageFrame;
 
+
 /**
  *
  * @author CanhPC
@@ -38,13 +39,12 @@ public class QlyNhanVien extends javax.swing.JPanel {
         initComponents();
         TableNhanVien = (DefaultTableModel) tbl_NhanVien.getModel();
         this.fillTable(rpNV.getAllNhanVien(1));
-        init();
         textSearch();
+        init();
         updateTotalNhanVien();
         loadTableData();
         tbl_NhanVien.fixTable(jScrollPane4);
     }
-
     public void init() {
         lb_HinhAnh.setText("");
     }
@@ -77,6 +77,7 @@ public class QlyNhanVien extends javax.swing.JPanel {
 
     public Model_NhanVien readFrom() {
         Model_NhanVien nv = new Model_NhanVien();
+        // check không được để trống
         if (txt_Ma.getText().trim().isEmpty()
                 || txt_Ten.getText().trim().isEmpty()
                 || txt_CCCD.getText().trim().isEmpty()
@@ -650,6 +651,8 @@ public class QlyNhanVien extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        lb_HinhAnh.getAccessibleContext().setAccessibleDescription("");
+
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -842,15 +845,35 @@ public class QlyNhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_XoaNVActionPerformed
 
     private void btn_SuaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaNVActionPerformed
-        // TODO add your handling code here:
         int i = tbl_NhanVien.getSelectedRow();
-        if (i >= 0) { // Kiểm tra xem có chọn hàng nào không
+        if (i >= 0) {
             Model_NhanVien nv = this.readFrom();
             if (nv != null) {
-                String maKH = tbl_NhanVien.getValueAt(i, 0).toString(); // Sử dụng cột mã nhân viên ở cột đầu tiên
-                message.showMessage("message", "Bạn có chắc chắn muốn sửa nhân viên này không? ");
+                String maNV = tbl_NhanVien.getValueAt(i, 0).toString(); // Mã nhân viên hiện tại trong bảng
+
+                // Kiểm tra mã nhân viên đã nhập có khác với mã nhân viên hiện tại không
+                if (!maNV.equals(nv.getMaNV())) {
+                    mesF.showMessage("error", "Không được phép sửa mã nhân viên.");
+                    return; // Dừng việc sửa
+                }
+
+                // Kiểm tra trùng số điện thoại
+                Model_NhanVien nvTrungDienThoai = rpNV.checkTrungDienThoai(nv.getDienThoai());
+                if (nvTrungDienThoai != null && !nvTrungDienThoai.getMaNV().equals(maNV)) {
+                    mesF.showMessage("error", "Số điện thoại đã tồn tại cho nhân viên khác.");
+                    return; // Dừng việc sửa
+                }
+
+                // Kiểm tra trùng số CCCD
+                Model_NhanVien nvTrungCCCD = rpNV.checkTrungCCCD(nv.getCCCD());
+                if (nvTrungCCCD != null && !nvTrungCCCD.getMaNV().equals(maNV)) {
+                    mesF.showMessage("error", "Số CCCD đã tồn tại cho nhân viên khác.");
+                    return; // Dừng việc sửa
+                }
+
+                message.showMessage("message", "Bạn có chắc chắn muốn sửa nhân viên này không?");
                 message.setOnOkClicked(() -> {
-                    if (rpNV.update(maKH, nv) > 0) {
+                    if (rpNV.update(maNV, nv) > 0) {
                         mesF.showMessage("success", "Sửa thông tin nhân viên thành công");
                         this.fillTable(rpNV.getAllNhanVien(1)); // Cập nhật bảng sau khi sửa
                         updateTotalNhanVien();
@@ -862,6 +885,8 @@ public class QlyNhanVien extends javax.swing.JPanel {
         } else {
             mesF.showMessage("error", "Vui lòng chọn nhân viên để sửa");
         }
+
+
     }//GEN-LAST:event_btn_SuaNVActionPerformed
 
     private void btn_ResetNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ResetNVActionPerformed
