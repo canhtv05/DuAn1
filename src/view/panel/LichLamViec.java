@@ -4,6 +4,7 @@
  */
 package view.panel;
 
+import java.awt.Color;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -53,6 +54,11 @@ public class LichLamViec extends javax.swing.JPanel {
             myButton3.setEnabled(false);
             myButton2.setEnabled(false);
             myButton1.setEnabled(false);
+            txt_Ma.setBackground(new Color(204,204,204));
+            txt_Ma.setEditable(false);
+            txt_TenNhanVien.setBackground(new Color(204,204,204));
+            txt_TenNhanVien.setEditable(false);
+            txt_NgayLamViec.setEnabled(false);
         }
     }
 
@@ -215,7 +221,6 @@ public class LichLamViec extends javax.swing.JPanel {
             }
         });
 
-        txt_CongViec.setBackground(new java.awt.Color(255, 255, 255));
         txt_CongViec.setColumns(20);
         txt_CongViec.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         txt_CongViec.setForeground(new java.awt.Color(0, 0, 255));
@@ -482,7 +487,7 @@ public class LichLamViec extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(comBo_Nam, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(combo_TrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                        .addComponent(combo_TrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 137, Short.MAX_VALUE)
                         .addGap(11, 11, 11)))
                 .addContainerGap())
         );

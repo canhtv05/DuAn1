@@ -4,6 +4,7 @@
  */
 package view.panel;
 
+import java.awt.Color;
 import model.Tang.ModelTang;
 import repository.Tang.repoTang;
 import java.util.ArrayList;
@@ -24,16 +25,19 @@ public class QlyTang extends javax.swing.JPanel {
         this.fillTable(this.repoT.findAll());
         checkNV();
     }
-    
+
     private void checkNV() {
         role = ViewSignIn.role;
-        if(role == 1) {
+        if (role == 1) {
             btnInsert.setEnabled(false);
             btnReSetForm.setEnabled(false);
             btnUpdate.setEnabled(false);
             txtTangSo.setEditable(false);
+            txtTangSo.setBackground(new Color(204, 204, 204));
             txtSoPhong.setEditable(false);
+            txtSoPhong.setBackground(new Color(204, 204, 204));
             txtGhiChu.setEditable(false);
+            txtGhiChu.setBackground(new Color(204, 204, 204));
         }
     }
 
