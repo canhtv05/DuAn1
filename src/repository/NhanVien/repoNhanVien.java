@@ -173,7 +173,8 @@ public class repoNhanVien {
     }
 
     public int update(String maNV, Model_NhanVien m) {
-        sql = "UPDATE NhanVien SET MaNhanVien=?, HoTen=?, NgaySinh=?, GioiTinh=?, DienThoai=?, CCCD=?, NgayBatDau=?, NgayKetThuc=?, ThoiHan=?, TrangThai =?, Anh=? WHERE MaNhanVien=?";
+        sql = "UPDATE NhanVien SET MaNhanVien=?, HoTen=?, NgaySinh=?, GioiTinh=?, DienThoai=?,"
+                + " CCCD=?, NgayBatDau=?, NgayKetThuc=?, ThoiHan=?, TrangThai =?, Anh=? WHERE MaNhanVien=?";
         try {
             con = DBContext.getConnection();
             ps = con.prepareStatement(sql);
@@ -214,24 +215,30 @@ public class repoNhanVien {
     public ArrayList<Model_NhanVien> tim(String tenCanTim) {
         ArrayList<Model_NhanVien> list_NhanVien = new ArrayList<>();
         sql = """
-              SELECT [MaNhanVien]
-                    ,[HoTen]
-                    ,[NgaySinh]
-                    ,[GioiTinh]
-                    ,[DienThoai]
-                    ,[CCCD]
-                    ,[NgayBatDau]
-                    ,[NgayKetThuc]
-                    ,[ThoiHan]
-                    ,[TrangThai]
-                    ,[Anh]
-                FROM [dbo].[NhanVien]
-                where MaNhanVien LIKE ? Or HoTen LIKE ? """;
+          SELECT [MaNhanVien]
+                ,[HoTen]
+                ,[NgaySinh]
+                ,[GioiTinh]
+                ,[DienThoai]
+                ,[CCCD]
+                ,[NgayBatDau]
+                ,[NgayKetThuc]
+                ,[ThoiHan]
+                ,[TrangThai]
+                ,[Anh]
+            FROM [dbo].[NhanVien]
+            WHERE MaNhanVien LIKE ? 
+              OR HoTen LIKE ? 
+              OR DienThoai LIKE ? 
+              OR CCCD LIKE ?""";
         try {
             con = DBContext.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setObject(1, '%' + tenCanTim + '%');
-            ps.setString(2, '%' + tenCanTim + '%');
+            String queryParam = '%' + tenCanTim + '%';
+            ps.setObject(1, queryParam);
+            ps.setString(2, queryParam);
+            ps.setString(3, queryParam);
+            ps.setString(4, queryParam);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Model_NhanVien nv = Model_NhanVien.builder()
