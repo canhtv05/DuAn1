@@ -704,12 +704,12 @@ public class QlyPhongTro extends javax.swing.JPanel {
         // TODO add your handling code here:
         msg = new MessageFrame();
         String Search = this.txtSearch.getText().trim();
-        
+
         if (Search.equals("")) {
             msg.showMessage("error", "Vui lòng nhập dữ liệu cần tìm!");
             return;
         }
-        
+
         this.fillTable(this.repoPT.Search(this.txtSearch.getText().trim()));
     }//GEN-LAST:event_btnSearchActionPerformed
 
@@ -837,8 +837,8 @@ public class QlyPhongTro extends javax.swing.JPanel {
         } else {
             try {
                 float giaPhong = Float.parseFloat(this.txtGiaPhong.getText().trim());
-                if (giaPhong < 2500000 || giaPhong > 5000000) {
-                    msg.showMessage("error", "Giá phòng chỉ trong khoảng từ 2.5 - 5tr");
+                if (giaPhong < 2500000 || giaPhong > 10000000) {
+                    msg.showMessage("error", "Giá phòng chỉ trong khoảng từ 2.5 - 10tr");
                     this.txtGiaPhong.requestFocus();
                     return false;
                 }
@@ -865,35 +865,35 @@ public class QlyPhongTro extends javax.swing.JPanel {
         float giaPhong = Float.parseFloat(this.txtGiaPhong.getText().trim());
         String tienNghi = "";
         if (this.cbkDieuHoa.isSelected()) {
-            tienNghi += cbkDieuHoa.getText() + " ";
-        }
-
-        if (this.cbkNongLanh.isSelected()) {
-            tienNghi += cbkNongLanh.getText() + " ";
+            tienNghi += cbkDieuHoa.getText() + ", ";
         }
 
         if (this.cbkTuLanh.isSelected()) {
-            tienNghi += cbkTuLanh.getText() + " ";
+            tienNghi += cbkTuLanh.getText() + ", ";
+        }
+
+        if (this.cbkMayGiat.isSelected()) {
+            tienNghi += cbkMayGiat.getText() + ", ";
+        }
+
+        if (this.cbkNongLanh.isSelected()) {
+            tienNghi += cbkNongLanh.getText() + ", ";
+        }
+
+        if (this.cbkBepDien.isSelected()) {
+            tienNghi += cbkBepDien.getText() + ", ";
+        }
+
+        if (this.cbkBanHoc.isSelected()) {
+            tienNghi += cbkBanHoc.getText() + ", ";
+        }
+
+        if (this.cbkGiuong.isSelected()) {
+            tienNghi += cbkGiuong.getText() + ", ";
         }
 
         if (this.cbkTuQuanAo.isSelected()) {
             tienNghi += cbkTuQuanAo.getText() + " ";
-        }
-
-        if (this.cbkGiuong.isSelected()) {
-            tienNghi += cbkGiuong.getText() + " ";
-        }
-
-        if (this.cbkBanHoc.isSelected()) {
-            tienNghi += cbkBanHoc.getText() + " ";
-        }
-
-        if (this.cbkMayGiat.isSelected()) {
-            tienNghi += cbkMayGiat.getText() + " ";
-        }
-
-        if (this.cbkBepDien.isSelected()) {
-            tienNghi += cbkBepDien.getText() + " ";
         }
 
         int trangThai = this.rdoConTrong.isSelected() ? 0 : this.rdoDaThue.isSelected() ? 1 : 2;

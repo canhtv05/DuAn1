@@ -5,6 +5,7 @@
 package view.panel;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -53,12 +54,16 @@ public class LichLamViec extends javax.swing.JPanel {
             btn_ThemLich.setEnabled(false);
             myButton3.setEnabled(false);
             myButton2.setEnabled(false);
-            myButton1.setEnabled(false);
             txt_Ma.setBackground(new Color(204,204,204));
             txt_Ma.setEditable(false);
             txt_TenNhanVien.setBackground(new Color(204,204,204));
             txt_TenNhanVien.setEditable(false);
+            txt_CongViec.setEditable(false);
             txt_NgayLamViec.setEnabled(false);
+            txt_NgayLamViec.setForeground(new Color(0,0,255));
+            txt_NgayLamViec.setFont(new Font("sansserif", 1, 14));
+            txt_NgayLamViec.setBackground(new Color(204,204,204));
+            txt_CongViec.setBackground(new Color(204,204,204));
         }
     }
 
@@ -75,7 +80,15 @@ public class LichLamViec extends javax.swing.JPanel {
             s.getGhiChu(), s.getTrangThai() == 0 ? "Chưa hoàn thành" : "Đã hoàn thành"
         }));
     }
+
     public Model_LichLamViec readFrom() {
+        // Kiểm tra không được để trống các trường
+        if (txt_Ma.getText().trim().isEmpty()
+                || txt_CongViec.getText().trim().isEmpty()
+                || txt_NgayLamViec.getDate() == null) {
+            mesF.showMessage("error", "Vui lòng không để trống các trường trừ ghi chú");
+            return null; // Hoặc thực hiện các hành động khác khi có lỗi
+        }
         Model_LichLamViec Lich = new Model_LichLamViec();
         Lich.setMaNV(txt_Ma.getText());
         Lich.setCongViec(txt_CongViec.getText());
@@ -373,24 +386,6 @@ public class LichLamViec extends javax.swing.JPanel {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jb_DaHoanThanh)
-                                .addGap(18, 18, 18)
-                                .addComponent(jb_ChuaHoanThanh)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_CapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(txt_TenNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -406,7 +401,26 @@ public class LichLamViec extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(myButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(myButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(0, 0, Short.MAX_VALUE)
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addContainerGap())
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jb_DaHoanThanh)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jb_ChuaHoanThanh)
+                                    .addGap(0, 0, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_CapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22))))))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -545,12 +559,15 @@ public class LichLamViec extends javax.swing.JPanel {
                         mesF.showMessage("error", "Sửa thất bại");
                     }
                 } else {
-                    mesF.showMessage("error", "Sửa thất bại");
+                    mesF.showMessage("error", "Sửa thất bại do dữ liệu các trường đang bị bỏ trống?"
+                            + "  Chỉ ghi chú mới được bỏ trống!");
                 }
             });
         } else {
             mesF.showMessage("error", "Vui lòng chọn một hàng để sửa");
         }
+
+
     }//GEN-LAST:event_myButton2ActionPerformed
 
     private void btn_ThemLichActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemLichActionPerformed
@@ -570,7 +587,8 @@ public class LichLamViec extends javax.swing.JPanel {
                         this.fillTable(rp.getALLLich());
                         updateTotalTrangThai();
                     } else {
-                        mesF.showMessage("error", "Thêm thất bại");
+                        mesF.showMessage("error", "Thêm thất bại mã nhân viên có thể ko tồn tại"
+                                + "  Vui lòng hập đúng mã nhân viên");
                     }
                 }
             });
@@ -651,13 +669,14 @@ public class LichLamViec extends javax.swing.JPanel {
         Model_LichLamViec lichLamViec = this.readFrom();
         if (lichLamViec != null) {
             // Hiển thị hộp thoại xác nhận
-            message.showMessage("message", "Bạn có chắc chắn muốn cập nhật không? ");
+            message.showMessage("message", "Bạn có chắc chắn muốn cập nhật không?");
             message.setOnOkClicked(() -> {
                 // Lấy ID từ hàng được chọn
                 int id = Integer.parseInt(tbl_Lich.getValueAt(i, 1).toString());
                 int trangThai = lichLamViec.getTrangThai();
+                String ghiChu = lichLamViec.getGhiChu(); // Đọc ghi chú từ model
 
-                if (rp.updateTrangThai(id, trangThai) > 0) {
+                if (rp.updateTrangThai(id, trangThai, ghiChu) > 0) { // Cập nhật với ghi chú
                     mesF.showMessage("success", "Bạn đã cập nhật thành công");
                     // Cập nhật lại bảng sau khi cập nhật
                     this.fillTable(rp.getALLLich());
@@ -669,6 +688,7 @@ public class LichLamViec extends javax.swing.JPanel {
         } else {
             mesF.showMessage("error", "Vui lòng chọn nhân viên cần cập nhật");
         }
+
     }//GEN-LAST:event_btn_CapNhatActionPerformed
 
     private void combo_NgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_NgayActionPerformed

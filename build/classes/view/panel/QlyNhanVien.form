@@ -803,7 +803,7 @@
         </Container>
         <Component class="view.component.textfield.TextField" name="txt_TimKiem">
           <Properties>
-            <Property name="labelText" type="java.lang.String" value=" T&#xec;m ki&#x1ebf;m m&#xe3;, T&#xea;n"/>
+            <Property name="labelText" type="java.lang.String" value=" T&#xec;m ki&#x1ebf;m m&#xe3;, T&#xea;n, SDT, CCCD"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_TimKiemActionPerformed"/>

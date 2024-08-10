@@ -95,13 +95,14 @@ public class repoLichLamViec {
         }
     }
 
-    public int updateTrangThai(int id, int trangThai) {
-        sql = "UPDATE LichLamViec SET TrangThai=? WHERE idLichLamViec=?";
+    public int updateTrangThai(int id, int trangThai, String ghiChu) {
+        sql = "UPDATE LichLamViec SET TrangThai=?, GhiChu=? WHERE idLichLamViec=?";
         try {
             con = DBContext.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, trangThai);
-            ps.setInt(2, id);
+            ps.setString(2, ghiChu);
+            ps.setInt(3, id);
             return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
