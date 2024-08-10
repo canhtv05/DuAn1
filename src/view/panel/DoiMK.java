@@ -470,13 +470,13 @@ public class DoiMK extends javax.swing.JPanel {
             mess.showMessage("error", "Mật khẩu phải chứa 3 ký tự trở lên.");
             return;
         }
-        if (!matcherMkMoi.matches() || !matcherNxMK.matches()) {
-            mess.showMessage("error", "Mật khẩu phải chứa ít nhất 1 kí tự số và chữ in hoa.");
-            return;
-        }
         if (!mkMoi.equals(xnMkMoi)) {
             txtXacNhan.requestFocus();
             mess.showMessage("error", "Mật khẩu không khớp.");
+            return;
+        }
+        if (!matcherMkMoi.matches() || !matcherNxMK.matches()) {
+            mess.showMessage("error", "Mật khẩu phải chứa ít nhất 1 kí tự số và chữ in hoa.");
             return;
         }
         mess.showMessage("message", "Bạn có muốn đổi mật khẩu không?");
@@ -495,8 +495,8 @@ public class DoiMK extends javax.swing.JPanel {
         Validate validate = new Validate();
         MessageFrame messageFrame = new MessageFrame();
         mess = new MessageFrame();
-        JTextField[] field = {txtMaNV,txtTenTK, txtMK,};
-        String[] label = {"Mã Nhân Viên","Tài khoản", "Mật khẩu",};
+        JTextField[] field = {txtMaNV, txtTenTK, txtMK,};
+        String[] label = {"Mã Nhân Viên", "Tài khoản", "Mật khẩu",};
         // Xác định vai trò trước khi kiểm tra các trường
         int vaiTro = rdo_ChuTro.isSelected() ? 0 : (rdo_NV.isSelected() ? 1 : -1); // Vai trò: 0 là Chủ trọ, 1 là Nhân viên
         // Kiểm tra xem vai trò đã được chọn chưa

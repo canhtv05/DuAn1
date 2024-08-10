@@ -54,7 +54,7 @@ public class Menu extends javax.swing.JPanel {
     }
 
     public void initMenuItem() {
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_speed_20px.png")),
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_house_20px.png")),
                 "Tầng"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icons8_hotel_star_20px.png")),
                 "Phòng trọ"));
