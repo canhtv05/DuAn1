@@ -23,6 +23,7 @@ public class QlyKhachThue extends javax.swing.JPanel {
     private MessageFrame mess = new MessageFrame();
 
     private int index = -1;
+    private int check=0;
 
     /**
      * Creates new form QliKhachThue
@@ -497,13 +498,14 @@ public class QlyKhachThue extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-
+        check=1;
         if (readForm() != null) {
             mesg = new MessageFrame();
             if (readForm().getMaKT().equalsIgnoreCase(rpKT.check(readForm().getMaKT()))) {
                 mesg.showMessage("error", "đã tồn tại mã khách: " + txtMaKT.getText());
             } else {
-
+                
+            
                 if (rpKT.them(readForm()) > 0) {
                     // cbbMaPhong.addItem(readForm().getMaPT());
                     // JOptionPane.showMessageDialog(this, "Thêm thành công")
@@ -514,9 +516,12 @@ public class QlyKhachThue extends javax.swing.JPanel {
                     mesg.showMessage("error", "Thêm thất bại");
 
                 }
+            
+                
             }
 
         }
+        check=0;
     }// GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSuaActionPerformed
@@ -663,6 +668,11 @@ public class QlyKhachThue extends javax.swing.JPanel {
             txtHoTen.requestFocus();
             return null;
         }
+        if (rpKT.checkTen(hoTen)==false) {
+            mesg.showMessage("error", "Họ tên không được chứa số");
+            txtHoTen.requestFocus();
+            return null;
+        }
         if (ngaySinh.equals("")) {
             mesg.showMessage("error", "chưa nhập Ngày sinh");
             // JOptionPane.showMessageDialog(this, "chưa nhập ngày sinh");
@@ -679,10 +689,18 @@ public class QlyKhachThue extends javax.swing.JPanel {
             txtDienThoai.requestFocus();
             return null;
         }
-        if (dienThoai.equals(rpKT.CheckSDT(dienThoai))) {
+        if (rpKT.checkSoDT(dienThoai)==false) {
+            mesg.showMessage("error", "số điện thoại phải có 10 or 11 chữ số");
+            // JOptionPane.showMessageDialog(this, "chưa nhập số điện thoại");
+            txtDienThoai.requestFocus();
+            return null;
+        }
+        if (check==1) {
+            if (dienThoai.equals(rpKT.CheckSDT(dienThoai))) {
             mesg.showMessage("error", "Đã tồn tại số điện thoại này");
             txtDienThoai.requestFocus();
             return null;
+        }
         }
 
         if (email.isEmpty()) {
@@ -691,16 +709,19 @@ public class QlyKhachThue extends javax.swing.JPanel {
             txtEmail.requestFocus();
             return null;
         }
-        if (email.endsWith("@gmail.com") == false) {
+        if (rpKT.checkemailNC(email) == false) {
             mesg.showMessage("error", "Email chưa đúng định dạng");
             // JOptionPane.showMessageDialog(this, "email chưa đúng định dạng");
             txtEmail.requestFocus();
             return null;
         }
-        if (email.equals(rpKT.CheckEmail(email))) {
+        if (check==1) {
+            if (email.equals(rpKT.CheckEmail(email))) {
             mesg.showMessage("error", "Email đã tồn tại");
             txtEmail.requestFocus();
             return null;
+        }
+        
 
         }
         if (cccd.isEmpty()) {
@@ -710,13 +731,23 @@ public class QlyKhachThue extends javax.swing.JPanel {
             txtCCCD.requestFocus();
             return null;
         }
-        if (cccd.equals(rpKT.CheckCCCD(cccd))) {
-            mesg.showMessage("error", "CCCD này đã tồn tại");
+        if (rpKT.checkCC(cccd)==false) {
+            mesg.showMessage("error", "CCCD phải đủ 12 số");
 
             // JOptionPane.showMessageDialog(this, "chưa nhập CCCD");
             txtCCCD.requestFocus();
             return null;
         }
+        if (check==1) {
+            if (cccd.equals(rpKT.CheckCCCD(cccd))) {
+            mesg.showMessage("error", "CCCD này đã tồn tại");
+
+            // JOptionPane.showMessageDialog(this, "chưa nhập CCCD");
+            txtCCCD.requestFocus();
+            return null;
+            }
+        }
+        
         if (diaChi.isEmpty()) {
             mesg.showMessage("error", "chưa nhập địa chỉ");
 

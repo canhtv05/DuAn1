@@ -684,6 +684,7 @@ public class QlyHopDong extends javax.swing.JPanel {
             txtSoLuongNguoi.requestFocus();
             return null;
         }
+        
         if (ngayBD.equals("")) {
             mesg.showMessage("error", "chưa nhập ngày bắt đầu");
             txtNgayBatDau.requestFocus();
@@ -692,6 +693,10 @@ public class QlyHopDong extends javax.swing.JPanel {
         if (ngayKT.equals("")) {
             mesg.showMessage("error", "chưa nhập ngày kết thúc");
             txtNgayKetThuc.requestFocus();
+            return null;
+        }
+        if (ngayBD.before(ngayKT)==false) {
+            mesg.showMessage("error", "Ngày bắt đầu phải nhỏ hơn ngày kết thúc");
             return null;
         }
         if (txtThoiHan.getText().equalsIgnoreCase("")) {
@@ -719,9 +724,21 @@ public class QlyHopDong extends javax.swing.JPanel {
             return null;
         }
         soNguoi = Integer.parseInt(txtSoLuongNguoi.getText());
+        if (soNguoi<=0) {
+            mesg.showMessage("error", "số người phải lớn hơn 0");
+            return null;
+        }
         thoiHan = Integer.parseInt(txtThoiHan.getText());
+         if (thoiHan<=0) {
+            mesg.showMessage("error", "Thời hạn phải lớn hơn 0");
+            return null;
+        }
         giaPhong = Float.parseFloat(txtGiaPhong.getText());
         tienCoc = Float.parseFloat(txtTienCoc.getText());
+         if (tienCoc<=0) {
+            mesg.showMessage("error", "số người phải lớn hơn 0");
+            return null;
+        }
 
         return new model.HopDong.ModelHopDong(maHD, maPT, maKT, soNguoi, ngayBD, ngayKT, thoiHan, giaPhong, tienCoc,
                 dieuKhoan, trangThai);
