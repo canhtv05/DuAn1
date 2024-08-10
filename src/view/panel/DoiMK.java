@@ -470,13 +470,13 @@ public class DoiMK extends javax.swing.JPanel {
             mess.showMessage("error", "Mật khẩu phải chứa 3 ký tự trở lên.");
             return;
         }
-        if (!matcherMkMoi.matches() || !matcherNxMK.matches()) {
-            mess.showMessage("error", "Mật khẩu phải chứa ít nhất 1 kí tự số và chữ in hoa.");
-            return;
-        }
         if (!mkMoi.equals(xnMkMoi)) {
             txtXacNhan.requestFocus();
             mess.showMessage("error", "Mật khẩu không khớp.");
+            return;
+        }
+        if (!matcherMkMoi.matches() || !matcherNxMK.matches()) {
+            mess.showMessage("error", "Mật khẩu phải chứa ít nhất 1 kí tự số và chữ in hoa.");
             return;
         }
         mess.showMessage("message", "Bạn có muốn đổi mật khẩu không?");
@@ -495,36 +495,35 @@ public class DoiMK extends javax.swing.JPanel {
         Validate validate = new Validate();
         MessageFrame messageFrame = new MessageFrame();
         mess = new MessageFrame();
-        JTextField[] field = {txtTenTK, txtMK, txtMaNV};
-        String[] label = {"Tài khoản", "Mật khẩu", "Mã Nhân Viên"};
-
+        JTextField[] field = {txtMaNV, txtTenTK, txtMK,};
+        String[] label = {"Mã Nhân Viên", "Tài khoản", "Mật khẩu",};
         // Xác định vai trò trước khi kiểm tra các trường
-        int vaiTro = rdo_ChuTro.isSelected() ? 0 : 1; // Vai trò: 0 là Chủ trọ, 1 là Nhân viên
-        // Kiểm tra các trường có bị bỏ trống không
+        int vaiTro = rdo_ChuTro.isSelected() ? 0 : (rdo_NV.isSelected() ? 1 : -1); // Vai trò: 0 là Chủ trọ, 1 là Nhân viên
+        // Kiểm tra xem vai trò đã được chọn chưa
+        if (vaiTro == -1) {
+            mess.showMessage("error", "Bạn phải chọn vai trò (Chủ trọ hoặc Nhân viên).");
+            return;
+        }
+        // Kiểm tra tất cả các trường có bị bỏ trống không
         for (int i = 0; i < field.length; i++) {
             // Bỏ qua kiểm tra nếu vai trò là chủ trọ và trường đang kiểm tra là mã nhân viên
             if (label[i].equals("Mã Nhân Viên") && vaiTro == 0) {
                 continue;
             }
-            // Kiểm tra các trường khác
-            if (!validate.isNull(field[i], label[i])) {
+            if (field[i].getText().trim().isEmpty()) {
+                mess.showMessage("error", "Không được để trống " + label[i] + ".");
                 return;
             }
         }
 
+        // Thiết lập vai trò cho ModelDoiMK
         ModelDoiMK Themtk = new ModelDoiMK();
         Themtk.setVaiTro(vaiTro); // Thiết lập vai trò
 
+        // Lấy dữ liệu từ các trường
         String tk = txtTenTK.getText().trim();
         String mk = txtMK.getText().trim();
         String maNV = txtMaNV.getText().trim();
-
-        // Kiểm tra nếu tài khoản và mật khẩu có bị bỏ trống không
-        if (tk.isEmpty() || mk.isEmpty()) {
-            mess.showMessage("error", "Không được để trống tên tài khoản và mật khẩu.");
-            return;
-        }
-
         // Kiểm tra tài khoản đã tồn tại chưa
         if (repo.existTK(tk)) {
             mess.showMessage("error", "Đã tồn tại tài khoản này.");
@@ -559,23 +558,24 @@ public class DoiMK extends javax.swing.JPanel {
                 mess.showMessage("success", "Tạo tài khoản thành công.");
                 this.tab1();
             } else {
-                mess.showMessage("error", "Tạo tài khoản thất bại.");
+                mess.showMessage("error", "Tạo tài khoản thất bại, mã nhân viên không đúng hoặc không tồn tại");
             }
         });
+
     }//GEN-LAST:event_btnTKActionPerformed
 
     private void tblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMouseClicked
         // TODO add your handling code here:
-        int indenx = tbl.getSelectedRow();
-        txtTenTK.setText(tbl.getValueAt(indenx, 0).toString());
-        txtMaNV.setText(tbl.getValueAt(indenx, 1).toString());
-        txtMK.setText(tbl.getValueAt(indenx, 2).toString());
-        String vaiTro = tbl.getValueAt(indenx, 3).toString();
-        if (vaiTro.equalsIgnoreCase("Chủ trọ")) {
-            rdo_ChuTro.setSelected(true);
-        } else {
-            rdo_NV.setSelected(true);
-        }
+//        int indenx = tbl.getSelectedRow();
+//        txtTenTK.setText(tbl.getValueAt(indenx, 0).toString());
+//        txtMaNV.setText(tbl.getValueAt(indenx, 1).toString());
+//        txtMK.setText(tbl.getValueAt(indenx, 2).toString());
+//        String vaiTro = tbl.getValueAt(indenx, 3).toString();
+//        if (vaiTro.equalsIgnoreCase("Chủ trọ")) {
+//            rdo_ChuTro.setSelected(true);
+//        } else {
+//            rdo_NV.setSelected(true);
+//        }
     }//GEN-LAST:event_tblMouseClicked
 
     private void txtTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTKActionPerformed

@@ -4,8 +4,7 @@
  */
 package view.panel;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.awt.Color;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -15,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import model.NhanVien.Model_LichLamViec;
 import repository.NhanVien.repoLichLamViec;
 import view.component.message.MessageFrame;
+import view.jframe.ViewSignIn;
 
 /**
  *
@@ -32,6 +32,7 @@ public class LichLamViec extends javax.swing.JPanel {
     private int nam = -1;
     private int trangThai = -1;
     private String timKiem = "";
+    private int role = -1;
 
     /**
      * Creates new form LichLamViec
@@ -43,6 +44,22 @@ public class LichLamViec extends javax.swing.JPanel {
         textSearch();
         updateTotalTrangThai();
         tbl_Lich.fixTable(jScrollPane1);
+        checkNV();
+    }
+    
+    private void checkNV() {
+        role  = ViewSignIn.role;
+        if(role == 1) {
+            btn_ThemLich.setEnabled(false);
+            myButton3.setEnabled(false);
+            myButton2.setEnabled(false);
+            myButton1.setEnabled(false);
+            txt_Ma.setBackground(new Color(204,204,204));
+            txt_Ma.setEditable(false);
+            txt_TenNhanVien.setBackground(new Color(204,204,204));
+            txt_TenNhanVien.setEditable(false);
+            txt_NgayLamViec.setEnabled(false);
+        }
     }
 
     private void loadTableData() {
@@ -204,7 +221,6 @@ public class LichLamViec extends javax.swing.JPanel {
             }
         });
 
-        txt_CongViec.setBackground(new java.awt.Color(255, 255, 255));
         txt_CongViec.setColumns(20);
         txt_CongViec.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         txt_CongViec.setForeground(new java.awt.Color(0, 0, 255));
@@ -471,7 +487,7 @@ public class LichLamViec extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(comBo_Nam, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(combo_TrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                        .addComponent(combo_TrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 137, Short.MAX_VALUE)
                         .addGap(11, 11, 11)))
                 .addContainerGap())
         );

@@ -48,4 +48,11 @@ public class ModelTang {
         this.soPhong = soPhong;
     }
 
+    public ModelTang(int soPhong, String ghiChu) {
+        this.soPhong = soPhong;
+        this.ghiChu = ghiChu;
+    }
+    
+    
+
 }

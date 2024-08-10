@@ -14,6 +14,7 @@ import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
+import view.component.message.MessageFrame;
 import view.panel.DoiMK;
 import view.panel.Footer;
 import view.panel.LichLamViec;
@@ -37,6 +38,7 @@ public class ViewApp extends javax.swing.JFrame {
     private MainForm main;
     private Animator animator;
     private Footer footer;
+    private int role = 1;
 
     public ViewApp() {
         initComponents();
@@ -50,7 +52,7 @@ public class ViewApp extends javax.swing.JFrame {
         // đó thì sửa username ở header vì là hàm static
         String usernameString = ViewSignIn.getUsernameString;
         header.setUsername(usernameString);
-        int role = ViewSignIn.role;
+        role = ViewSignIn.role;
         header.changeImg(role);
     }
 
@@ -86,6 +88,11 @@ public class ViewApp extends javax.swing.JFrame {
                     }
                 } else if (menuIndex == 4) {
                     if (subMenuIndex == 0) {
+                        if (role == 1) {
+                            MessageFrame mess = new MessageFrame();
+                            mess.showMessage("error", "Nhân viên không có quyền này.");
+                            return;
+                        }
                         main.showForm(new QlyNhanVien());
                     } else if (subMenuIndex == 1) {
                         main.showForm(new LichLamViec());

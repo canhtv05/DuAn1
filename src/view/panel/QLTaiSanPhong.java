@@ -30,6 +30,7 @@ public class QLTaiSanPhong extends javax.swing.JPanel {
         this.fillTable(rpTSP.getAll(0));
         this.fillCbbMaPT(rpTSP.getCbbMaPhong());
         this.fillCbbIdTS(rpTSP.getCbbTaiSan());
+        tblTaiSanPhong.fixTable(jScrollPane2);
     }
 
     public void fillTable(ArrayList<model.TaiSanPhong.ModelTaiSanPhong> list) {

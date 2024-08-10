@@ -736,7 +736,7 @@ public class QlyHopDong extends javax.swing.JPanel {
         giaPhong = Float.parseFloat(txtGiaPhong.getText());
         tienCoc = Float.parseFloat(txtTienCoc.getText());
          if (tienCoc<=0) {
-            mesg.showMessage("error", "số người phải lớn hơn 0");
+            mesg.showMessage("error", "Tiền cọc phải lớn hơn 0");
             return null;
         }
 
