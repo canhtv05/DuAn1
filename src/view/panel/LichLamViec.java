@@ -80,7 +80,15 @@ public class LichLamViec extends javax.swing.JPanel {
             s.getGhiChu(), s.getTrangThai() == 0 ? "Chưa hoàn thành" : "Đã hoàn thành"
         }));
     }
+
     public Model_LichLamViec readFrom() {
+        // Kiểm tra không được để trống các trường
+        if (txt_Ma.getText().trim().isEmpty()
+                || txt_CongViec.getText().trim().isEmpty()
+                || txt_NgayLamViec.getDate() == null) {
+            mesF.showMessage("error", "Vui lòng không để trống các trường trừ ghi chú");
+            return null; // Hoặc thực hiện các hành động khác khi có lỗi
+        }
         Model_LichLamViec Lich = new Model_LichLamViec();
         Lich.setMaNV(txt_Ma.getText());
         Lich.setCongViec(txt_CongViec.getText());
@@ -551,12 +559,15 @@ public class LichLamViec extends javax.swing.JPanel {
                         mesF.showMessage("error", "Sửa thất bại");
                     }
                 } else {
-                    mesF.showMessage("error", "Sửa thất bại");
+                    mesF.showMessage("error", "Sửa thất bại do dữ liệu các trường đang bị bỏ trống?"
+                            + "  Chỉ ghi chú mới được bỏ trống!");
                 }
             });
         } else {
             mesF.showMessage("error", "Vui lòng chọn một hàng để sửa");
         }
+
+
     }//GEN-LAST:event_myButton2ActionPerformed
 
     private void btn_ThemLichActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemLichActionPerformed
@@ -576,7 +587,8 @@ public class LichLamViec extends javax.swing.JPanel {
                         this.fillTable(rp.getALLLich());
                         updateTotalTrangThai();
                     } else {
-                        mesF.showMessage("error", "Thêm thất bại");
+                        mesF.showMessage("error", "Thêm thất bại mã nhân viên có thể ko tồn tại"
+                                + "  Vui lòng hập đúng mã nhân viên");
                     }
                 }
             });
@@ -657,13 +669,14 @@ public class LichLamViec extends javax.swing.JPanel {
         Model_LichLamViec lichLamViec = this.readFrom();
         if (lichLamViec != null) {
             // Hiển thị hộp thoại xác nhận
-            message.showMessage("message", "Bạn có chắc chắn muốn cập nhật không? ");
+            message.showMessage("message", "Bạn có chắc chắn muốn cập nhật không?");
             message.setOnOkClicked(() -> {
                 // Lấy ID từ hàng được chọn
                 int id = Integer.parseInt(tbl_Lich.getValueAt(i, 1).toString());
                 int trangThai = lichLamViec.getTrangThai();
+                String ghiChu = lichLamViec.getGhiChu(); // Đọc ghi chú từ model
 
-                if (rp.updateTrangThai(id, trangThai) > 0) {
+                if (rp.updateTrangThai(id, trangThai, ghiChu) > 0) { // Cập nhật với ghi chú
                     mesF.showMessage("success", "Bạn đã cập nhật thành công");
                     // Cập nhật lại bảng sau khi cập nhật
                     this.fillTable(rp.getALLLich());
@@ -675,6 +688,7 @@ public class LichLamViec extends javax.swing.JPanel {
         } else {
             mesF.showMessage("error", "Vui lòng chọn nhân viên cần cập nhật");
         }
+
     }//GEN-LAST:event_btn_CapNhatActionPerformed
 
     private void combo_NgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_NgayActionPerformed

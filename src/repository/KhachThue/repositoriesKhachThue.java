@@ -249,4 +249,22 @@ public class repositoriesKhachThue {
             return null;
         }
     }
+    
+    
+    public boolean checkTen(String ten){
+        return !ten.matches(".*\\d.*");
+    }
+    
+    public boolean checkSoDT(String sdt){
+        return sdt.matches("^\\d{10,11}$");
+    }
+    
+    public boolean checkemailNC(String email){
+        String bieuThuc = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" + 
+                            "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return email.matches(bieuThuc);
+    }
+    public boolean checkCC(String cccd){
+        return cccd.matches("^\\d{12}$");
+    }
 }

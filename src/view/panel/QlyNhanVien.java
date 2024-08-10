@@ -18,7 +18,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import view.component.message.MessageFrame;
 
-
 /**
  *
  * @author CanhPC
@@ -45,6 +44,7 @@ public class QlyNhanVien extends javax.swing.JPanel {
         loadTableData();
         tbl_NhanVien.fixTable(jScrollPane4);
     }
+
     public void init() {
         lb_HinhAnh.setText("");
     }
@@ -89,7 +89,6 @@ public class QlyNhanVien extends javax.swing.JPanel {
         }
         // Gán giá trị cho các thuộc tính của đối tượng
         nv.setMaNV(txt_Ma.getText());
-        nv.setHoTen(txt_Ten.getText());
         nv.setNgaySinh(txt_NgSinh.getDate());
         if (rdo_Nam.isSelected()) {
             nv.setGioiTinh(0); // Giới tính Nam
@@ -112,26 +111,31 @@ public class QlyNhanVien extends javax.swing.JPanel {
         } else {
             nv.setTrangThai(1);// đi làm
         }
+        // Kiểm tra tên nhân viên không được chứa số, chỉ chứa chữ cái và các dấu huyền, dấu sắc, dấu nặng, dấu ngã
+        String hoTen = txt_Ten.getText().trim();
+        nv.setHoTen(hoTen);
+        // Biểu thức chính quy cho phép tên chứa các chữ cái, và các dấu tiếng Việt
+        if (!hoTen.matches("^[\\p{L}\\p{M} ]+$")) {
+            mesF.showMessage("error", "Tên nhân viên chỉ được chứa chữ cái và các dấu tiếng Việt");
+            return null;
+        }
+        // Kiểm tra CCCD
         String cccd = txt_CCCD.getText().trim();
-        // Kiểm tra CCCD chỉ chứa đúng 12 chữ số
         if (!cccd.matches("\\d{12}")) {
             mesF.showMessage("error", "Số CCCD phải có đúng 12 chữ số và chỉ chứa chữ số");
             return null;
         }
-        // Kiểm tra mã tỉnh/thành phố
         String maTinh = cccd.substring(0, 3);
         int maTinhNum = Integer.parseInt(maTinh);
         if (maTinhNum < 1 || maTinhNum > 96) {
             mesF.showMessage("error", "Mã CCCD không hợp lệ, kiểm tra lại 3 số đầu");
             return null;
         }
-        // Kiểm tra mã thế kỷ và giới tính
         char maGioiTinh = cccd.charAt(3);
         if (maGioiTinh != '0' && maGioiTinh != '1' && maGioiTinh != '2' && maGioiTinh != '3') {
             mesF.showMessage("error", "Mã CCCD không hợp lệ, kiểm tra lại số thứ tự thứ 4");
             return null;
         }
-        // Kiểm tra năm sinh
         String namSinh = cccd.substring(4, 6);
         try {
             int nam = Integer.parseInt(namSinh);
@@ -143,24 +147,21 @@ public class QlyNhanVien extends javax.swing.JPanel {
             mesF.showMessage("error", "Mã CCCD không hợp lệ, kiểm tra lại số thứ tự 5 và 6");
             return null;
         }
+
         // Kiểm tra số điện thoại
         String dienThoai = nv.getDienThoai();
-        // Kiểm tra số điện thoại phải bắt đầu bằng số 0
         if (!dienThoai.startsWith("0")) {
             mesF.showMessage("error", "Số điện thoại phải bắt đầu bằng số 0");
             return null;
         }
-        // Kiểm tra số điện thoại chỉ chứa chữ số
         if (!dienThoai.matches("\\d+")) {
             mesF.showMessage("error", "Số điện thoại chỉ được chứa chữ số");
             return null;
         }
-        // Kiểm tra số điện thoại phải có đúng 10 chữ số
         if (dienThoai.length() != 10) {
             mesF.showMessage("error", "Số điện thoại phải có đúng 10 chữ số");
             return null;
         }
-        // Kiểm tra mã vùng hợp lệ (bao gồm các mã vùng phổ biến ở Việt Nam)
         String[] validPrefixes = {"09", "08", "07", "05", "03", "02"};
         boolean isValidPrefix = false;
         for (String prefix : validPrefixes) {
@@ -173,6 +174,8 @@ public class QlyNhanVien extends javax.swing.JPanel {
             mesF.showMessage("error", "Có thể hai số đầu SDT không hợp lệ: 00,01,04 ko nên dùng");
             return null;
         }
+
+        // Kiểm tra tuổi
         Date ngaySinhDate = txt_NgSinh.getDate();
         LocalDate ngaySinh = ngaySinhDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate ngayHienTai = LocalDate.now();
@@ -182,22 +185,30 @@ public class QlyNhanVien extends javax.swing.JPanel {
             mesF.showMessage("error", "Người này chưa đủ 18 tuổi");
             return null;
         }
+
+        // Kiểm tra ngày bắt đầu và ngày kết thúc
         Date ngayBatDauDate = txt_NgayBatDau.getDate();
         Date ngayKetThucDate = txt_NgayKT.getDate();
         if (ngayBatDauDate != null && ngayKetThucDate != null) {
             LocalDate ngayBatDau = ngayBatDauDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate ngayKetThuc = ngayKetThucDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-            Period thoiGianLamViec = Period.between(ngayBatDau, ngayKetThuc);
-            if (thoiGianLamViec.getMonths() < 1 && thoiGianLamViec.getYears() == 0) {
-                mesF.showMessage("error", "Ngày kết thúc phải lớn hơn ngày bắt đầu ít nhất một tháng");
+            if (ngayKetThuc.isBefore(ngayBatDau)) {
+                mesF.showMessage("error", "Ngày kết thúc không được nhỏ hơn ngày bắt đầu");
                 return null;
             }
         }
-        // Kiểm tra Thời hạn
-        if (nv.getThoiHan() == null || nv.getThoiHan() <= 0) {
-            mesF.showMessage("error", "Thời hạn hợp đồng ít nhất phải được 1 tháng");
-            return null;
+
+        // Kiểm tra Thời hạn hợp đồng
+        Integer thoiHan = nv.getThoiHan();
+        if (thoiHan != null) {
+            if (thoiHan <= 0) {
+                mesF.showMessage("error", "Thời hạn hợp đồng ít nhất phải được 1 tháng");
+                return null;
+            } else if (thoiHan > 700) {
+                mesF.showMessage("error", "Thời hạn hợp đồng quá dài, vui lòng kiểm tra lại");
+                return null;
+            }
         }
         return nv;
 
@@ -679,7 +690,7 @@ public class QlyNhanVien extends javax.swing.JPanel {
         });
         jScrollPane4.setViewportView(tbl_NhanVien);
 
-        txt_TimKiem.setLabelText(" Tìm kiếm mã, Tên");
+        txt_TimKiem.setLabelText(" Tìm kiếm mã, Tên, SDT, CCCD");
         txt_TimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_TimKiemActionPerformed(evt);
@@ -939,7 +950,7 @@ public class QlyNhanVien extends javax.swing.JPanel {
 
         int thoiHan = (int) tbl_NhanVien.getValueAt(i, 8);
         txt_ThoiHan.setText(String.valueOf(thoiHan));
-
+        
         // Kiểm tra và gán giá trị cho radio button trạng thái
         String trangThai = tbl_NhanVien.getValueAt(i, 9).toString();
         if (trangThai.equalsIgnoreCase("Đã nghỉ việc")) {
