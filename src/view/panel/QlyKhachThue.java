@@ -23,12 +23,11 @@ public class QlyKhachThue extends javax.swing.JPanel {
     private MessageFrame mess = new MessageFrame();
 
     private int index = -1;
-    private int check=0;
+    private int check = 0;
 
     /**
      * Creates new form QliKhachThue
      */
-
     public QlyKhachThue() {
         initComponents();
         tblKhachThue.fixTable(jScrollPane3);
@@ -412,14 +411,13 @@ public class QlyKhachThue extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        check=1;
+        check = 1;
         if (readForm() != null) {
             mesg = new MessageFrame();
             if (readForm().getMaKT().equalsIgnoreCase(rpKT.check(readForm().getMaKT()))) {
                 mesg.showMessage("error", "đã tồn tại mã khách: " + txtMaKT.getText());
             } else {
-                
-            
+
                 if (rpKT.them(readForm()) > 0) {
                     // cbbMaPhong.addItem(readForm().getMaPT());
                     // JOptionPane.showMessageDialog(this, "Thêm thành công")
@@ -430,12 +428,11 @@ public class QlyKhachThue extends javax.swing.JPanel {
                     mesg.showMessage("error", "Thêm thất bại");
 
                 }
-            
-                
+
             }
 
         }
-        check=0;
+        check = 0;
     }// GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSuaActionPerformed
@@ -582,12 +579,12 @@ public class QlyKhachThue extends javax.swing.JPanel {
             txtHoTen.requestFocus();
             return null;
         }
-        if (rpKT.checkTen(hoTen)==false) {
+        if (rpKT.checkTen(hoTen) == false) {
             mesg.showMessage("error", "Họ tên không được chứa số");
             txtHoTen.requestFocus();
             return null;
         }
-        if (ngaySinh==null) {
+        if (ngaySinh == null) {
             mesg.showMessage("error", "chưa nhập Ngày sinh");
             // JOptionPane.showMessageDialog(this, "chưa nhập ngày sinh");
             return null;
@@ -603,18 +600,40 @@ public class QlyKhachThue extends javax.swing.JPanel {
             txtDienThoai.requestFocus();
             return null;
         }
-        if (rpKT.checkSoDT(dienThoai)==false) {
-            mesg.showMessage("error", "số điện thoại phải có 10 or 11 chữ số");
+        
+         if (rpKT.isNumber(dienThoai.trim())==false) {
+                mesg.showMessage("error", "số điện thoại phải là số.");
+                txtDienThoai.requestFocus();
+                return null;
+            }
+
+            if (dienThoai.trim().length() != 10) {
+                mesg.showMessage("error", "số điện thoại phải có 10 chữ số");
+                txtDienThoai.requestFocus();
+                return null;
+            }
+        if (rpKT.checkSoDT(dienThoai) == false) {
+            String haiSoDau = dienThoai.substring(0, 2);
+
+           
+
+            if (!haiSoDau.equals("09") || !haiSoDau.equals("08") || !haiSoDau.equals("02") || !haiSoDau.equals("03")) {
+                mesg.showMessage("error", "Đầu số phải là 09, 02, 03 hoặc 08.");
+                txtDienThoai.requestFocus();
+                return null;
+            }
+            
+            
             // JOptionPane.showMessageDialog(this, "chưa nhập số điện thoại");
-            txtDienThoai.requestFocus();
-            return null;
+//            txtDienThoai.requestFocus();
+//            return null;
         }
-        if (check==1) {
+        if (check == 1) {
             if (dienThoai.equals(rpKT.CheckSDT(dienThoai))) {
-            mesg.showMessage("error", "Đã tồn tại số điện thoại này");
-            txtDienThoai.requestFocus();
-            return null;
-        }
+                mesg.showMessage("error", "Đã tồn tại số điện thoại này");
+                txtDienThoai.requestFocus();
+                return null;
+            }
         }
 
         if (email.isEmpty()) {
@@ -629,13 +648,12 @@ public class QlyKhachThue extends javax.swing.JPanel {
             txtEmail.requestFocus();
             return null;
         }
-        if (check==1) {
+        if (check == 1) {
             if (email.equals(rpKT.CheckEmail(email))) {
-            mesg.showMessage("error", "Email đã tồn tại");
-            txtEmail.requestFocus();
-            return null;
-        }
-        
+                mesg.showMessage("error", "Email đã tồn tại");
+                txtEmail.requestFocus();
+                return null;
+            }
 
         }
         if (cccd.isEmpty()) {
@@ -645,23 +663,23 @@ public class QlyKhachThue extends javax.swing.JPanel {
             txtCCCD.requestFocus();
             return null;
         }
-        if (rpKT.checkCC(cccd)==false) {
+        if (rpKT.checkCC(cccd) == false) {
             mesg.showMessage("error", "CCCD phải đủ 12 số");
 
             // JOptionPane.showMessageDialog(this, "chưa nhập CCCD");
             txtCCCD.requestFocus();
             return null;
         }
-        if (check==1) {
+        if (check == 1) {
             if (cccd.equals(rpKT.CheckCCCD(cccd))) {
-            mesg.showMessage("error", "CCCD này đã tồn tại");
+                mesg.showMessage("error", "CCCD này đã tồn tại");
 
-            // JOptionPane.showMessageDialog(this, "chưa nhập CCCD");
-            txtCCCD.requestFocus();
-            return null;
+                // JOptionPane.showMessageDialog(this, "chưa nhập CCCD");
+                txtCCCD.requestFocus();
+                return null;
             }
         }
-        
+
         if (diaChi.isEmpty()) {
             mesg.showMessage("error", "chưa nhập địa chỉ");
 
