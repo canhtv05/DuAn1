@@ -577,6 +577,10 @@ public class DoiMK extends javax.swing.JPanel {
 //                mess.showMessage("error", "Mã Nhân Viên này không tồn tại.");
 //                return;
 //            }
+            if (repo.KiemTraMaNhanVien(maNV)) {
+                mess.showMessage("error", "Mã Nhân Viên này đã có tài khoản.");
+                return;
+            }
         }
         messageFrame.showMessage("message", "Bạn có chắc chắn muốn thêm tài khoản này không?");
         messageFrame.setOnOkClicked(() -> {
