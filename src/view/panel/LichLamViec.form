@@ -81,16 +81,19 @@
                               <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="myButton4" max="32767" attributes="0"/>
+                                      <Component id="btn_HomNay" max="32767" attributes="0"/>
                                       <Component id="btn_ThemLich" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="myButton3" min="-2" pref="95" max="-2" attributes="0"/>
-                                      <Component id="myButton1" min="-2" pref="95" max="-2" attributes="0"/>
+                                      <Component id="btn_Xoa" min="-2" pref="95" max="-2" attributes="0"/>
+                                      <Component id="btn_Load" min="-2" pref="95" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="myButton2" min="-2" pref="87" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="btn_Sua" min="-2" pref="87" max="-2" attributes="0"/>
+                                      <Component id="btn_ResetLich" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
@@ -157,13 +160,14 @@
                           <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btn_ThemLich" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="myButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="myButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_Xoa" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_Sua" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="myButton1" alignment="3" max="32767" attributes="0"/>
-                              <Component id="myButton4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_Load" alignment="3" max="32767" attributes="0"/>
+                              <Component id="btn_HomNay" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_ResetLich" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -260,7 +264,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ThemLichActionPerformed"/>
           </Events>
         </Component>
-        <Component class="view.component.button.MyButton" name="myButton2">
+        <Component class="view.component.button.MyButton" name="btn_Sua">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/icon/icons8_update_24px.png"/>
@@ -268,10 +272,10 @@
             <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SuaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="view.component.button.MyButton" name="myButton3">
+        <Component class="view.component.button.MyButton" name="btn_Xoa">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/icon/icons8_cancel_24px.png"/>
@@ -279,7 +283,7 @@
             <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_XoaActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane4">
@@ -424,7 +428,7 @@
             <Property name="text" type="java.lang.String" value="Ch&#x1b0;a ho&#xe0;n th&#xe0;nh:"/>
           </Properties>
         </Component>
-        <Component class="view.component.button.MyButton" name="myButton1">
+        <Component class="view.component.button.MyButton" name="btn_Load">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/icon/icons8_synchronize_24px.png"/>
@@ -432,10 +436,10 @@
             <Property name="text" type="java.lang.String" value="Load"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_LoadActionPerformed"/>
           </Events>
         </Component>
-        <Component class="view.component.button.MyButton" name="myButton4">
+        <Component class="view.component.button.MyButton" name="btn_HomNay">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/icon/today.png"/>
@@ -443,7 +447,18 @@
             <Property name="text" type="java.lang.String" value="H&#xf4;m nay"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myButton4ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_HomNayActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="view.component.button.MyButton" name="btn_ResetLich">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icon/reset_48px.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Reset"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ResetLichActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
