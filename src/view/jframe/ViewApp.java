@@ -1,4 +1,5 @@
 package view.jframe;
+
 import view.panel.FormHome;
 import view.panel.Header;
 import view.panel.MainForm;
@@ -42,7 +43,7 @@ public class ViewApp extends javax.swing.JFrame {
 
     public ViewApp() {
         initComponents();
-        ViewApp.this.setExtendedState(ViewApp.this.MAXIMIZED_BOTH);
+//        ViewApp.this.setExtendedState(ViewApp.this.MAXIMIZED_BOTH);
         init();
         changeHeader();
     }
@@ -98,17 +99,21 @@ public class ViewApp extends javax.swing.JFrame {
                         main.showForm(new LichLamViec());
                     }
                 } else if (menuIndex == 5) {
-                    
+
                     if (subMenuIndex == 0) {
                         main.showForm(new QlyTaiSan());
-                    } else if(subMenuIndex == 1){
+                    } else if (subMenuIndex == 1) {
                         main.showForm(new QLTaiSanPhong());
                     }
                 } else if (menuIndex == 6) {
                     main.showForm(new DoiMK());
                 } else if (menuIndex == 7) {
-                    new ViewSignIn().setVisible(true);
-                    dispose();
+                    MessageFrame mess = new MessageFrame();
+                    mess.showMessage("message", "Bạn có muốn đăng xuất không?");
+                    mess.setOnOkClicked(() -> {
+                        new ViewSignIn().setVisible(true);
+                        dispose();
+                    });
                 } else {
                     // Default case if needed
                 }
