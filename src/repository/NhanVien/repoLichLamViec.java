@@ -275,6 +275,24 @@ public class repoLichLamViec {
         return listLich;
     }
 
+    public boolean checkMaNVTonTai(String maNV) {
+        sql = "SELECT COUNT(*) FROM NhanVien WHERE MaNhanVien = ?";
+        try {
+            con = DBContext.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, maNV);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResources();
+        }
+        return false;
+    }
+
     public int getTotalDaHoanThanh() {
         sql = "SELECT COUNT(*) FROM LichLamViec WHERE TrangThai = 1";
         try {

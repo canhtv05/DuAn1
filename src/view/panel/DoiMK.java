@@ -440,54 +440,81 @@ public class DoiMK extends javax.swing.JPanel {
 
     private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
 
+        RepoDoiMK repoMK = new RepoDoiMK();
         RepoLogin repo = new RepoLogin();
         Validate validate = new Validate();
         mess = new MessageFrame();
+        MessageFrame messageFrame = new MessageFrame();
 
         JTextField[] field = {txtMkCu, txtMkMoi, txtXacNhan};
         String[] label = {"Mật khẩu cũ", "Mật khẩu mới", "Xác nhận mật khẩu"};
 
+        // Kiểm tra các trường không bị bỏ trống
         for (int i = 0; i < field.length; i++) {
             if (!validate.isNull(field[i], label[i])) {
                 return;
             }
         }
+
+        String tenDangNhap = txtTK.getText().trim();
+        if (tenDangNhap.isEmpty()) {
+            mess.showMessage("error", "Tên đăng nhập không được để trống.");
+            return;
+        }
+
+        // Kiểm tra tên đăng nhập tồn tại
+        if (!repoMK.existTK(tenDangNhap)) {
+            mess.showMessage("error", "Tên đăng nhập không tồn tại.");
+            return;
+        }
+
         String mkCu = txtMkCu.getText().trim();
         String mkMoi = txtMkMoi.getText().trim();
         String xnMkMoi = txtXacNhan.getText().trim();
 
-        if (!mkCu.equals(repo.xacNhanMK(txtTK.getText().trim()))) {
-            mess.showMessage("error", "Mật khẩu sai.");
+        // Kiểm tra mật khẩu cũ
+        String storedMkCu = repo.xacNhanMK(tenDangNhap);  // Lấy mật khẩu cũ lưu trữ từ DB
+        if (storedMkCu == null || !mkCu.equals(storedMkCu)) {
+            mess.showMessage("error", "Mật khẩu cũ sai.");
             return;
         }
 
-        String regex = "^.*(?=.*[0-9])(?=.*[A-Z]).*$";
+        // Biểu thức chính quy kiểm tra không có dấu tiếng Việt và không có dấu cách
+        String regex = "^(?!.*[ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÛÝàáâãèéêìíòóôõùúûýăđĩũơưẠ-ỹ ])(?=.*[0-9])(?=.*[A-Z]).{3,}$";
         Pattern pattern = Pattern.compile(regex);
+
+        // Kiểm tra mật khẩu mới và xác nhận mật khẩu
         Matcher matcherMkMoi = pattern.matcher(mkMoi);
         Matcher matcherNxMK = pattern.matcher(xnMkMoi);
-
+        // Kiểm tra độ dài của mật khẩu
         if (mkMoi.length() <= 2 || xnMkMoi.length() <= 2) {
             mess.showMessage("error", "Mật khẩu phải chứa 3 ký tự trở lên.");
             return;
         }
+        // Kiểm tra mật khẩu xác nhận có khớp không
         if (!mkMoi.equals(xnMkMoi)) {
             txtXacNhan.requestFocus();
             mess.showMessage("error", "Mật khẩu không khớp.");
             return;
         }
+        // Kiểm tra mật khẩu có chứa ít nhất 1 ký tự số, 1 chữ in hoa, không có dấu tiếng Việt và không có dấu cách
         if (!matcherMkMoi.matches() || !matcherNxMK.matches()) {
-            mess.showMessage("error", "Mật khẩu phải chứa ít nhất 1 kí tự số và chữ in hoa.");
+            mess.showMessage("error", "Mật khẩu phải chứa ít nhất 1 ký tự số, 1 chữ in hoa,"
+                    + " không dấu tiếng Việt, không dấu cách.");
             return;
         }
-        mess.showMessage("message", "Bạn có muốn đổi mật khẩu không?");
-        mess.setOnOkClicked(() -> {
-            MessageFrame messageFrame = new MessageFrame();
+
+        messageFrame.showMessage("message", "Bạn có muốn đổi mật khẩu không?");
+        messageFrame.setOnOkClicked(() -> {
             if (repo.changePassword(user, mkMoi)) {
-                messageFrame.showMessage("success", "Đổi mật khẩu thành công.");
+                mess.showMessage("success", "Đổi mật khẩu thành công.");
+                this.tab1();
             } else {
-                messageFrame.showMessage("error", "Đổi mật khẩu thất bại.");
+                mess.showMessage("error", "Đổi mật khẩu thất bại.");
             }
         });
+
+
     }//GEN-LAST:event_btnActionPerformed
 
     private void btnTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTKActionPerformed
@@ -495,8 +522,8 @@ public class DoiMK extends javax.swing.JPanel {
         Validate validate = new Validate();
         MessageFrame messageFrame = new MessageFrame();
         mess = new MessageFrame();
-        JTextField[] field = {txtMaNV, txtTenTK, txtMK,};
-        String[] label = {"Mã Nhân Viên", "Tài khoản", "Mật khẩu",};
+        JTextField[] field = {txtMaNV, txtTenTK, txtMK};
+        String[] label = {"Mã Nhân Viên", "Tài khoản", "Mật khẩu"};
         // Xác định vai trò trước khi kiểm tra các trường
         int vaiTro = rdo_ChuTro.isSelected() ? 0 : (rdo_NV.isSelected() ? 1 : -1); // Vai trò: 0 là Chủ trọ, 1 là Nhân viên
         // Kiểm tra xem vai trò đã được chọn chưa
@@ -515,11 +542,9 @@ public class DoiMK extends javax.swing.JPanel {
                 return;
             }
         }
-
         // Thiết lập vai trò cho ModelDoiMK
         ModelDoiMK Themtk = new ModelDoiMK();
         Themtk.setVaiTro(vaiTro); // Thiết lập vai trò
-
         // Lấy dữ liệu từ các trường
         String tk = txtTenTK.getText().trim();
         String mk = txtMK.getText().trim();
@@ -529,29 +554,34 @@ public class DoiMK extends javax.swing.JPanel {
             mess.showMessage("error", "Đã tồn tại tài khoản này.");
             return;
         }
-
         // Kiểm tra mật khẩu
-        String regex = "^.*(?=.*[0-9])(?=.*[A-Z]).*$";
+        // Biểu thức chính quy kiểm tra không có dấu tiếng Việt, không có dấu cách, và chứa ít nhất 1 ký tự số và chữ in hoa
+        String regex = "^(?!.*[ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÛÝàáâãèéêìíòóôõùúûýăđĩũơưẠ-ỹ ])(?=.*[0-9])(?=.*[A-Z]).{3,}$";
         Pattern pattern = Pattern.compile(regex);
+        // Kiểm tra mật khẩu mới
         Matcher matcherMk = pattern.matcher(mk);
+        // Kiểm tra độ dài của mật khẩu và các điều kiện khác
         if (mk.length() <= 2 || !matcherMk.matches()) {
-            mess.showMessage("error", "Mật khẩu phải chứa ít nhất 3 ký tự, bao gồm ít nhất 1 ký tự số và chữ in hoa.");
+            mess.showMessage("error", "Mật khẩu phải chứa ít nhất 3 ký tự và 1 ký tự số,"
+                    + " 1 chữ in hoa, không dấu và không cách.");
             return;
         }
-
         // Kiểm tra mã nhân viên nếu vai trò là Nhân viên
         if (vaiTro == 1) {
             if (maNV.isEmpty()) {
                 mess.showMessage("error", "Mã Nhân Viên không được để trống.");
                 return;
             }
-            // Kiểm tra xem mã nhân viên đã có tài khoản chưa
+            // Kiểm tra xem mã nhân viên đã tồn tại hay không
+            if (!repo.KiemTraMaNhanVienTonTai(maNV)) {
+                mess.showMessage("error", "Mã Nhân Viên này không tồn tại.");
+                return;
+            }
             if (repo.KiemTraMaNhanVien(maNV)) {
                 mess.showMessage("error", "Mã Nhân Viên này đã có tài khoản.");
                 return;
             }
         }
-
         messageFrame.showMessage("message", "Bạn có chắc chắn muốn thêm tài khoản này không?");
         messageFrame.setOnOkClicked(() -> {
             if (repo.add(new ModelDoiMK(tk, maNV, mk, vaiTro))) {
@@ -561,7 +591,6 @@ public class DoiMK extends javax.swing.JPanel {
                 mess.showMessage("error", "Tạo tài khoản thất bại, mã nhân viên không đúng hoặc không tồn tại");
             }
         });
-
     }//GEN-LAST:event_btnTKActionPerformed
 
     private void tblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMouseClicked
