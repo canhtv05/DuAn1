@@ -215,13 +215,13 @@ public class QlyNhanVien extends javax.swing.JPanel {
     }
 
     public void clear() {
-        txt_Ma.setText("");
+        txt_Ma.setText("NV");
         txt_Ten.setText("");
         txt_NgSinh.setDate(null);
         //Model_NhanVien nv = new Model_NhanVien();
         rdo_Nam.setSelected(true);
-        txt_DT.setText("");
-        txt_CCCD.setText("");
+        txt_DT.setText("0");
+        txt_CCCD.setText("0");
         txt_NgayBatDau.setDate(null);
         txt_NgayKT.setDate(null);
         txt_ThoiHan.setText("0"); // Đặt giá trị mặc định cho thoiHan

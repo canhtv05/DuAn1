@@ -24,7 +24,8 @@ public class repoNhanVien {
 
     public ArrayList<Model_NhanVien> getAllNhanVien(int trangThai) {
         ArrayList<Model_NhanVien> list_NhanVien = new ArrayList<>();
-        sql = "SELECT MaNhanVien, HoTen, NgaySinh, GioiTinh, DienThoai, CCCD, NgayBatDau, NgayKetThuc, ThoiHan, Anh, TrangThai FROM NhanVien WHERE TrangThai = ?";
+        sql = "SELECT MaNhanVien, HoTen, NgaySinh, GioiTinh, DienThoai, CCCD, NgayBatDau, NgayKetThuc, ThoiHan, Anh, TrangThai"
+               + " FROM NhanVien WHERE TrangThai = ?";
         try {
             con = DBContext.getConnection();
             ps = con.prepareStatement(sql);
@@ -68,7 +69,8 @@ public class repoNhanVien {
 
     public ArrayList<Model_NhanVien> getAllNhanVien() {
         ArrayList<Model_NhanVien> list_NhanVien = new ArrayList<>();
-        sql = "SELECT MaNhanVien, HoTen, NgaySinh, GioiTinh, DienThoai, CCCD, NgayBatDau, NgayKetThuc, ThoiHan, Anh, TrangThai FROM NhanVien";
+        sql = "SELECT MaNhanVien, HoTen, NgaySinh, GioiTinh, DienThoai, CCCD, NgayBatDau, NgayKetThuc, ThoiHan, Anh, TrangThai "
+               + "FROM NhanVien";
         try {
             con = DBContext.getConnection();
             ps = con.prepareStatement(sql);
