@@ -105,6 +105,12 @@ public class DoiMK extends javax.swing.JPanel {
         txtTenTK.setText("");
         txtMK.setText("");
     }
+    public void ResetDoiMK() {
+        txtTK.setText(user);
+        txtMkCu.setText("");
+        txtMkMoi.setText("");
+        txtXacNhan.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -125,6 +131,7 @@ public class DoiMK extends javax.swing.JPanel {
         txtXacNhan = new view.component.textfield.TextField();
         jLabel1 = new javax.swing.JLabel();
         btn = new view.component.button.MyButton();
+        btn_ResetMK = new view.component.button.MyButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl = new view.component.table.Table();
@@ -229,21 +236,41 @@ public class DoiMK extends javax.swing.JPanel {
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
+        btn_ResetMK.setText("Reset");
+        btn_ResetMK.setBorderColor(new java.awt.Color(153, 204, 204));
+        btn_ResetMK.setColor(new java.awt.Color(204, 255, 255));
+        btn_ResetMK.setColorClick(new java.awt.Color(153, 255, 255));
+        btn_ResetMK.setColorOver(new java.awt.Color(204, 255, 255));
+        btn_ResetMK.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_ResetMK.setRadius(10);
+        btn_ResetMK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ResetMKActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(483, Short.MAX_VALUE)
+                .addContainerGap(485, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(484, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(btn_ResetMK, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(353, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(152, 152, 152)
+                        .addComponent(btn_ResetMK, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         tab.addTab("Đổi mật khẩu", jPanel1);
@@ -438,85 +465,6 @@ public class DoiMK extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
-
-        RepoDoiMK repoMK = new RepoDoiMK();
-        RepoLogin repo = new RepoLogin();
-        Validate validate = new Validate();
-        mess = new MessageFrame();
-        MessageFrame messageFrame = new MessageFrame();
-
-        JTextField[] field = {txtMkCu, txtMkMoi, txtXacNhan};
-        String[] label = {"Mật khẩu cũ", "Mật khẩu mới", "Xác nhận mật khẩu"};
-
-        // Kiểm tra các trường không bị bỏ trống
-        for (int i = 0; i < field.length; i++) {
-            if (!validate.isNull(field[i], label[i])) {
-                return;
-            }
-        }
-
-        String tenDangNhap = txtTK.getText().trim();
-        if (tenDangNhap.isEmpty()) {
-            mess.showMessage("error", "Tên đăng nhập không được để trống.");
-            return;
-        }
-
-        // Kiểm tra tên đăng nhập tồn tại
-        if (!repoMK.existTK(tenDangNhap)) {
-            mess.showMessage("error", "Tên đăng nhập không tồn tại.");
-            return;
-        }
-
-        String mkCu = txtMkCu.getText().trim();
-        String mkMoi = txtMkMoi.getText().trim();
-        String xnMkMoi = txtXacNhan.getText().trim();
-
-        // Kiểm tra mật khẩu cũ
-        String storedMkCu = repo.xacNhanMK(tenDangNhap);  // Lấy mật khẩu cũ lưu trữ từ DB
-        if (storedMkCu == null || !mkCu.equals(storedMkCu)) {
-            mess.showMessage("error", "Mật khẩu cũ sai.");
-            return;
-        }
-
-        // Biểu thức chính quy kiểm tra không có dấu tiếng Việt và không có dấu cách
-        String regex = "^(?!.*[ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÛÝàáâãèéêìíòóôõùúûýăđĩũơưẠ-ỹ ])(?=.*[0-9])(?=.*[A-Z]).{3,}$";
-        Pattern pattern = Pattern.compile(regex);
-
-        // Kiểm tra mật khẩu mới và xác nhận mật khẩu
-        Matcher matcherMkMoi = pattern.matcher(mkMoi);
-        Matcher matcherNxMK = pattern.matcher(xnMkMoi);
-        // Kiểm tra độ dài của mật khẩu
-        if (mkMoi.length() <= 2 || xnMkMoi.length() <= 2) {
-            mess.showMessage("error", "Mật khẩu phải chứa 3 ký tự trở lên.");
-            return;
-        }
-        // Kiểm tra mật khẩu xác nhận có khớp không
-        if (!mkMoi.equals(xnMkMoi)) {
-            txtXacNhan.requestFocus();
-            mess.showMessage("error", "Mật khẩu không khớp.");
-            return;
-        }
-        // Kiểm tra mật khẩu có chứa ít nhất 1 ký tự số, 1 chữ in hoa, không có dấu tiếng Việt và không có dấu cách
-        if (!matcherMkMoi.matches() || !matcherNxMK.matches()) {
-            mess.showMessage("error", "Mật khẩu phải chứa ít nhất 1 ký tự số, 1 chữ in hoa,"
-                    + " không dấu tiếng Việt, không dấu cách.");
-            return;
-        }
-
-        messageFrame.showMessage("message", "Bạn có muốn đổi mật khẩu không?");
-        messageFrame.setOnOkClicked(() -> {
-            if (repo.changePassword(user, mkMoi)) {
-                mess.showMessage("success", "Đổi mật khẩu thành công.");
-                this.tab1();
-            } else {
-                mess.showMessage("error", "Đổi mật khẩu thất bại.");
-            }
-        });
-
-
-    }//GEN-LAST:event_btnActionPerformed
-
     private void btnTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTKActionPerformed
         RepoDoiMK repo = new RepoDoiMK();
         Validate validate = new Validate();
@@ -656,12 +604,96 @@ public class DoiMK extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMKActionPerformed
 
+    private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
+
+        RepoDoiMK repoMK = new RepoDoiMK();
+        RepoLogin repo = new RepoLogin();
+        Validate validate = new Validate();
+        mess = new MessageFrame();
+        MessageFrame messageFrame = new MessageFrame();
+
+        JTextField[] field = {txtMkCu, txtMkMoi, txtXacNhan};
+        String[] label = {"Mật khẩu cũ", "Mật khẩu mới", "Xác nhận mật khẩu"};
+
+        // Kiểm tra các trường không bị bỏ trống
+        for (int i = 0; i < field.length; i++) {
+            if (!validate.isNull(field[i], label[i])) {
+                return;
+            }
+        }
+
+        String tenDangNhap = txtTK.getText().trim();
+        if (tenDangNhap.isEmpty()) {
+            mess.showMessage("error", "Tên đăng nhập không được để trống.");
+            return;
+        }
+
+        // Kiểm tra tên đăng nhập tồn tại
+        if (!repoMK.existTK(tenDangNhap)) {
+            mess.showMessage("error", "Tên đăng nhập không tồn tại.");
+            return;
+        }
+
+        String mkCu = txtMkCu.getText().trim();
+        String mkMoi = txtMkMoi.getText().trim();
+        String xnMkMoi = txtXacNhan.getText().trim();
+
+        // Kiểm tra mật khẩu cũ
+        String storedMkCu = repo.xacNhanMK(tenDangNhap);  // Lấy mật khẩu cũ lưu trữ từ DB
+        if (storedMkCu == null || !mkCu.equals(storedMkCu)) {
+            mess.showMessage("error", "Mật khẩu cũ sai.");
+            return;
+        }
+
+        // Biểu thức chính quy kiểm tra không có dấu tiếng Việt và không có dấu cách
+        String regex = "^(?!.*[ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÛÝàáâãèéêìíòóôõùúûýăđĩũơưẠ-ỹ ])(?=.*[0-9])(?=.*[A-Z]).{3,}$";
+        Pattern pattern = Pattern.compile(regex);
+
+        // Kiểm tra mật khẩu mới và xác nhận mật khẩu
+        Matcher matcherMkMoi = pattern.matcher(mkMoi);
+        Matcher matcherNxMK = pattern.matcher(xnMkMoi);
+        // Kiểm tra độ dài của mật khẩu
+        if (mkMoi.length() <= 2 || xnMkMoi.length() <= 2) {
+            mess.showMessage("error", "Mật khẩu phải chứa 3 ký tự trở lên.");
+            return;
+        }
+        // Kiểm tra mật khẩu xác nhận có khớp không
+        if (!mkMoi.equals(xnMkMoi)) {
+            txtXacNhan.requestFocus();
+            mess.showMessage("error", "Mật khẩu không khớp.");
+            return;
+        }
+        // Kiểm tra mật khẩu có chứa ít nhất 1 ký tự số, 1 chữ in hoa, không có dấu tiếng Việt và không có dấu cách
+        if (!matcherMkMoi.matches() || !matcherNxMK.matches()) {
+            mess.showMessage("error", "Mật khẩu phải chứa ít nhất 1 ký tự số, 1 chữ in hoa,"
+                + " không dấu tiếng Việt, không dấu cách.");
+            return;
+        }
+
+        messageFrame.showMessage("message", "Bạn có muốn đổi mật khẩu không?");
+        messageFrame.setOnOkClicked(() -> {
+            if (repo.changePassword(user, mkMoi)) {
+                mess.showMessage("success", "Đổi mật khẩu thành công.");
+                this.tab1();
+            } else {
+                mess.showMessage("error", "Đổi mật khẩu thất bại.");
+            }
+        });
+
+    }//GEN-LAST:event_btnActionPerformed
+
+    private void btn_ResetMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ResetMKActionPerformed
+        // TODO add your handling code here:
+        ResetDoiMK();
+    }//GEN-LAST:event_btn_ResetMKActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.component.button.MyButton btn;
     private view.component.button.MyButton btnReset;
     private view.component.button.MyButton btnTK;
     private view.component.button.MyButton btnXoaTK;
+    private view.component.button.MyButton btn_ResetMK;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
