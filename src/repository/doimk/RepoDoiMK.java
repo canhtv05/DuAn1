@@ -137,4 +137,18 @@ public class RepoDoiMK {
         }
         return false;
     }
+    public boolean KiemTraMaNhanVienTonTai(String maNV) {
+        sql = "SELECT COUNT(*) FROM dbo.NhanVien WHERE MaNhanVien = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, maNV);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0; 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

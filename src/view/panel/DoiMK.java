@@ -573,10 +573,10 @@ public class DoiMK extends javax.swing.JPanel {
                 return;
             }
             // Kiểm tra xem mã nhân viên đã tồn tại hay không
-//            if (!repo.KiemTraMaNhanVien(maNV)) {
-//                mess.showMessage("error", "Mã Nhân Viên này không tồn tại.");
-//                return;
-//            }
+            if (!repo.KiemTraMaNhanVienTonTai(maNV)) {
+                mess.showMessage("error", "Mã Nhân Viên này không tồn tại.");
+                return;
+            }
             if (repo.KiemTraMaNhanVien(maNV)) {
                 mess.showMessage("error", "Mã Nhân Viên này đã có tài khoản.");
                 return;
