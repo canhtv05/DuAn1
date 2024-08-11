@@ -48,29 +48,14 @@
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/QlyTang.java</file>
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/repository/exportpdf/RepoExportPDF.java</file>
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/model/hoadon/ModelHoaDon.java</file>
+            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/jframe/HoaDonChiTiet.java</file>
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/jframe/QrCodeHoaDon.java</file>
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/QlyHopDong.java</file>
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/jframe/ExportPdf.java</file>
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/jframe/ThemHoaDon.java</file>
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/jframe/LuaChonNgayXuatPDF.java</file>
-<<<<<<< HEAD
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/QLTaiSanPhong.java</file>
             <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/QlyTaiSan.java</file>
-=======
-            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/repository/hoadon/RepoHoaDon.java</file>
-            <file>file:/D:/DuAn1%20-%20Copy%20(4)/DuAn1/src/view/panel/LichLamViec.java</file>
-=======
-            <file>file:/H:/DuAn/DuAn1/src/view/jframe/ViewApp.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/view/panel/QlyNhanVien.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/view/panel/LichLamViec.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/view/panel/DoiMK.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/repository/NhanVien/repoNhanVien.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/repository/doimk/RepoDoiMK.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/view/jframe/ViewSignIn.java</file>
-            <file>file:/H:/DuAn/DuAn1/src/repository/NhanVien/repoLichLamViec.java</file>
->>>>>>> 9f5ff18a05754a662787467b71a7ed3b3710621e
->>>>>>> 3eba4c5aa005c0c27234ad72d805fa68e1c5c9a4
->>>>>>> d1cf7dc9659b35deb3116aea0a72a574f7c4a612
         </group>
     </open-files>
 </project-private>
