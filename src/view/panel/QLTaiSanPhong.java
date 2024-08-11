@@ -482,18 +482,18 @@ public class QLTaiSanPhong extends javax.swing.JPanel {
             txtSoLuong.requestFocus();
             return null;
         }
-        
+        soLuong=Integer.parseInt(txtSoLuong.getText());
+        if (soLuong<0) {
+            mesg.showMessage("error", "Số lượng phải lớn hơn hoặc bằng 0");
+            txtSoLuong.requestFocus();
+            return null;
+        }
+
         if (rdoBaoDuong.isSelected()==false && rdoHoatDong.isSelected()==false) {
             mesg.showMessage("error", "chưa chọn tình trạng");
             return null;
         }
-        if (ghiChu.isEmpty()) {
-            mesg.showMessage("error", "chưa nhập ghi chú");
-            txtGhiChu.requestFocus();
-            return null;
-
-        }
-        soLuong=Integer.parseInt(txtSoLuong.getText());
+        
         return new ModelTaiSanPhong(idTSP, idTS, tenTaiSan, maPhong, soLuong, tinhTrang, ghiChu);
     }
 
