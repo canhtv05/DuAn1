@@ -47,13 +47,27 @@ public class LichLamViec extends javax.swing.JPanel {
         tbl_Lich.fixTable(jScrollPane1);
         checkNV();
     }
-    
+    private void Reset(){
+        txt_Ma.setText("NV");
+        txt_TenNhanVien.setText("");
+        txt_NgayLamViec.setDate(null);
+        txt_CongViec.setText("Công việc hôm nay cần hoàn thành: \n"
+                + "1.\n"
+                + "2.\n"
+                + "3.\n"
+                + "4.\n"
+                + "5.\n");
+        txt_GhiChu.setText("1.Lời chủ trọ: \n"
+                + "2.Lời nhân viên: \n");
+        
+    }
     private void checkNV() {
         role  = ViewSignIn.role;
         if(role == 1) {
             btn_ThemLich.setEnabled(false);
-            myButton3.setEnabled(false);
-            myButton2.setEnabled(false);
+            btn_Xoa.setEnabled(false);
+            btn_Sua.setEnabled(false);
+            btn_Load.setEnabled(false);
             txt_Ma.setBackground(new Color(204,204,204));
             txt_Ma.setEditable(false);
             txt_TenNhanVien.setBackground(new Color(204,204,204));
@@ -155,8 +169,8 @@ public class LichLamViec extends javax.swing.JPanel {
         txt_GhiChu = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         btn_ThemLich = new view.component.button.MyButton();
-        myButton2 = new view.component.button.MyButton();
-        myButton3 = new view.component.button.MyButton();
+        btn_Sua = new view.component.button.MyButton();
+        btn_Xoa = new view.component.button.MyButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         txt_CongViec = new javax.swing.JTextArea();
         txt_NgayLamViec = new com.toedter.calendar.JDateChooser();
@@ -168,8 +182,9 @@ public class LichLamViec extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jb_DaHoanThanh = new javax.swing.JLabel();
         jb_ChuaHoanThanh = new javax.swing.JLabel();
-        myButton1 = new view.component.button.MyButton();
-        myButton4 = new view.component.button.MyButton();
+        btn_Load = new view.component.button.MyButton();
+        btn_HomNay = new view.component.button.MyButton();
+        btn_ResetLich = new view.component.button.MyButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_Lich = new view.component.table.Table();
@@ -218,19 +233,19 @@ public class LichLamViec extends javax.swing.JPanel {
             }
         });
 
-        myButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_update_24px.png"))); // NOI18N
-        myButton2.setText("Sửa");
-        myButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_Sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_update_24px.png"))); // NOI18N
+        btn_Sua.setText("Sửa");
+        btn_Sua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton2ActionPerformed(evt);
+                btn_SuaActionPerformed(evt);
             }
         });
 
-        myButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_cancel_24px.png"))); // NOI18N
-        myButton3.setText("Xóa");
-        myButton3.addActionListener(new java.awt.event.ActionListener() {
+        btn_Xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_cancel_24px.png"))); // NOI18N
+        btn_Xoa.setText("Xóa");
+        btn_Xoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton3ActionPerformed(evt);
+                btn_XoaActionPerformed(evt);
             }
         });
 
@@ -305,19 +320,27 @@ public class LichLamViec extends javax.swing.JPanel {
         jb_ChuaHoanThanh.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jb_ChuaHoanThanh.setText("Chưa hoàn thành:");
 
-        myButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_synchronize_24px.png"))); // NOI18N
-        myButton1.setText("Load");
-        myButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_Load.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_synchronize_24px.png"))); // NOI18N
+        btn_Load.setText("Load");
+        btn_Load.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton1ActionPerformed(evt);
+                btn_LoadActionPerformed(evt);
             }
         });
 
-        myButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/today.png"))); // NOI18N
-        myButton4.setText("Hôm nay");
-        myButton4.addActionListener(new java.awt.event.ActionListener() {
+        btn_HomNay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/today.png"))); // NOI18N
+        btn_HomNay.setText("Hôm nay");
+        btn_HomNay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton4ActionPerformed(evt);
+                btn_HomNayActionPerformed(evt);
+            }
+        });
+
+        btn_ResetLich.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/reset_48px.png"))); // NOI18N
+        btn_ResetLich.setText("Reset");
+        btn_ResetLich.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ResetLichActionPerformed(evt);
             }
         });
 
@@ -336,17 +359,19 @@ public class LichLamViec extends javax.swing.JPanel {
                         .addGap(47, 47, 47))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jScrollPane2)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(myButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btn_HomNay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btn_ThemLich, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(30, 30, 30)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(myButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btn_Xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btn_Load, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btn_ResetLich, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btn_Sua, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(35, 35, 35)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -366,7 +391,7 @@ public class LichLamViec extends javax.swing.JPanel {
                                 .addComponent(txt_NgayLamViec, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(41, 41, 41))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -395,12 +420,13 @@ public class LichLamViec extends javax.swing.JPanel {
                         .addGap(3, 3, 3)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_ThemLich, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(myButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btn_Xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_Sua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(myButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(myButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btn_Load, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_HomNay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_ResetLich, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -540,7 +566,7 @@ public class LichLamViec extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void myButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton2ActionPerformed
+    private void btn_SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaActionPerformed
         // TODO add your handling code here:
         int i = tbl_Lich.getSelectedRow();
         if (i >= 0) { // Kiểm tra xem có hàng nào được chọn không
@@ -568,7 +594,7 @@ public class LichLamViec extends javax.swing.JPanel {
         }
 
 
-    }//GEN-LAST:event_myButton2ActionPerformed
+    }//GEN-LAST:event_btn_SuaActionPerformed
 
     private void btn_ThemLichActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemLichActionPerformed
         // TODO add your handling code here:
@@ -587,8 +613,8 @@ public class LichLamViec extends javax.swing.JPanel {
                         this.fillTable(rp.getALLLich());
                         updateTotalTrangThai();
                     } else {
-                        mesF.showMessage("error", "Thêm thất bại mã nhân viên có thể ko tồn tại"
-                                + "  Vui lòng hập đúng mã nhân viên");
+                        mesF.showMessage("error", "Thêm thất bại mã nhân viên có thể ko tồn tại!\n"
+                                + "  Vui lòng hhập đúng mã nhân viên!");
                     }
                 }
             });
@@ -636,7 +662,7 @@ public class LichLamViec extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_MaActionPerformed
 
-    private void myButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton3ActionPerformed
+    private void btn_XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaActionPerformed
         // TODO add your handling code here:
         // Lấy hàng được chọn
         int i = tbl_Lich.getSelectedRow();
@@ -659,7 +685,7 @@ public class LichLamViec extends javax.swing.JPanel {
         } else {
             mesF.showMessage("error", "Vui lòng chọn bản ghi để xóa");
         }
-    }//GEN-LAST:event_myButton3ActionPerformed
+    }//GEN-LAST:event_btn_XoaActionPerformed
 
     private void btn_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhatActionPerformed
         // TODO add your handling code here:
@@ -729,21 +755,31 @@ public class LichLamViec extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_TenNhanVienActionPerformed
 
-    private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
+    private void btn_LoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoadActionPerformed
         // TODO add your handling code here:
         loadTableData();
-    }//GEN-LAST:event_myButton1ActionPerformed
+    }//GEN-LAST:event_btn_LoadActionPerformed
 
-    private void myButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton4ActionPerformed
+    private void btn_HomNayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HomNayActionPerformed
         // TODO add your handling code here:
         ArrayList<Model_LichLamViec> lichLamViecList = rp.XapXepLichHomNay();
         fillTable(lichLamViecList);
-    }//GEN-LAST:event_myButton4ActionPerformed
+    }//GEN-LAST:event_btn_HomNayActionPerformed
+
+    private void btn_ResetLichActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ResetLichActionPerformed
+        // TODO add your handling code here:
+        Reset();
+    }//GEN-LAST:event_btn_ResetLichActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.component.button.MyButton btn_CapNhat;
+    private view.component.button.MyButton btn_HomNay;
+    private view.component.button.MyButton btn_Load;
+    private view.component.button.MyButton btn_ResetLich;
+    private view.component.button.MyButton btn_Sua;
     private view.component.button.MyButton btn_ThemLich;
+    private view.component.button.MyButton btn_Xoa;
     private javax.swing.ButtonGroup buttonGroup1;
     private view.component.combobox.Combobox comBo_Nam;
     private view.component.combobox.Combobox comBo_Thang;
@@ -760,10 +796,6 @@ public class LichLamViec extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel jb_ChuaHoanThanh;
     private javax.swing.JLabel jb_DaHoanThanh;
-    private view.component.button.MyButton myButton1;
-    private view.component.button.MyButton myButton2;
-    private view.component.button.MyButton myButton3;
-    private view.component.button.MyButton myButton4;
     private view.component.radiobutton.RadioButtonCustom rdo_ChuaHoanThanh;
     private view.component.radiobutton.RadioButtonCustom rdo_DaHoanThanh;
     private view.component.table.Table tbl_Lich;
